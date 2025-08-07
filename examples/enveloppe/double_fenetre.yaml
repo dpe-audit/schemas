@@ -1,0 +1,21 @@
+- id: 6bc71c8d-11fa-4f36-b40b-b75ddbedf5d5
+  is: enveloppe:double_fenetre
+  description: Une double fenêtre
+  type_baie: fenetre_battante
+  type_pose: nu_interieur
+  materiau: pvc
+  ug: 4.8
+  uw: 3.8
+  sw: 54
+  vitrage:
+    type_vitrage: double_vitrage
+    nature_lame: argon
+    epaisseur_lame: 12
+    survitrage:
+      type_survitrage: survitrage_simple
+      epaisseur_lame: 12
+  menuiserie:
+    largeur_dormant: 60
+    presence_joint: true
+    presence_retour_isolation: true
+    presence_rupteur_pont_thermique: true

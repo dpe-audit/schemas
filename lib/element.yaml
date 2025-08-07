@@ -1,0 +1,48 @@
+$id: https://schemas.dpe-audit.fr/element
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Elément
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  is:
+    title: Type d'élément
+    type: string
+  description:
+    title: Description
+    type: string
+required:
+  - id
+  - is
+  - description
+discriminator:
+  propertyName: is
+oneOf:
+  - $ref: /chauffage/emetteur
+  - $ref: /chauffage/generateur
+  - $ref: /chauffage/installation
+  - $ref: /chauffage/systeme
+  - $ref: /ecs/generateur
+  - $ref: /ecs/installation
+  - $ref: /ecs/systeme
+  - $ref: /enveloppe/baie
+  - $ref: /enveloppe/double_fenetre
+  - $ref: /enveloppe/local_non_chauffe
+  - $ref: /enveloppe/local_non_chauffe/baie
+  - $ref: /enveloppe/local_non_chauffe/paroi
+  - $ref: /enveloppe/masque_lointain
+  - $ref: /enveloppe/masque_proche
+  - $ref: /enveloppe/mur
+  - $ref: /enveloppe/plancher_bas
+  - $ref: /enveloppe/plancher_haut
+  - $ref: /enveloppe/pont_thermique
+  - $ref: /enveloppe/porte
+  - $ref: /production/panneau_photovoltaique
+  - $ref: /refroidissement/generateur
+  - $ref: /refroidissement/installation
+  - $ref: /refroidissement/systeme
+  - $ref: /ventilation/generateur
+  - $ref: /ventilation/installation
+  - $ref: /ventilation/systeme

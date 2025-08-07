@@ -1,0 +1,29 @@
+$id: https://schemas.dpe-audit.fr/refroidissement/systeme
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Système de refroidissement
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  is:
+    type: string
+    const: refroidissement:systeme
+  description:
+    title: Description
+    type: string
+  installation_id:
+    title: Identifiant de l'installation associée
+    type: string
+    format: uuid
+  generateur_id:
+    title: Identifiant du générateur associé
+    type: string
+    format: uuid
+required:
+  - id
+  - is
+  - description
+  - installation_id
+  - generateur_id

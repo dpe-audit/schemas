@@ -1,0 +1,38 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Local non chauffé
+type: object
+unevaluatedProperties: false
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  is:
+    type: string
+    const: enveloppe:local_non_chauffe
+  description:
+    title: Description
+    type: string
+  type:
+    title: Type
+    type: string
+    enum:
+      - garage
+      - cellier
+      - espace_tampon_solarise
+      - comble_fortement_ventile
+      - comble_faiblement_ventile
+      - comble_tres_faiblement_ventile
+      - circulation_sans_ouverture_exterieure
+      - circulation_avec_ouverture_exterieure
+      - circulation_avec_bouche_ou_gaine_desenfumage_ouverte
+      - hall_entree_avec_fermeture_automatique
+      - hall_entree_sans_fermeture_automatique
+      - garage_collectif
+      - autres
+required:
+  - id
+  - is
+  - description
+  - type

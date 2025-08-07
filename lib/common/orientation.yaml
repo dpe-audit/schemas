@@ -1,0 +1,6 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.dpe-audit.fr/common/orientation
+title: Orientation
+type: number
+minimum: 0
+exclusiveMaximum: 360

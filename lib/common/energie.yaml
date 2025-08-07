@@ -1,0 +1,21 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.dpe-audit.fr/common/energie
+title: Energie
+type: string
+oneOf:
+  - const: electricite
+    title: Électricité
+  - const: gaz_naturel
+    title: Gaz naturel
+  - const: gpl
+    title: GPL
+  - const: fioul
+    title: Fioul
+  - const: bois
+    title: Bois
+  - const: charbon
+    title: Charbon
+  - const: reseau_chaleur
+    title: Réseau de chaleur
+  - const: reseau_froid
+    title: Réseau de froid

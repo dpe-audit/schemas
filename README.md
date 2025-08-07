@@ -25,8 +25,8 @@
 	<a href="https://github.com/dpe-audit/opendata">
 		Données ouvertes
 	</a>&nbsp;&nbsp;&nbsp;
-	<a href="https://github.com/dpe-audit/methodes">
-		Méthodes
+	<a href="https://github.com/dpe-audit/methode-3cl">
+		Méthode 3CL
 	</a>
 </p>
 

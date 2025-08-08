@@ -31,6 +31,7 @@ properties:
     type: boolean
 required:
   - id
+  - is
   - description
   - orientation
   - inclinaison

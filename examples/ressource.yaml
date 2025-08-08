@@ -22,6 +22,10 @@
       hauteur_sous_plafond: 2.5
       position: rdc
       typologie: T3
+  enveloppe:
+    exposition: exposition_simple
+    q4pa_conv: null
+    presence_brasseurs_air: false
   elements:
     # ## Enveloppe
     - id: 6bc71c8d-11fa-4f36-b40b-b75ddbedf5d5

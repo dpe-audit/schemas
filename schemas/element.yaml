@@ -27,6 +27,7 @@ oneOf:
   - $ref: /ecs/generateur
   - $ref: /ecs/installation
   - $ref: /ecs/systeme
+  - $ref: /enveloppe/niveau
   - $ref: /enveloppe/baie
   - $ref: /enveloppe/double_fenetre
   - $ref: /enveloppe/local_non_chauffe

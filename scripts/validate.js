@@ -4,7 +4,7 @@ import { registerSchema, validate } from '@hyperjump/json-schema/draft-2020-12'
 import { BASIC } from '@hyperjump/json-schema/experimental'
 import yaml from 'js-yaml'
 
-const schemas = globSync('lib/**/*.yaml')
+const schemas = globSync('schemas/**/*.yaml')
 const examples = globSync('examples/**/*.yaml')
 
 for (const schema of schemas) {
@@ -15,7 +15,7 @@ for (const schema of schemas) {
 for (const schema of schemas) {
   const schemaObject = yaml.load(readFileSync(schema, { encoding: 'utf-8' }))
   const exampleFile = examples.find(
-    item => item.replace('examples', 'lib') === schema
+    item => item.replace('examples', 'schemas') === schema
   )
 
   if (!exampleFile) {

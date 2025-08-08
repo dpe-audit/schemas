@@ -4,7 +4,7 @@ import { registerSchema } from '@hyperjump/json-schema/draft-2020-12'
 import { bundle } from '@hyperjump/json-schema/bundle'
 import yaml from 'js-yaml'
 
-const schemas = globSync('lib/**/*.yaml')
+const schemas = globSync('schemas/**/*.yaml')
 
 for (const schema of schemas) {
   console.log(schema)

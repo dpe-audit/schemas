@@ -2,7 +2,6 @@ $id: https://schemas.dpe-audit.fr/production/panneau_photovoltaique
 $schema: https://json-schema.org/draft/2020-12/schema
 title: Panneau photovoltaïque
 type: object
-unevaluatedProperties: false
 properties:
   id:
     title: Identifiant
@@ -27,6 +26,9 @@ properties:
     type: ["number", "null"]
     exclusiveMinimum: 0
     default: null
+  installation_collective:
+    title: Installation photovoltaïque collective
+    type: boolean
 required:
   - id
   - description
@@ -34,3 +36,4 @@ required:
   - inclinaison
   - modules
   - surface
+  - installation_collective

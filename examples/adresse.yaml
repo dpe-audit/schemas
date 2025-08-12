@@ -1,5 +1,5 @@
 ban_id: ban_id
-numero: 1
+numero: "1"
 rep: null
 nom_voie: rue de la Paix
 code_postal: "75000"

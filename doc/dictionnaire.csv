@@ -1,0 +1,375 @@
+schema	path	type	nullable	subschema	
+/ressource	/ressource/adresse	object		/adresse	1
+/ressource	/ressource/batiment	object		/batiment	1
+/ressource	/ressource/logements	object[]		/logement	1
+/ressource	/ressource/enveloppe	object		/enveloppe	1
+/ressource	/ressource/chauffage	object		/chauffage	1
+/ressource	/ressource/ecs	object		/ecs	1
+/ressource	/ressource/refroidissement	object		/refroidissement	1
+/ressource	/ressource/ventilation	object		/ventilation	1
+/ressource	/ressource/production	object		/production	1
+/adresse	/adresse/ban_id	string	nullable		1
+/adresse	/adresse/numero	string	nullable		1
+/adresse	/adresse/rep	string	nullable		1
+/adresse	/adresse/nom_voie	string			1
+/adresse	/adresse/code_postal	string			1
+/adresse	/adresse/code_insee	string			1
+/adresse	/adresse/nom_commune	string			1
+/batiment	/batiment/rnb_id	string	nullable		1
+/batiment	/batiment/type	enum			1
+/batiment	/batiment/annee_construction	integer			1
+/batiment	/batiment/altitude	number			1
+/batiment	/batiment/logements	integer			1
+/batiment	/batiment/surface_habitable	number			1
+/batiment	/batiment/hauteur_sous_plafond	number			1
+/batiment	/batiment/materiaux_anciens	boolean			1
+/logement	/logement/id	string			1
+/logement	/logement/description	string			1
+/logement	/logement/surface_habitable	number			1
+/logement	/logement/hauteur_sous_plafond	number			1
+/logement	/logement/position	enum			1
+/logement	/logement/typologie	enum			1
+/enveloppe	/enveloppe/exposition	enum			1
+/enveloppe	/enveloppe/q4pa_conv	number	nullable		1
+/enveloppe	/enveloppe/presence_brasseurs_air	boolean			1
+/enveloppe	/enveloppe/niveaux	object[]		/enveloppe/niveau	1
+/enveloppe	/enveloppe/locaux_non_chauffes	object[]		/enveloppe/local_non_chauffe	1
+/enveloppe	/enveloppe/murs	object[]		/enveloppe/mur	1
+/enveloppe	/enveloppe/planchers_bas	object[]		/enveloppe/plancher_bas	1
+/enveloppe	/enveloppe/planchers_hauts	object[]		/enveloppe/plancher_haut	1
+/enveloppe	/enveloppe/baies	object[]		/enveloppe/baie	1
+/enveloppe	/enveloppe/portes	object[]		/enveloppe/porte	1
+/enveloppe	/enveloppe/ponts_thermiques	object[]		/enveloppe/pont_thermique	1
+/enveloppe	/enveloppe/doubles_fenetres	object[]		/enveloppe/double_fenetre	1
+/enveloppe	/enveloppe/masques	object[]		/enveloppe/masque	1
+/enveloppe/niveau	/enveloppe/niveau/id	string			2
+/enveloppe/niveau	/enveloppe/niveau/description	string			2
+/enveloppe/niveau	/enveloppe/niveau/surface	number			2
+/enveloppe/niveau	/enveloppe/niveau/inertie_paroi_verticale	enum			2
+/enveloppe/niveau	/enveloppe/niveau/inertie_plancher_bas	enum			2
+/enveloppe/niveau	/enveloppe/niveau/inertie_plancher_haut	enum			2
+/enveloppe/local_non_chauffe	/enveloppe/local_non_chauffe/id	string			2
+/enveloppe/local_non_chauffe	/enveloppe/local_non_chauffe/description	string			2
+/enveloppe/local_non_chauffe	/enveloppe/local_non_chauffe/type	enum			2
+/enveloppe/local_non_chauffe	/enveloppe/local_non_chauffe/parois	object[]		/enveloppe/local_non_chauffe/paroi	2
+/enveloppe/local_non_chauffe	/enveloppe/local_non_chauffe/baies	object[]		/enveloppe/local_non_chauffe/baie	2
+/enveloppe/local_non_chauffe/paroi	/enveloppe/local_non_chauffe/paroi/id	string			3
+/enveloppe/local_non_chauffe/paroi	/enveloppe/local_non_chauffe/paroi/description	string			3
+/enveloppe/local_non_chauffe/paroi	/enveloppe/local_non_chauffe/paroi/isolation	enum			3
+/enveloppe/local_non_chauffe/paroi	/enveloppe/local_non_chauffe/paroi/position	object			3
+/enveloppe/local_non_chauffe/paroi	/enveloppe/local_non_chauffe/paroi/position/mitoyennete	enum			3
+/enveloppe/local_non_chauffe/paroi	/enveloppe/local_non_chauffe/paroi/position/surface	number			3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/id	string			3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/description	string			3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/type	enum			3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/materiau	enum	nullable		3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/type_vitrage	enum	nullable		3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/presence_rupteur_pont_thermique	boolean	nullable		3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/position	object			3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/position/paroi_id	string	nullable		3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/position/surface	number			3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/position/mitoyennete	enum			3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/position/inclinaison	number			3
+/enveloppe/local_non_chauffe/baie	/enveloppe/local_non_chauffe/baie/position/orientation	number	nullable		3
+/enveloppe/mur	/enveloppe/mur/id	string			2
+/enveloppe/mur	/enveloppe/mur/description	string			2
+/enveloppe/mur	/enveloppe/mur/type_structure	enum	nullable		2
+/enveloppe/mur	/enveloppe/mur/epaisseur_structure	number	nullable		2
+/enveloppe/mur	/enveloppe/mur/type_doublage	enum	nullable		2
+/enveloppe/mur	/enveloppe/mur/presence_enduit_isolant	boolean	nullable		2
+/enveloppe/mur	/enveloppe/mur/paroi_ancienne	boolean	nullable		2
+/enveloppe/mur	/enveloppe/mur/inertie	enum	nullable		2
+/enveloppe/mur	/enveloppe/mur/annee_construction	integer	nullable		2
+/enveloppe/mur	/enveloppe/mur/annee_renovation	integer	nullable		2
+/enveloppe/mur	/enveloppe/mur/u0	number	nullable		2
+/enveloppe/mur	/enveloppe/mur/u	number	nullable		2
+/enveloppe/mur	/enveloppe/mur/position	object			2
+/enveloppe/mur	/enveloppe/mur/position/surface	number			2
+/enveloppe/mur	/enveloppe/mur/position/mitoyennete	string			2
+/enveloppe/mur	/enveloppe/mur/position/orientation	number	nullable		2
+/enveloppe/mur	/enveloppe/mur/position/local_non_chauffe_id	string			2
+/enveloppe/mur	/enveloppe/mur/isolation	object			2
+/enveloppe/mur	/enveloppe/mur/isolation/etat_isolation	enum	nullable		2
+/enveloppe/mur	/enveloppe/mur/isolation/type_isolation	enum	nullable		2
+/enveloppe/mur	/enveloppe/mur/isolation/annee_isolation	integer	nullable		2
+/enveloppe/mur	/enveloppe/mur/isolation/epaisseur_isolation	number	nullable		2
+/enveloppe/mur	/enveloppe/mur/isolation/resistance_thermique_isolation	number	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/id	string			2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/description	string			2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/type_structure	enum	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/inertie	enum	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/annee_construction	integer	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/annee_renovation	integer	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/u0	number	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/u	number	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/position	object			2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/position/surface	number			2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/position/perimetre	number			2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/position/mitoyennete	enum			2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/position/local_non_chauffe_id	string			2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/isolation	object			2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/isolation/etat_isolation	enum	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/isolation/type_isolation	enum	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/isolation/annee_isolation	integer	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/isolation/epaisseur_isolation	number	nullable		2
+/enveloppe/plancher_bas	/enveloppe/plancher_bas/isolation/resistance_thermique_isolation	number	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/id	string			2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/description	string			2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/configuration	enum	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/type_structure	enum	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/inertie	enum	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/annee_construction	integer	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/annee_renovation	integer	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/u0	number	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/u	number	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/position	object			2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/position/surface	number			2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/position/mitoyennete	enum			2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/position/orientation	number	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/position/local_non_chauffe_id	string			2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/isolation	object			2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/isolation/etat_isolation	enum	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/isolation/type_isolation	enum	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/isolation/annee_isolation	integer	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/isolation/epaisseur_isolation	number	nullable		2
+/enveloppe/plancher_haut	/enveloppe/plancher_haut/isolation/resistance_thermique_isolation	number	nullable		2
+/enveloppe/baie	/enveloppe/baie/id	string			2
+/enveloppe/baie	/enveloppe/baie/double_fenetre_id	string	nullable		2
+/enveloppe/baie	/enveloppe/baie/description	string			2
+/enveloppe/baie	/enveloppe/baie/type_baie	enum			2
+/enveloppe/baie	/enveloppe/baie/presence_protection_solaire	boolean			2
+/enveloppe/baie	/enveloppe/baie/type_fermeture	enum			2
+/enveloppe/baie	/enveloppe/baie/annee_installation	integer	nullable		2
+/enveloppe/baie	/enveloppe/baie/ug	number	nullable		2
+/enveloppe/baie	/enveloppe/baie/uw	number	nullable		2
+/enveloppe/baie	/enveloppe/baie/ujn	number	nullable		2
+/enveloppe/baie	/enveloppe/baie/sw	number	nullable		2
+/enveloppe/baie	/enveloppe/baie/position	object			2
+/enveloppe/baie	/enveloppe/baie/position/paroi_id	string	nullable		2
+/enveloppe/baie	/enveloppe/baie/position/surface	number			2
+/enveloppe/baie	/enveloppe/baie/position/mitoyennete	enum			2
+/enveloppe/baie	/enveloppe/baie/position/inclinaison	number			2
+/enveloppe/baie	/enveloppe/baie/position/orientation	number	nullable		2
+/enveloppe/baie	/enveloppe/baie/position/local_non_chauffe_id	string			2
+/enveloppe/baie	/enveloppe/baie/masques	string[]			2
+/enveloppe/baie	/enveloppe/baie/type_pose	enum			2
+/enveloppe/baie	/enveloppe/baie/materiau	enum	nullable		2
+/enveloppe/baie	/enveloppe/baie/presence_soubassement	boolean	nullable		2
+/enveloppe/baie	/enveloppe/baie/vitrage	object	nullable		2
+/enveloppe/baie	/enveloppe/baie/vitrage/type_vitrage	enum	nullable		2
+/enveloppe/baie	/enveloppe/baie/vitrage/survitrage	object	nullable		2
+/enveloppe/baie	/enveloppe/baie/vitrage/nature_gaz_lame	enum	nullable		2
+/enveloppe/baie	/enveloppe/baie/vitrage/epaisseur_lame	number	nullable		2
+/enveloppe/baie	/enveloppe/baie/menuiserie	object	nullable		2
+/enveloppe/baie	/enveloppe/baie/menuiserie/largeur_dormant	number	nullable		2
+/enveloppe/baie	/enveloppe/baie/menuiserie/presence_joint	boolean	nullable		2
+/enveloppe/baie	/enveloppe/baie/menuiserie/presence_retour_isolation	boolean	nullable		2
+/enveloppe/baie	/enveloppe/baie/menuiserie/presence_rupteur_pont_thermique	boolean	nullable		2
+/enveloppe/baie	/enveloppe/baie/vitrage/survitrage	object	nullable		2
+/enveloppe/baie	/enveloppe/baie/vitrage/survitrage/type_survitrage	enum	nullable		2
+/enveloppe/baie	/enveloppe/baie/vitrage/survitrage/epaisseur_lame	number	nullable		2
+/enveloppe/porte	/enveloppe/porte/id	string			2
+/enveloppe/porte	/enveloppe/porte/description	string			2
+/enveloppe/porte	/enveloppe/porte/type_pose	string			2
+/enveloppe/porte	/enveloppe/porte/isolation	string	nullable		2
+/enveloppe/porte	/enveloppe/porte/materiau	string	nullable		2
+/enveloppe/porte	/enveloppe/porte/presence_sas	boolean			2
+/enveloppe/porte	/enveloppe/porte/annee_installation	integer	nullable		2
+/enveloppe/porte	/enveloppe/porte/u	number	nullable		2
+/enveloppe/porte	/enveloppe/porte/position	object			2
+/enveloppe/porte	/enveloppe/porte/position/paroi_id	string	nullable		2
+/enveloppe/porte	/enveloppe/porte/position/surface	number			2
+/enveloppe/porte	/enveloppe/porte/position/mitoyennete	string			2
+/enveloppe/porte	/enveloppe/porte/position/orientation	number	nullable		2
+/enveloppe/porte	/enveloppe/porte/position/local_non_chauffe_id	string			2
+/enveloppe/porte	/enveloppe/porte/vitrage	object			2
+/enveloppe/porte	/enveloppe/porte/vitrage/taux_vitrage	number			2
+/enveloppe/porte	/enveloppe/porte/vitrage/type_vitrage	string	nullable		2
+/enveloppe/porte	/enveloppe/porte/menuiserie	object			2
+/enveloppe/porte	/enveloppe/porte/menuiserie/largeur_dormant	number	nullable		2
+/enveloppe/porte	/enveloppe/porte/menuiserie/presence_joint	boolean	nullable		2
+/enveloppe/porte	/enveloppe/porte/menuiserie/presence_retour_isolation	boolean	nullable		2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/id	string			2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/description	string			2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/longueur	number			2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/kpt	number	nullable		2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/liaison	object			2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/liaison/type_liaison	enum			2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/liaison/mur_id	string			2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/liaison/plancher_id	string	nullable		2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/liaison/ouverture_id	string	nullable		2
+/enveloppe/pont_thermique	/enveloppe/pont_thermique/liaison/pont_thermique_partiel	boolean	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/id	string			2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/description	string			2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/type_baie	enum			2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/ug	number	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/uw	number	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/sw	number	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/type_pose	enum			2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/materiau	enum	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/presence_soubassement	boolean			2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/vitrage	object	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/vitrage/type_vitrage	enum	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/vitrage/survitrage	object	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/vitrage/nature_lame	enum	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/vitrage/epaisseur_lame	number	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/vitrage/survitrage	object	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/vitrage/survitrage/type_survitrage	enum	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/vitrage/survitrage/epaisseur_lame	number	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/menuiserie	object	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/menuiserie/largeur_dormant	number	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/menuiserie/presence_joint	boolean	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/menuiserie/presence_retour_isolation	boolean	nullable		2
+/enveloppe/double_fenetre	/enveloppe/double_fenetre/menuiserie/presence_rupteur_pont_thermique	boolean	nullable		2
+/enveloppe/masque	/enveloppe/masque/id	string			2
+/enveloppe/masque	/enveloppe/masque/description	string			2
+/enveloppe/masque	/enveloppe/masque/type	enum			2
+/enveloppe/masque	/enveloppe/masque/hauteur	number	nullable		2
+/enveloppe/masque	/enveloppe/masque/orientation	number	nullable		2
+/enveloppe/masque	/enveloppe/masque/profondeur	number	nullable		2
+/chauffage	/chauffage/emetteurs	object[]		/chauffage/emetteur	
+/chauffage	/chauffage/generateurs	object[]		/chauffage/generateur	
+/chauffage	/chauffage/installations	object[]		/chauffage/installation	
+/chauffage	/chauffage/systemes	object[]		/chauffage/systeme	
+/chauffage/emetteur	/chauffage/emetteur/id	string			
+/chauffage/emetteur	/chauffage/emetteur/description	string			
+/chauffage/emetteur	/chauffage/emetteur/type	enum			
+/chauffage/emetteur	/chauffage/emetteur/temperature_distribution	string			
+/chauffage/emetteur	/chauffage/emetteur/presence_robinet_thermostatique	boolean			
+/chauffage/emetteur	/chauffage/emetteur/annee_installation	integer	nullable		
+/chauffage/generateur	/chauffage/generateur/id	string			
+/chauffage/generateur	/chauffage/generateur/description	string			
+/chauffage/generateur	/chauffage/generateur/type	enum			
+/chauffage/generateur	/chauffage/generateur/energie	enum			
+/chauffage/generateur	/chauffage/generateur/generateur_collectif	boolean			
+/chauffage/generateur	/chauffage/generateur/generateur_multi_batiment	boolean			
+/chauffage/generateur	/chauffage/generateur/position_volume_chauffe	boolean			
+/chauffage/generateur	/chauffage/generateur/annee_installation	integer	nullable		
+/chauffage/generateur	/chauffage/generateur/generateur_mixte_id	string	nullable		
+/chauffage/generateur	/chauffage/generateur/type_chaudiere	enum	nullable		
+/chauffage/generateur	/chauffage/generateur/pn	number	nullable		
+/chauffage/generateur	/chauffage/generateur/scop	number	nullable		
+/chauffage/generateur	/chauffage/generateur/energie_partie_chaudiere	enum			
+/chauffage/generateur	/chauffage/generateur/label	string	nullable		
+/chauffage/generateur	/chauffage/generateur/mode_combustion	enum	nullable		
+/chauffage/generateur	/chauffage/generateur/presence_ventouse	boolean	nullable		
+/chauffage/generateur	/chauffage/generateur/presence_regulation_combustion	boolean	nullable		
+/chauffage/generateur	/chauffage/generateur/pveilleuse	number	nullable		
+/chauffage/generateur	/chauffage/generateur/qp0	number	nullable		
+/chauffage/generateur	/chauffage/generateur/rpn	number	nullable		
+/chauffage/generateur	/chauffage/generateur/rpint	number	nullable		
+/chauffage/generateur	/chauffage/generateur/tfonc30	number	nullable		
+/chauffage/generateur	/chauffage/generateur/tfonc100	number	nullable		
+/chauffage/generateur	/chauffage/generateur/reseau_chaleur_id	string	nullable		
+/chauffage/installation	/chauffage/installation/id	string			
+/chauffage/installation	/chauffage/installation/description	string			
+/chauffage/installation	/chauffage/installation/surface	number			
+/chauffage/installation	/chauffage/installation/comptage_individuel	boolean			
+/chauffage/installation	/chauffage/installation/solaire_thermique	object	nullable		
+/chauffage/installation	/chauffage/installation/solaire_thermique/usage	enum	nullable		
+/chauffage/installation	/chauffage/installation/solaire_thermique/annee_installation	integer	nullable		
+/chauffage/installation	/chauffage/installation/solaire_thermique/fch	number	nullable		
+/chauffage/installation	/chauffage/installation/regulation_centrale	object			
+/chauffage/installation	/chauffage/installation/regulation_centrale/presence_regulation	boolean			
+/chauffage/installation	/chauffage/installation/regulation_centrale/minimum_temperature	boolean			
+/chauffage/installation	/chauffage/installation/regulation_centrale/detection_presence	boolean			
+/chauffage/installation	/chauffage/installation/regulation_terminale	object			
+/chauffage/installation	/chauffage/installation/regulation_terminale/presence_regulation	boolean			
+/chauffage/installation	/chauffage/installation/regulation_terminale/minimum_temperature	boolean			
+/chauffage/installation	/chauffage/installation/regulation_terminale/detection_presence	boolean			
+/chauffage/systeme	/chauffage/systeme/id	string			
+/chauffage/systeme	/chauffage/systeme/description	string			
+/chauffage/systeme	/chauffage/systeme/installation_id	string			
+/chauffage/systeme	/chauffage/systeme/generateur_id	string			
+/chauffage/systeme	/chauffage/systeme/type	string			
+/chauffage/systeme	/chauffage/systeme/reseau	object	nullable		
+/chauffage/systeme	/chauffage/systeme/reseau/type_distribution	string	nullable		
+/chauffage/systeme	/chauffage/systeme/reseau/presence_circulateur_externe	boolean	nullable		
+/chauffage/systeme	/chauffage/systeme/reseau/niveaux_desservis	integer	nullable		
+/chauffage/systeme	/chauffage/systeme/reseau/isolation	string	nullable		
+/chauffage/systeme	/chauffage/systeme/emetteurs	string[]			
+/ecs	/ecs/generateurs	object[]		/ecs/generateur	1
+/ecs	/ecs/installations	object[]		/ecs/installation	1
+/ecs	/ecs/systemes	object[]		/ecs/systeme	1
+/ecs/generateur	/ecs/generateur/id	string			2
+/ecs/generateur	/ecs/generateur/description	string			2
+/ecs/generateur	/ecs/generateur/type	enum			2
+/ecs/generateur	/ecs/generateur/energie	enum			2
+/ecs/generateur	/ecs/generateur/volume_stockage	number			2
+/ecs/generateur	/ecs/generateur/generateur_collectif	boolean			2
+/ecs/generateur	/ecs/generateur/generateur_multi_batiment	boolean			2
+/ecs/generateur	/ecs/generateur/position_volume_chauffe	boolean			2
+/ecs/generateur	/ecs/generateur/annee_installation	integer	nullable		2
+/ecs/generateur	/ecs/generateur/pn	number	nullable		2
+/ecs/generateur	/ecs/generateur/label	string	nullable		2
+/ecs/generateur	/ecs/generateur/cop	number	nullable		2
+/ecs/generateur	/ecs/generateur/generateur_mixte_id	string	nullable		2
+/ecs/generateur	/ecs/generateur/mode_combustion	enum	nullable		2
+/ecs/generateur	/ecs/generateur/presence_ventouse	boolean	nullable		2
+/ecs/generateur	/ecs/generateur/pveilleuse	number	nullable		2
+/ecs/generateur	/ecs/generateur/qp0	number	nullable		2
+/ecs/generateur	/ecs/generateur/rpn	number	nullable		2
+/ecs/generateur	/ecs/generateur/reseau_chaleur_id	string	nullable		2
+/ecs/generateur	/ecs/generateur/type_chaudiere	enum	nullable		2
+/ecs/installation	/ecs/installation/id	string			2
+/ecs/installation	/ecs/installation/description	string			2
+/ecs/installation	/ecs/installation/surface	number			2
+/ecs/installation	/ecs/installation/solaire_thermique	object	nullable		2
+/ecs/installation	/ecs/installation/solaire_thermique/usage	enum	nullable		2
+/ecs/installation	/ecs/installation/solaire_thermique/annee_installation	integer	nullable		2
+/ecs/installation	/ecs/installation/solaire_thermique/fecs	number	nullable		2
+/ecs/systeme	/ecs/systeme/id	string			2
+/ecs/systeme	/ecs/systeme/description	string			2
+/ecs/systeme	/ecs/systeme/generateur_id	string			2
+/ecs/systeme	/ecs/systeme/installation_id	string			2
+/ecs/systeme	/ecs/systeme/reseau	object			2
+/ecs/systeme	/ecs/systeme/reseau/alimentation_contigue	boolean			2
+/ecs/systeme	/ecs/systeme/reseau/niveaux_desservis	integer			2
+/ecs/systeme	/ecs/systeme/reseau/isolation	string	nullable		2
+/ecs/systeme	/ecs/systeme/reseau/bouclage	string	nullable		2
+/ecs/systeme	/ecs/systeme/stockage	object	nullable		2
+/ecs/systeme	/ecs/systeme/stockage/volume	number	nullable		2
+/ecs/systeme	/ecs/systeme/stockage/position_volume_chauffe	boolean	nullable		2
+/production	/production/panneaux_photovoltaiques	object[]		/production/panneau_photovoltaique	1
+/production/panneau_photovoltaique	/production/panneau_photovoltaique/id	string			2
+/production/panneau_photovoltaique	/production/panneau_photovoltaique/description	string			2
+/production/panneau_photovoltaique	/production/panneau_photovoltaique/orientation	number			2
+/production/panneau_photovoltaique	/production/panneau_photovoltaique/inclinaison	number			2
+/production/panneau_photovoltaique	/production/panneau_photovoltaique/modules	integer			2
+/production/panneau_photovoltaique	/production/panneau_photovoltaique/surface	number	nullable		2
+/production/panneau_photovoltaique	/production/panneau_photovoltaique/installation_collective	boolean			2
+/refroidissement	/refroidissement/generateurs	object[]		/refroidissement/generateur	1
+/refroidissement	/refroidissement/installations	object[]		/refroidissement/installation	1
+/refroidissement	/refroidissement/systemes	object[]		/refroidissement/systeme	1
+/refroidissement/generateur	/refroidissement/generateur/id	string			2
+/refroidissement/generateur	/refroidissement/generateur/description	string			2
+/refroidissement/generateur	/refroidissement/generateur/type	enum			2
+/refroidissement/generateur	/refroidissement/generateur/annee_installation	integer	nullable		2
+/refroidissement/generateur	/refroidissement/generateur/energie	enum			2
+/refroidissement/generateur	/refroidissement/generateur/seer	number	nullable		2
+/refroidissement/generateur	/refroidissement/generateur/reseau_froid_id	string	nullable		2
+/refroidissement/installation	/refroidissement/installation/id	string			2
+/refroidissement/installation	/refroidissement/installation/description	string			2
+/refroidissement/installation	/refroidissement/installation/surface	number			2
+/refroidissement/systeme	/refroidissement/systeme/id	string			2
+/refroidissement/systeme	/refroidissement/systeme/description	string			2
+/refroidissement/systeme	/refroidissement/systeme/generateur_id	string			2
+/refroidissement/systeme	/refroidissement/systeme/installation_id	string			2
+/ventilation	/ventilation/generateurs	object[]		/ventilation/generateur	1
+/ventilation	/ventilation/installations	object[]		/ventilation/installation	1
+/ventilation	/ventilation/systemes	object[]		/ventilation/systeme	1
+/ventilation/generateur	/ventilation/generateur/id	string			2
+/ventilation/generateur	/ventilation/generateur/description	string			2
+/ventilation/generateur	/ventilation/generateur/type	enum			2
+/ventilation/generateur	/ventilation/generateur/generateur_collectif	boolean			2
+/ventilation/generateur	/ventilation/generateur/presence_echangeur_thermique	boolean	nullable		2
+/ventilation/generateur	/ventilation/generateur/annee_installation	integer	nullable		2
+/ventilation/generateur	/ventilation/generateur/type_vmc	enum	nullable		2
+/ventilation/installation	/ventilation/installation/id	string			2
+/ventilation/installation	/ventilation/installation/description	string			2
+/ventilation/installation	/ventilation/installation/surface	number			2
+/ventilation/systeme	/ventilation/systeme/id	string			2
+/ventilation/systeme	/ventilation/systeme/description	string			2
+/ventilation/systeme	/ventilation/systeme/type	enum			2
+/ventilation/systeme	/ventilation/systeme/generateur_id	string	nullable		2
+/ventilation/systeme	/ventilation/systeme/installation_id	string			2

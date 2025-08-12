@@ -10,7 +10,7 @@ properties:
     default: null
   numero:
     title: Numéro de l'adresse dans la voie
-    type: [integer, "null"]
+    type: [string, "null"]
     default: null
   rep:
     title: Indice de répétition associé au numéro (par exemple bis, a…)

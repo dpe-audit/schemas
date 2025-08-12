@@ -10,7 +10,7 @@ properties:
   description:
     title: Description
     type: string
-  type_baie:
+  type:
     title: Type de baie
     type: string
     enum:
@@ -24,20 +24,20 @@ properties:
 required:
   - id
   - description
-  - type_baie
+  - type
   - position
 oneOf:
   - title: Baie en polycarbonate
     type: object
     properties:
-      type_baie:
+      type:
         const: polycarbonate
     required:
-      - type_baie
+      - type
   - title: Autres cas
     type: object
     properties:
-      type_baie:
+      type:
         not:
           const: polycarbonate
       materiau:
@@ -66,7 +66,7 @@ oneOf:
         type: ["boolean", "null"]
         default: null
     required:
-      - type_baie
+      - type
       - materiau
       - type_vitrage
       - presence_rupteur_pont_thermique

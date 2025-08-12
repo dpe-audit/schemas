@@ -28,7 +28,19 @@ properties:
       - hall_entree_sans_fermeture_automatique
       - garage_collectif
       - autres
+  parois:
+    title: Liste des parois
+    type: array
+    items:
+      $ref: /enveloppe/local_non_chauffe/paroi
+  baies:
+    title: Liste des baies
+    type: array
+    items:
+      $ref: /enveloppe/local_non_chauffe/baie
 required:
   - id
   - description
   - type
+  - parois
+  - baies

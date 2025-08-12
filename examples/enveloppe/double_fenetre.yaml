@@ -1,5 +1,4 @@
 - id: 6bc71c8d-11fa-4f36-b40b-b75ddbedf5d5
-  is: enveloppe:double_fenetre
   description: Une double fenêtre
   type_baie: fenetre_battante
   type_pose: nu_interieur

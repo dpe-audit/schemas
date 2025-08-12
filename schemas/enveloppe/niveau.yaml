@@ -7,9 +7,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: enveloppe:niveau
   description:
     title: Description
     type: string
@@ -31,7 +28,6 @@ properties:
     enum: [lourde, legere]
 required:
   - id
-  - is
   - description
   - surface
   - inertie_paroi_verticale

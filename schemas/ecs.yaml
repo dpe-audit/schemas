@@ -1,0 +1,27 @@
+$id: https://schemas.dpe-audit.fr/ecs
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Eau chaude sanitaire
+type: object
+properties:
+  generateurs:
+    title: Liste des générateurs
+    type: array
+    minContains: 1
+    items:
+      $ref: /ecs/generateur
+  installations:
+    title: Liste des installations
+    type: array
+    minContains: 1
+    items:
+      $ref: /ecs/installation
+  systemes:
+    title: Liste des systèmes
+    type: array
+    minContains: 1
+    items:
+      $ref: /ecs/systeme
+required:
+  - generateurs
+  - installations
+  - systemes

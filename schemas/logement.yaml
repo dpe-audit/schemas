@@ -1,0 +1,33 @@
+$id: https://schemas.dpe-audit.fr/logement
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Logement visité
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  surface_habitable:
+    title: Surface habitable en m²
+    type: number
+  hauteur_sous_plafond:
+    title: Hauteur sous plafond moyenne en m
+    type: number
+  position:
+    title: Position du logement
+    type: string
+    enum: [rdc, etage_intermediaire, dernier_etage]
+  typologie:
+    title: Typologie du logement
+    type: string
+    enum: [T1, T2, T3, T4, T5, T6, T7]
+required:
+  - id
+  - description
+  - surface_habitable
+  - hauteur_sous_plafond
+  - position
+  - typologie

@@ -1,5 +1,4 @@
 - id: e5177740-3927-478a-ab69-8f673ec4d073
-  is: enveloppe:local_non_chauffe:baie
   description: Baie d'un local non chauffé donnant sur l'extérieur
   type_baie: fenetre_battante
   materiau: pvc

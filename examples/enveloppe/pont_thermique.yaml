@@ -1,5 +1,4 @@
 - id: 91ba046e-34e0-48ee-815a-b95f59f4056a
-  is: enveloppe:pont_thermique
   description: Un pont thermique
   longueur: 10
   kpt: 0.1

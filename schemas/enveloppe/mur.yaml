@@ -8,9 +8,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: enveloppe:mur
   description:
     title: Description
     type: string
@@ -92,7 +89,6 @@ properties:
     $ref: "#/$defs/isolation"
 required:
   - id
-  - is
   - description
   - type_structure
   - epaisseur_structure

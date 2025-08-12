@@ -1,5 +1,4 @@
 - id: 1e9098f0-5952-4c95-8608-291689103c29
-  is: chauffage:emetteur
   description: Un émetteur de chaleur
   type: radiateur_bitube
   temperature_distribution: moyenne

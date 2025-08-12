@@ -1,0 +1,3 @@
+generateurs: examples/ventilation/generateur.yaml
+installations: examples/ventilation/installation.yaml
+systemes: examples/ventilation/systeme.yaml

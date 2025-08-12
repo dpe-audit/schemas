@@ -8,9 +8,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: chauffage:installation
   description:
     title: Description
     type: string
@@ -35,7 +32,6 @@ properties:
     title: Régulation terminale
 required:
   - id
-  - is
   - description
   - surface
   - comptage_individuel

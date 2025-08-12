@@ -7,9 +7,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: production:panneau_photovoltaique
   description:
     title: Description
     type: string
@@ -31,7 +28,6 @@ properties:
     type: boolean
 required:
   - id
-  - is
   - description
   - orientation
   - inclinaison

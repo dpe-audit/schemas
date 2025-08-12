@@ -8,9 +8,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: enveloppe:local_non_chauffe
   description:
     title: Description
     type: string
@@ -33,6 +30,5 @@ properties:
       - autres
 required:
   - id
-  - is
   - description
   - type

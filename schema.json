@@ -5,10 +5,55 @@
   "type": "object",
   "properties": {
     "adresse": {
+      "$ref": "/adresse"
+    },
+    "batiment": {
+      "$ref": "/batiment"
+    },
+    "logements": {
+      "title": "Liste des logements visités",
+      "type": "array",
+      "default": [],
+      "items": {
+        "$ref": "/logement"
+      }
+    },
+    "enveloppe": {
+      "$ref": "/enveloppe"
+    },
+    "chauffage": {
+      "$ref": "/chauffage"
+    },
+    "ecs": {
+      "$ref": "/ecs"
+    },
+    "ventilation": {
+      "$ref": "/ventilation"
+    },
+    "refroidissement": {
+      "$ref": "/refroidissement"
+    },
+    "production": {
+      "$ref": "/production"
+    }
+  },
+  "required": [
+    "adresse",
+    "batiment",
+    "logements",
+    "chauffage",
+    "ecs",
+    "ventilation",
+    "refroidissement",
+    "production"
+  ],
+  "$defs": {
+    "https://schemas.dpe-audit.fr/adresse": {
+      "$id": "https://schemas.dpe-audit.fr/adresse",
       "title": "Adresse",
       "type": "object",
       "properties": {
-        "id": {
+        "ban_id": {
           "title": "Identifiant",
           "description": "Clé d'interopérabilité telle que définie dans la spécification du format d'échange BAL",
           "type": [
@@ -51,7 +96,7 @@
         }
       },
       "required": [
-        "id",
+        "ban_id",
         "numero",
         "rep",
         "nom_voie",
@@ -60,11 +105,12 @@
         "nom_commune"
       ]
     },
-    "batiment": {
+    "https://schemas.dpe-audit.fr/batiment": {
+      "$id": "https://schemas.dpe-audit.fr/batiment",
       "title": "Bâtiment",
       "type": "object",
       "properties": {
-        "id": {
+        "rnb_id": {
           "title": "Identifiant du bâtiment depuis le RNB",
           "type": [
             "string",
@@ -110,7 +156,7 @@
         }
       },
       "required": [
-        "id",
+        "rnb_id",
         "type",
         "annee_construction",
         "altitude",
@@ -120,192 +166,162 @@
         "materiaux_anciens"
       ]
     },
-    "logements": {
-      "title": "Liste des logements visités",
-      "type": "array",
-      "default": [],
-      "items": {
-        "logement": {
-          "title": "Logement",
-          "type": "object",
-          "properties": {
-            "id": {
-              "title": "Identifiant",
-              "type": "string",
-              "format": "uuid"
-            },
-            "description": {
-              "title": "Description",
-              "type": "string"
-            },
-            "surface_habitable": {
-              "title": "Surface habitable en m²",
-              "type": "number"
-            },
-            "hauteur_sous_plafond": {
-              "title": "Hauteur sous plafond moyenne en m",
-              "type": "number"
-            },
-            "position": {
-              "title": "Position du logement",
-              "type": "string",
-              "enum": [
-                "rdc",
-                "etage_intermediaire",
-                "dernier_etage"
-              ]
-            },
-            "typologie": {
-              "title": "Typologie du logement",
-              "type": "string",
-              "enum": [
-                "T1",
-                "T2",
-                "T3",
-                "T4",
-                "T5",
-                "T6",
-                "T7"
-              ]
-            }
-          }
-        },
-        "required": [
-          "id",
-          "description",
-          "surface_habitable",
-          "hauteur_sous_plafond",
-          "position",
-          "typologie"
-        ]
-      }
-    },
-    "elements": {
-      "title": "Liste des éléments",
-      "type": "array",
-      "items": {
-        "$ref": "/element"
-      }
-    }
-  },
-  "required": [
-    "adresse",
-    "batiment",
-    "logements",
-    "elements"
-  ],
-  "$defs": {
-    "https://schemas.dpe-audit.fr/element": {
-      "$id": "https://schemas.dpe-audit.fr/element",
-      "title": "Elément",
+    "https://schemas.dpe-audit.fr/logement": {
+      "$id": "https://schemas.dpe-audit.fr/logement",
+      "title": "Logement visité",
       "type": "object",
       "properties": {
         "id": {
           "title": "Identifiant",
           "type": "string",
           "format": "uuid"
-        },
-        "is": {
-          "title": "Type d'élément",
-          "type": "string"
         },
         "description": {
           "title": "Description",
           "type": "string"
+        },
+        "surface_habitable": {
+          "title": "Surface habitable en m²",
+          "type": "number"
+        },
+        "hauteur_sous_plafond": {
+          "title": "Hauteur sous plafond moyenne en m",
+          "type": "number"
+        },
+        "position": {
+          "title": "Position du logement",
+          "type": "string",
+          "enum": [
+            "rdc",
+            "etage_intermediaire",
+            "dernier_etage"
+          ]
+        },
+        "typologie": {
+          "title": "Typologie du logement",
+          "type": "string",
+          "enum": [
+            "T1",
+            "T2",
+            "T3",
+            "T4",
+            "T5",
+            "T6",
+            "T7"
+          ]
         }
       },
       "required": [
         "id",
-        "is",
-        "description"
-      ],
-      "discriminator": {
-        "propertyName": "is"
-      },
-      "oneOf": [
-        {
-          "$ref": "/chauffage/emetteur"
-        },
-        {
-          "$ref": "/chauffage/generateur"
-        },
-        {
-          "$ref": "/chauffage/installation"
-        },
-        {
-          "$ref": "/chauffage/systeme"
-        },
-        {
-          "$ref": "/ecs/generateur"
-        },
-        {
-          "$ref": "/ecs/installation"
-        },
-        {
-          "$ref": "/ecs/systeme"
-        },
-        {
-          "$ref": "/enveloppe/baie"
-        },
-        {
-          "$ref": "/enveloppe/double_fenetre"
-        },
-        {
-          "$ref": "/enveloppe/local_non_chauffe"
-        },
-        {
-          "$ref": "/enveloppe/local_non_chauffe/baie"
-        },
-        {
-          "$ref": "/enveloppe/local_non_chauffe/paroi"
-        },
-        {
-          "$ref": "/enveloppe/masque_lointain"
-        },
-        {
-          "$ref": "/enveloppe/masque_proche"
-        },
-        {
-          "$ref": "/enveloppe/mur"
-        },
-        {
-          "$ref": "/enveloppe/plancher_bas"
-        },
-        {
-          "$ref": "/enveloppe/plancher_haut"
-        },
-        {
-          "$ref": "/enveloppe/pont_thermique"
-        },
-        {
-          "$ref": "/enveloppe/porte"
-        },
-        {
-          "$ref": "/production/panneau_photovoltaique"
-        },
-        {
-          "$ref": "/refroidissement/generateur"
-        },
-        {
-          "$ref": "/refroidissement/installation"
-        },
-        {
-          "$ref": "/refroidissement/systeme"
-        },
-        {
-          "$ref": "/ventilation/generateur"
-        },
-        {
-          "$ref": "/ventilation/installation"
-        },
-        {
-          "$ref": "/ventilation/systeme"
-        }
+        "description",
+        "surface_habitable",
+        "hauteur_sous_plafond",
+        "position",
+        "typologie"
       ]
     },
-    "https://schemas.dpe-audit.fr/chauffage/emetteur": {
-      "$id": "https://schemas.dpe-audit.fr/chauffage/emetteur",
-      "title": "Émetteur de chaleur",
+    "https://schemas.dpe-audit.fr/enveloppe": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe",
+      "title": "Enveloppe",
+      "type": "object",
+      "properties": {
+        "niveaux": {
+          "title": "Liste des niveaux",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/niveau"
+          }
+        },
+        "locaux_non_chauffes": {
+          "title": "Liste des locaux non chauffés",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/local_non_chauffe"
+          }
+        },
+        "murs": {
+          "title": "Liste des murs",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/mur"
+          }
+        },
+        "planchers_bas": {
+          "title": "Liste des planchers bas",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/plancher_bas"
+          }
+        },
+        "planchers_hauts": {
+          "title": "Liste des planchers hauts",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/plancher_haut"
+          }
+        },
+        "baies": {
+          "title": "Liste des baies",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/baie"
+          }
+        },
+        "portes": {
+          "title": "Liste des portes",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/porte"
+          }
+        },
+        "ponts_thermiques": {
+          "title": "Liste des ponts thermiques",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/pont_thermique"
+          }
+        },
+        "doubles_fenetres": {
+          "title": "Liste des doubles fenêtres",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/double_fenetre"
+          }
+        },
+        "masques": {
+          "title": "Liste des masques",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/enveloppe/masque"
+          }
+        }
+      },
+      "required": [
+        "niveaux",
+        "locaux_non_chauffes",
+        "murs",
+        "planchers_bas",
+        "planchers_hauts",
+        "baies",
+        "portes",
+        "ponts_thermiques",
+        "doubles_fenetres",
+        "masques"
+      ]
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/niveau": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/niveau",
+      "title": "Niveau",
       "type": "object",
       "properties": {
         "id": {
@@ -313,55 +329,2495 @@
           "type": "string",
           "format": "uuid"
         },
-        "is": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "surface": {
+          "title": "Surface en m²",
+          "type": "number",
+          "minimumExclusive": 0
+        },
+        "inertie_paroi_verticale": {
+          "title": "Inertie des parois verticales",
           "type": "string",
-          "const": "chauffage:emetteur"
+          "enum": [
+            "lourde",
+            "legere"
+          ]
+        },
+        "inertie_plancher_bas": {
+          "title": "Inertie des planchers bas",
+          "type": "string",
+          "enum": [
+            "lourde",
+            "legere"
+          ]
+        },
+        "inertie_plancher_haut": {
+          "title": "Inertie des planchers hauts",
+          "type": "string",
+          "enum": [
+            "lourde",
+            "legere"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "surface",
+        "inertie_paroi_verticale",
+        "inertie_plancher_bas",
+        "inertie_plancher_haut"
+      ]
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe",
+      "title": "Local non chauffé",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
         },
         "description": {
           "title": "Description",
           "type": "string"
         },
         "type": {
-          "title": "Type d'émetteur de chauffage",
+          "title": "Type",
           "type": "string",
           "enum": [
-            "plancher_chauffant",
-            "plafond_chauffant",
-            "radiateur_monotube",
-            "radiateur_bitube",
-            "radiateur"
+            "garage",
+            "cellier",
+            "espace_tampon_solarise",
+            "comble_fortement_ventile",
+            "comble_faiblement_ventile",
+            "comble_tres_faiblement_ventile",
+            "circulation_sans_ouverture_exterieure",
+            "circulation_avec_ouverture_exterieure",
+            "circulation_avec_bouche_ou_gaine_desenfumage_ouverte",
+            "hall_entree_avec_fermeture_automatique",
+            "hall_entree_sans_fermeture_automatique",
+            "garage_collectif",
+            "autres"
           ]
-        },
-        "temperature_distribution": {
-          "title": "Température de distribution de l'émetteur de chaleur",
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "type"
+      ]
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/mur": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/mur",
+      "title": "Mur",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "id": {
+          "title": "Identifiant",
           "type": "string",
+          "format": "uuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "type_structure": {
+          "title": "Type de mur",
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
-            "basse",
-            "moyenne",
-            "haute"
-          ]
+            "pierre_moellons",
+            "pierre_moellons_avec_remplissage",
+            "pise_ou_beton_terre",
+            "pan_bois_sans_remplissage",
+            "pan_bois_avec_remplissage",
+            "bois_rondin",
+            "brique_pleine_simple",
+            "brique_pleine_double_avec_lame_air",
+            "brique_creuse",
+            "bloc_beton_plein",
+            "bloc_beton_creux",
+            "beton_banche",
+            "beton_machefer",
+            "brique_terre_cuite_alveolaire",
+            "sandwich_beton_isolant_beton_sans_isolation_rapportee",
+            "cloison_platre",
+            "ossature_bois_sans_remplissage",
+            "ossature_bois_avec_remplissage_tout_venant",
+            "ossature_bois_avec_remplissage_isolant",
+            null
+          ],
+          "default": null
         },
-        "presence_robinet_thermostatique": {
-          "title": "Présence d'un robinet thermostatique",
-          "type": "boolean"
+        "epaisseur_structure": {
+          "title": "Epaisseur du mur non isolé en mm",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
         },
-        "annee_installation": {
-          "title": "Année d'installation de l'émetteur de chaleur",
+        "type_doublage": {
+          "title": "Type de doublage",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "sans_doublage",
+            "indetermine",
+            "lame_air_inferieur_15mm",
+            "lame_air_superieur_15mm",
+            "materiaux_connu",
+            null
+          ],
+          "default": null
+        },
+        "presence_enduit_isolant": {
+          "title": "Présence d'un enduit isolant",
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "paroi_ancienne": {
+          "title": "Mur constitué de matériaux anciens",
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "inertie": {
+          "title": "État d'inertie",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "lourde",
+            "legere",
+            null
+          ],
+          "default": null
+        },
+        "annee_construction": {
+          "title": "Année de construction",
           "type": [
             "integer",
             "null"
           ],
           "default": null
+        },
+        "annee_renovation": {
+          "title": "Année de dernière rénovation connue et justifiée",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "default": null
+        },
+        "u0": {
+          "title": "Coefficient de transmission thermique connu et justifié du mur non isolé en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "u": {
+          "title": "Coefficient de transmission thermique connu et justifié en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "isolation": {
+          "$ref": "#/$defs/isolation"
         }
       },
       "required": [
         "id",
-        "is",
         "description",
-        "type",
-        "temperature_distribution",
-        "presence_robinet_thermostatique",
-        "annee_installation"
+        "type_structure",
+        "epaisseur_structure",
+        "type_doublage",
+        "presence_enduit_isolant",
+        "paroi_ancienne",
+        "inertie",
+        "annee_construction",
+        "annee_renovation",
+        "u0",
+        "u",
+        "position",
+        "isolation"
+      ],
+      "$defs": {
+        "position": {
+          "title": "Position",
+          "type": "object",
+          "properties": {
+            "surface": {
+              "title": "Surface totale en m²",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "mitoyennete": {
+              "title": "Mitoyenneté",
+              "type": "string",
+              "enum": [
+                "exterieur",
+                "enterre",
+                "vide_sanitaire",
+                "terre_plein",
+                "sous_sol_non_chauffe",
+                "local_non_chauffe",
+                "local_non_residentiel",
+                "local_residentiel",
+                "local_non_accessible"
+              ]
+            },
+            "orientation": {
+              "title": "Orientation en degré par rapport au nord",
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "exclusiveMaximum": 360,
+              "default": null
+            }
+          },
+          "required": [
+            "surface",
+            "mitoyennete",
+            "orientation"
+          ],
+          "oneOf": [
+            {
+              "title": "Mur donnant sur un local non chauffé",
+              "type": "object",
+              "properties": {
+                "mitoyennete": {
+                  "const": "local_non_chauffe"
+                },
+                "local_non_chauffe_id": {
+                  "title": "Identifiant du local non chauffé associé au mur",
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "required": [
+                "local_non_chauffe_id",
+                "mitoyennete"
+              ]
+            },
+            {
+              "title": "Autres cas",
+              "type": "object",
+              "properties": {
+                "mitoyennete": {
+                  "not": {
+                    "const": "local_non_chauffe"
+                  }
+                }
+              },
+              "required": [
+                "mitoyennete"
+              ]
+            }
+          ]
+        },
+        "isolation": {
+          "title": "Isolation",
+          "type": "object",
+          "properties": {
+            "etat_isolation": {
+              "title": "Etat d'isolation",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "isole",
+                "non_isole",
+                null
+              ]
+            }
+          },
+          "required": [
+            "etat_isolation"
+          ],
+          "oneOf": [
+            {
+              "title": "Mur isolé",
+              "type": "object",
+              "properties": {
+                "etat_isolation": {
+                  "const": "isole"
+                },
+                "type_isolation": {
+                  "title": "Type d'isolation",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "iti",
+                    "ite",
+                    "itr",
+                    "iti_ite",
+                    "itr_iti",
+                    "itr_ite",
+                    "itr_iti_ite",
+                    null
+                  ],
+                  "default": null
+                },
+                "annee_isolation": {
+                  "title": "Année d'isolation",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "default": null
+                },
+                "epaisseur_isolation": {
+                  "title": "Epaisseur de l'isolation en mm",
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "exclusiveMinimum": 0,
+                  "default": null
+                },
+                "resistance_thermique_isolation": {
+                  "title": "Résistance thermique de l'isolation en m².K/W",
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "exclusiveMinimum": 0,
+                  "default": null
+                }
+              },
+              "required": [
+                "etat_isolation",
+                "type_isolation",
+                "annee_isolation",
+                "epaisseur_isolation",
+                "resistance_thermique_isolation"
+              ]
+            },
+            {
+              "title": "Mur non isolé ou dont l'isolation n'est pas connue",
+              "type": "object",
+              "properties": {
+                "etat_isolation": {
+                  "enum": [
+                    "non_isole",
+                    null
+                  ]
+                }
+              },
+              "required": [
+                "etat_isolation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/plancher_bas": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/plancher_bas",
+      "title": "Plancher bas",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "type_structure": {
+          "title": "Type de plancher bas",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "plancher_avec_ou_sans_remplissage",
+            "plancher_entre_solives_metalliques",
+            "plancher_entre_solives_bois",
+            "plancher_bois_sur_solives_metalliques",
+            "bardeaux_et_remplissage",
+            "voutains_sur_solives_metalliques",
+            "voutains_briques_ou_moellons",
+            "dalle_beton",
+            "plancher_bois_sur_solives_bois",
+            "plancher_lourd_type_entrevous_terre_cuite_ou_poutrelles_beton",
+            "plancher_entrevous_isolant",
+            null
+          ],
+          "default": null
+        },
+        "inertie": {
+          "title": "État d'inertie",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "lourde",
+            "legere",
+            null
+          ],
+          "default": null
+        },
+        "annee_construction": {
+          "title": "Année de construction",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "default": null
+        },
+        "annee_renovation": {
+          "title": "Année de dernière rénovation connue et justifiée",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "default": null
+        },
+        "u0": {
+          "title": "Coefficient de transmission thermique connu et justifié du plancher bas non isolé en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "u": {
+          "title": "Coefficient de transmission thermique connu et justifié en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "isolation": {
+          "$ref": "#/$defs/isolation"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "type_structure",
+        "inertie",
+        "annee_construction",
+        "annee_renovation",
+        "u0",
+        "u",
+        "position",
+        "isolation"
+      ],
+      "$defs": {
+        "position": {
+          "title": "Position",
+          "type": "object",
+          "properties": {
+            "surface": {
+              "title": "Surface totale exprimée en m²",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "perimetre": {
+              "title": "Périmètre en m",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "mitoyennete": {
+              "title": "Mitoyenneté",
+              "type": "string",
+              "enum": [
+                "exterieur",
+                "enterre",
+                "vide_sanitaire",
+                "terre_plein",
+                "sous_sol_non_chauffe",
+                "local_non_chauffe",
+                "local_non_residentiel",
+                "local_residentiel",
+                "local_non_accessible"
+              ]
+            }
+          },
+          "required": [
+            "perimetre",
+            "surface",
+            "mitoyennete"
+          ],
+          "oneOf": [
+            {
+              "title": "Plancher bas donnant sur un local non chauffé",
+              "type": "object",
+              "properties": {
+                "mitoyennete": {
+                  "const": "local_non_chauffe"
+                },
+                "local_non_chauffe_id": {
+                  "title": "Identifiant du local non chauffé associé au plancher bas",
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "required": [
+                "local_non_chauffe_id",
+                "mitoyennete"
+              ]
+            },
+            {
+              "title": "Autres cas",
+              "type": "object",
+              "properties": {
+                "mitoyennete": {
+                  "not": {
+                    "const": "local_non_chauffe"
+                  }
+                }
+              },
+              "required": [
+                "mitoyennete"
+              ]
+            }
+          ]
+        },
+        "isolation": {
+          "title": "Isolation",
+          "type": "object",
+          "properties": {
+            "etat_isolation": {
+              "title": "Etat d'isolation",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "isole",
+                "non_isole",
+                null
+              ]
+            }
+          },
+          "required": [
+            "etat_isolation"
+          ],
+          "oneOf": [
+            {
+              "title": "Plancher bas isolé",
+              "type": "object",
+              "properties": {
+                "etat_isolation": {
+                  "const": "isole"
+                },
+                "type_isolation": {
+                  "title": "Type d'isolation",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "iti",
+                    "ite",
+                    "itr",
+                    "iti_ite",
+                    "itr_iti",
+                    "itr_ite",
+                    "itr_iti_ite",
+                    null
+                  ],
+                  "default": null
+                },
+                "annee_isolation": {
+                  "title": "Année d'isolation",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "default": null
+                },
+                "epaisseur_isolation": {
+                  "title": "Epaisseur de l'isolation en mm",
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "exclusiveMinimum": 0,
+                  "default": null
+                },
+                "resistance_thermique_isolation": {
+                  "title": "Résistance thermique de l'isolation en m².K/W",
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "exclusiveMinimum": 0,
+                  "default": null
+                }
+              },
+              "required": [
+                "etat_isolation",
+                "type_isolation",
+                "annee_isolation",
+                "epaisseur_isolation",
+                "resistance_thermique_isolation"
+              ]
+            },
+            {
+              "title": "Plancher bas non isolé ou dont l'isolation n'est pas connue",
+              "type": "object",
+              "properties": {
+                "etat_isolation": {
+                  "enum": [
+                    "non_isole",
+                    null
+                  ]
+                }
+              },
+              "required": [
+                "etat_isolation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/plancher_haut": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/plancher_haut",
+      "title": "Plancher haut",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "configuration": {
+          "title": "Configuration",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "combles_perdus",
+            "rampants",
+            "terrasse",
+            null
+          ],
+          "default": null
+        },
+        "type_structure": {
+          "title": "Type de plancher haut",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "plafond_avec_ou_sans_remplissage",
+            "plafond_entre_solives_metalliques",
+            "plafond_entre_solives_bois",
+            "plafond_bois_sur_solives_metalliques",
+            "plafond_bois_sous_solives_metalliques",
+            "bardeaux_et_remplissage",
+            "plafond_bois_sur_solives_bois",
+            "plafond_bois_sous_solives_bo",
+            "dalle_beton",
+            "plafond_lourd",
+            "combles_amenages_sous_rampant",
+            "toiture_chaume",
+            "plafond_patre",
+            "bac_acier",
+            null
+          ],
+          "default": null
+        },
+        "inertie": {
+          "title": "État d'inertie",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "lourde",
+            "legere",
+            null
+          ],
+          "default": null
+        },
+        "annee_construction": {
+          "title": "Année de construction",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "default": null
+        },
+        "annee_renovation": {
+          "title": "Année de dernière rénovation connue et justifiée",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "default": null
+        },
+        "u0": {
+          "title": "Coefficient de transmission thermique connu et justifié du plancher haut non isolé en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "u": {
+          "title": "Coefficient de transmission thermique connu et justifié en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "isolation": {
+          "$ref": "#/$defs/isolation"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "configuration",
+        "type_structure",
+        "inertie",
+        "annee_construction",
+        "annee_renovation",
+        "u0",
+        "u",
+        "position",
+        "isolation"
+      ],
+      "$defs": {
+        "position": {
+          "title": "Position",
+          "type": "object",
+          "properties": {
+            "surface": {
+              "title": "Surface totale exprimée en m²",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "mitoyennete": {
+              "title": "Mitoyenneté",
+              "type": "string",
+              "enum": [
+                "exterieur",
+                "enterre",
+                "vide_sanitaire",
+                "terre_plein",
+                "sous_sol_non_chauffe",
+                "local_non_chauffe",
+                "local_non_residentiel",
+                "local_residentiel",
+                "local_non_accessible"
+              ]
+            },
+            "orientation": {
+              "title": "Orientation en degré par rapport au nord",
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "exclusiveMaximum": 360,
+              "default": null
+            }
+          },
+          "required": [
+            "surface",
+            "mitoyennete",
+            "orientation"
+          ],
+          "oneOf": [
+            {
+              "title": "Plancher haut donnant sur un local non chauffé",
+              "type": "object",
+              "properties": {
+                "mitoyennete": {
+                  "const": "local_non_chauffe"
+                },
+                "local_non_chauffe_id": {
+                  "title": "Identifiant du local non chauffé associé au plancher haut",
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "required": [
+                "local_non_chauffe_id",
+                "mitoyennete"
+              ]
+            },
+            {
+              "title": "Autres cas",
+              "type": "object",
+              "properties": {
+                "mitoyennete": {
+                  "not": {
+                    "const": "local_non_chauffe"
+                  }
+                }
+              },
+              "required": [
+                "mitoyennete"
+              ]
+            }
+          ]
+        },
+        "isolation": {
+          "title": "Isolation",
+          "type": "object",
+          "properties": {
+            "etat_isolation": {
+              "title": "Etat d'isolation",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "isole",
+                "non_isole",
+                null
+              ]
+            }
+          },
+          "required": [
+            "etat_isolation"
+          ],
+          "oneOf": [
+            {
+              "title": "Plancher haut isolé",
+              "type": "object",
+              "properties": {
+                "etat_isolation": {
+                  "const": "isole"
+                },
+                "type_isolation": {
+                  "title": "Type d'isolation",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "iti",
+                    "ite",
+                    "itr",
+                    "iti_ite",
+                    "itr_iti",
+                    "itr_ite",
+                    "itr_iti_ite",
+                    null
+                  ],
+                  "default": null
+                },
+                "annee_isolation": {
+                  "title": "Année d'isolation",
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "default": null
+                },
+                "epaisseur_isolation": {
+                  "title": "Epaisseur de l'isolation en mm",
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "exclusiveMinimum": 0,
+                  "default": null
+                },
+                "resistance_thermique_isolation": {
+                  "title": "Résistance thermique de l'isolation en m².K/W",
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "exclusiveMinimum": 0,
+                  "default": null
+                }
+              },
+              "required": [
+                "etat_isolation",
+                "type_isolation",
+                "annee_isolation",
+                "epaisseur_isolation",
+                "resistance_thermique_isolation"
+              ]
+            },
+            {
+              "title": "Plancher haut non isolé ou dont l'isolation n'est pas connue",
+              "type": "object",
+              "properties": {
+                "etat_isolation": {
+                  "enum": [
+                    "non_isole",
+                    null
+                  ]
+                }
+              },
+              "required": [
+                "etat_isolation"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/baie": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/baie",
+      "title": "Baie",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
+        },
+        "double_fenetre_id": {
+          "title": "Identifiant de la double fenêtre associée",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid",
+          "default": null
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "type_baie": {
+          "$ref": "#/$defs/typeBaie"
+        },
+        "presence_protection_solaire": {
+          "title": "Présence de protection solaire",
+          "type": "boolean"
+        },
+        "type_fermeture": {
+          "title": "Type de fermeture",
+          "type": "string",
+          "enum": [
+            "sans_fermeture",
+            "jalousie_accordeon",
+            "fermeture_lames_orientables",
+            "venitiens_exterieurs_metal",
+            "volet_battant_avec_ajours_fixes",
+            "persiennes_avec_ajours_fixes",
+            "fermeture_sans_ajours",
+            "volets_roulants_aluminium",
+            "volets_roulants_pvc_bois_epaisseur_lte_12_mm",
+            "volets_roulants_pvc_bois_epaisseur_gt_12_mm",
+            "persienne_coulissante_epaisseur_lte_22_mm",
+            "persienne_coulissante_epaisseur_gt_22_mm",
+            "volet_battant_pvc_bois_epaisseur_lte_22_mm",
+            "volet_battant_pvc_bois_epaisseur_gt_22_mm",
+            "fermeture_isolee_sans_ajours"
+          ]
+        },
+        "annee_installation": {
+          "title": "Année d'installation",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "default": null
+        },
+        "ug": {
+          "$ref": "#/$defs/ug"
+        },
+        "uw": {
+          "$ref": "#/$defs/uw"
+        },
+        "ujn": {
+          "$ref": "#/$defs/ujn"
+        },
+        "sw": {
+          "$ref": "#/$defs/sw"
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "masques": {
+          "title": "Liste des masques",
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "double_fenetre_id",
+        "description",
+        "type_baie",
+        "presence_protection_solaire",
+        "type_fermeture",
+        "annee_installation",
+        "ug",
+        "uw",
+        "ujn",
+        "sw",
+        "position",
+        "masques"
+      ],
+      "oneOf": [
+        {
+          "title": "Paroi vitrée",
+          "type": "object",
+          "properties": {
+            "type_baie": {
+              "enum": [
+                "brique_verre_pleine",
+                "brique_verre_creuse",
+                "polycarbonate"
+              ]
+            }
+          },
+          "required": [
+            "type_baie"
+          ]
+        },
+        {
+          "title": "Fenêtre",
+          "type": "object",
+          "properties": {
+            "type_baie": {
+              "enum": [
+                "fenetre_battante",
+                "fenetre_coulissante"
+              ]
+            },
+            "type_pose": {
+              "title": "Type de pose",
+              "type": "string",
+              "enum": [
+                "nu_exterieur",
+                "nu_interieur",
+                "tunnel"
+              ]
+            },
+            "materiau": {
+              "title": "Matériau",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "pvc",
+                "bois",
+                "bois_metal",
+                "metal",
+                null
+              ],
+              "default": null
+            },
+            "vitrage": {
+              "$ref": "#/$defs/vitrage"
+            },
+            "menuiserie": {
+              "$ref": "#/$defs/menuiserie"
+            }
+          },
+          "required": [
+            "type_baie",
+            "type_pose",
+            "materiau",
+            "vitrage",
+            "menuiserie"
+          ]
+        },
+        {
+          "title": "Porte fenêtre",
+          "type": "object",
+          "properties": {
+            "type_baie": {
+              "enum": [
+                "porte_fenetre_coulissante",
+                "porte_fenetre_battante"
+              ]
+            },
+            "type_pose": {
+              "title": "Type de pose",
+              "type": "string",
+              "enum": [
+                "nu_exterieur",
+                "nu_interieur",
+                "tunnel"
+              ]
+            },
+            "materiau": {
+              "title": "Matériau",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "pvc",
+                "bois",
+                "bois_metal",
+                "metal",
+                null
+              ],
+              "default": null
+            },
+            "presence_soubassement": {
+              "title": "Présence d'un soubassement",
+              "type": "boolean"
+            },
+            "vitrage": {
+              "$ref": "#/$defs/vitrage"
+            },
+            "menuiserie": {
+              "$ref": "#/$defs/menuiserie"
+            }
+          },
+          "required": [
+            "type",
+            "type_pose",
+            "materiau",
+            "presence_soubassement",
+            "vitrage",
+            "menuiserie"
+          ]
+        }
+      ],
+      "$defs": {
+        "typeBaie": {
+          "title": "Type de baie",
+          "type": "string",
+          "enum": [
+            "brique_verre_pleine",
+            "brique_verre_creuse",
+            "polycarbonate",
+            "fenetre_battante",
+            "fenetre_coulissante",
+            "porte_fenetre_coulissante",
+            "porte_fenetre_battante"
+          ]
+        },
+        "ug": {
+          "title": "Coefficient de transmission thermique du vitrage connu et justifié en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "uw": {
+          "title": "Coefficient de transmission thermique de la baie connu et justifié en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "ujn": {
+          "title": "Coefficient de transmission thermique de la baie avec fermeture connu et justifié en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "sw": {
+          "title": "Proportion d'énergie solaire transmise par la baie en %",
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100,
+          "default": null
+        },
+        "position": {
+          "title": "Position de la baie",
+          "type": "object",
+          "properties": {
+            "paroi_id": {
+              "title": "Identifiant de la paroi associée à la baie",
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uuid",
+              "default": null
+            },
+            "surface": {
+              "title": "Surface de la baie en m²",
+              "type": "number",
+              "minimum": 0
+            },
+            "mitoyennete": {
+              "title": "Mitoyenneté de la baie",
+              "type": "string",
+              "enum": [
+                "exterieur",
+                "enterre",
+                "vide_sanitaire",
+                "terre_plein",
+                "sous_sol_non_chauffe",
+                "local_non_chauffe",
+                "local_non_residentiel",
+                "local_residentiel",
+                "local_non_accessible"
+              ]
+            },
+            "inclinaison": {
+              "title": "Inclinaison de la baie par rapport à l'horizontale en degré",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 90
+            },
+            "orientation": {
+              "title": "Orientation de la baie en degré par rapport au nord",
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "exclusiveMaximum": 360
+            }
+          },
+          "required": [
+            "paroi_id",
+            "surface",
+            "mitoyennete",
+            "inclinaison",
+            "orientation"
+          ],
+          "allOf": [
+            {
+              "oneOf": [
+                {
+                  "title": "Baie donnant sur un local non chauffé",
+                  "type": "object",
+                  "properties": {
+                    "mitoyennete": {
+                      "const": "local_non_chauffe"
+                    },
+                    "local_non_chauffe_id": {
+                      "title": "Identifiant du local non chauffé associé à la baie",
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  },
+                  "required": [
+                    "local_non_chauffe_id",
+                    "mitoyennete"
+                  ]
+                },
+                {
+                  "title": "Autres cas",
+                  "type": "object",
+                  "properties": {
+                    "mitoyennete": {
+                      "not": {
+                        "const": "local_non_chauffe"
+                      }
+                    }
+                  },
+                  "required": [
+                    "mitoyennete"
+                  ]
+                }
+              ]
+            },
+            {
+              "oneOf": [
+                {
+                  "title": "Baie horizontale",
+                  "type": "object",
+                  "properties": {
+                    "inclinaison": {
+                      "const": 0
+                    },
+                    "orientation": {
+                      "const": null,
+                      "default": null
+                    }
+                  },
+                  "required": [
+                    "inclinaison",
+                    "orientation"
+                  ]
+                },
+                {
+                  "title": "Autres cas",
+                  "type": "object",
+                  "properties": {
+                    "inclinaison": {
+                      "minimumExlusive": 0
+                    },
+                    "orientation": {
+                      "title": "Orientation par rapport au nord en °",
+                      "type": "number",
+                      "minimum": 0,
+                      "exclusiveMaximum": 360
+                    }
+                  },
+                  "required": [
+                    "inclinaison",
+                    "orientation"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "menuiserie": {
+          "title": "Menuiserie",
+          "type": "object",
+          "properties": {
+            "largeur_dormant": {
+              "title": "Largeur dormant en mm",
+              "type": [
+                "number",
+                "null"
+              ],
+              "exclusiveMinimum": 0,
+              "default": null
+            },
+            "presence_joint": {
+              "title": "Présence de joint d'étanchéité",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": null
+            },
+            "presence_retour_isolation": {
+              "title": "Présence d'un retour d'isolation",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": null
+            },
+            "presence_rupteur_pont_thermique": {
+              "title": "Présence d'un rupteur de pont thermique",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "largeur_dormant",
+            "presence_joint",
+            "presence_retour_isolation",
+            "presence_rupteur_pont_thermique"
+          ]
+        },
+        "vitrage": {
+          "title": "Vitrage",
+          "type": "object",
+          "properties": {
+            "type_vitrage": {
+              "title": "Type de vitrage",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "simple_vitrage",
+                "double_vitrage",
+                "double_vitrage_fe",
+                "triple_vitrage",
+                "triple_vitrage_fe",
+                null
+              ],
+              "default": null
+            },
+            "survitrage": {
+              "title": "Survitrage",
+              "type": [
+                "object",
+                "null"
+              ],
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/survitrage"
+                },
+                {
+                  "const": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type_vitrage",
+            "survitrage"
+          ],
+          "oneOf": [
+            {
+              "title": "Vitrage simple",
+              "properties": {
+                "type_vitrage": {
+                  "const": "simple_vitrage"
+                }
+              },
+              "required": [
+                "type_vitrage"
+              ]
+            },
+            {
+              "title": "Vitrage complexe",
+              "properties": {
+                "type_vitrage": {
+                  "not": {
+                    "const": "simple_vitrage"
+                  }
+                },
+                "nature_gaz_lame": {
+                  "title": "Nature de la lame d'air",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "air",
+                    "argon",
+                    "krypton",
+                    null
+                  ],
+                  "default": null
+                },
+                "epaisseur_lame": {
+                  "title": "Epaisseur de la lame d'air en mm",
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "exclusiveMinimum": 0,
+                  "default": null
+                }
+              },
+              "required": [
+                "type_vitrage",
+                "nature_lame",
+                "epaisseur_lame"
+              ]
+            }
+          ]
+        },
+        "survitrage": {
+          "title": "Survitrage",
+          "type": "object",
+          "properties": {
+            "type_survitrage": {
+              "title": "Type de survitrage",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "survitrage_simple",
+                "survitrage_fe",
+                null
+              ],
+              "default": null
+            },
+            "epaisseur_lame": {
+              "title": "Epaisseur de la lame d'air en mm",
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "default": null
+            }
+          },
+          "required": [
+            "type_survitrage",
+            "epaisseur_lame"
+          ]
+        }
+      }
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/porte": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/porte",
+      "title": "Porte",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "type_pose": {
+          "title": "Type de pose",
+          "type": "string",
+          "enum": [
+            "nu_exterieur",
+            "nu_interieur",
+            "tunnel"
+          ]
+        },
+        "isolation": {
+          "title": "État d'isolation de la porte",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "isole",
+            "non_isole",
+            null
+          ],
+          "default": null
+        },
+        "materiau": {
+          "title": "Matériau de la porte",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "pvc",
+            "bois",
+            "bois_metal",
+            "metal",
+            null
+          ],
+          "default": null
+        },
+        "presence_sas": {
+          "title": "Présence d'un sas devant la porte",
+          "type": "boolean"
+        },
+        "annee_installation": {
+          "title": "Année d'installation",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "default": null
+        },
+        "u": {
+          "title": "Coefficient de transmission thermique de la porte connu et justifié en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "menuiserie": {
+          "$ref": "#/$defs/menuiserie"
+        },
+        "vitrage": {
+          "$ref": "#/$defs/vitrage"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "type_pose",
+        "isolation",
+        "materiau",
+        "presence_sas",
+        "annee_installation",
+        "u",
+        "position",
+        "vitrage",
+        "menuiserie"
+      ],
+      "$defs": {
+        "position": {
+          "title": "Position de la porte",
+          "type": "object",
+          "properties": {
+            "paroi_id": {
+              "title": "Identifiant de la paroi associée à la porte",
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uuid",
+              "default": null
+            },
+            "surface": {
+              "title": "Surface totale de la porte en m²",
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "mitoyennete": {
+              "title": "Mitoyenneté de la porte",
+              "type": "string",
+              "enum": [
+                "exterieur",
+                "enterre",
+                "vide_sanitaire",
+                "terre_plein",
+                "sous_sol_non_chauffe",
+                "local_non_chauffe",
+                "local_non_residentiel",
+                "local_residentiel",
+                "local_non_accessible"
+              ]
+            },
+            "orientation": {
+              "title": "Orientation de la porte en degré par rapport au nord",
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "exclusiveMaximum": 360,
+              "default": null
+            }
+          },
+          "required": [
+            "paroi_id",
+            "surface",
+            "mitoyennete",
+            "orientation"
+          ],
+          "oneOf": [
+            {
+              "title": "Porte donnant sur un local non chauffé",
+              "type": "object",
+              "properties": {
+                "mitoyennete": {
+                  "const": "local_non_chauffe"
+                },
+                "local_non_chauffe_id": {
+                  "title": "Identifiant du local non chauffé associé à la porte",
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "required": [
+                "local_non_chauffe_id",
+                "mitoyennete"
+              ]
+            },
+            {
+              "title": "Autres cas",
+              "type": "object",
+              "properties": {
+                "mitoyennete": {
+                  "not": {
+                    "const": "local_non_chauffe"
+                  }
+                }
+              },
+              "required": [
+                "mitoyennete"
+              ]
+            }
+          ]
+        },
+        "vitrage": {
+          "title": "Vitrage",
+          "type": "object",
+          "properties": {
+            "taux_vitrage": {
+              "title": "Taux de vitrage en %",
+              "description": "Une porte avec un taux de vitrage supérieur à 60% est à considérer comme une porte-fenêtre avec soubassement",
+              "type": "number",
+              "minimum": 0,
+              "maximum": 60
+            }
+          },
+          "required": [
+            "taux_vitrage"
+          ],
+          "oneOf": [
+            {
+              "title": "Porte sans vitrage",
+              "type": "object",
+              "properties": {
+                "taux_vitrage": {
+                  "const": 0
+                }
+              },
+              "required": [
+                "taux_vitrage"
+              ]
+            },
+            {
+              "title": "Porte avec vitrage",
+              "type": "object",
+              "properties": {
+                "taux_vitrage": {
+                  "type": "number",
+                  "minimumExclusive": 0
+                },
+                "type_vitrage": {
+                  "title": "Type de vitrage",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "simple_vitrage",
+                    "double_vitrage",
+                    "triple_vitrage",
+                    null
+                  ],
+                  "default": null
+                }
+              },
+              "required": [
+                "taux_vitrage",
+                "type_vitrage"
+              ]
+            }
+          ]
+        },
+        "menuiserie": {
+          "title": "Menuiserie",
+          "type": "object",
+          "properties": {
+            "largeur_dormant": {
+              "title": "Largeur dormant en mm",
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "default": null
+            },
+            "presence_joint": {
+              "title": "Présence de joint d'étanchéité",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": null
+            },
+            "presence_retour_isolation": {
+              "title": "Présence d'un retour d'isolation",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "largeur_dormant",
+            "presence_joint",
+            "presence_retour_isolation"
+          ]
+        }
+      }
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/pont_thermique": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/pont_thermique",
+      "title": "Pont thermique",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "longueur": {
+          "title": "Longueur du pont thermique en m",
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "kpt": {
+          "title": "Valeur du pont thermique connue et justifiée",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "liaison": {
+          "$ref": "#/$defs/liaison"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "longueur",
+        "kpt",
+        "liaison"
+      ],
+      "$defs": {
+        "liaison": {
+          "title": "Liaison",
+          "type": "object",
+          "properties": {
+            "type_liaison": {
+              "title": "Type de liaison",
+              "type": "string",
+              "enum": [
+                "plancher_bas_mur",
+                "plancher_haut_mur",
+                "refend_mur",
+                "plancher_intermediaire_mur",
+                "menuiserie_mur"
+              ]
+            },
+            "mur_id": {
+              "title": "Identifiant du mur associé au pont thermique au format UUID",
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "required": [
+            "type_liaison",
+            "mur_id"
+          ],
+          "anyOf": [
+            {
+              "title": "Pont thermique mur / plancher",
+              "type": "object",
+              "properties": {
+                "type_liaison": {
+                  "enum": [
+                    "plancher_bas_mur",
+                    "plancher_haut_mur"
+                  ]
+                },
+                "plancher_id": {
+                  "title": "Identifiant du Plancher haut ou du Plancher bas associé au pont thermique",
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "required": [
+                "type_liaison",
+                "plancher_id"
+              ]
+            },
+            {
+              "title": "Pont thermique mur / menuiserie",
+              "type": "object",
+              "properties": {
+                "type_liaison": {
+                  "const": "menuiserie_mur"
+                },
+                "ouverture_id": {
+                  "title": "Identifiant de la Baie ou de la Porte associée au pont thermique",
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "required": [
+                "type_liaison",
+                "ouverture_id"
+              ]
+            },
+            {
+              "title": "Pont thermique mur / refend ou plancher intermédiaire",
+              "type": "object",
+              "properties": {
+                "type_liaison": {
+                  "enum": [
+                    "plancher_intermediaire_mur",
+                    "refend_mur"
+                  ]
+                },
+                "pont_thermique_partiel": {
+                  "title": "Pont thermique partiel",
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "type_liaison",
+                "pont_thermique_partiel"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/double_fenetre": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/double_fenetre",
+      "title": "Double fenêtre",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "type_baie": {
+          "$ref": "#/$defs/typeBaie"
+        },
+        "ug": {
+          "$ref": "#/$defs/ug"
+        },
+        "uw": {
+          "$ref": "#/$defs/uw"
+        },
+        "sw": {
+          "$ref": "#/$defs/sw"
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "type_baie",
+        "ug",
+        "uw",
+        "sw"
+      ],
+      "anyOf": [
+        {
+          "title": "Paroi vitrée",
+          "type": "object",
+          "properties": {
+            "type_baie": {
+              "enum": [
+                "brique_verre_pleine",
+                "brique_verre_creuse",
+                "polycarbonate"
+              ]
+            }
+          },
+          "required": [
+            "type_baie"
+          ]
+        },
+        {
+          "title": "Fenêtre",
+          "type": "object",
+          "properties": {
+            "type_baie": {
+              "enum": [
+                "fenetre_battante",
+                "fenetre_coulissante"
+              ]
+            },
+            "type_pose": {
+              "title": "Type de pose",
+              "type": "string",
+              "enum": [
+                "nu_exterieur",
+                "nu_interieur",
+                "tunnel"
+              ]
+            },
+            "materiau": {
+              "title": "Matériau",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "pvc",
+                "bois",
+                "bois_metal",
+                "metal",
+                null
+              ],
+              "default": null
+            },
+            "vitrage": {
+              "$ref": "#/$defs/vitrage"
+            },
+            "menuiserie": {
+              "$ref": "#/$defs/menuiserie"
+            }
+          },
+          "required": [
+            "type_baie",
+            "type_pose",
+            "materiau",
+            "vitrage",
+            "menuiserie"
+          ]
+        },
+        {
+          "title": "Porte fenêtre",
+          "type": "object",
+          "properties": {
+            "type_baie": {
+              "enum": [
+                "porte_fenetre_coulissante",
+                "porte_fenetre_battante"
+              ]
+            },
+            "type_pose": {
+              "title": "Type de pose",
+              "type": "string",
+              "enum": [
+                "nu_exterieur",
+                "nu_interieur",
+                "tunnel"
+              ]
+            },
+            "materiau": {
+              "title": "Matériau",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "pvc",
+                "bois",
+                "bois_metal",
+                "metal",
+                null
+              ],
+              "default": null
+            },
+            "presence_soubassement": {
+              "title": "Présence d'un soubassement",
+              "type": "boolean"
+            },
+            "vitrage": {
+              "$ref": "#/$defs/vitrage"
+            },
+            "menuiserie": {
+              "$ref": "#/$defs/menuiserie"
+            }
+          },
+          "required": [
+            "type_baie",
+            "type_pose",
+            "materiau",
+            "presence_soubassement",
+            "vitrage",
+            "menuiserie"
+          ]
+        }
+      ],
+      "$defs": {
+        "typeBaie": {
+          "title": "Type de baie",
+          "type": "string",
+          "enum": [
+            "brique_verre_pleine",
+            "brique_verre_creuse",
+            "polycarbonate",
+            "fenetre_battante",
+            "fenetre_coulissante",
+            "porte_fenetre_coulissante",
+            "porte_fenetre_battante"
+          ]
+        },
+        "ug": {
+          "title": "Coefficient de transmission thermique du vitrage connu et justifié en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "uw": {
+          "title": "Coefficient de transmission thermique de la baie connu et justifié en W/m²K",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "sw": {
+          "title": "Proportion d'énergie solaire transmise par la baie en %",
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100,
+          "default": null
+        },
+        "menuiserie": {
+          "title": "Menuiserie",
+          "type": "object",
+          "properties": {
+            "largeur_dormant": {
+              "title": "Largeur dormant en mm",
+              "type": [
+                "number",
+                "null"
+              ],
+              "exclusiveMinimum": 0,
+              "default": null
+            },
+            "presence_joint": {
+              "title": "Présence de joint d'étanchéité",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": null
+            },
+            "presence_retour_isolation": {
+              "title": "Présence d'un retour d'isolation",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": null
+            },
+            "presence_rupteur_pont_thermique": {
+              "title": "Présence d'un rupteur de pont thermique",
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "default": null
+            }
+          },
+          "required": [
+            "largeur_dormant",
+            "presence_joint",
+            "presence_retour_isolation",
+            "presence_rupteur_pont_thermique"
+          ]
+        },
+        "vitrage": {
+          "title": "Vitrage",
+          "type": "object",
+          "properties": {
+            "type_vitrage": {
+              "title": "Type de vitrage",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "simple_vitrage",
+                "double_vitrage",
+                "double_vitrage_fe",
+                "triple_vitrage",
+                "triple_vitrage_fe",
+                null
+              ],
+              "default": null
+            },
+            "survitrage": {
+              "title": "Survitrage",
+              "type": [
+                "object",
+                "null"
+              ],
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/survitrage"
+                },
+                {
+                  "const": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "type_vitrage",
+            "survitrage"
+          ],
+          "oneOf": [
+            {
+              "title": "Vitrage simple",
+              "properties": {
+                "type_vitrage": {
+                  "const": "simple_vitrage"
+                }
+              },
+              "required": [
+                "type_vitrage"
+              ]
+            },
+            {
+              "title": "Vitrage complexe",
+              "properties": {
+                "type_vitrage": {
+                  "not": {
+                    "const": "simple_vitrage"
+                  }
+                },
+                "nature_lame": {
+                  "title": "Nature de la lame d'air",
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "air",
+                    "argon",
+                    "krypton",
+                    null
+                  ],
+                  "default": null
+                },
+                "epaisseur_lame": {
+                  "title": "Epaisseur de la lame d'air en mm",
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "exclusiveMinimum": 0,
+                  "default": null
+                }
+              },
+              "required": [
+                "type_vitrage",
+                "nature_lame",
+                "epaisseur_lame"
+              ]
+            }
+          ]
+        },
+        "survitrage": {
+          "title": "Survitrage",
+          "type": "object",
+          "properties": {
+            "type_survitrage": {
+              "title": "Type de survitrage",
+              "type": [
+                "string",
+                "null"
+              ],
+              "enum": [
+                "survitrage_simple",
+                "survitrage_fe",
+                null
+              ],
+              "default": null
+            },
+            "epaisseur_lame": {
+              "title": "Epaisseur de la lame d'air en mm",
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0,
+              "default": null
+            }
+          },
+          "required": [
+            "type_survitrage",
+            "epaisseur_lame"
+          ]
+        }
+      }
+    },
+    "https://schemas.dpe-audit.fr/enveloppe/masque": {
+      "$id": "https://schemas.dpe-audit.fr/enveloppe/masque",
+      "title": "Masque",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type de masque proche",
+          "type": "string",
+          "enum": [
+            "homogene",
+            "non_homogene",
+            "fond_balcon",
+            "fond_et_flanc_loggias",
+            "balcon_ou_auvent",
+            "paroi_laterale_sans_obstacle_au_sud",
+            "paroi_laterale_avec_obstacle_au_sud"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "description"
+      ],
+      "oneOf": [
+        {
+          "title": "Masque lointain",
+          "type": "object",
+          "properties": {
+            "type": {
+              "title": "Type de masque lointain",
+              "type": "string",
+              "enum": [
+                "homogene",
+                "non_homogene"
+              ]
+            },
+            "hauteur": {
+              "title": "Hauteur du masque lointain en angle",
+              "type": "number",
+              "exlusiveMinimum": 0,
+              "exclusiveMaximum": 80
+            },
+            "orientation": {
+              "title": "Orientation du masque lointain par rapport au nord en angle",
+              "type": "number",
+              "minimum": 0,
+              "exclusiveMaximum": 360
+            }
+          },
+          "required": [
+            "type",
+            "hauteur",
+            "orientation"
+          ]
+        },
+        {
+          "title": "Masque proche - Paroi latérale",
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "paroi_laterale_sans_obstacle_au_sud",
+                "paroi_laterale_avec_obstacle_au_sud"
+              ]
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "title": "Masque proche - Autres masques proches",
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "fond_balcon",
+                "fond_et_flanc_loggias",
+                "balcon_ou_auvent"
+              ]
+            },
+            "profondeur": {
+              "title": "Profondeur du masque en m",
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          "required": [
+            "type",
+            "profondeur"
+          ]
+        }
+      ]
+    },
+    "https://schemas.dpe-audit.fr/chauffage": {
+      "$id": "https://schemas.dpe-audit.fr/chauffage",
+      "title": "Chauffage",
+      "type": "object",
+      "properties": {
+        "generateurs": {
+          "title": "Liste des générateurs",
+          "type": "array",
+          "minContains": 1,
+          "items": {
+            "$ref": "/chauffage/generateur"
+          }
+        },
+        "emetteurs": {
+          "title": "Liste des émetteurs",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/chauffage/emetteur"
+          }
+        },
+        "installations": {
+          "title": "Liste des installations",
+          "type": "array",
+          "minContains": 1,
+          "items": {
+            "$ref": "/chauffage/installation"
+          }
+        },
+        "systemes": {
+          "title": "Liste des systèmes",
+          "type": "array",
+          "minContains": 1,
+          "items": {
+            "$ref": "/chauffage/systeme"
+          }
+        }
+      },
+      "required": [
+        "generateurs",
+        "emetteurs",
+        "installations",
+        "systemes"
       ]
     },
     "https://schemas.dpe-audit.fr/chauffage/generateur": {
@@ -374,10 +2830,6 @@
           "title": "Identifiant",
           "type": "string",
           "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "chauffage:generateur"
         },
         "description": {
           "title": "Description",
@@ -452,7 +2904,6 @@
       },
       "required": [
         "id",
-        "is",
         "description",
         "type",
         "energie",
@@ -1082,6 +3533,62 @@
         }
       }
     },
+    "https://schemas.dpe-audit.fr/chauffage/emetteur": {
+      "$id": "https://schemas.dpe-audit.fr/chauffage/emetteur",
+      "title": "Émetteur de chaleur",
+      "type": "object",
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type d'émetteur de chauffage",
+          "type": "string",
+          "enum": [
+            "plancher_chauffant",
+            "plafond_chauffant",
+            "radiateur_monotube",
+            "radiateur_bitube",
+            "radiateur"
+          ]
+        },
+        "temperature_distribution": {
+          "title": "Température de distribution de l'émetteur de chaleur",
+          "type": "string",
+          "enum": [
+            "basse",
+            "moyenne",
+            "haute"
+          ]
+        },
+        "presence_robinet_thermostatique": {
+          "title": "Présence d'un robinet thermostatique",
+          "type": "boolean"
+        },
+        "annee_installation": {
+          "title": "Année d'installation de l'émetteur de chaleur",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "type",
+        "temperature_distribution",
+        "presence_robinet_thermostatique",
+        "annee_installation"
+      ]
+    },
     "https://schemas.dpe-audit.fr/chauffage/installation": {
       "$id": "https://schemas.dpe-audit.fr/chauffage/installation",
       "title": "Installation de chauffage",
@@ -1092,10 +3599,6 @@
           "title": "Identifiant",
           "type": "string",
           "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "chauffage:installation"
         },
         "description": {
           "title": "Description",
@@ -1136,7 +3639,6 @@
       },
       "required": [
         "id",
-        "is",
         "description",
         "surface",
         "comptage_individuel",
@@ -1241,10 +3743,6 @@
           "type": "string",
           "format": "uuid"
         },
-        "is": {
-          "type": "string",
-          "const": "chauffage:systeme"
-        },
         "description": {
           "title": "Description",
           "type": "string"
@@ -1270,7 +3768,6 @@
       },
       "required": [
         "id",
-        "is",
         "description",
         "installation_id",
         "generateur_id",
@@ -1364,6 +3861,42 @@
         }
       }
     },
+    "https://schemas.dpe-audit.fr/ecs": {
+      "$id": "https://schemas.dpe-audit.fr/ecs",
+      "title": "Eau chaude sanitaire",
+      "type": "object",
+      "properties": {
+        "generateurs": {
+          "title": "Liste des générateurs",
+          "type": "array",
+          "minContains": 1,
+          "items": {
+            "$ref": "/ecs/generateur"
+          }
+        },
+        "installations": {
+          "title": "Liste des installations",
+          "type": "array",
+          "minContains": 1,
+          "items": {
+            "$ref": "/ecs/installation"
+          }
+        },
+        "systemes": {
+          "title": "Liste des systèmes",
+          "type": "array",
+          "minContains": 1,
+          "items": {
+            "$ref": "/ecs/systeme"
+          }
+        }
+      },
+      "required": [
+        "generateurs",
+        "installations",
+        "systemes"
+      ]
+    },
     "https://schemas.dpe-audit.fr/ecs/generateur": {
       "$id": "https://schemas.dpe-audit.fr/ecs/generateur",
       "title": "Générateur d'eau chaude sanitaire",
@@ -1374,10 +3907,6 @@
           "title": "Identifiant",
           "type": "string",
           "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "ecs:generateur"
         },
         "description": {
           "title": "Description",
@@ -1431,7 +3960,6 @@
       },
       "required": [
         "id",
-        "is",
         "description",
         "type",
         "energie",
@@ -1869,10 +4397,6 @@
           "type": "string",
           "format": "uuid"
         },
-        "is": {
-          "type": "string",
-          "const": "ecs:installation"
-        },
         "description": {
           "title": "Description",
           "type": "string"
@@ -1901,7 +4425,6 @@
       },
       "required": [
         "id",
-        "is",
         "description",
         "surface",
         "solaire_thermique"
@@ -1957,10 +4480,6 @@
           "type": "string",
           "format": "uuid"
         },
-        "is": {
-          "type": "string",
-          "const": "ecs:systeme"
-        },
         "description": {
           "title": "Description",
           "type": "string"
@@ -1997,7 +4516,6 @@
       },
       "required": [
         "id",
-        "is",
         "description",
         "generateur_id",
         "installation_id",
@@ -2073,602 +4591,45 @@
         }
       }
     },
-    "https://schemas.dpe-audit.fr/enveloppe/baie": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/baie",
-      "title": "Baie",
+    "https://schemas.dpe-audit.fr/ventilation": {
+      "$id": "https://schemas.dpe-audit.fr/ventilation",
+      "title": "Ventilation",
       "type": "object",
-      "unevaluatedProperties": false,
       "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:baie"
-        },
-        "double_fenetre_id": {
-          "title": "Identifiant de la double fenêtre associée",
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uuid",
-          "default": null
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "type_baie": {
-          "$ref": "#/$defs/typeBaie"
-        },
-        "presence_protection_solaire": {
-          "title": "Présence de protection solaire",
-          "type": "boolean"
-        },
-        "type_fermeture": {
-          "title": "Type de fermeture",
-          "type": "string",
-          "enum": [
-            "sans_fermeture",
-            "jalousie_accordeon",
-            "fermeture_lames_orientables",
-            "venitiens_exterieurs_metal",
-            "volet_battant_avec_ajours_fixes",
-            "persiennes_avec_ajours_fixes",
-            "fermeture_sans_ajours",
-            "volets_roulants_aluminium",
-            "volets_roulants_pvc_bois_epaisseur_lte_12_mm",
-            "volets_roulants_pvc_bois_epaisseur_gt_12_mm",
-            "persienne_coulissante_epaisseur_lte_22_mm",
-            "persienne_coulissante_epaisseur_gt_22_mm",
-            "volet_battant_pvc_bois_epaisseur_lte_22_mm",
-            "volet_battant_pvc_bois_epaisseur_gt_22_mm",
-            "fermeture_isolee_sans_ajours"
-          ]
-        },
-        "annee_installation": {
-          "title": "Année d'installation",
-          "type": [
-            "integer",
-            "null"
-          ],
-          "default": null
-        },
-        "ug": {
-          "$ref": "#/$defs/ug"
-        },
-        "uw": {
-          "$ref": "#/$defs/uw"
-        },
-        "ujn": {
-          "$ref": "#/$defs/ujn"
-        },
-        "sw": {
-          "$ref": "#/$defs/sw"
-        },
-        "position": {
-          "$ref": "#/$defs/position"
-        },
-        "masques_proches": {
-          "title": "Liste des masques proches",
+        "generateurs": {
+          "title": "Liste des générateurs",
           "type": "array",
           "default": [],
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "$ref": "/ventilation/generateur"
           }
         },
-        "masques_lointains": {
-          "title": "Liste des masques lointains",
+        "installations": {
+          "title": "Liste des installations",
           "type": "array",
-          "default": [],
+          "minContains": 1,
           "items": {
-            "type": "string",
-            "format": "uuid"
+            "$ref": "/ventilation/installation"
+          }
+        },
+        "systemes": {
+          "title": "Liste des systèmes",
+          "type": "array",
+          "minContains": 1,
+          "items": {
+            "$ref": "/ventilation/systeme"
           }
         }
       },
       "required": [
-        "id",
-        "is",
-        "double_fenetre_id",
-        "description",
-        "type_baie",
-        "presence_protection_solaire",
-        "type_fermeture",
-        "annee_installation",
-        "ug",
-        "uw",
-        "ujn",
-        "sw",
-        "position",
-        "masques_proches",
-        "masques_lointains"
-      ],
-      "oneOf": [
-        {
-          "title": "Paroi vitrée",
-          "type": "object",
-          "properties": {
-            "type_baie": {
-              "enum": [
-                "brique_verre_pleine",
-                "brique_verre_creuse",
-                "polycarbonate"
-              ]
-            }
-          },
-          "required": [
-            "type_baie"
-          ]
-        },
-        {
-          "title": "Fenêtre",
-          "type": "object",
-          "properties": {
-            "type_baie": {
-              "enum": [
-                "fenetre_battante",
-                "fenetre_coulissante"
-              ]
-            },
-            "type_pose": {
-              "title": "Type de pose",
-              "type": "string",
-              "enum": [
-                "nu_exterieur",
-                "nu_interieur",
-                "tunnel"
-              ]
-            },
-            "materiau": {
-              "title": "Matériau",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "pvc",
-                "bois",
-                "bois_metal",
-                "metal",
-                null
-              ],
-              "default": null
-            },
-            "vitrage": {
-              "$ref": "#/$defs/vitrage"
-            },
-            "menuiserie": {
-              "$ref": "#/$defs/menuiserie"
-            }
-          },
-          "required": [
-            "type_baie",
-            "type_pose",
-            "materiau",
-            "vitrage",
-            "menuiserie"
-          ]
-        },
-        {
-          "title": "Porte fenêtre",
-          "type": "object",
-          "properties": {
-            "type_baie": {
-              "enum": [
-                "porte_fenetre_coulissante",
-                "porte_fenetre_battante"
-              ]
-            },
-            "type_pose": {
-              "title": "Type de pose",
-              "type": "string",
-              "enum": [
-                "nu_exterieur",
-                "nu_interieur",
-                "tunnel"
-              ]
-            },
-            "materiau": {
-              "title": "Matériau",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "pvc",
-                "bois",
-                "bois_metal",
-                "metal",
-                null
-              ],
-              "default": null
-            },
-            "presence_soubassement": {
-              "title": "Présence d'un soubassement",
-              "type": "boolean"
-            },
-            "vitrage": {
-              "$ref": "#/$defs/vitrage"
-            },
-            "menuiserie": {
-              "$ref": "#/$defs/menuiserie"
-            }
-          },
-          "required": [
-            "type",
-            "type_pose",
-            "materiau",
-            "presence_soubassement",
-            "vitrage",
-            "menuiserie"
-          ]
-        }
-      ],
-      "$defs": {
-        "typeBaie": {
-          "title": "Type de baie",
-          "type": "string",
-          "enum": [
-            "brique_verre_pleine",
-            "brique_verre_creuse",
-            "polycarbonate",
-            "fenetre_battante",
-            "fenetre_coulissante",
-            "porte_fenetre_coulissante",
-            "porte_fenetre_battante"
-          ]
-        },
-        "ug": {
-          "title": "Coefficient de transmission thermique du vitrage connu et justifié en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "uw": {
-          "title": "Coefficient de transmission thermique de la baie connu et justifié en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "ujn": {
-          "title": "Coefficient de transmission thermique de la baie avec fermeture connu et justifié en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "sw": {
-          "title": "Proportion d'énergie solaire transmise par la baie en %",
-          "type": [
-            "number",
-            "null"
-          ],
-          "minimum": 0,
-          "maximum": 100,
-          "default": null
-        },
-        "position": {
-          "title": "Position de la baie",
-          "type": "object",
-          "properties": {
-            "paroi_id": {
-              "title": "Identifiant de la paroi associée à la baie",
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uuid",
-              "default": null
-            },
-            "surface": {
-              "title": "Surface de la baie en m²",
-              "type": "number",
-              "minimum": 0
-            },
-            "mitoyennete": {
-              "title": "Mitoyenneté de la baie",
-              "type": "string",
-              "enum": [
-                "exterieur",
-                "enterre",
-                "vide_sanitaire",
-                "terre_plein",
-                "sous_sol_non_chauffe",
-                "local_non_chauffe",
-                "local_non_residentiel",
-                "local_residentiel",
-                "local_non_accessible"
-              ]
-            },
-            "inclinaison": {
-              "title": "Inclinaison de la baie par rapport à l'horizontale en degré",
-              "type": "number",
-              "minimum": 0,
-              "maximum": 90
-            },
-            "orientation": {
-              "title": "Orientation de la baie en degré par rapport au nord",
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "exclusiveMaximum": 360
-            }
-          },
-          "required": [
-            "paroi_id",
-            "surface",
-            "mitoyennete",
-            "inclinaison",
-            "orientation"
-          ],
-          "allOf": [
-            {
-              "oneOf": [
-                {
-                  "title": "Baie donnant sur un local non chauffé",
-                  "type": "object",
-                  "properties": {
-                    "mitoyennete": {
-                      "const": "local_non_chauffe"
-                    },
-                    "local_non_chauffe_id": {
-                      "title": "Identifiant du local non chauffé associé à la baie",
-                      "type": "string",
-                      "format": "uuid"
-                    }
-                  },
-                  "required": [
-                    "local_non_chauffe_id",
-                    "mitoyennete"
-                  ]
-                },
-                {
-                  "title": "Autres cas",
-                  "type": "object",
-                  "properties": {
-                    "mitoyennete": {
-                      "not": {
-                        "const": "local_non_chauffe"
-                      }
-                    }
-                  },
-                  "required": [
-                    "mitoyennete"
-                  ]
-                }
-              ]
-            },
-            {
-              "oneOf": [
-                {
-                  "title": "Baie horizontale",
-                  "type": "object",
-                  "properties": {
-                    "inclinaison": {
-                      "const": 0
-                    },
-                    "orientation": {
-                      "const": null,
-                      "default": null
-                    }
-                  },
-                  "required": [
-                    "inclinaison",
-                    "orientation"
-                  ]
-                },
-                {
-                  "title": "Autres cas",
-                  "type": "object",
-                  "properties": {
-                    "inclinaison": {
-                      "minimumExlusive": 0
-                    },
-                    "orientation": {
-                      "title": "Orientation par rapport au nord en °",
-                      "type": "number",
-                      "minimum": 0,
-                      "exclusiveMaximum": 360
-                    }
-                  },
-                  "required": [
-                    "inclinaison",
-                    "orientation"
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        "menuiserie": {
-          "title": "Menuiserie",
-          "type": "object",
-          "properties": {
-            "largeur_dormant": {
-              "title": "Largeur dormant en mm",
-              "type": [
-                "number",
-                "null"
-              ],
-              "exclusiveMinimum": 0,
-              "default": null
-            },
-            "presence_joint": {
-              "title": "Présence de joint d'étanchéité",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            },
-            "presence_retour_isolation": {
-              "title": "Présence d'un retour d'isolation",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            },
-            "presence_rupteur_pont_thermique": {
-              "title": "Présence d'un rupteur de pont thermique",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            }
-          },
-          "required": [
-            "largeur_dormant",
-            "presence_joint",
-            "presence_retour_isolation",
-            "presence_rupteur_pont_thermique"
-          ]
-        },
-        "vitrage": {
-          "title": "Vitrage",
-          "type": "object",
-          "properties": {
-            "type_vitrage": {
-              "title": "Type de vitrage",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "simple_vitrage",
-                "double_vitrage",
-                "double_vitrage_fe",
-                "triple_vitrage",
-                "triple_vitrage_fe",
-                null
-              ],
-              "default": null
-            },
-            "survitrage": {
-              "title": "Survitrage",
-              "type": [
-                "object",
-                "null"
-              ],
-              "oneOf": [
-                {
-                  "$ref": "#/$defs/survitrage"
-                },
-                {
-                  "const": "null"
-                }
-              ]
-            }
-          },
-          "required": [
-            "type_vitrage",
-            "survitrage"
-          ],
-          "oneOf": [
-            {
-              "title": "Vitrage simple",
-              "properties": {
-                "type_vitrage": {
-                  "const": "simple_vitrage"
-                }
-              },
-              "required": [
-                "type_vitrage"
-              ]
-            },
-            {
-              "title": "Vitrage complexe",
-              "properties": {
-                "type_vitrage": {
-                  "not": {
-                    "const": "simple_vitrage"
-                  }
-                },
-                "nature_gaz_lame": {
-                  "title": "Nature de la lame d'air",
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "enum": [
-                    "air",
-                    "argon",
-                    "krypton",
-                    null
-                  ],
-                  "default": null
-                },
-                "epaisseur_lame": {
-                  "title": "Epaisseur de la lame d'air en mm",
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "exclusiveMinimum": 0,
-                  "default": null
-                }
-              },
-              "required": [
-                "type_vitrage",
-                "nature_lame",
-                "epaisseur_lame"
-              ]
-            }
-          ]
-        },
-        "survitrage": {
-          "title": "Survitrage",
-          "type": "object",
-          "properties": {
-            "type_survitrage": {
-              "title": "Type de survitrage",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "survitrage_simple",
-                "survitrage_fe",
-                null
-              ],
-              "default": null
-            },
-            "epaisseur_lame": {
-              "title": "Epaisseur de la lame d'air en mm",
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "default": null
-            }
-          },
-          "required": [
-            "type_survitrage",
-            "epaisseur_lame"
-          ]
-        }
-      }
+        "generateurs",
+        "installations",
+        "systemes"
+      ]
     },
-    "https://schemas.dpe-audit.fr/enveloppe/double_fenetre": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/double_fenetre",
-      "title": "Double fenêtre",
+    "https://schemas.dpe-audit.fr/ventilation/generateur": {
+      "$id": "https://schemas.dpe-audit.fr/ventilation/generateur",
+      "title": "Générateur de ventilation",
       "type": "object",
       "unevaluatedProperties": false,
       "properties": {
@@ -2676,2211 +4637,245 @@
           "title": "Identifiant",
           "type": "string",
           "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:double_fenetre"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "type_baie": {
-          "$ref": "#/$defs/typeBaie"
-        },
-        "ug": {
-          "$ref": "#/$defs/ug"
-        },
-        "uw": {
-          "$ref": "#/$defs/uw"
-        },
-        "sw": {
-          "$ref": "#/$defs/sw"
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "type_baie",
-        "ug",
-        "uw",
-        "sw"
-      ],
-      "anyOf": [
-        {
-          "title": "Paroi vitrée",
-          "type": "object",
-          "properties": {
-            "type_baie": {
-              "enum": [
-                "brique_verre_pleine",
-                "brique_verre_creuse",
-                "polycarbonate"
-              ]
-            }
-          },
-          "required": [
-            "type_baie"
-          ]
-        },
-        {
-          "title": "Fenêtre",
-          "type": "object",
-          "properties": {
-            "type_baie": {
-              "enum": [
-                "fenetre_battante",
-                "fenetre_coulissante"
-              ]
-            },
-            "type_pose": {
-              "title": "Type de pose",
-              "type": "string",
-              "enum": [
-                "nu_exterieur",
-                "nu_interieur",
-                "tunnel"
-              ]
-            },
-            "materiau": {
-              "title": "Matériau",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "pvc",
-                "bois",
-                "bois_metal",
-                "metal",
-                null
-              ],
-              "default": null
-            },
-            "vitrage": {
-              "$ref": "#/$defs/vitrage"
-            },
-            "menuiserie": {
-              "$ref": "#/$defs/menuiserie"
-            }
-          },
-          "required": [
-            "type_baie",
-            "type_pose",
-            "materiau",
-            "vitrage",
-            "menuiserie"
-          ]
-        },
-        {
-          "title": "Porte fenêtre",
-          "type": "object",
-          "properties": {
-            "type_baie": {
-              "enum": [
-                "porte_fenetre_coulissante",
-                "porte_fenetre_battante"
-              ]
-            },
-            "type_pose": {
-              "title": "Type de pose",
-              "type": "string",
-              "enum": [
-                "nu_exterieur",
-                "nu_interieur",
-                "tunnel"
-              ]
-            },
-            "materiau": {
-              "title": "Matériau",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "pvc",
-                "bois",
-                "bois_metal",
-                "metal",
-                null
-              ],
-              "default": null
-            },
-            "presence_soubassement": {
-              "title": "Présence d'un soubassement",
-              "type": "boolean"
-            },
-            "vitrage": {
-              "$ref": "#/$defs/vitrage"
-            },
-            "menuiserie": {
-              "$ref": "#/$defs/menuiserie"
-            }
-          },
-          "required": [
-            "type_baie",
-            "type_pose",
-            "materiau",
-            "presence_soubassement",
-            "vitrage",
-            "menuiserie"
-          ]
-        }
-      ],
-      "$defs": {
-        "typeBaie": {
-          "title": "Type de baie",
-          "type": "string",
-          "enum": [
-            "brique_verre_pleine",
-            "brique_verre_creuse",
-            "polycarbonate",
-            "fenetre_battante",
-            "fenetre_coulissante",
-            "porte_fenetre_coulissante",
-            "porte_fenetre_battante"
-          ]
-        },
-        "ug": {
-          "title": "Coefficient de transmission thermique du vitrage connu et justifié en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "uw": {
-          "title": "Coefficient de transmission thermique de la baie connu et justifié en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "sw": {
-          "title": "Proportion d'énergie solaire transmise par la baie en %",
-          "type": [
-            "number",
-            "null"
-          ],
-          "minimum": 0,
-          "maximum": 100,
-          "default": null
-        },
-        "menuiserie": {
-          "title": "Menuiserie",
-          "type": "object",
-          "properties": {
-            "largeur_dormant": {
-              "title": "Largeur dormant en mm",
-              "type": [
-                "number",
-                "null"
-              ],
-              "exclusiveMinimum": 0,
-              "default": null
-            },
-            "presence_joint": {
-              "title": "Présence de joint d'étanchéité",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            },
-            "presence_retour_isolation": {
-              "title": "Présence d'un retour d'isolation",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            },
-            "presence_rupteur_pont_thermique": {
-              "title": "Présence d'un rupteur de pont thermique",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            }
-          },
-          "required": [
-            "largeur_dormant",
-            "presence_joint",
-            "presence_retour_isolation",
-            "presence_rupteur_pont_thermique"
-          ]
-        },
-        "vitrage": {
-          "title": "Vitrage",
-          "type": "object",
-          "properties": {
-            "type_vitrage": {
-              "title": "Type de vitrage",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "simple_vitrage",
-                "double_vitrage",
-                "double_vitrage_fe",
-                "triple_vitrage",
-                "triple_vitrage_fe",
-                null
-              ],
-              "default": null
-            },
-            "survitrage": {
-              "title": "Survitrage",
-              "type": [
-                "object",
-                "null"
-              ],
-              "oneOf": [
-                {
-                  "$ref": "#/$defs/survitrage"
-                },
-                {
-                  "const": "null"
-                }
-              ]
-            }
-          },
-          "required": [
-            "type_vitrage",
-            "survitrage"
-          ],
-          "oneOf": [
-            {
-              "title": "Vitrage simple",
-              "properties": {
-                "type_vitrage": {
-                  "const": "simple_vitrage"
-                }
-              },
-              "required": [
-                "type_vitrage"
-              ]
-            },
-            {
-              "title": "Vitrage complexe",
-              "properties": {
-                "type_vitrage": {
-                  "not": {
-                    "const": "simple_vitrage"
-                  }
-                },
-                "nature_lame": {
-                  "title": "Nature de la lame d'air",
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "enum": [
-                    "air",
-                    "argon",
-                    "krypton",
-                    null
-                  ],
-                  "default": null
-                },
-                "epaisseur_lame": {
-                  "title": "Epaisseur de la lame d'air en mm",
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "exclusiveMinimum": 0,
-                  "default": null
-                }
-              },
-              "required": [
-                "type_vitrage",
-                "nature_lame",
-                "epaisseur_lame"
-              ]
-            }
-          ]
-        },
-        "survitrage": {
-          "title": "Survitrage",
-          "type": "object",
-          "properties": {
-            "type_survitrage": {
-              "title": "Type de survitrage",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "survitrage_simple",
-                "survitrage_fe",
-                null
-              ],
-              "default": null
-            },
-            "epaisseur_lame": {
-              "title": "Epaisseur de la lame d'air en mm",
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "default": null
-            }
-          },
-          "required": [
-            "type_survitrage",
-            "epaisseur_lame"
-          ]
-        }
-      }
-    },
-    "https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe",
-      "title": "Local non chauffé",
-      "type": "object",
-      "unevaluatedProperties": false,
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:local_non_chauffe"
         },
         "description": {
           "title": "Description",
           "type": "string"
         },
         "type": {
-          "title": "Type",
+          "title": "Type de générateur",
           "type": "string",
           "enum": [
-            "garage",
-            "cellier",
-            "espace_tampon_solarise",
-            "comble_fortement_ventile",
-            "comble_faiblement_ventile",
-            "comble_tres_faiblement_ventile",
-            "circulation_sans_ouverture_exterieure",
-            "circulation_avec_ouverture_exterieure",
-            "circulation_avec_bouche_ou_gaine_desenfumage_ouverte",
-            "hall_entree_avec_fermeture_automatique",
-            "hall_entree_sans_fermeture_automatique",
-            "garage_collectif",
-            "autres"
-          ]
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "type"
-      ]
-    },
-    "https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/baie": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/baie",
-      "title": "Baie",
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:local_non_chauffe:baie"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "type_baie": {
-          "title": "Type de baie",
-          "type": "string",
-          "enum": [
-            "polycarbonate",
-            "fenetre_battante",
-            "fenetre_coulissante",
-            "porte_fenetre_coulissante",
-            "porte_fenetre_battante"
+            "vmc_simple_flux",
+            "vmc_simple_flux_gaz",
+            "vmc_basse_pression",
+            "vmc_double_flux",
+            "ventilation_hybride",
+            "ventilation_mecanique",
+            "puit_climatique",
+            "vmi",
+            "vmr"
           ]
         },
-        "position": {
-          "$ref": "#/$defs/position"
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "type_baie",
-        "position"
-      ],
-      "oneOf": [
-        {
-          "title": "Baie en polycarbonate",
-          "type": "object",
-          "properties": {
-            "type_baie": {
-              "const": "polycarbonate"
-            }
-          },
-          "required": [
-            "type_baie"
-          ]
+        "generateur_collectif": {
+          "title": "Générateur collectif de ventilation",
+          "type": "boolean"
         },
-        {
-          "title": "Autres cas",
-          "type": "object",
-          "properties": {
-            "type_baie": {
-              "not": {
-                "const": "polycarbonate"
-              }
-            },
-            "materiau": {
-              "title": "Matériau de la baie",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "pvc",
-                "bois",
-                "bois_metal",
-                "metal",
-                null
-              ],
-              "default": null
-            },
-            "type_vitrage": {
-              "title": "Type de vitrage",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "simple_vitrage",
-                "double_vitrage",
-                "double_vitrage_fe",
-                "triple_vitrage",
-                "triple_vitrage_fe",
-                null
-              ],
-              "default": null
-            },
-            "presence_rupteur_pont_thermique": {
-              "title": "Présence d'un rupteur de pont thermique",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            }
-          },
-          "required": [
-            "type_baie",
-            "materiau",
-            "type_vitrage",
-            "presence_rupteur_pont_thermique"
-          ]
-        }
-      ],
-      "$defs": {
-        "position": {
-          "title": "Position de la baie",
-          "type": "object",
-          "properties": {
-            "paroi_id": {
-              "title": "Identifiant unique de la paroi associée au format UUID",
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uuid",
-              "default": null
-            },
-            "surface": {
-              "title": "Surface totale en m²",
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "mitoyennete": {
-              "title": "Mitoyenneté",
-              "type": "string",
-              "enum": [
-                "exterieur",
-                "enterre",
-                "vide_sanitaire",
-                "terre_plein",
-                "sous_sol_non_chauffe",
-                "local_non_chauffe",
-                "local_non_residentiel",
-                "local_residentiel",
-                "local_non_accessible"
-              ]
-            },
-            "inclinaison": {
-              "title": "Inclinaison par rapport à l'horizontal en °",
-              "type": "number",
-              "minimum": 0,
-              "maximum": 90
-            }
-          },
-          "required": [
-            "surface",
-            "mitoyennete",
-            "inclinaison",
-            "orientation"
-          ],
-          "oneOf": [
-            {
-              "title": "Baie horizontale",
-              "type": "object",
-              "properties": {
-                "inclinaison": {
-                  "const": 0
-                },
-                "orientation": {
-                  "const": null,
-                  "default": null
-                }
-              },
-              "required": [
-                "inclinaison",
-                "orientation"
-              ]
-            },
-            {
-              "title": "Autres cas",
-              "type": "object",
-              "properties": {
-                "inclinaison": {
-                  "minimumExlusive": 0
-                },
-                "orientation": {
-                  "title": "Orientation par rapport au nord en °",
-                  "type": "number",
-                  "minimum": 0,
-                  "exclusiveMaximum": 360
-                }
-              },
-              "required": [
-                "inclinaison",
-                "orientation"
-              ]
-            }
-          ]
-        }
-      }
-    },
-    "https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/paroi": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/paroi",
-      "title": "Paroi",
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:local_non_chauffe:paroi"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "isolation": {
-          "title": "État d'isolation de la paroi",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "isole",
-            "non_isole",
-            null
-          ]
-        },
-        "position": {
-          "$ref": "#/$defs/position"
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "isolation",
-        "position"
-      ],
-      "$defs": {
-        "position": {
-          "title": "Position",
-          "type": "object",
-          "properties": {
-            "mitoyennete": {
-              "title": "Mitoyenneté",
-              "type": "string",
-              "enum": [
-                "exterieur",
-                "enterre",
-                "vide_sanitaire",
-                "terre_plein",
-                "sous_sol_non_chauffe",
-                "local_non_chauffe",
-                "local_non_residentiel",
-                "local_residentiel",
-                "local_non_accessible"
-              ]
-            },
-            "surface": {
-              "title": "Surface de la paroi en m²",
-              "type": "number",
-              "exclusiveMinimum": 0
-            }
-          },
-          "required": [
-            "mitoyennete",
-            "surface"
-          ]
-        }
-      }
-    },
-    "https://schemas.dpe-audit.fr/enveloppe/masque_lointain": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/masque_lointain",
-      "title": "Masque lointain",
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:masque_lointain"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "type_masque": {
-          "title": "Type de masque lointain",
-          "type": "string",
-          "enum": [
-            "homogene",
-            "non_homogene"
-          ]
-        },
-        "hauteur": {
-          "title": "Hauteur du masque lointain en angle",
-          "type": "number",
-          "exlusiveMinimum": 0,
-          "exclusiveMaximum": 80
-        },
-        "orientation": {
-          "title": "Orientation du masque lointain par rapport au nord en angle",
-          "type": "number",
-          "minimum": 0,
-          "exclusiveMaximum": 360
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "type_masque",
-        "hauteur",
-        "orientation"
-      ]
-    },
-    "https://schemas.dpe-audit.fr/enveloppe/masque_proche": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/masque_proche",
-      "title": "Masque proche",
-      "type": "object",
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:masque_proche"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "type_masque": {
-          "title": "Type de masque proche",
-          "type": "string",
-          "enum": [
-            "fond_balcon",
-            "fond_et_flanc_loggias",
-            "balcon_ou_auvent",
-            "paroi_laterale_sans_obstacle_au_sud",
-            "paroi_laterale_avec_obstacle_au_sud"
-          ]
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "type_masque"
-      ],
-      "oneOf": [
-        {
-          "title": "Paroi latérale",
-          "type": "object",
-          "properties": {
-            "type_masque": {
-              "enum": [
-                "paroi_laterale_sans_obstacle_au_sud",
-                "paroi_laterale_avec_obstacle_au_sud"
-              ]
-            }
-          },
-          "required": [
-            "type_masque"
-          ]
-        },
-        {
-          "title": "Autres masques proches",
-          "type": "object",
-          "properties": {
-            "type_masque": {
-              "enum": [
-                "fond_balcon",
-                "fond_et_flanc_loggias",
-                "balcon_ou_auvent"
-              ]
-            },
-            "profondeur": {
-              "title": "Profondeur du masque en m",
-              "type": "number",
-              "exclusiveMinimum": 0
-            }
-          },
-          "required": [
-            "type_masque",
-            "profondeur"
-          ]
-        }
-      ]
-    },
-    "https://schemas.dpe-audit.fr/enveloppe/mur": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/mur",
-      "title": "Mur",
-      "type": "object",
-      "unevaluatedProperties": false,
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:mur"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "type_structure": {
-          "title": "Type de mur",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "pierre_moellons",
-            "pierre_moellons_avec_remplissage",
-            "pise_ou_beton_terre",
-            "pan_bois_sans_remplissage",
-            "pan_bois_avec_remplissage",
-            "bois_rondin",
-            "brique_pleine_simple",
-            "brique_pleine_double_avec_lame_air",
-            "brique_creuse",
-            "bloc_beton_plein",
-            "bloc_beton_creux",
-            "beton_banche",
-            "beton_machefer",
-            "brique_terre_cuite_alveolaire",
-            "sandwich_beton_isolant_beton_sans_isolation_rapportee",
-            "cloison_platre",
-            "ossature_bois_sans_remplissage",
-            "ossature_bois_avec_remplissage_tout_venant",
-            "ossature_bois_avec_remplissage_isolant",
-            null
-          ],
-          "default": null
-        },
-        "epaisseur_structure": {
-          "title": "Epaisseur du mur non isolé en mm",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "type_doublage": {
-          "title": "Type de doublage",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "sans_doublage",
-            "indetermine",
-            "lame_air_inferieur_15mm",
-            "lame_air_superieur_15mm",
-            "materiaux_connu",
-            null
-          ],
-          "default": null
-        },
-        "presence_enduit_isolant": {
-          "title": "Présence d'un enduit isolant",
+        "presence_echangeur_thermique": {
+          "title": "Présence d'un échangeur thermique",
           "type": [
             "boolean",
             "null"
           ],
           "default": null
         },
-        "paroi_ancienne": {
-          "title": "Mur constitué de matériaux anciens",
-          "type": [
-            "boolean",
-            "null"
-          ],
-          "default": null
-        },
-        "inertie": {
-          "title": "État d'inertie",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "lourde",
-            "legere",
-            null
-          ],
-          "default": null
-        },
-        "annee_construction": {
-          "title": "Année de construction",
+        "annee_installation": {
+          "title": "Année d'installation du générateur de ventilation",
           "type": [
             "integer",
             "null"
           ],
           "default": null
-        },
-        "annee_renovation": {
-          "title": "Année de dernière rénovation connue et justifiée",
-          "type": [
-            "integer",
-            "null"
-          ],
-          "default": null
-        },
-        "u0": {
-          "title": "Coefficient de transmission thermique connu et justifié du mur non isolé en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "u": {
-          "title": "Coefficient de transmission thermique connu et justifié en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "position": {
-          "$ref": "#/$defs/position"
-        },
-        "isolation": {
-          "$ref": "#/$defs/isolation"
         }
       },
       "required": [
         "id",
-        "is",
         "description",
-        "type_structure",
-        "epaisseur_structure",
-        "type_doublage",
-        "presence_enduit_isolant",
-        "paroi_ancienne",
-        "inertie",
-        "annee_construction",
-        "annee_renovation",
-        "u0",
-        "u",
-        "position",
-        "isolation"
+        "type",
+        "generateur_collectif",
+        "presence_echangeur_thermique",
+        "annee_installation"
       ],
-      "$defs": {
-        "position": {
-          "title": "Position",
+      "oneOf": [
+        {
+          "title": "Ventilation Mécanique Contrôlée",
           "type": "object",
           "properties": {
-            "surface": {
-              "title": "Surface totale en m²",
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "mitoyennete": {
-              "title": "Mitoyenneté",
-              "type": "string",
+            "type": {
               "enum": [
-                "exterieur",
-                "enterre",
-                "vide_sanitaire",
-                "terre_plein",
-                "sous_sol_non_chauffe",
-                "local_non_chauffe",
-                "local_non_residentiel",
-                "local_residentiel",
-                "local_non_accessible"
+                "vmc_simple_flux",
+                "vmc_simple_flux_gaz",
+                "vmc_basse_pression",
+                "vmc_double_flux",
+                "ventilation_hybride"
               ]
             },
-            "orientation": {
-              "title": "Orientation en degré par rapport au nord",
+            "type_vmc": {
+              "title": "Type de Ventilation Mécanique Contrôlée",
               "type": [
-                "number",
+                "string",
                 "null"
               ],
-              "minimum": 0,
-              "exclusiveMaximum": 360,
+              "enum": [
+                "autoreglable",
+                "hygroreglable_type_a",
+                "hygroreglable_type_b",
+                null
+              ],
               "default": null
             }
           },
           "required": [
-            "surface",
-            "mitoyennete",
-            "orientation"
-          ],
-          "oneOf": [
-            {
-              "title": "Mur donnant sur un local non chauffé",
-              "type": "object",
-              "properties": {
-                "mitoyennete": {
-                  "const": "local_non_chauffe"
-                },
-                "local_non_chauffe_id": {
-                  "title": "Identifiant du local non chauffé associé au mur",
-                  "type": "string",
-                  "format": "uuid"
-                }
-              },
-              "required": [
-                "local_non_chauffe_id",
-                "mitoyennete"
-              ]
-            },
-            {
-              "title": "Autres cas",
-              "type": "object",
-              "properties": {
-                "mitoyennete": {
-                  "not": {
-                    "const": "local_non_chauffe"
-                  }
-                }
-              },
-              "required": [
-                "mitoyennete"
-              ]
-            }
+            "type",
+            "type_vmc"
           ]
         },
-        "isolation": {
-          "title": "Isolation",
+        {
+          "title": "Autres",
           "type": "object",
           "properties": {
-            "etat_isolation": {
-              "title": "Etat d'isolation",
-              "type": [
-                "string",
-                "null"
-              ],
+            "type": {
               "enum": [
-                "isole",
-                "non_isole",
-                null
+                "ventilation_mecanique",
+                "puit_climatique",
+                "vmi",
+                "vmr"
               ]
             }
           },
           "required": [
-            "etat_isolation"
-          ],
-          "oneOf": [
-            {
-              "title": "Mur isolé",
-              "type": "object",
-              "properties": {
-                "etat_isolation": {
-                  "const": "isole"
-                },
-                "type_isolation": {
-                  "title": "Type d'isolation",
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "enum": [
-                    "iti",
-                    "ite",
-                    "itr",
-                    "iti_ite",
-                    "itr_iti",
-                    "itr_ite",
-                    "itr_iti_ite",
-                    null
-                  ],
-                  "default": null
-                },
-                "annee_isolation": {
-                  "title": "Année d'isolation",
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "default": null
-                },
-                "epaisseur_isolation": {
-                  "title": "Epaisseur de l'isolation en mm",
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "exclusiveMinimum": 0,
-                  "default": null
-                },
-                "resistance_thermique_isolation": {
-                  "title": "Résistance thermique de l'isolation en m².K/W",
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "exclusiveMinimum": 0,
-                  "default": null
-                }
-              },
-              "required": [
-                "etat_isolation",
-                "type_isolation",
-                "annee_isolation",
-                "epaisseur_isolation",
-                "resistance_thermique_isolation"
-              ]
-            },
-            {
-              "title": "Mur non isolé ou dont l'isolation n'est pas connue",
-              "type": "object",
-              "properties": {
-                "etat_isolation": {
-                  "enum": [
-                    "non_isole",
-                    null
-                  ]
-                }
-              },
-              "required": [
-                "etat_isolation"
-              ]
-            }
+            "type"
           ]
         }
-      }
+      ]
     },
-    "https://schemas.dpe-audit.fr/enveloppe/plancher_bas": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/plancher_bas",
-      "title": "Plancher bas",
+    "https://schemas.dpe-audit.fr/ventilation/installation": {
+      "$id": "https://schemas.dpe-audit.fr/ventilation/installation",
+      "title": "Installation de ventilation",
       "type": "object",
-      "unevaluatedProperties": false,
       "properties": {
         "id": {
           "title": "Identifiant",
           "type": "string",
           "format": "uuid"
         },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:plancher_bas"
-        },
         "description": {
           "title": "Description",
           "type": "string"
         },
-        "type_structure": {
-          "title": "Type de plancher bas",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "plancher_avec_ou_sans_remplissage",
-            "plancher_entre_solives_metalliques",
-            "plancher_entre_solives_bois",
-            "plancher_bois_sur_solives_metalliques",
-            "bardeaux_et_remplissage",
-            "voutains_sur_solives_metalliques",
-            "voutains_briques_ou_moellons",
-            "dalle_beton",
-            "plancher_bois_sur_solives_bois",
-            "plancher_lourd_type_entrevous_terre_cuite_ou_poutrelles_beton",
-            "plancher_entrevous_isolant",
-            null
-          ],
-          "default": null
-        },
-        "inertie": {
-          "title": "État d'inertie",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "lourde",
-            "legere",
-            null
-          ],
-          "default": null
-        },
-        "annee_construction": {
-          "title": "Année de construction",
-          "type": [
-            "integer",
-            "null"
-          ],
-          "default": null
-        },
-        "annee_renovation": {
-          "title": "Année de dernière rénovation connue et justifiée",
-          "type": [
-            "integer",
-            "null"
-          ],
-          "default": null
-        },
-        "u0": {
-          "title": "Coefficient de transmission thermique connu et justifié du plancher bas non isolé en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "u": {
-          "title": "Coefficient de transmission thermique connu et justifié en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "position": {
-          "$ref": "#/$defs/position"
-        },
-        "isolation": {
-          "$ref": "#/$defs/isolation"
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "type_structure",
-        "inertie",
-        "annee_construction",
-        "annee_renovation",
-        "u0",
-        "u",
-        "position",
-        "isolation"
-      ],
-      "$defs": {
-        "position": {
-          "title": "Position",
-          "type": "object",
-          "properties": {
-            "surface": {
-              "title": "Surface totale exprimée en m²",
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "perimetre": {
-              "title": "Périmètre en m",
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "mitoyennete": {
-              "title": "Mitoyenneté",
-              "type": "string",
-              "enum": [
-                "exterieur",
-                "enterre",
-                "vide_sanitaire",
-                "terre_plein",
-                "sous_sol_non_chauffe",
-                "local_non_chauffe",
-                "local_non_residentiel",
-                "local_residentiel",
-                "local_non_accessible"
-              ]
-            }
-          },
-          "required": [
-            "perimetre",
-            "surface",
-            "mitoyennete"
-          ],
-          "oneOf": [
-            {
-              "title": "Plancher bas donnant sur un local non chauffé",
-              "type": "object",
-              "properties": {
-                "mitoyennete": {
-                  "const": "local_non_chauffe"
-                },
-                "local_non_chauffe_id": {
-                  "title": "Identifiant du local non chauffé associé au plancher bas",
-                  "type": "string",
-                  "format": "uuid"
-                }
-              },
-              "required": [
-                "local_non_chauffe_id",
-                "mitoyennete"
-              ]
-            },
-            {
-              "title": "Autres cas",
-              "type": "object",
-              "properties": {
-                "mitoyennete": {
-                  "not": {
-                    "const": "local_non_chauffe"
-                  }
-                }
-              },
-              "required": [
-                "mitoyennete"
-              ]
-            }
-          ]
-        },
-        "isolation": {
-          "title": "Isolation",
-          "type": "object",
-          "properties": {
-            "etat_isolation": {
-              "title": "Etat d'isolation",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "isole",
-                "non_isole",
-                null
-              ]
-            }
-          },
-          "required": [
-            "etat_isolation"
-          ],
-          "oneOf": [
-            {
-              "title": "Plancher bas isolé",
-              "type": "object",
-              "properties": {
-                "etat_isolation": {
-                  "const": "isole"
-                },
-                "type_isolation": {
-                  "title": "Type d'isolation",
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "enum": [
-                    "iti",
-                    "ite",
-                    "itr",
-                    "iti_ite",
-                    "itr_iti",
-                    "itr_ite",
-                    "itr_iti_ite",
-                    null
-                  ],
-                  "default": null
-                },
-                "annee_isolation": {
-                  "title": "Année d'isolation",
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "default": null
-                },
-                "epaisseur_isolation": {
-                  "title": "Epaisseur de l'isolation en mm",
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "exclusiveMinimum": 0,
-                  "default": null
-                },
-                "resistance_thermique_isolation": {
-                  "title": "Résistance thermique de l'isolation en m².K/W",
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "exclusiveMinimum": 0,
-                  "default": null
-                }
-              },
-              "required": [
-                "etat_isolation",
-                "type_isolation",
-                "annee_isolation",
-                "epaisseur_isolation",
-                "resistance_thermique_isolation"
-              ]
-            },
-            {
-              "title": "Plancher bas non isolé ou dont l'isolation n'est pas connue",
-              "type": "object",
-              "properties": {
-                "etat_isolation": {
-                  "enum": [
-                    "non_isole",
-                    null
-                  ]
-                }
-              },
-              "required": [
-                "etat_isolation"
-              ]
-            }
-          ]
-        }
-      }
-    },
-    "https://schemas.dpe-audit.fr/enveloppe/plancher_haut": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/plancher_haut",
-      "title": "Plancher haut",
-      "type": "object",
-      "unevaluatedProperties": false,
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:plancher_haut"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "configuration": {
-          "title": "Configuration",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "combles_perdus",
-            "rampants",
-            "terrasse",
-            null
-          ],
-          "default": null
-        },
-        "type_structure": {
-          "title": "Type de plancher haut",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "plafond_avec_ou_sans_remplissage",
-            "plafond_entre_solives_metalliques",
-            "plafond_entre_solives_bois",
-            "plafond_bois_sur_solives_metalliques",
-            "plafond_bois_sous_solives_metalliques",
-            "bardeaux_et_remplissage",
-            "plafond_bois_sur_solives_bois",
-            "plafond_bois_sous_solives_bo",
-            "dalle_beton",
-            "plafond_lourd",
-            "combles_amenages_sous_rampant",
-            "toiture_chaume",
-            "plafond_patre",
-            "bac_acier",
-            null
-          ],
-          "default": null
-        },
-        "inertie": {
-          "title": "État d'inertie",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "lourde",
-            "legere",
-            null
-          ],
-          "default": null
-        },
-        "annee_construction": {
-          "title": "Année de construction",
-          "type": [
-            "integer",
-            "null"
-          ],
-          "default": null
-        },
-        "annee_renovation": {
-          "title": "Année de dernière rénovation connue et justifiée",
-          "type": [
-            "integer",
-            "null"
-          ],
-          "default": null
-        },
-        "u0": {
-          "title": "Coefficient de transmission thermique connu et justifié du plancher haut non isolé en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "u": {
-          "title": "Coefficient de transmission thermique connu et justifié en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "position": {
-          "$ref": "#/$defs/position"
-        },
-        "isolation": {
-          "$ref": "#/$defs/isolation"
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "configuration",
-        "type_structure",
-        "inertie",
-        "annee_construction",
-        "annee_renovation",
-        "u0",
-        "u",
-        "position",
-        "isolation"
-      ],
-      "$defs": {
-        "position": {
-          "title": "Position",
-          "type": "object",
-          "properties": {
-            "surface": {
-              "title": "Surface totale exprimée en m²",
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "mitoyennete": {
-              "title": "Mitoyenneté",
-              "type": "string",
-              "enum": [
-                "exterieur",
-                "enterre",
-                "vide_sanitaire",
-                "terre_plein",
-                "sous_sol_non_chauffe",
-                "local_non_chauffe",
-                "local_non_residentiel",
-                "local_residentiel",
-                "local_non_accessible"
-              ]
-            },
-            "orientation": {
-              "title": "Orientation en degré par rapport au nord",
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "exclusiveMaximum": 360,
-              "default": null
-            }
-          },
-          "required": [
-            "surface",
-            "mitoyennete",
-            "orientation"
-          ],
-          "oneOf": [
-            {
-              "title": "Plancher haut donnant sur un local non chauffé",
-              "type": "object",
-              "properties": {
-                "mitoyennete": {
-                  "const": "local_non_chauffe"
-                },
-                "local_non_chauffe_id": {
-                  "title": "Identifiant du local non chauffé associé au plancher haut",
-                  "type": "string",
-                  "format": "uuid"
-                }
-              },
-              "required": [
-                "local_non_chauffe_id",
-                "mitoyennete"
-              ]
-            },
-            {
-              "title": "Autres cas",
-              "type": "object",
-              "properties": {
-                "mitoyennete": {
-                  "not": {
-                    "const": "local_non_chauffe"
-                  }
-                }
-              },
-              "required": [
-                "mitoyennete"
-              ]
-            }
-          ]
-        },
-        "isolation": {
-          "title": "Isolation",
-          "type": "object",
-          "properties": {
-            "etat_isolation": {
-              "title": "Etat d'isolation",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "isole",
-                "non_isole",
-                null
-              ]
-            }
-          },
-          "required": [
-            "etat_isolation"
-          ],
-          "oneOf": [
-            {
-              "title": "Plancher haut isolé",
-              "type": "object",
-              "properties": {
-                "etat_isolation": {
-                  "const": "isole"
-                },
-                "type_isolation": {
-                  "title": "Type d'isolation",
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "enum": [
-                    "iti",
-                    "ite",
-                    "itr",
-                    "iti_ite",
-                    "itr_iti",
-                    "itr_ite",
-                    "itr_iti_ite",
-                    null
-                  ],
-                  "default": null
-                },
-                "annee_isolation": {
-                  "title": "Année d'isolation",
-                  "type": [
-                    "integer",
-                    "null"
-                  ],
-                  "default": null
-                },
-                "epaisseur_isolation": {
-                  "title": "Epaisseur de l'isolation en mm",
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "exclusiveMinimum": 0,
-                  "default": null
-                },
-                "resistance_thermique_isolation": {
-                  "title": "Résistance thermique de l'isolation en m².K/W",
-                  "type": [
-                    "number",
-                    "null"
-                  ],
-                  "exclusiveMinimum": 0,
-                  "default": null
-                }
-              },
-              "required": [
-                "etat_isolation",
-                "type_isolation",
-                "annee_isolation",
-                "epaisseur_isolation",
-                "resistance_thermique_isolation"
-              ]
-            },
-            {
-              "title": "Plancher haut non isolé ou dont l'isolation n'est pas connue",
-              "type": "object",
-              "properties": {
-                "etat_isolation": {
-                  "enum": [
-                    "non_isole",
-                    null
-                  ]
-                }
-              },
-              "required": [
-                "etat_isolation"
-              ]
-            }
-          ]
-        }
-      }
-    },
-    "https://schemas.dpe-audit.fr/enveloppe/pont_thermique": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/pont_thermique",
-      "title": "Pont thermique",
-      "type": "object",
-      "unevaluatedProperties": false,
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:pont_thermique"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "longueur": {
-          "title": "Longueur du pont thermique en m",
+        "surface": {
+          "title": "Surface couverte par l'installation en m²",
           "type": "number",
           "exclusiveMinimum": 0
-        },
-        "kpt": {
-          "title": "Valeur du pont thermique connue et justifiée",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "liaison": {
-          "$ref": "#/$defs/liaison"
         }
       },
       "required": [
         "id",
-        "is",
         "description",
-        "longueur",
-        "kpt",
-        "liaison"
+        "surface"
+      ]
+    },
+    "https://schemas.dpe-audit.fr/ventilation/systeme": {
+      "$id": "https://schemas.dpe-audit.fr/ventilation/systeme",
+      "title": "Système de ventilation",
+      "type": "object",
+      "unevaluatedProperties": false,
+      "properties": {
+        "id": {
+          "title": "Identifiant",
+          "type": "string",
+          "format": "uuid"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "installation_id": {
+          "title": "Identifiant de l'installation associée au système",
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "title": "Type de système de ventilation",
+          "type": "string",
+          "enum": [
+            "ventilation_mecanique",
+            "ventilation_naturelle_ouverture_fenetres",
+            "ventilation_naturelle_entrees_air_hautes_basses",
+            "ventilation_naturelle_conduit",
+            "ventilation_naturelle_conduit_entrees_air_hygroreglables"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "installation_id",
+        "type"
       ],
-      "$defs": {
-        "liaison": {
-          "title": "Liaison",
+      "anyOf": [
+        {
+          "title": "Système de ventilation mécanique",
           "type": "object",
           "properties": {
-            "type_liaison": {
-              "title": "Type de liaison",
-              "type": "string",
-              "enum": [
-                "plancher_bas_mur",
-                "plancher_haut_mur",
-                "refend_mur",
-                "plancher_intermediaire_mur",
-                "menuiserie_mur"
-              ]
+            "type": {
+              "const": "ventilation_mecanique"
             },
-            "mur_id": {
-              "title": "Identifiant du mur associé au pont thermique au format UUID",
+            "generateur_id": {
+              "title": "Identifiant du générateur de ventilation associé au système",
               "type": "string",
               "format": "uuid"
             }
           },
           "required": [
-            "type_liaison",
-            "mur_id"
-          ],
-          "anyOf": [
-            {
-              "title": "Pont thermique mur / plancher",
-              "type": "object",
-              "properties": {
-                "type_liaison": {
-                  "enum": [
-                    "plancher_bas_mur",
-                    "plancher_haut_mur"
-                  ]
-                },
-                "plancher_id": {
-                  "title": "Identifiant du Plancher haut ou du Plancher bas associé au pont thermique",
-                  "type": "string",
-                  "format": "uuid"
-                }
-              },
-              "required": [
-                "type_liaison",
-                "plancher_id"
-              ]
-            },
-            {
-              "title": "Pont thermique mur / menuiserie",
-              "type": "object",
-              "properties": {
-                "type_liaison": {
-                  "const": "menuiserie_mur"
-                },
-                "ouverture_id": {
-                  "title": "Identifiant de la Baie ou de la Porte associée au pont thermique",
-                  "type": "string",
-                  "format": "uuid"
-                }
-              },
-              "required": [
-                "type_liaison",
-                "ouverture_id"
-              ]
-            },
-            {
-              "title": "Pont thermique mur / refend ou plancher intermédiaire",
-              "type": "object",
-              "properties": {
-                "type_liaison": {
-                  "enum": [
-                    "plancher_intermediaire_mur",
-                    "refend_mur"
-                  ]
-                },
-                "pont_thermique_partiel": {
-                  "title": "Pont thermique partiel",
-                  "type": "boolean"
-                }
-              },
-              "required": [
-                "type_liaison",
-                "pont_thermique_partiel"
-              ]
-            }
-          ]
-        }
-      }
-    },
-    "https://schemas.dpe-audit.fr/enveloppe/porte": {
-      "$id": "https://schemas.dpe-audit.fr/enveloppe/porte",
-      "title": "Porte",
-      "type": "object",
-      "unevaluatedProperties": false,
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "enveloppe:porte"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "type_pose": {
-          "title": "Type de pose",
-          "type": "string",
-          "enum": [
-            "nu_exterieur",
-            "nu_interieur",
-            "tunnel"
+            "type",
+            "generateur_id"
           ]
         },
-        "isolation": {
-          "title": "État d'isolation de la porte",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "isole",
-            "non_isole",
-            null
-          ],
-          "default": null
-        },
-        "materiau": {
-          "title": "Matériau de la porte",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "pvc",
-            "bois",
-            "bois_metal",
-            "metal",
-            null
-          ],
-          "default": null
-        },
-        "presence_sas": {
-          "title": "Présence d'un sas devant la porte",
-          "type": "boolean"
-        },
-        "annee_installation": {
-          "title": "Année d'installation",
-          "type": [
-            "integer",
-            "null"
-          ],
-          "default": null
-        },
-        "u": {
-          "title": "Coefficient de transmission thermique de la porte connu et justifié en W/m²K",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        },
-        "position": {
-          "$ref": "#/$defs/position"
-        },
-        "menuiserie": {
-          "$ref": "#/$defs/menuiserie"
-        },
-        "vitrage": {
-          "$ref": "#/$defs/vitrage"
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "type_pose",
-        "isolation",
-        "materiau",
-        "presence_sas",
-        "annee_installation",
-        "u",
-        "position",
-        "vitrage",
-        "menuiserie"
-      ],
-      "$defs": {
-        "position": {
-          "title": "Position de la porte",
+        {
+          "title": "Système de ventilation naturelle",
           "type": "object",
           "properties": {
-            "paroi_id": {
-              "title": "Identifiant de la paroi associée à la porte",
-              "type": [
-                "string",
-                "null"
-              ],
-              "format": "uuid",
-              "default": null
-            },
-            "surface": {
-              "title": "Surface totale de la porte en m²",
-              "type": "number",
-              "exclusiveMinimum": 0
-            },
-            "mitoyennete": {
-              "title": "Mitoyenneté de la porte",
-              "type": "string",
+            "type": {
               "enum": [
-                "exterieur",
-                "enterre",
-                "vide_sanitaire",
-                "terre_plein",
-                "sous_sol_non_chauffe",
-                "local_non_chauffe",
-                "local_non_residentiel",
-                "local_residentiel",
-                "local_non_accessible"
+                "ventilation_naturelle_ouverture_fenetres",
+                "ventilation_naturelle_entrees_air_hautes_basses",
+                "ventilation_naturelle_conduit",
+                "ventilation_naturelle_conduit_entrees_air_hygroreglables"
               ]
-            },
-            "orientation": {
-              "title": "Orientation de la porte en degré par rapport au nord",
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "exclusiveMaximum": 360,
-              "default": null
             }
           },
           "required": [
-            "paroi_id",
-            "surface",
-            "mitoyennete",
-            "orientation"
-          ],
-          "oneOf": [
-            {
-              "title": "Porte donnant sur un local non chauffé",
-              "type": "object",
-              "properties": {
-                "mitoyennete": {
-                  "const": "local_non_chauffe"
-                },
-                "local_non_chauffe_id": {
-                  "title": "Identifiant du local non chauffé associé à la porte",
-                  "type": "string",
-                  "format": "uuid"
-                }
-              },
-              "required": [
-                "local_non_chauffe_id",
-                "mitoyennete"
-              ]
-            },
-            {
-              "title": "Autres cas",
-              "type": "object",
-              "properties": {
-                "mitoyennete": {
-                  "not": {
-                    "const": "local_non_chauffe"
-                  }
-                }
-              },
-              "required": [
-                "mitoyennete"
-              ]
-            }
-          ]
-        },
-        "vitrage": {
-          "title": "Vitrage",
-          "type": "object",
-          "properties": {
-            "taux_vitrage": {
-              "title": "Taux de vitrage en %",
-              "description": "Une porte avec un taux de vitrage supérieur à 60% est à considérer comme une porte-fenêtre avec soubassement",
-              "type": "number",
-              "minimum": 0,
-              "maximum": 60
-            }
-          },
-          "required": [
-            "taux_vitrage"
-          ],
-          "oneOf": [
-            {
-              "title": "Porte sans vitrage",
-              "type": "object",
-              "properties": {
-                "taux_vitrage": {
-                  "const": 0
-                }
-              },
-              "required": [
-                "taux_vitrage"
-              ]
-            },
-            {
-              "title": "Porte avec vitrage",
-              "type": "object",
-              "properties": {
-                "taux_vitrage": {
-                  "type": "number",
-                  "minimumExclusive": 0
-                },
-                "type_vitrage": {
-                  "title": "Type de vitrage",
-                  "type": [
-                    "string",
-                    "null"
-                  ],
-                  "enum": [
-                    "simple_vitrage",
-                    "double_vitrage",
-                    "triple_vitrage",
-                    null
-                  ],
-                  "default": null
-                }
-              },
-              "required": [
-                "taux_vitrage",
-                "type_vitrage"
-              ]
-            }
-          ]
-        },
-        "menuiserie": {
-          "title": "Menuiserie",
-          "type": "object",
-          "properties": {
-            "largeur_dormant": {
-              "title": "Largeur dormant en mm",
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "default": null
-            },
-            "presence_joint": {
-              "title": "Présence de joint d'étanchéité",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            },
-            "presence_retour_isolation": {
-              "title": "Présence d'un retour d'isolation",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            }
-          },
-          "required": [
-            "largeur_dormant",
-            "presence_joint",
-            "presence_retour_isolation"
+            "type"
           ]
         }
-      }
-    },
-    "https://schemas.dpe-audit.fr/production/panneau_photovoltaique": {
-      "$id": "https://schemas.dpe-audit.fr/production/panneau_photovoltaique",
-      "title": "Panneau photovoltaïque",
-      "type": "object",
-      "unevaluatedProperties": false,
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "production:panneau_photovoltaique"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "orientation": {
-          "$ref": "/common/orientation"
-        },
-        "inclinaison": {
-          "$ref": "/common/inclinaison"
-        },
-        "modules": {
-          "title": "Nombre de modules",
-          "type": "integer",
-          "minimum": 1
-        },
-        "surface": {
-          "title": "Surface totale des capteurs en m²",
-          "type": [
-            "number",
-            "null"
-          ],
-          "exclusiveMinimum": 0,
-          "default": null
-        }
-      },
-      "required": [
-        "id",
-        "description",
-        "orientation",
-        "inclinaison",
-        "modules",
-        "surface"
       ]
     },
-    "https://schemas.dpe-audit.fr/common/orientation": {
-      "$id": "https://schemas.dpe-audit.fr/common/orientation",
-      "title": "Orientation",
-      "type": "number",
-      "minimum": 0,
-      "exclusiveMaximum": 360
-    },
-    "https://schemas.dpe-audit.fr/common/inclinaison": {
-      "$id": "https://schemas.dpe-audit.fr/common/inclinaison",
-      "title": "Inclinaison",
-      "type": "number",
-      "minimum": 0,
-      "maximum": 90
+    "https://schemas.dpe-audit.fr/refroidissement": {
+      "$id": "https://schemas.dpe-audit.fr/refroidissement",
+      "title": "Refroidissement",
+      "type": "object",
+      "properties": {
+        "generateurs": {
+          "title": "Liste des générateurs",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/refroidissement/generateur"
+          }
+        },
+        "installations": {
+          "title": "Liste des installations",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/refroidissement/installation"
+          }
+        },
+        "systemes": {
+          "title": "Liste des systèmes",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/refroidissement/systeme"
+          }
+        }
+      },
+      "required": [
+        "generateurs",
+        "installations",
+        "systemes"
+      ]
     },
     "https://schemas.dpe-audit.fr/refroidissement/generateur": {
       "$id": "https://schemas.dpe-audit.fr/refroidissement/generateur",
@@ -4892,10 +4887,6 @@
           "title": "Identifiant",
           "type": "string",
           "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "refroidissement:generateur"
         },
         "description": {
           "title": "Description",
@@ -4926,7 +4917,6 @@
       },
       "required": [
         "id",
-        "is",
         "description",
         "type",
         "energie",
@@ -5037,10 +5027,6 @@
           "type": "string",
           "format": "uuid"
         },
-        "is": {
-          "type": "string",
-          "const": "refroidissement:installation"
-        },
         "description": {
           "title": "Description",
           "type": "string"
@@ -5053,7 +5039,6 @@
       },
       "required": [
         "id",
-        "is",
         "description",
         "surface"
       ]
@@ -5067,10 +5052,6 @@
           "title": "Identifiant",
           "type": "string",
           "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "refroidissement:systeme"
         },
         "description": {
           "title": "Description",
@@ -5089,132 +5070,32 @@
       },
       "required": [
         "id",
-        "is",
         "description",
         "installation_id",
         "generateur_id"
       ]
     },
-    "https://schemas.dpe-audit.fr/ventilation/generateur": {
-      "$id": "https://schemas.dpe-audit.fr/ventilation/generateur",
-      "title": "Générateur de ventilation",
+    "https://schemas.dpe-audit.fr/production": {
+      "$id": "https://schemas.dpe-audit.fr/production",
+      "title": "Production",
       "type": "object",
-      "unevaluatedProperties": false,
       "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "ventilation:generateur"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "type": {
-          "title": "Type de générateur",
-          "type": "string",
-          "enum": [
-            "vmc_simple_flux",
-            "vmc_simple_flux_gaz",
-            "vmc_basse_pression",
-            "vmc_double_flux",
-            "ventilation_hybride",
-            "ventilation_mecanique",
-            "puit_climatique",
-            "vmi",
-            "vmr"
-          ]
-        },
-        "generateur_collectif": {
-          "title": "Générateur collectif de ventilation",
-          "type": "boolean"
-        },
-        "presence_echangeur_thermique": {
-          "title": "Présence d'un échangeur thermique",
-          "type": [
-            "boolean",
-            "null"
-          ],
-          "default": null
-        },
-        "annee_installation": {
-          "title": "Année d'installation du générateur de ventilation",
-          "type": [
-            "integer",
-            "null"
-          ],
-          "default": null
+        "panneaux_photovoltaiques": {
+          "title": "Liste des panneaux photovoltaïques",
+          "type": "array",
+          "default": [],
+          "items": {
+            "$ref": "/production/panneau_photovoltaique"
+          }
         }
       },
       "required": [
-        "id",
-        "is",
-        "description",
-        "type",
-        "generateur_collectif",
-        "presence_echangeur_thermique",
-        "annee_installation"
-      ],
-      "oneOf": [
-        {
-          "title": "Ventilation Mécanique Contrôlée",
-          "type": "object",
-          "properties": {
-            "type": {
-              "enum": [
-                "vmc_simple_flux",
-                "vmc_simple_flux_gaz",
-                "vmc_basse_pression",
-                "vmc_double_flux",
-                "ventilation_hybride"
-              ]
-            },
-            "type_vmc": {
-              "title": "Type de Ventilation Mécanique Contrôlée",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "autoreglable",
-                "hygroreglable_type_a",
-                "hygroreglable_type_b",
-                null
-              ],
-              "default": null
-            }
-          },
-          "required": [
-            "type",
-            "type_vmc"
-          ]
-        },
-        {
-          "title": "Autres",
-          "type": "object",
-          "properties": {
-            "type": {
-              "enum": [
-                "ventilation_mecanique",
-                "puit_climatique",
-                "vmi",
-                "vmr"
-              ]
-            }
-          },
-          "required": [
-            "type"
-          ]
-        }
+        "panneaux_photovoltaiques"
       ]
     },
-    "https://schemas.dpe-audit.fr/ventilation/installation": {
-      "$id": "https://schemas.dpe-audit.fr/ventilation/installation",
-      "title": "Installation de ventilation",
+    "https://schemas.dpe-audit.fr/production/panneau_photovoltaique": {
+      "$id": "https://schemas.dpe-audit.fr/production/panneau_photovoltaique",
+      "title": "Panneau photovoltaïque",
       "type": "object",
       "properties": {
         "id": {
@@ -5222,107 +5103,58 @@
           "type": "string",
           "format": "uuid"
         },
-        "is": {
-          "type": "string",
-          "const": "ventilation:installation"
-        },
         "description": {
           "title": "Description",
           "type": "string"
+        },
+        "orientation": {
+          "$ref": "/common/orientation"
+        },
+        "inclinaison": {
+          "$ref": "/common/inclinaison"
+        },
+        "modules": {
+          "title": "Nombre de modules",
+          "type": "integer",
+          "minimum": 1
         },
         "surface": {
-          "title": "Surface couverte par l'installation en m²",
-          "type": "number",
-          "exclusiveMinimum": 0
+          "title": "Surface totale des capteurs en m²",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "installation_collective": {
+          "title": "Installation photovoltaïque collective",
+          "type": "boolean"
         }
       },
       "required": [
         "id",
-        "is",
         "description",
-        "surface"
+        "orientation",
+        "inclinaison",
+        "modules",
+        "surface",
+        "installation_collective"
       ]
     },
-    "https://schemas.dpe-audit.fr/ventilation/systeme": {
-      "$id": "https://schemas.dpe-audit.fr/ventilation/systeme",
-      "title": "Système de ventilation",
-      "type": "object",
-      "unevaluatedProperties": false,
-      "properties": {
-        "id": {
-          "title": "Identifiant",
-          "type": "string",
-          "format": "uuid"
-        },
-        "is": {
-          "type": "string",
-          "const": "ventilation:systeme"
-        },
-        "description": {
-          "title": "Description",
-          "type": "string"
-        },
-        "installation_id": {
-          "title": "Identifiant de l'installation associée au système",
-          "type": "string",
-          "format": "uuid"
-        },
-        "type": {
-          "title": "Type de système de ventilation",
-          "type": "string",
-          "enum": [
-            "ventilation_mecanique",
-            "ventilation_naturelle_ouverture_fenetres",
-            "ventilation_naturelle_entrees_air_hautes_basses",
-            "ventilation_naturelle_conduit",
-            "ventilation_naturelle_conduit_entrees_air_hygroreglables"
-          ]
-        }
-      },
-      "required": [
-        "id",
-        "is",
-        "description",
-        "installation_id",
-        "type"
-      ],
-      "anyOf": [
-        {
-          "title": "Système de ventilation mécanique",
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "ventilation_mecanique"
-            },
-            "generateur_id": {
-              "title": "Identifiant du générateur de ventilation associé au système",
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          "required": [
-            "type",
-            "generateur_id"
-          ]
-        },
-        {
-          "title": "Système de ventilation naturelle",
-          "type": "object",
-          "properties": {
-            "type": {
-              "enum": [
-                "ventilation_naturelle_ouverture_fenetres",
-                "ventilation_naturelle_entrees_air_hautes_basses",
-                "ventilation_naturelle_conduit",
-                "ventilation_naturelle_conduit_entrees_air_hygroreglables"
-              ]
-            }
-          },
-          "required": [
-            "type"
-          ]
-        }
-      ]
+    "https://schemas.dpe-audit.fr/common/orientation": {
+      "$id": "https://schemas.dpe-audit.fr/common/orientation",
+      "title": "Orientation",
+      "type": "number",
+      "minimum": 0,
+      "exclusiveMaximum": 360
+    },
+    "https://schemas.dpe-audit.fr/common/inclinaison": {
+      "$id": "https://schemas.dpe-audit.fr/common/inclinaison",
+      "title": "Inclinaison",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 90
     }
   }
 }

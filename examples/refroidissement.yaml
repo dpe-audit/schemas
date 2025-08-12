@@ -1,0 +1,3 @@
+generateurs: examples/refroidissement/generateur.yaml
+installations: examples/refroidissement/installation.yaml
+systemes: examples/refroidissement/systeme.yaml

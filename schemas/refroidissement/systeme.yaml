@@ -7,9 +7,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: refroidissement:systeme
   description:
     title: Description
     type: string
@@ -23,7 +20,6 @@ properties:
     format: uuid
 required:
   - id
-  - is
   - description
   - installation_id
   - generateur_id

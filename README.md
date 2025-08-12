@@ -13,9 +13,6 @@
 	</a>&nbsp;&nbsp;&nbsp;
 	<a href="https://github.com/dpe-audit/documentation">
 		Documentation
-	</a>&nbsp;&nbsp;&nbsp;
-	<a href="https://github.com/dpe-audit/migration">
-		Migration
 	</a>
 </p>
 <p align="center">
@@ -27,6 +24,9 @@
 	</a>&nbsp;&nbsp;&nbsp;
 	<a href="https://github.com/dpe-audit/methode-3cl">
 		Méthode 3CL
+	</a>&nbsp;&nbsp;&nbsp;
+	<a href="https://github.com/dpe-audit/migration">
+		Migration
 	</a>
 </p>
 
@@ -46,7 +46,7 @@ npm i
 npm run build
 ```
 
-## Commandes
+## Usage
 
 ```
 npm run validate // Valide les exemples de données
@@ -56,9 +56,52 @@ npm run build // Déréférence le schéma de données aux formats JSON et YAML
 ## Organisation
 
 /examples : Exemples de données valide
-/lib : Sous-schémas de données
+/schemas : Sous-schémas de données
 
 ## Documentation
+
+### Généralités
+
+Le schéma de données publiques proposer une description standardisée des bâtiments du point de vue du diagnostiqueur / auditeur pour l'établissement des Diagnostics de Performance Energétique et Audits réglementaires.
+
+### Structure
+
+```
+Ressource
+├── Bâtiment
+├── Adresse
+├── Logements
+├── Enveloppe
+│   ├── Niveaux
+│   ├── Locaux non chauffés
+│   ├── Murs
+│   ├── Planchers bas
+│   ├── Planchers hauts
+│   ├── Baies
+│   ├── Portes
+│   ├── Ponts thermiques
+│   ├── Masques
+│   ├── Doubles fenêtres
+├── Chauffage
+│   ├── Générateurs
+│   ├── Emetteurs
+│   ├── Installations
+│   ├── Systèmes
+├── Eau chaude sanitaire
+│   ├── Générateurs
+│   ├── Installations
+│   ├── Systèmes
+├── Ventilation
+│   ├── Générateurs
+│   ├── Installations
+│   ├── Systèmes
+├── Refroidissement
+│   ├── Générateurs
+│   ├── Installations
+│   ├── Systèmes
+├── Production
+│   ├── Panneaux photovoltaïques
+```
 
 ### Technologies
 

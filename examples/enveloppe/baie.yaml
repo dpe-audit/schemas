@@ -1,6 +1,5 @@
 - id: 6bc71c8d-11fa-4f36-b40b-b75ddbedf5d5
   double_fenetre_id: 6bc71c8d-11fa-4f36-b40b-b75ddbedf5d5
-  is: enveloppe:baie
   description: Une fenêtre
   type_baie: fenetre_battante
   type_pose: nu_interieur
@@ -31,7 +30,5 @@
     presence_joint: true
     presence_retour_isolation: true
     presence_rupteur_pont_thermique: true
-  masques_proches:
-    - 84689d75-6494-425a-8ed6-5e5a26ad9716
-  masques_lointains:
+  masques:
     - 84689d75-6494-425a-8ed6-5e5a26ad9716

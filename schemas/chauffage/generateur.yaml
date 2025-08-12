@@ -8,9 +8,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: chauffage:generateur
   description:
     title: Description
     type: string
@@ -71,7 +68,6 @@ properties:
     default: null
 required:
   - id
-  - is
   - description
   - type
   - energie

@@ -1,5 +1,4 @@
 - id: 9d615f30-c6f8-406f-8a1f-899617c472db
-  is: chauffage:installation
   description: Une installation de chauffage
   surface: 100
   comptage_individuel: true

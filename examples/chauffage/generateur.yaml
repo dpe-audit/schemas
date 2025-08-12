@@ -1,5 +1,4 @@
 - id: 6a785019-8ce1-4768-b9c3-400b7bd2f1f3
-  is: chauffage:generateur
   description: Pompe à chaleur hybride
   type: pac_hybride_air_eau
   energie: electricite
@@ -22,7 +21,6 @@
   annee_installation: 2000
   scop: 4.5
 - id: 6a785019-8ce1-4768-b9c3-400b7bd2f1f3
-  is: chauffage:generateur
   description: Réseau de chaleur
   type: reseau_chaleur
   energie: reseau_chaleur

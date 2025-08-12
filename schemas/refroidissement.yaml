@@ -1,0 +1,27 @@
+$id: https://schemas.dpe-audit.fr/refroidissement
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Refroidissement
+type: object
+properties:
+  generateurs:
+    title: Liste des générateurs
+    type: array
+    default: []
+    items:
+      $ref: /refroidissement/generateur
+  installations:
+    title: Liste des installations
+    type: array
+    default: []
+    items:
+      $ref: /refroidissement/installation
+  systemes:
+    title: Liste des systèmes
+    type: array
+    default: []
+    items:
+      $ref: /refroidissement/systeme
+required:
+  - generateurs
+  - installations
+  - systemes

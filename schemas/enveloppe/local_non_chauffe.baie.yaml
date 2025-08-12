@@ -7,9 +7,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: enveloppe:local_non_chauffe:baie
   description:
     title: Description
     type: string
@@ -26,7 +23,6 @@ properties:
     $ref: "#/$defs/position"
 required:
   - id
-  - is
   - description
   - type_baie
   - position

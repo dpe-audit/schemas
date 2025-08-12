@@ -1,5 +1,4 @@
 - id: ecd4cd8f-7f2b-4427-9d94-b1ed5da33711
-  is: enveloppe:plancher_haut
   description: Un plancher haut
   configuration: combles_perdus
   type_structure: dalle_beton

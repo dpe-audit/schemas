@@ -8,9 +8,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: ecs:installation
   description:
     title: Description
     type: string
@@ -27,7 +24,6 @@ properties:
       - const: null
 required:
   - id
-  - is
   - description
   - surface
   - solaire_thermique

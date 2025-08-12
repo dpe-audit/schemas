@@ -8,9 +8,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: enveloppe:baie
   double_fenetre_id:
     title: Identifiant de la double fenêtre associée
     type: ["string", "null"]
@@ -57,15 +54,8 @@ properties:
     $ref: "#/$defs/sw"
   position:
     $ref: "#/$defs/position"
-  masques_proches:
-    title: Liste des masques proches
-    type: array
-    default: []
-    items:
-      type: string
-      format: uuid
-  masques_lointains:
-    title: Liste des masques lointains
+  masques:
+    title: Liste des masques
     type: array
     default: []
     items:
@@ -73,7 +63,6 @@ properties:
       format: uuid
 required:
   - id
-  - is
   - double_fenetre_id
   - description
   - type_baie
@@ -85,8 +74,7 @@ required:
   - ujn
   - sw
   - position
-  - masques_proches
-  - masques_lointains
+  - masques
 oneOf:
   - title: Paroi vitrée
     type: object

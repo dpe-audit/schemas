@@ -8,9 +8,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: ventilation:systeme
   description:
     title: Description
     type: string
@@ -29,7 +26,6 @@ properties:
       - ventilation_naturelle_conduit_entrees_air_hygroreglables
 required:
   - id
-  - is
   - description
   - installation_id
   - type

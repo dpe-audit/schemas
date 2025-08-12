@@ -4,151 +4,33 @@ title: Ressource
 type: object
 properties:
   adresse:
-    title: Adresse
-    type: object
-    properties:
-      id:
-        title: Identifiant
-        description: Clé d'interopérabilité telle que définie dans la spécification du format d'échange BAL
-        type: [string, "null"]
-        default: null
-      numero:
-        title: Numéro de l'adresse dans la voie
-        type: [integer, "null"]
-        default: null
-      rep:
-        title: Indice de répétition associé au numéro (par exemple bis, a…)
-        type: [string, "null"]
-        default: null
-      nom_voie:
-        title: Nom de la voie en minuscules accentuées
-        type: string
-      code_postal:
-        title: Code postal de la commune
-        type: string
-      code_insee:
-        title: Code INSEE de la commune
-        type: string
-      nom_commune:
-        title: Nom officiel de la commune
-        type: string
-    required:
-      - id
-      - numero
-      - rep
-      - nom_voie
-      - code_postal
-      - code_insee
-      - nom_commune
+    $ref: /adresse
   batiment:
-    title: Bâtiment
-    type: object
-    properties:
-      id:
-        title: Identifiant du bâtiment depuis le RNB
-        type: ["string", "null"]
-        default: null
-      type:
-        title: Type de bâtiment
-        description: Donnée calculée à partir du nombre de logements
-        type: string
-        enum: [maison, immeuble]
-      annee_construction:
-        title: Année de construction
-        type: integer
-      altitude:
-        title: Altitude du bâtiment en mètres
-        type: number
-      logements:
-        title: Nombre de logements
-        type: integer
-        exclusiveMinimum: 0
-      surface_habitable:
-        title: Surface habitable en m²
-        type: number
-        exclusiveMinimum: 0
-      hauteur_sous_plafond:
-        title: Hauteur moyenne sous plafond en m
-        type: number
-        exclusiveMinimum: 0
-      materiaux_anciens:
-        title: Bâtiment majoritairement composé de matériaux anciens
-        type: boolean
-    required:
-      - id
-      - type
-      - annee_construction
-      - altitude
-      - logements
-      - surface_habitable
-      - hauteur_sous_plafond
-      - materiaux_anciens
+    $ref: /batiment
   logements:
     title: Liste des logements visités
     type: array
     default: []
     items:
-      logement:
-        title: Logement
-        type: object
-        properties:
-          id:
-            title: Identifiant
-            type: string
-            format: uuid
-          description:
-            title: Description
-            type: string
-          surface_habitable:
-            title: Surface habitable en m²
-            type: number
-          hauteur_sous_plafond:
-            title: Hauteur sous plafond moyenne en m
-            type: number
-          position:
-            title: Position du logement
-            type: string
-            enum: [rdc, etage_intermediaire, dernier_etage]
-          typologie:
-            title: Typologie du logement
-            type: string
-            enum: [T1, T2, T3, T4, T5, T6, T7]
-      required:
-        - id
-        - description
-        - surface_habitable
-        - hauteur_sous_plafond
-        - position
-        - typologie
+      $ref: /logement
   enveloppe:
-    title: Enveloppe
-    type: object
-    properties:
-      exposition:
-        title: Exposition
-        type: string
-        enum: [exposition_simple, exposition_multiple]
-      q4pa_conv:
-        title: Perméabilité à l'air de l'enveloppe sous 4Pa connue et justifiée en m3/(h.m²)
-        type: ["number", "null"]
-        exclusiveMinimum: 0
-        default: null
-      presence_brasseurs_air:
-        title: Présence de brasseurs d'air
-        type: boolean
-        default: false
-    required:
-      - exposition
-      - q4pa_conv
-      - presence_brasseurs_air
-  elements:
-    title: Liste des éléments
-    type: array
-    items:
-      $ref: /element
+    $ref: /enveloppe
+  chauffage:
+    $ref: /chauffage
+  ecs:
+    $ref: /ecs
+  ventilation:
+    $ref: /ventilation
+  refroidissement:
+    $ref: /refroidissement
+  production:
+    $ref: /production
 required:
   - adresse
   - batiment
   - logements
-  - enveloppe
-  - elements
+  - chauffage
+  - ecs
+  - ventilation
+  - refroidissement
+  - production

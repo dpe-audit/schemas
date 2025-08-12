@@ -1,0 +1,10 @@
+niveaux: examples/enveloppe/niveau.yaml
+locaux_non_chauffes: examples/enveloppe/local_non_chauffe.yaml
+murs: examples/enveloppe/mur.yaml
+planchers_bas: examples/enveloppe/plancher_bas.yaml
+planchers_hauts: examples/enveloppe/plancher_haut.yaml
+baies: examples/enveloppe/baie.yaml
+portes: examples/enveloppe/porte.yaml
+ponts_thermiques: examples/enveloppe/pont_thermique.yaml
+doubles_fenetres: examples/enveloppe/double_fenetre.yaml
+masques: examples/enveloppe/masque.yaml

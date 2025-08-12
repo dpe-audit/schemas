@@ -1,0 +1,8 @@
+rnb_id: band_id
+type: maison
+annee_construction: 2000
+altitude: 0
+logements: 1
+surface_habitable: 100
+hauteur_sous_plafond: 2.5
+materiaux_anciens: true

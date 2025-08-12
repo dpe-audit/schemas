@@ -7,9 +7,6 @@ properties:
     title: Identifiant
     type: string
     format: uuid
-  is:
-    type: string
-    const: ventilation:installation
   description:
     title: Description
     type: string
@@ -19,6 +16,5 @@ properties:
     exclusiveMinimum: 0
 required:
   - id
-  - is
   - description
   - surface

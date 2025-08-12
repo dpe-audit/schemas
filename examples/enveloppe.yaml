@@ -1,3 +1,6 @@
+exposition: exposition_simple
+q4pa_conv: null
+presence_brasseurs_air: false
 niveaux: examples/enveloppe/niveau.yaml
 locaux_non_chauffes: examples/enveloppe/local_non_chauffe.yaml
 murs: examples/enveloppe/mur.yaml

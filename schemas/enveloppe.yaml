@@ -3,6 +3,19 @@ $schema: https://json-schema.org/draft/2020-12/schema
 title: Enveloppe
 type: object
 properties:
+  exposition:
+    title: Exposition
+    type: string
+    enum: [exposition_simple, exposition_multiple]
+  q4pa_conv:
+    title: Perméabilité à l'air de l'enveloppe sous 4Pa connue et justifiée en m3/(h.m²)
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+  presence_brasseurs_air:
+    title: Présence de brasseurs d'air
+    type: boolean
+    default: false
   niveaux:
     title: Liste des niveaux
     type: array
@@ -64,6 +77,9 @@ properties:
     items:
       $ref: /enveloppe/masque
 required:
+  - exposition
+  - q4pa_conv
+  - presence_brasseurs_air
   - niveaux
   - locaux_non_chauffes
   - murs

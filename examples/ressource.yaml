@@ -1,3 +1,6 @@
+id: 1cd5fa87-9e0f-4add-ae09-6cb32a2ac929
+date_etablissement: "2025-01-01"
+date_visite: "2025-01-01"
 adresse: examples/adresse.yaml
 batiment: examples/batiment.yaml
 logements: examples/logement.yaml

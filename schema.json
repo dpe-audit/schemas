@@ -4,6 +4,21 @@
   "title": "Ressource",
   "type": "object",
   "properties": {
+    "id": {
+      "title": "Identifiant",
+      "type": "string",
+      "format": "uuid"
+    },
+    "date_etablissement": {
+      "title": "Date d'établissement",
+      "type": "string",
+      "format": "date"
+    },
+    "date_visite": {
+      "title": "Date de visite",
+      "type": "string",
+      "format": "date"
+    },
     "adresse": {
       "$ref": "/adresse"
     },
@@ -38,6 +53,9 @@
     }
   },
   "required": [
+    "id",
+    "date_etablissement",
+    "date_visite",
     "adresse",
     "batiment",
     "logements",

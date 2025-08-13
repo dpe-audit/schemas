@@ -12,12 +12,10 @@
 /ventilation;/ressource;object;;/ventilation;1
 /production;/ressource;object;;/production;1
 /adresse/ban_id;/adresse;string;nullable;;2
-/adresse/numero;/adresse;string;nullable;;2
-/adresse/rep;/adresse;string;nullable;;2
-/adresse/nom_voie;/adresse;string;;;2
+/adresse/nom;/adresse;string;;;2
 /adresse/code_postal;/adresse;string;;;2
 /adresse/code_insee;/adresse;string;;;2
-/adresse/nom_commune;/adresse;string;;;2
+/adresse/commune;/adresse;string;;;2
 /batiment/rnb_id;/batiment;string;nullable;;2
 /batiment/type;/batiment;enum;;;2
 /batiment/annee_construction;/batiment;integer;;;2

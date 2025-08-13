@@ -8,16 +8,8 @@ properties:
     description: Clé d'interopérabilité telle que définie dans la spécification du format d'échange BAL
     type: [string, "null"]
     default: null
-  numero:
-    title: Numéro de l'adresse dans la voie
-    type: [string, "null"]
-    default: null
-  rep:
-    title: Indice de répétition associé au numéro (par exemple bis, a…)
-    type: [string, "null"]
-    default: null
-  nom_voie:
-    title: Nom de la voie en minuscules accentuées
+  nom:
+    title: Numéro éventuel et nom de voie ou lieu dit
     type: string
   code_postal:
     title: Code postal de la commune
@@ -25,14 +17,12 @@ properties:
   code_insee:
     title: Code INSEE de la commune
     type: string
-  nom_commune:
+  commune:
     title: Nom officiel de la commune
     type: string
 required:
   - ban_id
-  - numero
-  - rep
-  - nom_voie
+  - nom
   - code_postal
   - code_insee
-  - nom_commune
+  - commune

@@ -34,7 +34,6 @@ properties:
   production:
     $ref: /production
 required:
-  - id
   - date_etablissement
   - date_visite
   - adresse

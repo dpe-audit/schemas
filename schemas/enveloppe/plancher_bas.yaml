@@ -75,10 +75,6 @@ $defs:
         title: Surface totale exprimée en m²
         type: number
         exclusiveMinimum: 0
-      perimetre:
-        title: Périmètre en m
-        type: number
-        exclusiveMinimum: 0
       mitoyennete:
         title: Mitoyenneté
         type: string
@@ -93,7 +89,6 @@ $defs:
           - local_residentiel
           - local_non_accessible
     required:
-      - perimetre
       - surface
       - mitoyennete
     oneOf:
@@ -109,12 +104,36 @@ $defs:
         required:
           - local_non_chauffe_id
           - mitoyennete
+      - title: Plancher bas donnant sur un vides sanitaire, un sous-sol non chauffé ou un terre-plein
+        type: object
+        properties:
+          mitoyennete:
+            enum:
+              - enterre
+              - vide_sanitaire
+              - terre_plein
+              - sous_sol_non_chauffe
+          surface_ue:
+            title: Surface retenue pour le calcul de ue en m²
+            type: number
+            exclusiveMinimum: 0
+          perimetre_ue:
+            title: Périmètre retenue pour le calcul de ue en m
+            type: number
+            exclusiveMinimum: 0
+        required:
+          - mitoyennete
+          - surface_ue
+          - perimetre_ue
       - title: Autres cas
         type: object
         properties:
           mitoyennete:
-            not:
-              const: local_non_chauffe
+            enum:
+              - exterieur
+              - local_non_residentiel
+              - local_residentiel
+              - local_non_accessible
         required:
           - mitoyennete
   isolation:

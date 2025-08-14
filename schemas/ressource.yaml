@@ -3,10 +3,6 @@ $schema: https://json-schema.org/draft/2020-12/schema
 title: Ressource
 type: object
 properties:
-  id:
-    title: Identifiant
-    type: string
-    format: uuid
   date_etablissement:
     title: Date d'établissement
     type: string

@@ -1,5 +1,4 @@
 ﻿path;schema;type;nullable;subschema;depth
-/id;/ressource;string;;;1
 /date_etablissement;/ressource;string;;;1
 /date_visite;/ressource;string;;;1
 /adresse;/ressource;object;;/adresse;1

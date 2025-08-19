@@ -3,14 +3,6 @@ $schema: https://json-schema.org/draft/2020-12/schema
 title: Ressource
 type: object
 properties:
-  date_etablissement:
-    title: Date d'établissement
-    type: string
-    format: date
-  date_visite:
-    title: Date de visite
-    type: string
-    format: date
   adresse:
     $ref: /adresse
   batiment:
@@ -34,8 +26,6 @@ properties:
   production:
     $ref: /production
 required:
-  - date_etablissement
-  - date_visite
   - adresse
   - batiment
   - logements

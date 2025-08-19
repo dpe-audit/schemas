@@ -1,5 +1,3 @@
-date_etablissement: "2025-01-01"
-date_visite: "2025-01-01"
 adresse: examples/adresse.yaml
 batiment: examples/batiment.yaml
 logements: examples/logement.yaml

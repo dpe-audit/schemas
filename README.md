@@ -46,7 +46,7 @@ npm i
 npm run build
 ```
 
-## Usage
+## Commandes
 
 ```
 npm run validate // Valide les exemples de données

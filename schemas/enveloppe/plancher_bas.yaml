@@ -121,6 +121,9 @@ $defs:
             title: Périmètre retenue pour le calcul de ue en m
             type: number
             exclusiveMinimum: 0
+          local_non_chauffe_id:
+            const: null
+            default: null
         required:
           - mitoyennete
           - surface_ue
@@ -134,6 +137,9 @@ $defs:
               - local_non_residentiel
               - local_residentiel
               - local_non_accessible
+          local_non_chauffe_id:
+            const: null
+            default: null
         required:
           - mitoyennete
   isolation:

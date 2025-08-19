@@ -4,16 +4,6 @@
   "title": "Ressource",
   "type": "object",
   "properties": {
-    "date_etablissement": {
-      "title": "Date d'établissement",
-      "type": "string",
-      "format": "date"
-    },
-    "date_visite": {
-      "title": "Date de visite",
-      "type": "string",
-      "format": "date"
-    },
     "adresse": {
       "$ref": "/adresse"
     },
@@ -48,8 +38,6 @@
     }
   },
   "required": [
-    "date_etablissement",
-    "date_visite",
     "adresse",
     "batiment",
     "logements",
@@ -934,6 +922,10 @@
                   "not": {
                     "const": "local_non_chauffe"
                   }
+                },
+                "local_non_chauffe_id": {
+                  "const": null,
+                  "default": null
                 }
               },
               "required": [
@@ -1215,6 +1207,10 @@
                   "title": "Périmètre retenue pour le calcul de ue en m",
                   "type": "number",
                   "exclusiveMinimum": 0
+                },
+                "local_non_chauffe_id": {
+                  "const": null,
+                  "default": null
                 }
               },
               "required": [
@@ -1234,6 +1230,10 @@
                     "local_residentiel",
                     "local_non_accessible"
                   ]
+                },
+                "local_non_chauffe_id": {
+                  "const": null,
+                  "default": null
                 }
               },
               "required": [
@@ -1531,6 +1531,10 @@
                   "not": {
                     "const": "local_non_chauffe"
                   }
+                },
+                "local_non_chauffe_id": {
+                  "const": null,
+                  "default": null
                 }
               },
               "required": [
@@ -1996,6 +2000,10 @@
                       "not": {
                         "const": "local_non_chauffe"
                       }
+                    },
+                    "local_non_chauffe_id": {
+                      "const": null,
+                      "default": null
                     }
                   },
                   "required": [
@@ -2391,6 +2399,10 @@
                   "not": {
                     "const": "local_non_chauffe"
                   }
+                },
+                "local_non_chauffe_id": {
+                  "const": null,
+                  "default": null
                 }
               },
               "required": [
@@ -2421,6 +2433,10 @@
               "properties": {
                 "taux_vitrage": {
                   "const": 0
+                },
+                "type_vitrage": {
+                  "const": null,
+                  "default": null
                 }
               },
               "required": [

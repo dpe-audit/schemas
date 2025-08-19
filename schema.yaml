@@ -3,14 +3,6 @@ $id: https://schemas.dpe-audit.fr/ressource
 title: Ressource
 type: object
 properties:
-  date_etablissement:
-    title: Date d'établissement
-    type: string
-    format: date
-  date_visite:
-    title: Date de visite
-    type: string
-    format: date
   adresse:
     $ref: /adresse
   batiment:
@@ -34,8 +26,6 @@ properties:
   production:
     $ref: /production
 required:
-  - date_etablissement
-  - date_visite
   - adresse
   - batiment
   - logements
@@ -730,6 +720,9 @@ $defs:
               mitoyennete:
                 not:
                   const: local_non_chauffe
+              local_non_chauffe_id:
+                const: null
+                default: null
             required:
               - mitoyennete
       isolation:
@@ -945,6 +938,9 @@ $defs:
                 title: Périmètre retenue pour le calcul de ue en m
                 type: number
                 exclusiveMinimum: 0
+              local_non_chauffe_id:
+                const: null
+                default: null
             required:
               - mitoyennete
               - surface_ue
@@ -958,6 +954,9 @@ $defs:
                   - local_non_residentiel
                   - local_residentiel
                   - local_non_accessible
+              local_non_chauffe_id:
+                const: null
+                default: null
             required:
               - mitoyennete
       isolation:
@@ -1184,6 +1183,9 @@ $defs:
               mitoyennete:
                 not:
                   const: local_non_chauffe
+              local_non_chauffe_id:
+                const: null
+                default: null
             required:
               - mitoyennete
       isolation:
@@ -1538,6 +1540,9 @@ $defs:
                   mitoyennete:
                     not:
                       const: local_non_chauffe
+                  local_non_chauffe_id:
+                    const: null
+                    default: null
                 required:
                   - mitoyennete
           - oneOf:
@@ -1824,6 +1829,9 @@ $defs:
               mitoyennete:
                 not:
                   const: local_non_chauffe
+              local_non_chauffe_id:
+                const: null
+                default: null
             required:
               - mitoyennete
       vitrage:
@@ -1846,6 +1854,9 @@ $defs:
             properties:
               taux_vitrage:
                 const: 0
+              type_vitrage:
+                const: null
+                default: null
             required:
               - taux_vitrage
           - title: Porte avec vitrage

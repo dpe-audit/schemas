@@ -132,6 +132,9 @@ $defs:
         properties:
           taux_vitrage:
             const: 0
+          type_vitrage:
+            const: null
+            default: null
         required:
           - taux_vitrage
       - title: Porte avec vitrage

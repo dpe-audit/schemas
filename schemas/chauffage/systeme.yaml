@@ -23,6 +23,22 @@ properties:
     title: Type de système
     type: string
     enum: [chauffage_central, chauffage_divise]
+  reseau:
+    title: Réseau de chauffage
+    type: [object, "null"]
+    default: null
+    oneOf:
+      - const: null
+      - $ref: "#/$defs/reseau"
+  emetteurs:
+    title: Liste des émetteurs associés au système de chauffage
+    type: [array, "null"]
+    default: null
+    minContains: 1
+    items:
+      title: Identifiant unique de l'émetteur de chauffage au format UUID
+      type: string
+      format: uuid
 required:
   - id
   - description
@@ -36,15 +52,9 @@ anyOf:
       type:
         const: chauffage_central
       reseau:
-        $ref: "#/$defs/reseau"
+        type: object
       emetteurs:
-        title: Liste des émetteurs associés au système de chauffage
         type: array
-        minContains: 1
-        items:
-          title: Identifiant unique de l'émetteur de chauffage au format UUID
-          type: string
-          format: uuid
     required:
       - type
       - reseau
@@ -54,6 +64,10 @@ anyOf:
     properties:
       type:
         const: chauffage_divise
+      reseau:
+        const: null
+      emetteurs:
+        const: null
     required:
       - type
 $defs:

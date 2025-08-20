@@ -65,6 +65,11 @@ $defs:
         type: ["string", "null"]
         format: uuid
         default: null
+      local_non_chauffe_id:
+        title: Identifiant du local non chauffé associé à la porte
+        type: ["string", "null"]
+        format: uuid
+        default: null
       surface:
         title: Surface déperditive exprimée en m²
         type: number
@@ -89,7 +94,6 @@ $defs:
         exclusiveMaximum: 360
         default: null
     required:
-      - paroi_id
       - surface
       - mitoyennete
       - orientation
@@ -100,9 +104,7 @@ $defs:
           mitoyennete:
             const: local_non_chauffe
           local_non_chauffe_id:
-            title: Identifiant du local non chauffé associé à la porte
             type: string
-            format: uuid
         required:
           - local_non_chauffe_id
           - mitoyennete
@@ -114,7 +116,6 @@ $defs:
               const: local_non_chauffe
           local_non_chauffe_id:
             const: null
-            default: null
         required:
           - mitoyennete
   vitrage:
@@ -127,6 +128,11 @@ $defs:
         type: number
         minimum: 0
         maximum: 60
+      type_vitrage:
+        title: Type de vitrage
+        type: ["string", "null"]
+        enum: [simple_vitrage, double_vitrage, triple_vitrage, null]
+        default: null
     required:
       - taux_vitrage
     oneOf:
@@ -137,7 +143,6 @@ $defs:
             const: 0
           type_vitrage:
             const: null
-            default: null
         required:
           - taux_vitrage
       - title: Porte avec vitrage
@@ -147,10 +152,7 @@ $defs:
             type: number
             minimumExclusive: 0
           type_vitrage:
-            title: Type de vitrage
-            type: ["string", "null"]
-            enum: [simple_vitrage, double_vitrage, triple_vitrage, null]
-            default: null
+            type: string
         required:
           - taux_vitrage
           - type_vitrage

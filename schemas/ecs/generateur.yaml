@@ -20,8 +20,6 @@ properties:
       - chauffe_eau_vertical
       - chauffe_eau_horizontal
       - chaudiere
-      - chaudiere_murale
-      - chaudiere_sol
       - cet_air_ambiant
       - cet_air_exterieur
       - cet_air_extrait
@@ -415,8 +413,6 @@ allOf:
           type:
             enum:
               - chaudiere
-              - chaudiere_murale
-              - chaudiere_sol
           energie:
             const: electricite
         required:
@@ -428,8 +424,6 @@ allOf:
           type:
             enum:
               - chaudiere
-              - chaudiere_murale
-              - chaudiere_sol
           energie:
             enum:
               - gaz_naturel

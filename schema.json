@@ -4744,8 +4744,6 @@
             "chauffe_eau_vertical",
             "chauffe_eau_horizontal",
             "chaudiere",
-            "chaudiere_murale",
-            "chaudiere_sol",
             "cet_air_ambiant",
             "cet_air_exterieur",
             "cet_air_extrait",
@@ -5358,9 +5356,7 @@
               "properties": {
                 "type": {
                   "enum": [
-                    "chaudiere",
-                    "chaudiere_murale",
-                    "chaudiere_sol"
+                    "chaudiere"
                   ]
                 },
                 "energie": {
@@ -5378,9 +5374,7 @@
               "properties": {
                 "type": {
                   "enum": [
-                    "chaudiere",
-                    "chaudiere_murale",
-                    "chaudiere_sol"
+                    "chaudiere"
                   ]
                 },
                 "energie": {

@@ -42,23 +42,39 @@ $defs:
           - refend_mur
           - plancher_intermediaire_mur
           - menuiserie_mur
+      pont_thermique_partiel:
+        title: Pont thermique partiel
+        type: boolean
+        default: false
       mur_id:
         title: Identifiant du mur associé au pont thermique au format UUID
         type: string
         format: uuid
+      plancher_id:
+        title: Identifiant du Plancher haut ou du Plancher bas associé au pont thermique
+        type: [string, "null"]
+        format: uuid
+        default: null
+      ouverture_id:
+        title: Identifiant de la Baie ou de la Porte associée au pont thermique
+        type: [string, "null"]
+        format: uuid
+        default: null
     required:
       - type_liaison
       - mur_id
-    anyOf:
+    oneOf:
       - title: Pont thermique mur / plancher
         type: object
         properties:
           type_liaison:
             enum: [plancher_bas_mur, plancher_haut_mur]
+          pont_thermique_partiel:
+            const: false
           plancher_id:
-            title: Identifiant du Plancher haut ou du Plancher bas associé au pont thermique
             type: string
-            format: uuid
+          ouverture_id:
+            const: null
         required:
           - type_liaison
           - plancher_id
@@ -67,10 +83,12 @@ $defs:
         properties:
           type_liaison:
             const: menuiserie_mur
+          pont_thermique_partiel:
+            const: false
           ouverture_id:
-            title: Identifiant de la Baie ou de la Porte associée au pont thermique
             type: string
-            format: uuid
+          plancher_id:
+            const: null
         required:
           - type_liaison
           - ouverture_id
@@ -79,9 +97,10 @@ $defs:
         properties:
           type_liaison:
             enum: [plancher_intermediaire_mur, refend_mur]
-          pont_thermique_partiel:
-            title: Pont thermique partiel
-            type: boolean
+          ouverture_id:
+            const: null
+          plancher_id:
+            const: null
         required:
           - type_liaison
           - pont_thermique_partiel

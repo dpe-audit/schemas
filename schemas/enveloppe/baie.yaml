@@ -17,10 +17,32 @@ properties:
     title: Description
     type: string
   type_baie:
-    $ref: "#/$defs/typeBaie"
+    title: Type de baie
+    type: string
+    enum:
+      - brique_verre_pleine
+      - brique_verre_creuse
+      - polycarbonate
+      - fenetre_battante
+      - fenetre_coulissante
+      - porte_fenetre_coulissante
+      - porte_fenetre_battante
+  type_pose:
+    title: Type de pose
+    type: ["string", "null"]
+    enum: [nu_exterieur, nu_interieur, tunnel, null]
+  materiau:
+    title: Matériau
+    type: ["string", "null"]
+    enum: [pvc, bois, bois_metal, metal, null]
+    default: null
   presence_protection_solaire:
     title: Présence de protection solaire
     type: boolean
+  presence_soubassement:
+    title: Présence d'un soubassement
+    type: [boolean, "null"]
+    default: "null"
   type_fermeture:
     title: Type de fermeture
     type: string
@@ -45,15 +67,46 @@ properties:
     type: ["integer", "null"]
     default: null
   ug:
-    $ref: "#/$defs/ug"
+    title: Coefficient de transmission thermique du vitrage connu et justifié en W/m²K
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
   uw:
-    $ref: "#/$defs/uw"
+    title: Coefficient de transmission thermique de la baie connu et justifié en W/m²K
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
   ujn:
-    $ref: "#/$defs/ujn"
+    title: Coefficient de transmission thermique de la baie avec fermeture connu et justifié en W/m²K
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
   sw:
-    $ref: "#/$defs/sw"
+    title: Proportion d'énergie solaire transmise par la baie en %
+    type: ["number", "null"]
+    minimum: 0
+    maximum: 100
+    default: null
   position:
     $ref: "#/$defs/position"
+  menuiserie:
+    title: Menuiserie
+    type: ["object", "null"]
+    oneOf:
+      - $ref: "#/$defs/menuiserie"
+      - const: "null"
+  vitrage:
+    title: Vitrage
+    type: ["object", "null"]
+    oneOf:
+      - $ref: "#/$defs/vitrage"
+      - const: "null"
+  survitrage:
+    title: Survitrage
+    type: ["object", "null"]
+    oneOf:
+      - $ref: "#/$defs/survitrage"
+      - const: "null"
   masques:
     title: Liste des masques
     type: array
@@ -81,6 +134,18 @@ oneOf:
     properties:
       type_baie:
         enum: [brique_verre_pleine, brique_verre_creuse, polycarbonate]
+      type_pose:
+        const: null
+      materiau:
+        const: null
+      presence_soubassement:
+        const: null
+      vitrage:
+        const: null
+      survitrage:
+        const: null
+      menuiserie:
+        const: null
     required:
       - type_baie
   - title: Fenêtre
@@ -89,18 +154,13 @@ oneOf:
       type_baie:
         enum: [fenetre_battante, fenetre_coulissante]
       type_pose:
-        title: Type de pose
         type: string
-        enum: [nu_exterieur, nu_interieur, tunnel]
-      materiau:
-        title: Matériau
-        type: ["string", "null"]
-        enum: [pvc, bois, bois_metal, metal, null]
-        default: null
+      presence_soubassement:
+        const: null
       vitrage:
-        $ref: "#/$defs/vitrage"
+        type: object
       menuiserie:
-        $ref: "#/$defs/menuiserie"
+        type: object
     required:
       - type_baie
       - type_pose
@@ -113,67 +173,31 @@ oneOf:
       type_baie:
         enum: [porte_fenetre_coulissante, porte_fenetre_battante]
       type_pose:
-        title: Type de pose
         type: string
-        enum: [nu_exterieur, nu_interieur, tunnel]
-      materiau:
-        title: Matériau
-        type: ["string", "null"]
-        enum: [pvc, bois, bois_metal, metal, null]
-        default: null
       presence_soubassement:
-        title: Présence d'un soubassement
         type: boolean
       vitrage:
-        $ref: "#/$defs/vitrage"
+        type: object
       menuiserie:
-        $ref: "#/$defs/menuiserie"
+        type: object
     required:
       - type
       - type_pose
-      - materiau
       - presence_soubassement
       - vitrage
       - menuiserie
 $defs:
-  typeBaie:
-    title: Type de baie
-    type: string
-    enum:
-      - brique_verre_pleine
-      - brique_verre_creuse
-      - polycarbonate
-      - fenetre_battante
-      - fenetre_coulissante
-      - porte_fenetre_coulissante
-      - porte_fenetre_battante
-  ug:
-    title: Coefficient de transmission thermique du vitrage connu et justifié en W/m²K
-    type: ["number", "null"]
-    exclusiveMinimum: 0
-    default: null
-  uw:
-    title: Coefficient de transmission thermique de la baie connu et justifié en W/m²K
-    type: ["number", "null"]
-    exclusiveMinimum: 0
-    default: null
-  ujn:
-    title: Coefficient de transmission thermique de la baie avec fermeture connu et justifié en W/m²K
-    type: ["number", "null"]
-    exclusiveMinimum: 0
-    default: null
-  sw:
-    title: Proportion d'énergie solaire transmise par la baie en %
-    type: ["number", "null"]
-    minimum: 0
-    maximum: 100
-    default: null
   position:
     title: Position de la baie
     type: object
     properties:
       paroi_id:
         title: Identifiant de la paroi associée à la baie
+        type: ["string", "null"]
+        format: uuid
+        default: null
+      local_non_chauffe_id:
+        title: Identifiant du local non chauffé associé à la baie
         type: ["string", "null"]
         format: uuid
         default: null
@@ -218,9 +242,7 @@ $defs:
               mitoyennete:
                 const: local_non_chauffe
               local_non_chauffe_id:
-                title: Identifiant du local non chauffé associé à la baie
                 type: string
-                format: uuid
             required:
               - local_non_chauffe_id
               - mitoyennete
@@ -232,7 +254,6 @@ $defs:
                   const: local_non_chauffe
               local_non_chauffe_id:
                 const: null
-                default: null
             required:
               - mitoyennete
       - oneOf:
@@ -243,7 +264,6 @@ $defs:
                 const: 0
               orientation:
                 const: null
-                default: null
             required:
               - inclinaison
               - orientation
@@ -253,10 +273,7 @@ $defs:
               inclinaison:
                 minimumExlusive: 0
               orientation:
-                title: Orientation par rapport au nord en °
                 type: number
-                minimum: 0
-                exclusiveMaximum: 360
             required:
               - inclinaison
               - orientation
@@ -301,20 +318,31 @@ $defs:
           - triple_vitrage_fe
           - null
         default: null
-      survitrage:
-        title: Survitrage
-        type: ["object", "null"]
-        oneOf:
-          - $ref: "#/$defs/survitrage"
-          - const: "null"
+      nature_gaz_lame:
+        title: Nature de la lame d'air
+        type: ["string", "null"]
+        enum:
+          - air
+          - argon
+          - krypton
+          - null
+        default: null
+      epaisseur_lame:
+        title: Epaisseur de la lame d'air en mm
+        type: ["number", "null"]
+        exclusiveMinimum: 0
+        default: null
     required:
       - type_vitrage
-      - survitrage
     oneOf:
       - title: Vitrage simple
         properties:
           type_vitrage:
             const: simple_vitrage
+          nature_gaz_lame:
+            const: null
+          epaisseur_lame:
+            const: null
         required:
           - type_vitrage
       - title: Vitrage complexe
@@ -322,20 +350,6 @@ $defs:
           type_vitrage:
             not:
               const: simple_vitrage
-          nature_gaz_lame:
-            title: Nature de la lame d'air
-            type: ["string", "null"]
-            enum:
-              - air
-              - argon
-              - krypton
-              - null
-            default: null
-          epaisseur_lame:
-            title: Epaisseur de la lame d'air en mm
-            type: ["number", "null"]
-            exclusiveMinimum: 0
-            default: null
         required:
           - type_vitrage
           - nature_lame

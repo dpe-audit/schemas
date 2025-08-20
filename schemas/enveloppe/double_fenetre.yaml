@@ -12,82 +12,6 @@ properties:
     title: Description
     type: string
   type_baie:
-    $ref: "#/$defs/typeBaie"
-  ug:
-    $ref: "#/$defs/ug"
-  uw:
-    $ref: "#/$defs/uw"
-  sw:
-    $ref: "#/$defs/sw"
-required:
-  - id
-  - description
-  - type_baie
-  - ug
-  - uw
-  - sw
-anyOf:
-  - title: Paroi vitrée
-    type: object
-    properties:
-      type_baie:
-        enum: [brique_verre_pleine, brique_verre_creuse, polycarbonate]
-    required:
-      - type_baie
-  - title: Fenêtre
-    type: object
-    properties:
-      type_baie:
-        enum: [fenetre_battante, fenetre_coulissante]
-      type_pose:
-        title: Type de pose
-        type: string
-        enum: [nu_exterieur, nu_interieur, tunnel]
-      materiau:
-        title: Matériau
-        type: ["string", "null"]
-        enum: [pvc, bois, bois_metal, metal, null]
-        default: null
-      vitrage:
-        $ref: "#/$defs/vitrage"
-      menuiserie:
-        $ref: "#/$defs/menuiserie"
-    required:
-      - type_baie
-      - type_pose
-      - materiau
-      - vitrage
-      - menuiserie
-  - title: Porte fenêtre
-    type: object
-    properties:
-      type_baie:
-        enum: [porte_fenetre_coulissante, porte_fenetre_battante]
-      type_pose:
-        title: Type de pose
-        type: string
-        enum: [nu_exterieur, nu_interieur, tunnel]
-      materiau:
-        title: Matériau
-        type: ["string", "null"]
-        enum: [pvc, bois, bois_metal, metal, null]
-        default: null
-      presence_soubassement:
-        title: Présence d'un soubassement
-        type: boolean
-      vitrage:
-        $ref: "#/$defs/vitrage"
-      menuiserie:
-        $ref: "#/$defs/menuiserie"
-    required:
-      - type_baie
-      - type_pose
-      - materiau
-      - presence_soubassement
-      - vitrage
-      - menuiserie
-$defs:
-  typeBaie:
     title: Type de baie
     type: string
     enum:
@@ -98,6 +22,20 @@ $defs:
       - fenetre_coulissante
       - porte_fenetre_coulissante
       - porte_fenetre_battante
+  type_pose:
+    title: Type de pose
+    type: ["string", "null"]
+    enum: [nu_exterieur, nu_interieur, tunnel, null]
+    default: null
+  materiau:
+    title: Matériau
+    type: ["string", "null"]
+    enum: [pvc, bois, bois_metal, metal, null]
+    default: null
+  presence_soubassement:
+    title: Présence d'un soubassement
+    type: [boolean, "null"]
+    default: null
   ug:
     title: Coefficient de transmission thermique du vitrage connu et justifié en W/m²K
     type: ["number", "null"]
@@ -114,6 +52,93 @@ $defs:
     minimum: 0
     maximum: 100
     default: null
+  vitrage:
+    title: Vitrage
+    type: [object, "null"]
+    default: null
+    oneOf:
+      - const: null
+      - $ref: "#/$defs/vitrage"
+  survitrage:
+    title: Survitrage
+    type: ["object", "null"]
+    default: null
+    oneOf:
+      - $ref: "#/$defs/survitrage"
+      - const: "null"
+  menuiserie:
+    title: Menuiserie
+    type: [object, "null"]
+    default: null
+    oneOf:
+      - const: null
+      - $ref: "#/$defs/menuiserie"
+required:
+  - id
+  - description
+  - type_baie
+  - ug
+  - uw
+  - sw
+oneOf:
+  - title: Paroi vitrée
+    type: object
+    properties:
+      type_baie:
+        enum: [brique_verre_pleine, brique_verre_creuse, polycarbonate]
+      type_pose:
+        const: null
+      materiau:
+        const: null
+      presence_soubassement:
+        const: null
+      vitrage:
+        const: null
+      survitrage:
+        const: null
+      menuiserie:
+        const: null
+    required:
+      - type_baie
+  - title: Fenêtre
+    type: object
+    properties:
+      type_baie:
+        enum: [fenetre_battante, fenetre_coulissante]
+      type_pose:
+        type: string
+      presence_soubassement:
+        const: null
+      vitrage:
+        type: object
+      menuiserie:
+        type: object
+    required:
+      - type_baie
+      - type_pose
+      - materiau
+      - vitrage
+      - menuiserie
+  - title: Porte fenêtre
+    type: object
+    properties:
+      type_baie:
+        enum: [porte_fenetre_coulissante, porte_fenetre_battante]
+      type_pose:
+        type: string
+      presence_soubassement:
+        type: boolean
+      vitrage:
+        type: object
+      menuiserie:
+        type: object
+    required:
+      - type_baie
+      - type_pose
+      - presence_soubassement
+      - vitrage
+      - menuiserie
+$defs:
   menuiserie:
     title: Menuiserie
     type: object
@@ -155,20 +180,31 @@ $defs:
           - triple_vitrage_fe
           - null
         default: null
-      survitrage:
-        title: Survitrage
-        type: ["object", "null"]
-        oneOf:
-          - $ref: "#/$defs/survitrage"
-          - const: "null"
+      nature_lame:
+        title: Nature de la lame d'air
+        type: ["string", "null"]
+        enum:
+          - air
+          - argon
+          - krypton
+          - null
+        default: null
+      epaisseur_lame:
+        title: Epaisseur de la lame d'air en mm
+        type: ["number", "null"]
+        exclusiveMinimum: 0
+        default: null
     required:
       - type_vitrage
-      - survitrage
     oneOf:
       - title: Vitrage simple
         properties:
           type_vitrage:
             const: simple_vitrage
+          nature_lame:
+            const: null
+          epaisseur_lame:
+            const: null
         required:
           - type_vitrage
       - title: Vitrage complexe
@@ -176,20 +212,6 @@ $defs:
           type_vitrage:
             not:
               const: simple_vitrage
-          nature_lame:
-            title: Nature de la lame d'air
-            type: ["string", "null"]
-            enum:
-              - air
-              - argon
-              - krypton
-              - null
-            default: null
-          epaisseur_lame:
-            title: Epaisseur de la lame d'air en mm
-            type: ["number", "null"]
-            exclusiveMinimum: 0
-            default: null
         required:
           - type_vitrage
           - nature_lame

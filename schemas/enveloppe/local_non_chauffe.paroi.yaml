@@ -40,7 +40,7 @@ $defs:
           - local_residentiel
           - local_non_accessible
       surface:
-        title: Surface de la paroi en m²
+        title: Surface opaque en m²
         type: number
         exclusiveMinimum: 0
     required:

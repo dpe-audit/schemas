@@ -19,6 +19,31 @@ properties:
       - fenetre_coulissante
       - porte_fenetre_coulissante
       - porte_fenetre_battante
+  materiau:
+    title: Matériau de la baie
+    type: ["string", "null"]
+    enum:
+      - pvc
+      - bois
+      - bois_metal
+      - metal
+      - null
+    default: null
+  type_vitrage:
+    title: Type de vitrage
+    type: ["string", "null"]
+    enum:
+      - simple_vitrage
+      - double_vitrage
+      - double_vitrage_fe
+      - triple_vitrage
+      - triple_vitrage_fe
+      - null
+    default: null
+  presence_rupteur_pont_thermique:
+    title: Présence d'un rupteur de pont thermique
+    type: ["boolean", "null"]
+    default: null
   position:
     $ref: "#/$defs/position"
 required:
@@ -32,6 +57,12 @@ oneOf:
     properties:
       type:
         const: polycarbonate
+      materiau:
+        const: null
+      type_vitrage:
+        const: null
+      presence_rupteur_pont_thermique:
+        const: null
     required:
       - type
   - title: Autres cas
@@ -40,36 +71,8 @@ oneOf:
       type:
         not:
           const: polycarbonate
-      materiau:
-        title: Matériau de la baie
-        type: ["string", "null"]
-        enum:
-          - pvc
-          - bois
-          - bois_metal
-          - metal
-          - null
-        default: null
-      type_vitrage:
-        title: Type de vitrage
-        type: ["string", "null"]
-        enum:
-          - simple_vitrage
-          - double_vitrage
-          - double_vitrage_fe
-          - triple_vitrage
-          - triple_vitrage_fe
-          - null
-        default: null
-      presence_rupteur_pont_thermique:
-        title: Présence d'un rupteur de pont thermique
-        type: ["boolean", "null"]
-        default: null
     required:
       - type
-      - materiau
-      - type_vitrage
-      - presence_rupteur_pont_thermique
 $defs:
   position:
     title: Position de la baie
@@ -97,6 +100,12 @@ $defs:
           - local_non_residentiel
           - local_residentiel
           - local_non_accessible
+      orientation:
+        title: Orientation par rapport au nord en °
+        type: [number, "null"]
+        default: null
+        minimum: 0
+        exclusiveMaximum: 360
       inclinaison:
         title: Inclinaison par rapport à l'horizontal en °
         type: number
@@ -115,20 +124,15 @@ $defs:
             const: 0
           orientation:
             const: null
-            default: null
         required:
           - inclinaison
-          - orientation
       - title: Autres cas
         type: object
         properties:
           inclinaison:
-            minimumExlusive: 0
+            minimumExclusive: 0
           orientation:
-            title: Orientation par rapport au nord en °
             type: number
-            minimum: 0
-            exclusiveMaximum: 360
         required:
           - inclinaison
           - orientation

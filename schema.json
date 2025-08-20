@@ -860,7 +860,7 @@
           "type": "object",
           "properties": {
             "surface": {
-              "title": "Surface totale en m²",
+              "title": "Surface déperditive exprimée en m²",
               "type": "number",
               "exclusiveMinimum": 0
             },
@@ -1143,7 +1143,7 @@
           "type": "object",
           "properties": {
             "surface": {
-              "title": "Surface totale exprimée en m²",
+              "title": "Surface déperditive exprimée en m²",
               "type": "number",
               "exclusiveMinimum": 0
             },
@@ -1469,7 +1469,7 @@
           "type": "object",
           "properties": {
             "surface": {
-              "title": "Surface totale exprimée en m²",
+              "title": "Surface déperditive exprimée en m²",
               "type": "number",
               "exclusiveMinimum": 0
             },
@@ -1929,7 +1929,7 @@
               "default": null
             },
             "surface": {
-              "title": "Surface de la baie en m²",
+              "title": "Surface déperditive exprimée en m²",
               "type": "number",
               "minimum": 0
             },
@@ -2336,7 +2336,7 @@
               "default": null
             },
             "surface": {
-              "title": "Surface totale de la porte en m²",
+              "title": "Surface déperditive exprimée en m²",
               "type": "number",
               "exclusiveMinimum": 0
             },
@@ -4269,321 +4269,6 @@
           ]
         },
         "energie": {
-          "$ref": "#/$defs/energie"
-        },
-        "volume_stockage": {
-          "title": "Volume de stockage en l",
-          "type": "number",
-          "minimum": 0
-        },
-        "generateur_collectif": {
-          "title": "Présence d'un générateur collectif d'eau chaude sanitaire",
-          "type": "boolean"
-        },
-        "generateur_multi_batiment": {
-          "title": "Présence d'un générateur multi bâtiment",
-          "type": "boolean"
-        },
-        "position_volume_chauffe": {
-          "title": "Position du générateur à l'intérieur du volume chauffé",
-          "type": "boolean"
-        },
-        "annee_installation": {
-          "title": "Année d'installation connue et justifiée",
-          "type": [
-            "integer",
-            "null"
-          ],
-          "default": null
-        }
-      },
-      "required": [
-        "id",
-        "description",
-        "type",
-        "energie",
-        "volume_stockage",
-        "generateur_collectif",
-        "generateur_multi_batiment",
-        "position_volume_chauffe",
-        "annee_installation"
-      ],
-      "oneOf": [
-        {
-          "title": "Accumulateur",
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "accumulateur"
-            },
-            "energie": {
-              "$ref": "#/$defs/energie",
-              "enum": [
-                "gaz_naturel",
-                "gpl"
-              ]
-            },
-            "volume_stockage": {
-              "exclusiveMinimum": 0
-            }
-          },
-          "required": [
-            "type",
-            "energie",
-            "volume_stockage"
-          ],
-          "allOf": [
-            {
-              "$ref": "#/$defs/combustion"
-            }
-          ]
-        },
-        {
-          "title": "Chauffe-eau instantané",
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "chauffe_eau_instantane"
-            },
-            "energie": {
-              "$ref": "#/$defs/energie",
-              "enum": [
-                "gaz_naturel",
-                "gpl"
-              ]
-            },
-            "volume_stockage": {
-              "const": 0,
-              "default": 0
-            }
-          },
-          "required": [
-            "type",
-            "energie",
-            "volume_stockage"
-          ],
-          "allOf": [
-            {
-              "$ref": "#/$defs/combustion"
-            }
-          ]
-        },
-        {
-          "title": "Chauffe-eau électrique",
-          "type": "object",
-          "properties": {
-            "type": {
-              "enum": [
-                "chauffe_eau_vertical",
-                "chauffe_eau_horizontal"
-              ]
-            },
-            "energie": {
-              "$ref": "#/$defs/energie",
-              "const": "electricite"
-            },
-            "pn": {
-              "$ref": "#/$defs/pn"
-            },
-            "label": {
-              "$ref": "#/$defs/label"
-            },
-            "generateur_multi_batiment": {
-              "const": false,
-              "default": false
-            }
-          },
-          "required": [
-            "type",
-            "energie",
-            "pn",
-            "label",
-            "generateur_multi_batiment"
-          ]
-        },
-        {
-          "title": "Chaudière électrique",
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "chaudiere"
-            },
-            "energie": {
-              "const": "electricite"
-            },
-            "pn": {
-              "$ref": "#/$defs/pn"
-            },
-            "generateur_mixte_id": {
-              "$ref": "#/$defs/generateurChauffage"
-            }
-          },
-          "required": [
-            "type",
-            "energie",
-            "pn",
-            "generateur_mixte_id"
-          ]
-        },
-        {
-          "title": "Chaudière à combustion",
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "chaudiere"
-            },
-            "energie": {
-              "$ref": "#/$defs/energieCombustion"
-            },
-            "type_chaudiere": {
-              "$ref": "#/$defs/typeChaudiere"
-            },
-            "generateur_mixte_id": {
-              "$ref": "#/$defs/generateurChauffage"
-            }
-          },
-          "required": [
-            "type",
-            "energie",
-            "type_chaudiere",
-            "generateur_mixte_id"
-          ],
-          "allOf": [
-            {
-              "$ref": "#/$defs/combustion"
-            }
-          ]
-        },
-        {
-          "title": "Chauffe-eau thermodynamique",
-          "type": "object",
-          "properties": {
-            "type": {
-              "enum": [
-                "cet_air_ambiant",
-                "cet_air_exterieur",
-                "cet_air_extrait"
-              ]
-            },
-            "energie": {
-              "$ref": "#/$defs/energie",
-              "const": "electricite"
-            },
-            "cop": {
-              "$ref": "#/$defs/cop"
-            },
-            "pn": {
-              "$ref": "#/$defs/pn"
-            }
-          },
-          "required": [
-            "type",
-            "energie",
-            "cop",
-            "pn"
-          ]
-        },
-        {
-          "title": "Pompe à chaleur",
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "pac_double_service"
-            },
-            "energie": {
-              "$ref": "#/$defs/energie",
-              "const": "electricite"
-            },
-            "cop": {
-              "$ref": "#/$defs/cop"
-            },
-            "pn": {
-              "$ref": "#/$defs/pn"
-            },
-            "generateur_mixte_id": {
-              "$ref": "#/$defs/generateurChauffage"
-            }
-          },
-          "required": [
-            "type",
-            "energie",
-            "cop",
-            "pn",
-            "generateur_mixte_id"
-          ]
-        },
-        {
-          "title": "Poêle bouilleur",
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "poele_bouilleur"
-            },
-            "energie": {
-              "$ref": "#/$defs/energie",
-              "enum": [
-                "bois_buche",
-                "bois_plaquette",
-                "bois_granule"
-              ]
-            },
-            "generateur_mixte_id": {
-              "$ref": "#/$defs/generateurChauffage"
-            }
-          },
-          "required": [
-            "type",
-            "energie",
-            "generateur_mixte_id"
-          ],
-          "allOf": [
-            {
-              "$ref": "#/$defs/combustion"
-            }
-          ]
-        },
-        {
-          "title": "Réseau de chaleur",
-          "type": "object",
-          "properties": {
-            "type": {
-              "const": "reseau_chaleur"
-            },
-            "energie": {
-              "$ref": "#/$defs/energie",
-              "const": "reseau_chaleur"
-            },
-            "reseau_chaleur_id": {
-              "title": "Identifiant du réseau de chaleur",
-              "type": [
-                "string",
-                "null"
-              ],
-              "default": null
-            },
-            "generateur_mixte_id": {
-              "$ref": "#/$defs/generateurChauffage"
-            }
-          },
-          "required": [
-            "type",
-            "energie",
-            "reseau_chaleur_id",
-            "generateur_mixte_id"
-          ]
-        }
-      ],
-      "$defs": {
-        "generateurChauffage": {
-          "title": "Générateur de chauffage",
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uuid",
-          "default": null
-        },
-        "energie": {
           "title": "Energie",
           "type": "string",
           "enum": [
@@ -4598,19 +4283,41 @@
             "reseau_chaleur"
           ]
         },
-        "energieCombustion": {
-          "$ref": "#/$defs/energie",
-          "enum": [
-            "gaz_naturel",
-            "gpl",
-            "fioul",
-            "charbon",
-            "bois_buche",
-            "bois_plaquette",
-            "bois_granule"
-          ]
+        "volume_stockage": {
+          "title": "Volume de stockage en l",
+          "type": "number",
+          "minimum": 0
         },
-        "typeChaudiere": {
+        "generateur_collectif": {
+          "title": "Présence d'un générateur collectif d'eau chaude sanitaire",
+          "type": "boolean"
+        },
+        "generateur_multi_batiment": {
+          "title": "Présence d'un générateur multi bâtiment",
+          "type": "boolean"
+        },
+        "generateur_mixte_id": {
+          "title": "Identifiant du générateur mixte",
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid",
+          "default": null
+        },
+        "position_volume_chauffe": {
+          "title": "Position du générateur à l'intérieur du volume chauffé",
+          "type": "boolean"
+        },
+        "annee_installation": {
+          "title": "Année d'installation connue et justifiée",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "default": null
+        },
+        "type_chaudiere": {
           "title": "Type de chaudière",
           "type": [
             "string",
@@ -4619,20 +4326,6 @@
           "enum": [
             "chaudiere_murale",
             "chaudiere_sol",
-            null
-          ],
-          "default": null
-        },
-        "label": {
-          "title": "Label du générateur",
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "ne_performance_a",
-            "ne_performance_b",
-            "ne_performance_c",
             null
           ],
           "default": null
@@ -4646,6 +4339,20 @@
           "exclusiveMinimum": 0,
           "default": null
         },
+        "label": {
+          "title": "Label",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "ne_performance_a",
+            "ne_performance_b",
+            "ne_performance_c",
+            null
+          ],
+          "default": null
+        },
         "cop": {
           "title": "Coefficient de performance énergétique",
           "type": [
@@ -4656,74 +4363,379 @@
           "maximum": 10,
           "default": null
         },
-        "combustion": {
-          "title": "Caractéristiques des générateurs à combustion",
-          "type": "object",
-          "properties": {
-            "mode_combustion": {
-              "title": "Mode de combustion",
-              "type": [
-                "string",
-                "null"
-              ],
-              "enum": [
-                "standard",
-                "basse_temperature",
-                "condensation",
-                null
-              ],
-              "default": null
+        "mode_combustion": {
+          "title": "Mode de combustion",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "standard",
+            "basse_temperature",
+            "condensation",
+            null
+          ],
+          "default": null
+        },
+        "presence_ventouse": {
+          "title": "Présence d'une ventouse",
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "default": null
+        },
+        "pveilleuse": {
+          "title": "Puissance de la veilleuse en W",
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        },
+        "qp0": {
+          "title": "Pertes à l'arrêt en W",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "default": null
+        },
+        "rpn": {
+          "title": "Rendement à puissance nominale sur PCI en %",
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0,
+          "maximum": 150,
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "type",
+        "energie",
+        "volume_stockage",
+        "generateur_collectif",
+        "generateur_multi_batiment",
+        "position_volume_chauffe",
+        "annee_installation"
+      ],
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "title": "Générateur électrique",
+              "type": "object",
+              "properties": {
+                "energie": {
+                  "const": "electricite"
+                },
+                "type_chaudiere": {
+                  "const": null
+                },
+                "mode_combustion": {
+                  "const": null
+                },
+                "presence_ventouse": {
+                  "const": null
+                },
+                "pveilleuse": {
+                  "const": null
+                },
+                "qp0": {
+                  "const": null
+                },
+                "rpn": {
+                  "const": null
+                },
+                "reseau_chaleur_id": {
+                  "const": null
+                }
+              },
+              "required": [
+                "energie"
+              ]
             },
-            "presence_ventouse": {
-              "title": "Présence d'une ventouse",
-              "type": [
-                "boolean",
-                "null"
-              ],
-              "default": null
-            },
-            "pn": {
-              "$ref": "#/$defs/pn"
-            },
-            "pveilleuse": {
-              "title": "Puissance de la veilleuse en W",
-              "type": [
-                "number",
-                "null"
-              ],
-              "minimum": 0,
-              "default": null
-            },
-            "qp0": {
-              "title": "Pertes à l'arrêt en W",
-              "type": [
-                "number",
-                "null"
-              ],
-              "exclusiveMinimum": 0,
-              "default": null
-            },
-            "rpn": {
-              "title": "Rendement à puissance nominale sur PCI en %",
-              "type": [
-                "number",
-                "null"
-              ],
-              "exclusiveMinimum": 0,
-              "maximum": 150,
-              "default": null
+            {
+              "title": "Générateur à combustion",
+              "type": "object",
+              "properties": {
+                "energie": {
+                  "type": "string",
+                  "enum": [
+                    "gaz_naturel",
+                    "gpl",
+                    "fioul",
+                    "charbon",
+                    "bois_buche",
+                    "bois_plaquette",
+                    "bois_granule"
+                  ]
+                },
+                "label": {
+                  "const": null
+                },
+                "cop": {
+                  "const": null
+                },
+                "reseau_chaleur_id": {
+                  "const": null
+                }
+              },
+              "required": [
+                "energie"
+              ]
             }
-          },
-          "required": [
-            "mode_combustion",
-            "presence_ventouse",
-            "pn",
-            "pveilleuse",
-            "qp0",
-            "rpn"
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "title": "Générateur individuel",
+              "type": "object",
+              "properties": {
+                "generateur_collectif": {
+                  "const": false
+                },
+                "generateur_multi_batiment": {
+                  "const": false
+                },
+                "generateur_mixte_id": {
+                  "const": null
+                },
+                "reseau_chaleur_id": {
+                  "const": null
+                }
+              },
+              "required": [
+                "generateur_collectif"
+              ]
+            },
+            {
+              "title": "Générateur collectif",
+              "type": "object",
+              "properties": {
+                "generateur_collectif": {
+                  "const": true
+                },
+                "position_volume_chauffe": {
+                  "const": false
+                }
+              },
+              "required": [
+                "generateur_collectif",
+                "position_volume_chauffe"
+              ]
+            }
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "title": "Accumulateur",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "accumulateur"
+                },
+                "energie": {
+                  "enum": [
+                    "gaz_naturel",
+                    "gpl"
+                  ]
+                },
+                "volume_stockage": {
+                  "exclusiveMinimum": 0
+                },
+                "type_chaudiere": {
+                  "const": null
+                },
+                "generateur_mixte_id": {
+                  "const": null
+                }
+              },
+              "required": [
+                "type",
+                "energie",
+                "volume_stockage"
+              ]
+            },
+            {
+              "title": "Chauffe-eau instantané",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "chauffe_eau_instantane"
+                },
+                "energie": {
+                  "enum": [
+                    "gaz_naturel",
+                    "gpl"
+                  ]
+                },
+                "volume_stockage": {
+                  "const": 0,
+                  "default": 0
+                },
+                "generateur_mixte_id": {
+                  "const": null
+                }
+              },
+              "required": [
+                "type",
+                "energie",
+                "volume_stockage"
+              ]
+            },
+            {
+              "title": "Chauffe-eau électrique",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "enum": [
+                    "chauffe_eau_vertical",
+                    "chauffe_eau_horizontal"
+                  ]
+                },
+                "energie": {
+                  "const": "electricite"
+                },
+                "generateur_mixte_id": {
+                  "const": null
+                }
+              },
+              "required": [
+                "type",
+                "energie"
+              ]
+            },
+            {
+              "title": "Chaudière électrique",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "chaudiere"
+                },
+                "energie": {
+                  "const": "electricite"
+                }
+              },
+              "required": [
+                "type",
+                "energie"
+              ]
+            },
+            {
+              "title": "Chaudière à combustion",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "chaudiere"
+                },
+                "energie": {
+                  "enum": [
+                    "gaz_naturel",
+                    "gpl",
+                    "fioul",
+                    "charbon",
+                    "bois_buche",
+                    "bois_plaquette",
+                    "bois_granule"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "energie"
+              ]
+            },
+            {
+              "title": "Chauffe-eau thermodynamique",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "enum": [
+                    "cet_air_ambiant",
+                    "cet_air_exterieur",
+                    "cet_air_extrait"
+                  ]
+                },
+                "energie": {
+                  "const": "electricite"
+                }
+              },
+              "required": [
+                "type",
+                "energie"
+              ]
+            },
+            {
+              "title": "Pompe à chaleur",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "pac_double_service"
+                },
+                "energie": {
+                  "const": "electricite"
+                }
+              },
+              "required": [
+                "type",
+                "energie"
+              ]
+            },
+            {
+              "title": "Poêle bouilleur",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "poele_bouilleur"
+                },
+                "energie": {
+                  "enum": [
+                    "bois_buche",
+                    "bois_plaquette",
+                    "bois_granule"
+                  ]
+                },
+                "reseau_chaleur_id": {
+                  "const": null
+                }
+              },
+              "required": [
+                "type",
+                "energie"
+              ]
+            },
+            {
+              "title": "Réseau de chaleur",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "reseau_chaleur"
+                },
+                "energie": {
+                  "const": "reseau_chaleur"
+                },
+                "generateur_collectif": {
+                  "const": true
+                }
+              },
+              "required": [
+                "type",
+                "energie",
+                "generateur_collectif"
+              ]
+            }
           ]
         }
-      }
+      ]
     },
     "https://schemas.dpe-audit.fr/ecs/installation": {
       "$id": "https://schemas.dpe-audit.fr/ecs/installation",

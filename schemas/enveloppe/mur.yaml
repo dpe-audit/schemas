@@ -108,7 +108,7 @@ $defs:
     type: object
     properties:
       surface:
-        title: Surface totale en m²
+        title: Surface déperditive exprimée en m²
         type: number
         exclusiveMinimum: 0
       mitoyennete:

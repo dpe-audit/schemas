@@ -178,7 +178,7 @@ $defs:
         format: uuid
         default: null
       surface:
-        title: Surface de la baie en m²
+        title: Surface déperditive exprimée en m²
         type: number
         minimum: 0
       mitoyennete:

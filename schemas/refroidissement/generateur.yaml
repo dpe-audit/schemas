@@ -23,16 +23,32 @@ properties:
       - autre_systeme_thermodynamique
       - autre
       - reseau_froid
+  energie:
+    title: Énergie utilisée par le générateur
+    type: string
+    enum:
+      - electricite
+      - gaz_naturel
+      - gpl
+      - reseau_froid
   annee_installation:
     title: Année d'installation connue et justifiée
     type: ["integer", "null"]
+    default: null
+  seer:
+    title: Coefficient d'efficience énergétique saisonnier connu et justifié
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+  reseau_froid_id:
+    title: Identifiant unique du réseau de froid
+    type: ["string", "null"]
     default: null
 required:
   - id
   - description
   - type
   - energie
-  - annee_installation
 oneOf:
   - title: Pompe à chaleur
     type: object
@@ -46,39 +62,27 @@ oneOf:
           - pac_geothermique
           - autre_systeme_thermodynamique
       energie:
-        title: Énergie utilisée par le générateur
-        type: string
         const: electricite
-      seer:
-        title: Coefficient d'efficience énergétique saisonnier connu et justifié
-        type: ["number", "null"]
-        exclusiveMinimum: 0
-        default: null
+      reseau_froid_id:
+        const: null
     required:
       - type
       - energie
-      - seer
   - title: Climatiseur
     type: object
     properties:
       type:
         const: autre
       energie:
-        title: Énergie utilisée par le générateur
-        type: string
         enum:
           - electricite
           - gaz_naturel
           - gpl
-      seer:
-        title: Coefficient d'efficience énergétique saisonnier connu et justifié
-        type: ["number", "null"]
-        exclusiveMinimum: 0
-        default: null
+      reseau_froid_id:
+        const: null
     required:
       - type
       - energie
-      - seer
   - title: Réseau de froid
     type: object
     properties:
@@ -86,11 +90,6 @@ oneOf:
         const: reseau_froid
       energie:
         const: reseau_froid
-      reseau_froid_id:
-        title: Identifiant unique du réseau de froid
-        type: ["string", "null"]
-        default: null
     required:
       - type
       - energie
-      - reseau_froid_id

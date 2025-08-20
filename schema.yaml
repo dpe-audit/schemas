@@ -3515,6 +3515,16 @@ $defs:
           - integer
           - 'null'
         default: null
+      type_chaudiere:
+        title: Type de chaudière
+        type:
+          - string
+          - 'null'
+        enum:
+          - chaudiere_murale
+          - chaudiere_sol
+          - null
+        default: null
       position:
         $ref: '#/$defs/position'
       signaletique:
@@ -3660,6 +3670,66 @@ $defs:
           - volume_stockage
     allOf:
       - oneOf:
+          - title: Générateur indépendant
+            type: object
+            properties:
+              type:
+                enum:
+                  - accumulateur
+                  - chauffe_eau_instantane
+                  - chauffe_eau_vertical
+                  - chauffe_eau_horizontal
+                  - cet_air_ambiant
+                  - cet_air_exterieur
+                  - cet_air_extrait
+              position:
+                type: object
+                properties:
+                  generateur_mixte_id:
+                    const: null
+                  reseau_chaleur_id:
+                    const: null
+            required:
+              - type
+              - position
+          - title: Générateur mixte
+            type: object
+            properties:
+              type:
+                not:
+                  enum:
+                    - reseau_chaleur
+                    - accumulateur
+                    - chauffe_eau_instantane
+                    - chauffe_eau_vertical
+                    - chauffe_eau_horizontal
+                    - cet_air_ambiant
+                    - cet_air_exterieur
+                    - cet_air_extrait
+              position:
+                type: object
+                properties:
+                  reseau_chaleur_id:
+                    const: null
+            required:
+              - type
+              - position
+          - title: Réseau de chaleur
+            type: object
+            properties:
+              type:
+                const: reseau_chaleur
+              position:
+                type: object
+                properties:
+                  generateur_collectif:
+                    const: true
+                  generateur_multi_batiment:
+                    const: true
+            required:
+              - type
+              - position
+      - oneOf:
           - title: Générateur électrique
             type: object
             properties:
@@ -3671,8 +3741,6 @@ $defs:
                   - chauffe_eau_vertical
                   - chauffe_eau_horizontal
                   - chaudiere
-                  - chaudiere_murale
-                  - chaudiere_sol
               signaletique:
                 cop:
                   const: null
@@ -3784,66 +3852,6 @@ $defs:
               - energie
               - signaletique
       - oneOf:
-          - title: Générateur indépendant
-            type: object
-            properties:
-              type:
-                enum:
-                  - accumulateur
-                  - chauffe_eau_instantane
-                  - chauffe_eau_vertical
-                  - chauffe_eau_horizontal
-                  - cet_air_ambiant
-                  - cet_air_exterieur
-                  - cet_air_extrait
-              position:
-                type: object
-                properties:
-                  generateur_mixte_id:
-                    const: null
-                  reseau_chaleur_id:
-                    const: null
-            required:
-              - type
-              - position
-          - title: Générateur mixte
-            type: object
-            properties:
-              type:
-                not:
-                  enum:
-                    - reseau_chaleur
-                    - accumulateur
-                    - chauffe_eau_instantane
-                    - chauffe_eau_vertical
-                    - chauffe_eau_horizontal
-                    - cet_air_ambiant
-                    - cet_air_exterieur
-                    - cet_air_extrait
-              position:
-                type: object
-                properties:
-                  reseau_chaleur_id:
-                    const: null
-            required:
-              - type
-              - position
-          - title: Réseau de chaleur
-            type: object
-            properties:
-              type:
-                const: reseau_chaleur
-              position:
-                type: object
-                properties:
-                  generateur_collectif:
-                    const: true
-                  generateur_multi_batiment:
-                    const: true
-            required:
-              - type
-              - position
-      - oneOf:
           - title: Accumulateur
             type: object
             properties:
@@ -3853,6 +3861,8 @@ $defs:
                 enum:
                   - gaz_naturel
                   - gpl
+              type_chaudiere:
+                const: null
               signaletique:
                 type: object
                 properties:
@@ -3871,6 +3881,8 @@ $defs:
                 enum:
                   - gaz_naturel
                   - gpl
+              type_chaudiere:
+                const: null
               signaletique:
                 type: object
                 properties:
@@ -3890,6 +3902,8 @@ $defs:
                   - chauffe_eau_horizontal
               energie:
                 const: electricite
+              type_chaudiere:
+                const: null
             required:
               - type
               - energie
@@ -3936,6 +3950,8 @@ $defs:
                   - cet_air_extrait
               energie:
                 const: electricite
+              type_chaudiere:
+                const: null
             required:
               - type
               - energie
@@ -3946,6 +3962,8 @@ $defs:
                 const: pac_double_service
               energie:
                 const: electricite
+              type_chaudiere:
+                const: null
             required:
               - type
               - energie
@@ -3969,6 +3987,8 @@ $defs:
                 const: reseau_chaleur
               energie:
                 const: reseau_chaleur
+              type_chaudiere:
+                const: null
             required:
               - type
               - energie

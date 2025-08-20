@@ -4777,6 +4777,19 @@
           ],
           "default": null
         },
+        "type_chaudiere": {
+          "title": "Type de chaudière",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "chaudiere_murale",
+            "chaudiere_sol",
+            null
+          ],
+          "default": null
+        },
         "position": {
           "$ref": "#/$defs/position"
         },
@@ -4976,6 +4989,98 @@
         {
           "oneOf": [
             {
+              "title": "Générateur indépendant",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "enum": [
+                    "accumulateur",
+                    "chauffe_eau_instantane",
+                    "chauffe_eau_vertical",
+                    "chauffe_eau_horizontal",
+                    "cet_air_ambiant",
+                    "cet_air_exterieur",
+                    "cet_air_extrait"
+                  ]
+                },
+                "position": {
+                  "type": "object",
+                  "properties": {
+                    "generateur_mixte_id": {
+                      "const": null
+                    },
+                    "reseau_chaleur_id": {
+                      "const": null
+                    }
+                  }
+                }
+              },
+              "required": [
+                "type",
+                "position"
+              ]
+            },
+            {
+              "title": "Générateur mixte",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "not": {
+                    "enum": [
+                      "reseau_chaleur",
+                      "accumulateur",
+                      "chauffe_eau_instantane",
+                      "chauffe_eau_vertical",
+                      "chauffe_eau_horizontal",
+                      "cet_air_ambiant",
+                      "cet_air_exterieur",
+                      "cet_air_extrait"
+                    ]
+                  }
+                },
+                "position": {
+                  "type": "object",
+                  "properties": {
+                    "reseau_chaleur_id": {
+                      "const": null
+                    }
+                  }
+                }
+              },
+              "required": [
+                "type",
+                "position"
+              ]
+            },
+            {
+              "title": "Réseau de chaleur",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "reseau_chaleur"
+                },
+                "position": {
+                  "type": "object",
+                  "properties": {
+                    "generateur_collectif": {
+                      "const": true
+                    },
+                    "generateur_multi_batiment": {
+                      "const": true
+                    }
+                  }
+                }
+              },
+              "required": [
+                "type",
+                "position"
+              ]
+            }
+          ]
+        },
+        {
+          "oneOf": [
+            {
               "title": "Générateur électrique",
               "type": "object",
               "properties": {
@@ -4987,9 +5092,7 @@
                     "chauffe_eau_instantane",
                     "chauffe_eau_vertical",
                     "chauffe_eau_horizontal",
-                    "chaudiere",
-                    "chaudiere_murale",
-                    "chaudiere_sol"
+                    "chaudiere"
                   ]
                 },
                 "signaletique": {
@@ -5165,98 +5268,6 @@
         {
           "oneOf": [
             {
-              "title": "Générateur indépendant",
-              "type": "object",
-              "properties": {
-                "type": {
-                  "enum": [
-                    "accumulateur",
-                    "chauffe_eau_instantane",
-                    "chauffe_eau_vertical",
-                    "chauffe_eau_horizontal",
-                    "cet_air_ambiant",
-                    "cet_air_exterieur",
-                    "cet_air_extrait"
-                  ]
-                },
-                "position": {
-                  "type": "object",
-                  "properties": {
-                    "generateur_mixte_id": {
-                      "const": null
-                    },
-                    "reseau_chaleur_id": {
-                      "const": null
-                    }
-                  }
-                }
-              },
-              "required": [
-                "type",
-                "position"
-              ]
-            },
-            {
-              "title": "Générateur mixte",
-              "type": "object",
-              "properties": {
-                "type": {
-                  "not": {
-                    "enum": [
-                      "reseau_chaleur",
-                      "accumulateur",
-                      "chauffe_eau_instantane",
-                      "chauffe_eau_vertical",
-                      "chauffe_eau_horizontal",
-                      "cet_air_ambiant",
-                      "cet_air_exterieur",
-                      "cet_air_extrait"
-                    ]
-                  }
-                },
-                "position": {
-                  "type": "object",
-                  "properties": {
-                    "reseau_chaleur_id": {
-                      "const": null
-                    }
-                  }
-                }
-              },
-              "required": [
-                "type",
-                "position"
-              ]
-            },
-            {
-              "title": "Réseau de chaleur",
-              "type": "object",
-              "properties": {
-                "type": {
-                  "const": "reseau_chaleur"
-                },
-                "position": {
-                  "type": "object",
-                  "properties": {
-                    "generateur_collectif": {
-                      "const": true
-                    },
-                    "generateur_multi_batiment": {
-                      "const": true
-                    }
-                  }
-                }
-              },
-              "required": [
-                "type",
-                "position"
-              ]
-            }
-          ]
-        },
-        {
-          "oneOf": [
-            {
               "title": "Accumulateur",
               "type": "object",
               "properties": {
@@ -5268,6 +5279,9 @@
                     "gaz_naturel",
                     "gpl"
                   ]
+                },
+                "type_chaudiere": {
+                  "const": null
                 },
                 "signaletique": {
                   "type": "object",
@@ -5297,6 +5311,9 @@
                     "gpl"
                   ]
                 },
+                "type_chaudiere": {
+                  "const": null
+                },
                 "signaletique": {
                   "type": "object",
                   "properties": {
@@ -5325,6 +5342,9 @@
                 },
                 "energie": {
                   "const": "electricite"
+                },
+                "type_chaudiere": {
+                  "const": null
                 }
               },
               "required": [
@@ -5393,6 +5413,9 @@
                 },
                 "energie": {
                   "const": "electricite"
+                },
+                "type_chaudiere": {
+                  "const": null
                 }
               },
               "required": [
@@ -5409,6 +5432,9 @@
                 },
                 "energie": {
                   "const": "electricite"
+                },
+                "type_chaudiere": {
+                  "const": null
                 }
               },
               "required": [
@@ -5445,6 +5471,9 @@
                 },
                 "energie": {
                   "const": "reseau_chaleur"
+                },
+                "type_chaudiere": {
+                  "const": null
                 }
               },
               "required": [

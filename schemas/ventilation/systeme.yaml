@@ -24,19 +24,23 @@ properties:
       - ventilation_naturelle_entrees_air_hautes_basses
       - ventilation_naturelle_conduit
       - ventilation_naturelle_conduit_entrees_air_hygroreglables
+    generateur_id:
+      title: Identifiant du générateur de ventilation associé au système
+      type: [string, "null"]
+      default: null
+      format: uuid
 required:
   - id
   - description
   - installation_id
   - type
-anyOf:
+oneOf:
   - title: Système de ventilation mécanique
     type: object
     properties:
       type:
         const: ventilation_mecanique
       generateur_id:
-        title: Identifiant du générateur de ventilation associé au système
         type: string
         format: uuid
     required:
@@ -51,5 +55,7 @@ anyOf:
           - ventilation_naturelle_entrees_air_hautes_basses
           - ventilation_naturelle_conduit
           - ventilation_naturelle_conduit_entrees_air_hygroreglables
+      generateur_id:
+        const: null
     required:
       - type

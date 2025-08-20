@@ -24,6 +24,15 @@ properties:
       - puit_climatique
       - vmi
       - vmr
+  type_vmc:
+    title: Type de Ventilation Mécanique Contrôlée
+    type: ["string", "null"]
+    enum:
+      - autoreglable
+      - hygroreglable_type_a
+      - hygroreglable_type_b
+      - null
+    default: null
   generateur_collectif:
     title: Générateur collectif de ventilation
     type: boolean
@@ -53,18 +62,8 @@ oneOf:
           - vmc_basse_pression
           - vmc_double_flux
           - ventilation_hybride
-      type_vmc:
-        title: Type de Ventilation Mécanique Contrôlée
-        type: ["string", "null"]
-        enum:
-          - autoreglable
-          - hygroreglable_type_a
-          - hygroreglable_type_b
-          - null
-        default: null
     required:
       - type
-      - type_vmc
   - title: Autres
     type: object
     properties:
@@ -74,5 +73,7 @@ oneOf:
           - puit_climatique
           - vmi
           - vmr
+      type_vmc:
+        const: null
     required:
       - type

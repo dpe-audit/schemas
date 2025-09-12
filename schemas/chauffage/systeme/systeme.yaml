@@ -1,0 +1,74 @@
+$id: https://schemas.dpe-audit.fr/chauffage/systeme
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Système de chauffage
+type: object
+unevaluatedProperties: false
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  installation_id:
+    title: Identifiant de l'installation de chauffage associée
+    type: string
+    format: uuid
+  generateur_id:
+    title: Identifiant du générateur de chauffage associé
+    type: string
+    format: uuid
+  type:
+    title: Type de système
+    type: string
+    enum: [chauffage_central, chauffage_divise]
+  reseau:
+    title: Réseau de distribution
+    type: [object, "null"]
+    default: null
+    oneOf:
+      - const: null
+      - $ref: /chauffage/systeme/reseau
+  emetteurs:
+    title: Liste des émetteurs associés au système de chauffage
+    type: array
+    default: []
+    items:
+      title: Identifiant unique de l'émetteur de chauffage au format UUID
+      type: string
+      format: uuid
+required:
+  - id
+  - description
+  - installation_id
+  - generateur_id
+  - type
+oneOf:
+  - title: Chauffage central
+    type: object
+    properties:
+      type:
+        const: chauffage_central
+      reseau:
+        type: object
+      emetteurs:
+        type: array
+        minContains: 1
+    required:
+      - type
+      - reseau
+      - emetteurs
+  - title: Chauffage divisé
+    type: object
+    properties:
+      type:
+        const: chauffage_divise
+      reseau:
+        const: null
+      emetteurs:
+        type: array
+        minContains: 0
+        maxContains: 0
+    required:
+      - type

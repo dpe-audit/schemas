@@ -1,0 +1,44 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/niveau
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Niveau
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  surface:
+    title: Surface en m²
+    type: number
+    minimumExclusive: 0
+  inertie_paroi_verticale:
+    title: Inertie des parois verticales
+    type: string
+    enum: [lourde, legere]
+  inertie_plancher_bas:
+    title: Inertie des planchers bas
+    type: string
+    enum: [lourde, legere]
+  inertie_plancher_haut:
+    title: Inertie des planchers hauts
+    type: string
+    enum: [lourde, legere]
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      inertie:
+        title: Inertie
+        type: string
+        enum: [lourde, legere]
+required:
+  - id
+  - description
+  - surface
+  - inertie_paroi_verticale
+  - inertie_plancher_bas
+  - inertie_plancher_haut

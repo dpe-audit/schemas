@@ -1,0 +1,157 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/masque
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Masque
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  type:
+    title: Type de masque
+    type: string
+    enum:
+      - proche
+      - lointain
+  configuration:
+    title: Configuration du masque
+    type: string
+    enum:
+      - homogene
+      - non_homogene
+      - fond_balcon
+      - fond_et_flanc_loggias
+      - balcon_ou_auvent
+      - paroi_laterale_sans_obstacle_au_sud
+      - paroi_laterale_avec_obstacle_au_sud
+  orientation:
+    title: Orientation de la façade
+    type: [string, "null"]
+    enum: [nord, sud, est, ouest, null]
+    default: null
+  hauteur:
+    title: Hauteur du masque en angle
+    type: [number, "null"]
+    exclusiveMinimum: 0
+    exclusiveMaximum: 80
+    default: null
+  profondeur:
+    title: Profondeur du masque en m
+    type: [number, "null"]
+    exclusiveMinimum: 0
+    default: null
+  secteur:
+    title: Secteur
+    type: [string, "null"]
+    enum: [lateral, lateral_sud, central, central_sud, null]
+    default: null
+required:
+  - id
+  - description
+  - type
+  - configuration
+oneOf:
+  - title: Masque lointain homogène
+    type: object
+    properties:
+      type:
+        const: lointain
+      configuration:
+        const: homogene
+      orientation:
+        type: string
+      hauteur:
+        type: number
+    required:
+      - type
+      - configuration
+      - orientation
+      - hauteur
+  - title: Masque lointain non homogène
+    type: object
+    properties:
+      type:
+        const: lointain
+      configuration:
+        const: non_homogene
+      orientation:
+        type: string
+      hauteur:
+        type: number
+      secteur:
+        type: string
+    required:
+      - type
+      - configuration
+      - orientation
+      - hauteur
+      - secteur
+    anyOf:
+      - title: Façade au Sud ou Nord
+        type: object
+        properties:
+          orientation:
+            type: string
+            enum: [nord, sud]
+          secteur:
+            enum: [lateral, central]
+        required:
+          - orientation
+          - secteur
+      - title: Façade Est ou Ouest
+        type: object
+        properties:
+          orientation:
+            type: string
+            enum: [est, ouest]
+          secteur:
+            enum: [lateral, lateral_sud, central, central_sud]
+        required:
+          - orientation
+          - secteur
+  - title: Masque proche - Paroi latérale
+    type: object
+    properties:
+      type:
+        const: proche
+      configuration:
+        enum:
+          - paroi_laterale_sans_obstacle_au_sud
+          - paroi_laterale_avec_obstacle_au_sud
+    required:
+      - type
+      - configuration
+  - title: Masque proche - Baie en fond de balcon ou fond et flanc de loggias
+    type: object
+    properties:
+      type:
+        const: proche
+      configuration:
+        enum:
+          - fond_balcon
+          - fond_et_flanc_loggias
+      orientation:
+        type: string
+      profondeur:
+        type: number
+    required:
+      - type
+      - configuration
+      - orientation
+      - profondeur
+  - title: Masque proche - Baie sous un balcon ou auvent
+    type: object
+    properties:
+      type:
+        const: proche
+      configuration:
+        const: balcon_ou_auvent
+      profondeur:
+        type: number
+    required:
+      - type
+      - configuration
+      - profondeur

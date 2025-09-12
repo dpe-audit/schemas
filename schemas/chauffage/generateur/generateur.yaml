@@ -1,0 +1,278 @@
+$id: https://schemas.dpe-audit.fr/chauffage/generateur
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Générateur de chauffage
+type: object
+unevaluatedProperties: false
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  type:
+    title: Type de générateur
+    type: [string, "null"]
+    enum:
+      - chaudiere
+      - convecteur_bi_jonction
+      - convecteur_electrique
+      - panneau_rayonnant_electrique
+      - plafond_rayonnant_electrique
+      - plancher_rayonnant_electrique
+      - radiateur_electrique
+      - radiateur_electrique_accumulation
+      - generateur_air_chaud
+      - pac_air_air
+      - pac_air_eau
+      - pac_eau_eau
+      - pac_eau_glycolee_eau
+      - pac_geothermique
+      - cuisiniere
+      - foyer_ferme
+      - insert
+      - poele
+      - poele_bouilleur
+      - radiateur_gaz
+      - reseau_chaleur
+      - null
+  energie:
+    title: Energie
+    type: [string, "null"]
+    enum:
+      - electricite
+      - gaz_naturel
+      - gpl
+      - fioul
+      - charbon
+      - bois_buche
+      - bois_plaquette
+      - bois_granule
+      - reseau_chaleur
+      - null
+  bienergie:
+    title: Energie secondaire
+    type: ["string", "null"]
+    default: null
+    enum:
+      - electricite
+      - gaz_naturel
+      - gpl
+      - fioul
+      - charbon
+      - bois_buche
+      - bois_plaquette
+      - bois_granule
+      - null
+  annee_installation:
+    title: Année d'installation
+    type: ["integer", "null"]
+    default: null
+  position:
+    $ref: /chauffage/generateur/position
+  signaletique:
+    $ref: /chauffage/generateur/signaletique
+required:
+  - id
+  - description
+  - type
+  - energie
+  - annee_installation
+  - position
+  - signaletique
+$defs:
+  chaudiere_combustion:
+    title: Chaudière à combustion
+    properties:
+      type:
+        enum: [chaudiere, poele_bouilleur, generateur_air_chaud]
+      energie:
+        not:
+          enum: [electricite, reseau_chaleur]
+      bienergie:
+        not:
+          const: reseau_chaleur
+      position:
+        $ref: /chauffage/generateur/position#/$defs/chaudiere_combustion
+      signaletique:
+        $ref: /chauffage/generateur/signaletique#/$defs/chaudiere_combustion
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  chaudiere_electrique:
+    title: Chaudière électrique
+    properties:
+      type:
+        enum: [chaudiere, generateur_air_chaud]
+      energie:
+        const: electricite
+      bienergie:
+        const: null
+      position:
+        $ref: /chauffage/generateur/position#/$defs/chaudiere_electrique
+      signaletique:
+        $ref: /chauffage/generateur/signaletique#/$defs/chaudiere_electrique
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  emetteur_electrique:
+    title: Emetteur électrique
+    properties:
+      type:
+        enum:
+          - generateur_air_chaud
+          - convecteur_bi_jonction
+          - convecteur_electrique
+          - panneau_rayonnant_electrique
+          - plafond_rayonnant_electrique
+          - plancher_rayonnant_electrique
+          - radiateur_electrique
+          - radiateur_electrique_accumulation
+      energie:
+        const: electricite
+      bienergie:
+        const: null
+      position:
+        $ref: /chauffage/generateur/position#/$defs/emetteur_electrique
+      signaletique:
+        $ref: /chauffage/generateur/signaletique#/$defs/emetteur_electrique
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  pac:
+    title: Pompe à chaleur
+    properties:
+      type:
+        enum:
+          - pac_air_air
+          - pac_air_eau
+          - pac_eau_eau
+          - pac_eau_glycolee_eau
+          - pac_geothermique
+      energie:
+        const: electricite
+      bienergie:
+        const: null
+      position:
+        $ref: /chauffage/generateur/position#/$defs/pac
+      signaletique:
+        $ref: /chauffage/generateur/signaletique#/$defs/pac
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  pac_hybride:
+    title: Pompe à chaleur hybride
+    properties:
+      type:
+        enum:
+          - pac_air_eau
+          - pac_eau_eau
+          - pac_eau_glycolee_eau
+          - pac_geothermique
+      energie:
+        const: electricite
+      bienergie:
+        not:
+          enum: [electricite, fioul, charbon, reseau_chaleur, null]
+      position:
+        $ref: /chauffage/generateur/position#/$defs/pac_hybride
+      signaletique:
+        $ref: /chauffage/generateur/signaletique#/$defs/pac_hybride
+    required:
+      - type
+      - energie
+      - bienergie
+      - position
+      - signaletique
+  poele_insert:
+    title: Poêle / Insert
+    properties:
+      type:
+        enum: [cuisiniere, foyer_ferme, insert, poele]
+      energie:
+        not:
+          enum: [electricite, reseau_chaleur]
+      bienergie:
+        const: null
+      position:
+        $ref: /chauffage/generateur/position#/$defs/poele_insert
+      signaletique:
+        $ref: /chauffage/generateur/signaletique#/$defs/poele_insert
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  radiateur_gaz:
+    title: Radiateur à gaz
+    properties:
+      type:
+        const: radiateur_gaz
+      energie:
+        enum: [gaz_naturel, gpl]
+      bienergie:
+        const: null
+      position:
+        $ref: /chauffage/generateur/position#/$defs/radiateur_gaz
+      signaletique:
+        $ref: /chauffage/generateur/signaletique#/$defs/radiateur_gaz
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  reseau_chaleur:
+    title: Réseau de chaleur
+    properties:
+      type:
+        const: reseau_chaleur
+      energie:
+        const: reseau_chaleur
+      bienergie:
+        const: null
+      position:
+        $ref: /chauffage/generateur/position#/$defs/reseau_chaleur
+      signaletique:
+        $ref: /chauffage/generateur/signaletique#/$defs/reseau_chaleur
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  generateur_collectif_inconnu:
+    title: Générateur collectif inconnu
+    properties:
+      type:
+        const: null
+      energie:
+        const: null
+      bienergie:
+        const: null
+      position:
+        $ref: /chauffage/generateur/position#/$defs/generateur_collectif_inconnu
+      signaletique:
+        $ref: /chauffage/generateur/signaletique#/$defs/generateur_collectif_inconnu
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+oneOf:
+  - $ref: "#/$defs/chaudiere_combustion"
+  - $ref: "#/$defs/chaudiere_electrique"
+  - $ref: "#/$defs/emetteur_electrique"
+  - $ref: "#/$defs/pac"
+  - $ref: "#/$defs/pac_hybride"
+  - $ref: "#/$defs/poele_insert"
+  - $ref: "#/$defs/radiateur_gaz"
+  - $ref: "#/$defs/reseau_chaleur"
+  - $ref: "#/$defs/generateur_collectif_inconnu"

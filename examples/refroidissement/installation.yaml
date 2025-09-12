@@ -1,3 +1,5 @@
-- id: 5124d497-6458-45a9-a9b0-8c84d14139f6
-  description: Une installation de refroidissement
-  surface: 100
+schema: https://schemas.dpe-audit.fr/refroidissement/installation
+examples:
+  - id: 5124d497-6458-45a9-a9b0-8c84d14139f6
+    description: Une installation de refroidissement
+    surface: 100

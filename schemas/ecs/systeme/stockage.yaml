@@ -1,0 +1,38 @@
+$id: https://schemas.dpe-audit.fr/ecs/systeme/stockage
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Stockage indépendant
+type: object
+properties:
+  volume:
+    title: Volume de stockage en l
+    type: [number, "null"]
+    minimum: 0
+    default: null
+  position_volume_chauffe:
+    title: Position à l'intérieur volume chauffé
+    type: [boolean, "null"]
+    default: null
+oneOf:
+  - title: Absance de stockage
+    properties:
+      volume:
+        minimumExclusive: 0
+      position_volume_chauffe:
+        type: boolean
+    required:
+      - volume
+      - position_volume_chauffe
+  - title: Sans stockage
+    properties:
+      volume:
+        const: 0
+      position_volume_chauffe:
+        const: null
+    required:
+      - volume
+  - title: Stockage inconnu
+    properties:
+      volume:
+        const: null
+      position_volume_chauffe:
+        const: null

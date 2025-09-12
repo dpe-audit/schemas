@@ -1,0 +1,36 @@
+$id: https://schemas.dpe-audit.fr/ventilation
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Ventilation
+type: object
+properties:
+  generateurs:
+    title: Liste des générateurs
+    type: array
+    default: []
+    items:
+      $ref: /ventilation/generateur
+  installations:
+    title: Liste des installations
+    type: array
+    minContains: 1
+    items:
+      $ref: /ventilation/installation
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      hvent:
+        title: Déperdition thermique par renouvellement d'air due au système de ventilation en W/K
+        type: number
+      hperm:
+        title: Déperdition thermique par renouvellement d'air due au vent en W/K
+        type: number
+      q4pa_conv:
+        title: Perméabilité à l'air de l'enveloppe sous 4Pa en m3/(h.m²)
+        type: number
+      performance:
+        $ref: /common/performance
+required:
+  - generateurs
+  - installations

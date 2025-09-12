@@ -1,0 +1,191 @@
+$id: https://schemas.dpe-audit.fr/ecs/generateur
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Générateur d'eau chaude sanitaire
+type: object
+unevaluatedProperties: false
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  type:
+    title: Type de générateur d'eau chaude sanitaire
+    type: [string, "null"]
+    enum:
+      - chauffe_eau
+      - chaudiere
+      - cet_air_ambiant
+      - cet_air_exterieur
+      - cet_air_extrait
+      - pac_double_service
+      - poele_bouilleur
+      - reseau_chaleur
+      - null
+  energie:
+    title: Energie
+    type: [string, "null"]
+    enum:
+      - electricite
+      - gaz_naturel
+      - gpl
+      - fioul
+      - charbon
+      - bois_buche
+      - bois_plaquette
+      - bois_granule
+      - reseau_chaleur
+      - null
+  annee_installation:
+    title: Année d'installation connue et justifiée
+    type: ["integer", "null"]
+    default: null
+  position:
+    $ref: /ecs/generateur/position
+  signaletique:
+    $ref: /ecs/generateur/signaletique
+required:
+  - id
+  - description
+  - type
+  - energie
+  - annee_installation
+  - position
+  - signaletique
+$defs:
+  chauffe_eau_combustion:
+    title: Chauffe-eau à combustion
+    properties:
+      type:
+        const: chauffe_eau
+      energie:
+        not:
+          enum: [electricite, reseau_chaleur]
+      position:
+        $ref: /ecs/generateur/position#/$defs/chauffe_eau_combustion
+      signaletique:
+        $ref: /ecs/generateur/signaletique#/$defs/chauffe_eau_combustion
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  chauffe_eau_electrique:
+    title: Chauffe-eau électrique
+    properties:
+      type:
+        const: chauffe_eau
+      energie:
+        const: electricite
+      position:
+        $ref: /ecs/generateur/position#/$defs/chauffe_eau_electrique
+      signaletique:
+        $ref: /ecs/generateur/signaletique#/$defs/chauffe_eau_electrique
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  chaudiere_combustion:
+    title: Chaudière à combustion
+    properties:
+      type:
+        enum: [chaudiere, poele_bouilleur]
+      energie:
+        not:
+          enum: [electricite, reseau_chaleur]
+      position:
+        $ref: /ecs/generateur/position#/$defs/chaudiere_combustion
+      signaletique:
+        $ref: /ecs/generateur/signaletique#/$defs/chaudiere_combustion
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  chaudiere_electrique:
+    title: Chaudière électrique
+    properties:
+      type:
+        const: chaudiere
+      energie:
+        const: electricite
+      position:
+        $ref: /ecs/generateur/position#/$defs/chaudiere_electrique
+      signaletique:
+        $ref: /ecs/generateur/signaletique#/$defs/chaudiere_electrique
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  chauffe_eau_thermodynamique:
+    title: Chauffe-eau thermodynamique
+    properties:
+      type:
+        enum: [cet_air_ambiant, cet_air_exterieur, cet_air_extrait]
+      energie:
+        const: electricite
+      position:
+        $ref: /ecs/generateur/position#/$defs/chauffe_eau_thermodynamique
+      signaletique:
+        $ref: /ecs/generateur/signaletique#/$defs/chauffe_eau_thermodynamique
+  pac_double_service:
+    title: PAC double service
+    properties:
+      type:
+        const: pac_double_service
+      energie:
+        const: electricite
+      position:
+        $ref: /ecs/generateur/position#/$defs/pac_double_service
+      signaletique:
+        $ref: /ecs/generateur/signaletique#/$defs/pac_double_service
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  reseau_chaleur:
+    title: Réseau de chaleur
+    properties:
+      type:
+        const: reseau_chaleur
+      energie:
+        const: reseau_chaleur
+      position:
+        $ref: /ecs/generateur/position#/$defs/reseau_chaleur
+      signaletique:
+        $ref: /ecs/generateur/signaletique#/$defs/reseau_chaleur
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+  generateur_collectif_inconnu:
+    title: Générateur collectif inconnu
+    type: object
+    properties:
+      type:
+        const: null
+      energie:
+        const: null
+      position:
+        $ref: /ecs/generateur/position#/$defs/generateur_collectif_inconnu
+      signaletique:
+        $ref: /ecs/generateur/signaletique#/$defs/generateur_collectif_inconnu
+    required:
+      - type
+      - energie
+      - position
+      - signaletique
+oneOf:
+  - $ref: "#/$defs/chaudiere_combustion"
+  - $ref: "#/$defs/chaudiere_electrique"
+  - $ref: "#/$defs/chauffe_eau_combustion"
+  - $ref: "#/$defs/chauffe_eau_electrique"
+  - $ref: "#/$defs/chauffe_eau_thermodynamique"
+  - $ref: "#/$defs/pac_double_service"
+  - $ref: "#/$defs/reseau_chaleur"

@@ -1,0 +1,23 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/paroi
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Paroi
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  isolation:
+    title: État d'isolation de la paroi
+    type: ["string", "null"]
+    enum: [isole, non_isole, null]
+  position:
+    $ref: /enveloppe/local_non_chauffe/paroi/position
+required:
+  - id
+  - description
+  - isolation
+  - position

@@ -1,12 +1,14 @@
-- id: a33b7dd0-70f0-420b-a21a-fb19f544f5c0
-  description: Un niveau
-  surface: 100
-  inertie_paroi_verticale: lourde
-  inertie_plancher_bas: lourde
-  inertie_plancher_haut: lourde
-- id: a33b7dd0-70f0-420b-a21a-fb19f544f5c0
-  description: Un niveau
-  surface: 100
-  inertie_paroi_verticale: lourde
-  inertie_plancher_bas: lourde
-  inertie_plancher_haut: lourde
+schema: https://schemas.dpe-audit.fr/enveloppe/niveau
+examples:
+  - id: a33b7dd0-70f0-420b-a21a-fb19f544f5c0
+    description: Un niveau
+    surface: 100
+    inertie_paroi_verticale: lourde
+    inertie_plancher_bas: lourde
+    inertie_plancher_haut: lourde
+  - id: a33b7dd0-70f0-420b-a21a-fb19f544f5c0
+    description: Un niveau
+    surface: 100
+    inertie_paroi_verticale: lourde
+    inertie_plancher_bas: lourde
+    inertie_plancher_haut: lourde

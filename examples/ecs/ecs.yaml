@@ -1,0 +1,5 @@
+schema: https://schemas.dpe-audit.fr/ecs
+examples:
+  - generateurs: https://schemas.dpe-audit.fr/ecs/generateur
+    installations: https://schemas.dpe-audit.fr/ecs/installation
+    systemes: https://schemas.dpe-audit.fr/ecs/systeme

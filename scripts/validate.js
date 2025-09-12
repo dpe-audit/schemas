@@ -9,13 +9,19 @@ const load = file => {
   return yaml.load(content)
 }
 
-const merge = file => {
-  let data = load(file)
-
+const merge = data => {
   const resolve = data => {
     for (let key in data) {
-      if (typeof data[key] === 'string' && data[key].endsWith('.yaml')) {
-        const referencedData = load(data[key])
+      if (
+        typeof data[key] === 'string' &&
+        data[key].startsWith('https://schemas.dpe-audit.fr')
+      ) {
+        const target = data[key].split('#')[0]
+        const index = data[key].split('#')[1] ?? null
+        let referencedData = examples.find(item => item.schema === target)
+        referencedData = referencedData.examples
+        referencedData = referencedData[index] ?? referencedData
+
         data[key] = resolve(referencedData)
       } else if (typeof data[key] === 'object' && data[key] !== null) {
         data[key] = resolve(data[key])
@@ -27,33 +33,27 @@ const merge = file => {
   return resolve(data)
 }
 
-const schemas = globSync('schemas/**/*.yaml')
-const examples = globSync('examples/**/*.yaml')
+const schemas = globSync('schemas/**/*.yaml').map(file => load(file))
+const examples = globSync('examples/**/*.yaml').map(file => load(file))
 
 for (const schema of schemas) {
-  const schemaObject = yaml.load(readFileSync(schema, { encoding: 'utf-8' }))
-  registerSchema(schemaObject, schemaObject.$id)
+  registerSchema(schema, schema.$id)
 }
 
 for (const schema of schemas) {
-  const schemaObject = load(schema)
-  const exampleFile = examples.find(
-    item => item.replace('examples', 'schemas') === schema
-  )
+  const example = examples.find(item => item.schema === schema.$id)
 
-  if (!exampleFile) {
-    console.warn(`No example found for schema: ${schema}`)
+  if (!example) {
+    console.warn(`No example found for schema: ${schema.$id}`)
     continue
   }
 
-  let examplesData = merge(exampleFile)
+  let dataset = merge(example.examples)
 
-  console.log(`Validating schema: ${schemaObject.$id}`)
+  console.log(`Validating schema: ${schema.$id}`)
 
-  examplesData = Array.isArray(examplesData) ? examplesData : [examplesData]
-
-  for (const data of examplesData) {
-    const { valid, errors } = await validate(schemaObject.$id, data, BASIC)
+  for (const data of dataset) {
+    const { valid, errors } = await validate(schema.$id, data, BASIC)
 
     if (false === valid) {
       console.error(errors.length ? errors : 'Unknown error')

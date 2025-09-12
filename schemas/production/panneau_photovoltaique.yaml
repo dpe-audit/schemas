@@ -26,6 +26,17 @@ properties:
   installation_collective:
     title: Installation photovoltaïque collective
     type: boolean
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      kpv:
+        title: Coefficient de pondération prenant en compte l'altération par rapport à l'orientation optimale
+        type: number
+      ppv:
+        title: Production photovoltaïque en kWh
+        type: number
 required:
   - id
   - description

@@ -1,0 +1,6 @@
+schema: https://schemas.dpe-audit.fr/chauffage
+examples:
+  - generateurs: https://schemas.dpe-audit.fr/chauffage/generateur
+    emetteurs: https://schemas.dpe-audit.fr/chauffage/emetteur
+    installations: https://schemas.dpe-audit.fr/chauffage/installation
+    systemes: https://schemas.dpe-audit.fr/chauffage/systeme

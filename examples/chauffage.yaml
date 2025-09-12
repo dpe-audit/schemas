@@ -1,4 +1,0 @@
-generateurs: examples/chauffage/generateur.yaml
-emetteurs: examples/chauffage/emetteur.yaml
-installations: examples/chauffage/installation.yaml
-systemes: examples/chauffage/systeme.yaml

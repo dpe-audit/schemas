@@ -3,6 +3,19 @@ $schema: https://json-schema.org/draft/2020-12/schema
 title: Ressource
 type: object
 properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+    readOnly: true
+  date_visite:
+    title: Date de visite du logement
+    type: string
+    format: date
+  date_etablissement:
+    title: Date d'établissement
+    type: string
+    format: date
   adresse:
     $ref: /adresse
   batiment:
@@ -25,7 +38,34 @@ properties:
     $ref: /refroidissement
   production:
     $ref: /production
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      cef:
+        title: Consommation d'énergie finale
+        type: number
+        minimum: 0
+      cep:
+        title: Consommation d'énergie primaire
+        type: number
+        minimum: 0
+      eges:
+        title: Émissions de gaz à effet de serre
+        type: number
+        minimum: 0
+      etiquette_energie:
+        title: Etiquette énergie
+        type: string
+        enum: [A, B, C, D, E, F, G]
+      etiquette_climat:
+        title: Etiquette climat
+        type: string
+        enum: [A, B, C, D, E, F, G]
 required:
+  - date_visite
+  - date_etablissement
   - adresse
   - batiment
   - logements

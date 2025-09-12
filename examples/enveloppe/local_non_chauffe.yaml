@@ -1,5 +1,7 @@
-- id: 30972a71-398f-4eb9-a902-0a6665d94a4f
-  description: Un local non chauffé
-  type: espace_tampon_solarise
-  parois: examples/enveloppe/local_non_chauffe.paroi.yaml
-  baies: examples/enveloppe/local_non_chauffe.baie.yaml
+schema: https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe
+examples:
+  - id: 30972a71-398f-4eb9-a902-0a6665d94a4f
+    description: Un local non chauffé
+    type: espace_tampon_solarise
+    parois: https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/paroi
+    baies: https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/baie

@@ -1,0 +1,13 @@
+schema: https://schemas.dpe-audit.fr/audit
+examples:
+  - date_visite: "2026-01-01"
+    date_etablissement: "2026-01-01"
+    adresse: https://schemas.dpe-audit.fr/adresse#0
+    batiment: https://schemas.dpe-audit.fr/batiment#0
+    logements: https://schemas.dpe-audit.fr/logement
+    enveloppe: https://schemas.dpe-audit.fr/enveloppe#0
+    chauffage: https://schemas.dpe-audit.fr/chauffage#0
+    ecs: https://schemas.dpe-audit.fr/ecs#0
+    ventilation: https://schemas.dpe-audit.fr/ventilation#0
+    refroidissement: https://schemas.dpe-audit.fr/refroidissement#0
+    production: https://schemas.dpe-audit.fr/production#0

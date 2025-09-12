@@ -1,0 +1,19 @@
+$id: https://schemas.dpe-audit.fr/eclairage
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Eclairage
+type: object
+properties:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      cef:
+        title: Consommation finale en kWh/an
+        type: number
+      cep:
+        title: Consommation primaire en kWh/an
+        type: number
+      eges:
+        title: Emissions de gaz à effet de serre en kgCO2/an
+        type: number

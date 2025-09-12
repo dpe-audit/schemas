@@ -1,0 +1,24 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/confort_ete
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Confort d'été
+type: object
+properties:
+  performance:
+    title: Performance
+    type: string
+    enum: [bon, moyen, insuffisant]
+  inertie_lourde:
+    title: Inertie lourde
+    type: boolean
+  isolatoin_plancher_haut:
+    title: Isolation des planchers hauts
+    type: [boolean, "null"]
+  presence_protection_solaire:
+    title: Présence de protections solaires
+    type: [boolean, "null"]
+  logement_traversant:
+    title: Logement traversant
+    type: [boolean, "null"]
+  presence_brasseur_air:
+    title: Présence de brasseurs d'air
+    type: [boolean, "null"]

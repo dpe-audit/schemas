@@ -1,0 +1,43 @@
+$id: https://schemas.dpe-audit.fr/chauffage/installation/regulation
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Régulation
+type: object
+properties:
+  presence_regulation:
+    title: Présence d'une régulation
+    type: boolean
+  minimum_temperature:
+    title: Régulation avec minimum de température
+    type: [boolean, "null"]
+    default: null
+  detection_presence:
+    title: Détection de présence
+    type: [boolean, "null"]
+    default: null
+required:
+  - presence_regulation
+oneOf:
+  - title: Régulation
+    type: object
+    properties:
+      presence_regulation:
+        const: true
+      minimum_temperature:
+        type: boolean
+      detection_presence:
+        type: boolean
+    required:
+      - presence_regulation
+      - minimum_temperature
+      - detection_presence
+  - title: Pas de régulation
+    type: object
+    properties:
+      presence_regulation:
+        const: false
+      minimum_temperature:
+        const: null
+      detection_presence:
+        const: null
+    required:
+      - presence_regulation

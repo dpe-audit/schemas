@@ -1,0 +1,44 @@
+$id: https://schemas.dpe-audit.fr/refroidissement
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Refroidissement
+type: object
+properties:
+  generateurs:
+    title: Liste des générateurs
+    type: array
+    default: []
+    items:
+      $ref: /refroidissement/generateur
+  installations:
+    title: Liste des installations
+    type: array
+    default: []
+    items:
+      $ref: /refroidissement/installation
+  systemes:
+    title: Liste des systèmes
+    type: array
+    default: []
+    items:
+      $ref: /refroidissement/systeme
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      bfr:
+        title: Besoin annuel de refroidissement en kWh
+        type: number
+      cef:
+        title: Consommation finale en kWh/an
+        type: number
+      cep:
+        title: Consommation primaire en kWh/an
+        type: number
+      eges:
+        title: Emissions de gaz à effet de serre en kgCO2/an
+        type: number
+required:
+  - generateurs
+  - installations
+  - systemes

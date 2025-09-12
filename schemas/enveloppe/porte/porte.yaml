@@ -1,0 +1,73 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/porte
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Porte
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  type_pose:
+    title: Type de pose
+    type: string
+    enum: [nu_exterieur, nu_interieur, tunnel]
+  isolation:
+    title: État d'isolation de la porte
+    type: ["string", "null"]
+    enum: [isole, non_isole, null]
+    default: null
+  materiau:
+    title: Matériau de la porte
+    type: ["string", "null"]
+    enum: [pvc, bois, bois_metal, metal, null]
+    default: null
+  annee_installation:
+    title: Année d'installation
+    type: ["integer", "null"]
+    default: null
+  u:
+    title: Coefficient de transmission thermique de la porte connu et justifié en W/m²K
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+  position:
+    $ref: /enveloppe/porte/position
+  menuiserie:
+    $ref: /enveloppe/porte/menuiserie
+  vitrage:
+    $ref: /enveloppe/porte/vitrage
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      u:
+        title: Coefficient de transmission thermique en W/(m².K)
+        type: number
+      b:
+        title: Coefficient de réduction des déperditions thermiques
+        type: number
+      sdep:
+        title: Surface déperditive en m²
+        type: number
+      dp:
+        title: Déperditions thermiques en W/K
+        type: number
+      performance:
+        title: Performance
+        type: string
+        enum: [tres_bonne, bonne, moyenne, insuffisante]
+required:
+  - id
+  - description
+  - type_pose
+  - isolation
+  - materiau
+  - annee_installation
+  - u
+  - position
+  - vitrage
+  - menuiserie

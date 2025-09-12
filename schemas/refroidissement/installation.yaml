@@ -14,6 +14,20 @@ properties:
     title: Surface couverte par l'installation en m²
     type: number
     exclusiveMinimum: 0
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      cef:
+        title: Consommation finale en kWh/an
+        type: number
+      cep:
+        title: Consommation primaire en kWh/an
+        type: number
+      eges:
+        title: Emissions de gaz à effet de serre en kgCO2/an
+        type: number
 required:
   - id
   - description

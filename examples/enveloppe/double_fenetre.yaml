@@ -1,20 +1,32 @@
-- id: 6bc71c8d-11fa-4f36-b40b-b75ddbedf5d5
-  description: Une double fenêtre
-  type_baie: fenetre_battante
-  type_pose: nu_interieur
-  materiau: pvc
-  ug: 4.8
-  uw: 3.8
-  sw: 54
-  vitrage:
-    type_vitrage: double_vitrage
-    nature_lame: argon
-    epaisseur_lame: 12
-    survitrage:
-      type_survitrage: survitrage_simple
+schema: https://schemas.dpe-audit.fr/enveloppe/double_fenetre
+examples:
+  - id: 6bc71c8d-11fa-4f36-b40b-b75ddbedf5d5
+    description: Une double fenêtre
+    type: fenetre_battante
+    ug: 4.8
+    uw: 3.8
+    sw: 2.4
+    position:
+      type_pose: nu_interieur
+      inclinaison: 90
+      presence_soubassement: false
+    vitrage:
+      type: double_vitrage
+      nature_lame: argon
       epaisseur_lame: 12
-  menuiserie:
-    largeur_dormant: 60
-    presence_joint: true
-    presence_retour_isolation: true
-    presence_rupteur_pont_thermique: true
+    survitrage:
+      type: survitrage_simple
+      epaisseur_lame: 12
+    menuiserie:
+      materiau: pvc
+      largeur_dormant: 60
+      presence_joint: true
+      presence_retour_isolation: true
+      presence_rupteur_pont_thermique: true
+  - id: 6bc71c8d-11fa-4f36-b40b-b75ddbedf5d5
+    description: Paroi vitrée
+    type: polycarbonate
+    position:
+      inclinaison: 90
+    vitrage:
+      type: polycarbonate

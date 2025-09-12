@@ -1,0 +1,32 @@
+$id: https://schemas.dpe-audit.fr/ecs/systeme
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Système d'eau chaude sanitaire
+type: object
+unevaluatedProperties: false
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  generateur_id:
+    title: Identifiant du générateur d'eau chaude sanitaire associé au système
+    type: string
+    format: uuid
+  installation_id:
+    title: Identifiant de l'installation d'eau chaude sanitaire associée au système
+    type: string
+    format: uuid
+  reseau:
+    $ref: /ecs/systeme/reseau
+  stockage:
+    $ref: /ecs/systeme/stockage
+required:
+  - id
+  - description
+  - generateur_id
+  - installation_id
+  - reseau
+  - stockage

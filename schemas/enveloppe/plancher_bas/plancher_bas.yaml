@@ -1,0 +1,88 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/plancher_bas
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Plancher bas
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  type_structure:
+    title: Type de plancher bas
+    type: ["string", "null"]
+    enum:
+      - plancher_avec_ou_sans_remplissage
+      - plancher_entre_solives_metalliques
+      - plancher_entre_solives_bois
+      - plancher_bois_sur_solives_metalliques
+      - bardeaux_et_remplissage
+      - voutains_sur_solives_metalliques
+      - voutains_briques_ou_moellons
+      - dalle_beton
+      - plancher_bois_sur_solives_bois
+      - plancher_lourd_type_entrevous_terre_cuite_ou_poutrelles_beton
+      - plancher_entrevous_isolant
+      - null
+    default: null
+  inertie:
+    title: État d'inertie
+    type: ["string", "null"]
+    enum: [lourde, legere, null]
+    default: null
+  annee_construction:
+    title: Année de construction
+    type: ["integer", "null"]
+    default: null
+  annee_renovation:
+    title: Année de dernière rénovation connue et justifiée
+    type: ["integer", "null"]
+    default: null
+  u0:
+    title: Coefficient de transmission thermique connu et justifié du plancher bas non isolé en W/m²K
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+  u:
+    title: Coefficient de transmission thermique connu et justifié en W/m²K
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+  position:
+    $ref: /enveloppe/plancher_bas/position
+  isolation:
+    $ref: /enveloppe/plancher_bas/isolation
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      u:
+        title: Coefficient de transmission thermique en W/(m².K)
+        type: number
+      b:
+        title: Coefficient de réduction des déperditions thermiques
+        type: number
+      sdep:
+        title: Surface déperditive en m²
+        type: number
+      dp:
+        title: Déperditions thermiques en W/K
+        type: number
+      performance:
+        title: Performance
+        type: string
+        enum: [tres_bonne, bonne, moyenne, insuffisante]
+required:
+  - id
+  - description
+  - type_structure
+  - inertie
+  - annee_construction
+  - annee_renovation
+  - u0
+  - u
+  - position
+  - isolation

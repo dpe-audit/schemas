@@ -1,0 +1,15 @@
+schema: https://schemas.dpe-audit.fr/enveloppe
+examples:
+  - exposition: exposition_simple
+    q4pa_conv: null
+    presence_brasseurs_air: false
+    niveaux: https://schemas.dpe-audit.fr/enveloppe/niveau
+    locaux_non_chauffes: https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe
+    murs: https://schemas.dpe-audit.fr/enveloppe/mur
+    planchers_bas: https://schemas.dpe-audit.fr/enveloppe/plancher_bas
+    planchers_hauts: https://schemas.dpe-audit.fr/enveloppe/plancher_haut
+    baies: https://schemas.dpe-audit.fr/enveloppe/baie
+    portes: https://schemas.dpe-audit.fr/enveloppe/porte
+    ponts_thermiques: https://schemas.dpe-audit.fr/enveloppe/pont_thermique
+    doubles_fenetres: https://schemas.dpe-audit.fr/enveloppe/double_fenetre
+    masques: https://schemas.dpe-audit.fr/enveloppe/masque

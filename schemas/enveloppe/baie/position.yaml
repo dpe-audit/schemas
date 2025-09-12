@@ -1,0 +1,105 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/baie/position
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Position
+type: object
+properties:
+  paroi_id:
+    title: Identifiant de la paroi associée à la baie
+    type: ["string", "null"]
+    format: uuid
+    default: null
+  local_non_chauffe_id:
+    title: Identifiant du local non chauffé associé à la baie
+    type: ["string", "null"]
+    format: uuid
+    default: null
+  double_fenetre_id:
+    title: Identifiant de la double fenêtre associée
+    type: ["string", "null"]
+    format: uuid
+    default: null
+  surface:
+    title: Surface déperditive exprimée en m²
+    type: number
+    minimum: 0
+  mitoyennete:
+    title: Mitoyenneté de la baie
+    type: string
+    enum:
+      - exterieur
+      - enterre
+      - vide_sanitaire
+      - terre_plein
+      - sous_sol_non_chauffe
+      - local_non_chauffe
+      - local_non_residentiel
+      - local_residentiel
+      - local_non_accessible
+  type_pose:
+    title: Type de pose
+    type: ["string", "null"]
+    enum: [nu_exterieur, nu_interieur, tunnel, null]
+    default: null
+  presence_soubassement:
+    title: Présence d'un soubassement
+    type: [boolean, "null"]
+    default: null
+  inclinaison:
+    title: Inclinaison de la baie par rapport à l'horizontale en degré
+    type: number
+    minimum: 0
+    maximum: 90
+  orientation:
+    title: Orientation de la baie en degré par rapport au nord
+    type: [number, "null"]
+    minimum: 0
+    exclusiveMaximum: 360
+required:
+  - paroi_id
+  - surface
+  - mitoyennete
+  - inclinaison
+  - orientation
+allOf:
+  - oneOf:
+      - title: Baie donnant sur un local non chauffé
+        type: object
+        properties:
+          mitoyennete:
+            const: local_non_chauffe
+          local_non_chauffe_id:
+            type: string
+        required:
+          - local_non_chauffe_id
+          - mitoyennete
+      - title: Autres cas
+        type: object
+        properties:
+          mitoyennete:
+            not:
+              const: local_non_chauffe
+          local_non_chauffe_id:
+            const: null
+        required:
+          - mitoyennete
+  - oneOf:
+      - title: Baie horizontale
+        type: object
+        properties:
+          inclinaison:
+            const: 0
+          orientation:
+            const: null
+        required:
+          - inclinaison
+          - orientation
+      - title: Autres cas
+        type: object
+        properties:
+          inclinaison:
+            minimumExlusive: 0
+          orientation:
+            type: number
+        required:
+          - inclinaison
+          - orientation

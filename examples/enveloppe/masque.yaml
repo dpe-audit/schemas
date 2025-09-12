@@ -1,9 +1,14 @@
-- id: 84689d75-6494-425a-8ed6-5e5a26ad9716
-  description: Un masque proche
-  type: fond_balcon
-  profondeur: 2.5
-- id: 84689d75-6494-425a-8ed6-5e5a26ad9716
-  description: Un masque lointain homogène
-  type: homogene
-  hauteur: 45
-  orientation: 35
+schema: https://schemas.dpe-audit.fr/enveloppe/masque
+examples:
+  - id: 84689d75-6494-425a-8ed6-5e5a26ad9716
+    description: Un masque proche
+    type: proche
+    configuration: fond_balcon
+    orientation: nord
+    profondeur: 2.5
+  - id: 84689d75-6494-425a-8ed6-5e5a26ad9716
+    description: Un masque lointain homogène
+    type: lointain
+    configuration: homogene
+    hauteur: 45
+    orientation: nord

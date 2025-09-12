@@ -114,7 +114,7 @@
 /enveloppe/plancher_bas/isolation/resistance_thermique_isolation;/enveloppe/plancher_bas;number;nullable;;4
 /enveloppe/plancher_haut/id;/enveloppe/plancher_haut;string;;;3
 /enveloppe/plancher_haut/description;/enveloppe/plancher_haut;string;;;3
-/enveloppe/plancher_haut/configuration;/enveloppe/plancher_haut;enum;nullable;;3
+/enveloppe/plancher_haut/configuration;/enveloppe/plancher_haut;enum;;;3
 /enveloppe/plancher_haut/type_structure;/enveloppe/plancher_haut;enum;nullable;;3
 /enveloppe/plancher_haut/inertie;/enveloppe/plancher_haut;enum;nullable;;3
 /enveloppe/plancher_haut/annee_construction;/enveloppe/plancher_haut;integer;nullable;;3
@@ -248,6 +248,8 @@
 /chauffage/generateur/position/generateur_collectif;/chauffage/generateur;boolean;;;4
 /chauffage/generateur/position/generateur_multi_batiment;/chauffage/generateur;boolean;;;4
 /chauffage/generateur/position/position_volume_chauffe;/chauffage/generateur;boolean;;;4
+/chauffage/generateur/position/cascade;/chauffage/generateur;integer;nullable;;4
+/chauffage/generateur/position/priorite_cascade;/chauffage/generateur;integer;nullable;;4
 /chauffage/generateur/position/reseau_chaleur_id;/chauffage/generateur;string;nullable;;4
 /chauffage/generateur/signaletique;/chauffage/generateur;object;;;3
 /chauffage/generateur/signaletique/pn;/chauffage/generateur;number;nullable;;3
@@ -359,7 +361,6 @@
 /refroidissement/systeme/installation_id;/refroidissement/systeme;string;;;3
 /ventilation/generateurs;/ventilation;object[];;/ventilation/generateur;2
 /ventilation/installations;/ventilation;object[];;/ventilation/installation;2
-/ventilation/systemes;/ventilation;object[];;/ventilation/systeme;2
 /ventilation/generateur/id;/ventilation/generateur;string;;;3
 /ventilation/generateur/description;/ventilation/generateur;string;;;3
 /ventilation/generateur/type;/ventilation/generateur;enum;;;3
@@ -370,8 +371,6 @@
 /ventilation/installation/id;/ventilation/installation;string;;;3
 /ventilation/installation/description;/ventilation/installation;string;;;3
 /ventilation/installation/surface;/ventilation/installation;number;;;3
-/ventilation/systeme/id;/ventilation/systeme;string;;;3
-/ventilation/systeme/description;/ventilation/systeme;string;;;3
-/ventilation/systeme/type;/ventilation/systeme;enum;;;3
-/ventilation/systeme/generateur_id;/ventilation/systeme;string;nullable;;3
-/ventilation/systeme/installation_id;/ventilation/systeme;string;;;3
+/ventilation/installation/type;/ventilation/installation;enum;;;3
+/ventilation/installation/generateur_id;/ventilation/installation;string;nullable;;3
+

@@ -1,0 +1,15 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.dpe-audit.fr/common/usage
+title: Usage
+type: string
+oneOf:
+  - const: chauffage
+    title: Chauffage
+  - const: ecs
+    title: Eau chaude sanitaire
+  - const: refroidissement
+    title: Refroidissement
+  - const: eclairage
+    title: Eclairage
+  - const: auxiliaire
+    title: Auxiliaire

@@ -1,0 +1,25 @@
+$id: https://schemas.dpe-audit.fr/chauffage/installation/solaire_thermique
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Solaire thermique
+type: object
+properties:
+  usage:
+    title: Usages couverts par le solaire thermique
+    type: string
+    enum:
+      - chauffage
+      - chauffage_ecs
+    default: chauffage
+  annee_installation:
+    title: Année d'installation
+    type: ["integer", "null"]
+    default: null
+  fch:
+    title: Facteur de couverture solaire connu et justifié en %
+    type: number
+    minimum: 0
+    maximum: 100
+required:
+  - usage
+  - annee_installation
+  - fch

@@ -1,0 +1,40 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/pont_thermique
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Pont thermique
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  longueur:
+    title: Longueur du pont thermique en m
+    type: number
+    exclusiveMinimum: 0
+  kpt:
+    title: Valeur du pont thermique connue et justifiée
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+  liaison:
+    $ref: /enveloppe/pont_thermique/liaison
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      k:
+        title: Valeur du pont thermique
+        type: number
+      pt:
+        title: Déperditions thermiques en W/K
+        type: number
+required:
+  - id
+  - description
+  - longueur
+  - kpt
+  - liaison

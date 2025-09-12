@@ -1,3 +1,0 @@
-generateurs: examples/ecs/generateur.yaml
-installations: examples/ecs/installation.yaml
-systemes: examples/ecs/systeme.yaml

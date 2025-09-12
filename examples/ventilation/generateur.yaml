@@ -1,7 +1,9 @@
-- id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
-  description: Un générateur de ventilation
-  type: vmc_simple_flux
-  type_vmc: hygroreglable_type_b
-  presence_echangeur_thermique: false
-  generateur_collectif: false
-  annee_installation: 2000
+schema: https://schemas.dpe-audit.fr/ventilation/generateur
+examples:
+  - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
+    description: Un générateur de ventilation
+    type: vmc_simple_flux
+    type_vmc: hygroreglable_type_b
+    presence_echangeur_thermique: false
+    generateur_collectif: false
+    annee_installation: 2000

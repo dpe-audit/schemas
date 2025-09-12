@@ -1,0 +1,109 @@
+$id: https://schemas.dpe-audit.fr/enveloppe
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Enveloppe
+type: object
+properties:
+  exposition:
+    title: Exposition
+    type: string
+    enum: [exposition_simple, exposition_multiple]
+  q4pa_conv:
+    title: Perméabilité à l'air de l'enveloppe sous 4Pa connue et justifiée en m3/(h.m²)
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+  presence_brasseurs_air:
+    title: Présence de brasseurs d'air
+    type: boolean
+    default: false
+  niveaux:
+    title: Liste des niveaux
+    type: array
+    minItems: 1
+    items:
+      $ref: /enveloppe/niveau
+  locaux_non_chauffes:
+    title: Liste des locaux non chauffés
+    type: array
+    default: []
+    items:
+      $ref: /enveloppe/local_non_chauffe
+  murs:
+    title: Liste des murs
+    type: array
+    minItems: 1
+    items:
+      $ref: /enveloppe/mur
+  planchers_bas:
+    title: Liste des planchers bas
+    type: array
+    default: []
+    items:
+      $ref: /enveloppe/plancher_bas
+  planchers_hauts:
+    title: Liste des planchers hauts
+    type: array
+    default: []
+    items:
+      $ref: /enveloppe/plancher_haut
+  baies:
+    title: Liste des baies
+    type: array
+    default: []
+    items:
+      $ref: /enveloppe/baie
+  portes:
+    title: Liste des portes
+    type: array
+    default: []
+    items:
+      $ref: /enveloppe/porte
+  ponts_thermiques:
+    title: Liste des ponts thermiques
+    type: array
+    default: []
+    items:
+      $ref: /enveloppe/pont_thermique
+  doubles_fenetres:
+    title: Liste des doubles fenêtres
+    type: array
+    default: []
+    items:
+      $ref: /enveloppe/double_fenetre
+  masques:
+    title: Liste des masques
+    type: array
+    default: []
+    items:
+      $ref: /enveloppe/masque
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      inertie:
+        title: Inertie
+        type: string
+        enum: [tres_lourde, lourde, moyenne, legere]
+      permeabilite:
+        $ref: /enveloppe/permeabilite
+      deperditions:
+        $ref: /enveloppe/deperditions
+      confort_ete:
+        $ref: /enveloppe/confort_ete
+      apports:
+        $ref: /enveloppe/apports
+required:
+  - exposition
+  - q4pa_conv
+  - presence_brasseurs_air
+  - niveaux
+  - locaux_non_chauffes
+  - murs
+  - planchers_bas
+  - planchers_hauts
+  - baies
+  - portes
+  - ponts_thermiques
+  - doubles_fenetres
+  - masques

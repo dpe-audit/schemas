@@ -1,0 +1,38 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/porte/vitrage
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Vitrage
+type: object
+properties:
+  surface:
+    title: Surface de vitrage en m²
+    description: Une porte avec un taux de vitrage supérieur à 60% est à considérer comme une porte-fenêtre avec soubassement
+    type: number
+    minimum: 0
+  type:
+    title: Type de vitrage
+    type: ["string", "null"]
+    enum: [simple_vitrage, double_vitrage, triple_vitrage, null]
+    default: null
+required:
+  - surface
+oneOf:
+  - title: Porte sans vitrage
+    type: object
+    properties:
+      surface:
+        const: 0
+      type:
+        const: null
+    required:
+      - surface
+  - title: Porte avec vitrage
+    type: object
+    properties:
+      surface:
+        type: number
+        minimumExclusive: 0
+      type:
+        type: string
+    required:
+      - surface
+      - type

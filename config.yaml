@@ -1,0 +1,7 @@
+build:
+  - schema: schemas/dpe.yaml
+    output: dpe.schema
+    formats: [json, yaml]
+  - schema: schemas/audit.yaml
+    output: audit.schema
+    formats: [json, yaml]

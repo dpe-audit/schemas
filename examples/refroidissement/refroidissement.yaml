@@ -1,0 +1,5 @@
+schema: https://schemas.dpe-audit.fr/refroidissement
+examples:
+  - generateurs: https://schemas.dpe-audit.fr/refroidissement/generateur
+    installations: https://schemas.dpe-audit.fr/refroidissement/installation
+    systemes: https://schemas.dpe-audit.fr/refroidissement/systeme

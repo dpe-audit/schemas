@@ -1,0 +1,56 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/double_fenetre/vitrage
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Vitrage
+type: object
+properties:
+  type:
+    title: Type
+    type: string
+    enum:
+      - brique_verre
+      - polycarbonate
+      - simple_vitrage
+      - double_vitrage
+      - double_vitrage_fe
+      - triple_vitrage
+      - triple_vitrage_fe
+  nature_lame:
+    title: Nature de la lame d'air
+    type: ["string", "null"]
+    enum: [air, argon, krypton, null]
+    default: null
+  epaisseur_lame:
+    title: Epaisseur de la lame d'air en mm
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+required:
+  - type
+oneOf:
+  - title: Paroi vitrée
+    properties:
+      type:
+        enum: [brique_verre, polycarbonate]
+      nature_lame:
+        const: null
+      epaisseur_lame:
+        const: null
+    required:
+      - type
+  - title: Vitrage simple
+    properties:
+      type:
+        const: simple_vitrage
+      nature_lame:
+        const: null
+      epaisseur_lame:
+        const: null
+    required:
+      - type
+  - title: Vitrage complexe
+    properties:
+      type:
+        not:
+          enum: [brique_verre, polycarbonate, simple_vitrage]
+    required:
+      - type

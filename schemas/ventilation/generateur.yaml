@@ -44,6 +44,22 @@ properties:
     title: Année d'installation du générateur de ventilation
     type: ["integer", "null"]
     default: null
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      rdim:
+        title: Ratio de dimensionnement du générateur
+        type: number
+      ratio_utilisation:
+        title: Ratio d'utilisation du mode mécanique du générateur
+        type: number
+      pvent_moy:
+        title: Puissance moyenne des auxiliaires en W
+        type: number
+      performance:
+        $ref: /common/performance
 required:
   - id
   - description

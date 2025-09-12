@@ -1,0 +1,50 @@
+$id: https://schemas.dpe-audit.fr/ecs
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Eau chaude sanitaire
+type: object
+properties:
+  generateurs:
+    title: Liste des générateurs
+    type: array
+    minContains: 1
+    items:
+      $ref: /ecs/generateur
+  installations:
+    title: Liste des installations
+    type: array
+    minContains: 1
+    items:
+      $ref: /ecs/installation
+  systemes:
+    title: Liste des systèmes
+    type: array
+    minContains: 1
+    items:
+      $ref: /ecs/systeme
+  date:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      nadeq:
+        title: Nombre d'adultes équivalents
+        type: number
+      nmax:
+        title: Coefficient d'occupation maximal
+        type: number
+      besoin:
+        title: Besoin en kWh/an
+        type: number
+      cef:
+        title: Consommation finale en kWh/an
+        type: number
+      cep:
+        title: Consommation primaire en kWh/an
+        type: number
+      eges:
+        title: Emissions de gaz à effet de serre en kgCO2/an
+        type: number
+required:
+  - generateurs
+  - installations
+  - systemes

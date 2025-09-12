@@ -1,0 +1,151 @@
+$id: https://schemas.dpe-audit.fr/ecs/generateur/position
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Position
+type: object
+properties:
+  position_chauffe_eau:
+    title: Position du chauffe-eau
+    type: [string, "null"]
+    enum: [chauffe_eau_vertical, chauffe_eau_horizontal, null]
+    default: null
+  generateur_collectif:
+    title: Générateur collectif d'eau chaude sanitaire
+    type: boolean
+  generateur_multi_batiment:
+    title: Générateur multi bâtiment
+    type: boolean
+  position_volume_chauffe:
+    title: Position du générateur à l'intérieur du volume chauffé
+    type: boolean
+  generateur_mixte_id:
+    title: Identifiant du générateur mixte
+    type: ["string", "null"]
+    format: uuid
+    default: null
+  reseau_chaleur_id:
+    title: Identifiant du réseau de chaleur
+    type: ["string", "null"]
+    format: uuid
+    default: null
+required:
+  - generateur_collectif
+  - generateur_multi_batiment
+  - position_volume_chauffe
+$defs:
+  chaudiere_combustion:
+    title: Chaudière à combustion
+    type: object
+    properties:
+      position_chauffe_eau:
+        const: null
+      reseau_chaleur_id:
+        const: null
+  chaudiere_electrique:
+    title: Chaudière électrique
+    type: object
+    properties:
+      position_chauffe_eau:
+        const: null
+      reseau_chaleur_id:
+        const: null
+  chauffe_eau_combustion:
+    title: Chauffe-eau à combustion
+    type: object
+    properties:
+      generateur_collectif:
+        const: false
+      generateur_multi_batiment:
+        const: false
+      generateur_mixte_id:
+        const: null
+      reseau_chaleur_id:
+        const: null
+  chauffe_eau_electrique:
+    title: Chauffe-eau électrique
+    type: object
+    properties:
+      generateur_collectif:
+        const: false
+      generateur_multi_batiment:
+        const: false
+      generateur_mixte_id:
+        const: null
+      reseau_chaleur_id:
+        const: null
+  chauffe_eau_thermodynamique:
+    title: Chauffe-eau thermodynamique
+    type: object
+    properties:
+      position_chauffe_eau:
+        const: null
+      generateur_mixte_id:
+        const: null
+      reseau_chaleur_id:
+        const: null
+  pac_double_service:
+    title: PAC double service
+    type: object
+    properties:
+      position_chauffe_eau:
+        const: null
+      reseau_chaleur_id:
+        const: null
+  reseau_chaleur:
+    title: Réseau de chaleur
+    type: object
+    properties:
+      generateur_collectif:
+        const: true
+      generateur_multi_batiment:
+        const: true
+      position_volume_chauffe:
+        const: false
+      generateur_mixte_id:
+        const: null
+  generateur_collectif_inconnu:
+    title: Générateur collectif inconnu
+    type: object
+    properties:
+      generateur_collectif:
+        const: true
+      position_volume_chauffe:
+        const: false
+      position_chauffe_eau:
+        const: null
+      generateur_mixte_id:
+        const: null
+      reseau_chaleur_id:
+        const: null
+anyOf:
+  - $ref: "#/$defs/chaudiere_combustion"
+  - $ref: "#/$defs/chaudiere_electrique"
+  - $ref: "#/$defs/chauffe_eau_combustion"
+  - $ref: "#/$defs/chauffe_eau_electrique"
+  - $ref: "#/$defs/chauffe_eau_thermodynamique"
+  - $ref: "#/$defs/pac_double_service"
+  - $ref: "#/$defs/reseau_chaleur"
+  - $ref: "#/$defs/generateur_collectif_inconnu"
+oneOf:
+  - title: Générateur individuel
+    type: object
+    properties:
+      generateur_collectif:
+        const: false
+      generateur_multi_batiment:
+        const: false
+      generateur_mixte_id:
+        const: null
+      reseau_chaleur_id:
+        const: null
+    required:
+      - generateur_collectif
+  - title: Générateur collectif
+    type: object
+    properties:
+      generateur_collectif:
+        const: true
+      position_volume_chauffe:
+        const: false
+    required:
+      - generateur_collectif
+      - position_volume_chauffe

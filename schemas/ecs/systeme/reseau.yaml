@@ -1,0 +1,26 @@
+$id: https://schemas.dpe-audit.fr/ecs/systeme/reseau
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Réseau de distribution d'eau chaude sanitaire
+type: object
+properties:
+  alimentation_contigue:
+    title: Alimentation contigüe
+    type: boolean
+  niveaux_desservis:
+    title: Nombre de niveaux desservis
+    type: integer
+    minimum: 1
+  isolation:
+    title: Isolation du réseau
+    type: ["string", "null"]
+    enum: [isole, non_isole, null]
+    default: null
+  bouclage:
+    title: Type de bouclage
+    type: ["string", "null"]
+    enum: [non_boucle, boucle, trace, null]
+required:
+  - alimentation_contigue
+  - niveaux_desservis
+  - isolation
+  - bouclage

@@ -1,21 +1,55 @@
-- id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
-  description: Un générateur d'eau chaude sanitaire
-  type: cet_air_ambiant
-  energie: electricite
-  annee_installation: 2000
-  position:
-    generateur_collectif: false
-    generateur_multi_batiment: false
-    position_volume_chauffe: true
-    reseau_chaleur_id: null
-    generateur_mixte_id: null
-  signaletique:
-    volume_stockage: 200
-    pn: 10
-    cop: 3
-    label: null
-    mode_combustion: null
-    presence_ventouse: null
-    pveilleuse: null
-    qp0: null
-    rpn: null
+schema: https://schemas.dpe-audit.fr/ecs/generateur
+examples:
+  - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
+    description: Un générateur d'eau chaude sanitaire
+    type: cet_air_ambiant
+    energie: electricite
+    annee_installation: 2000
+    position:
+      position_chauffe_eau: null
+      generateur_collectif: false
+      generateur_multi_batiment: false
+      position_volume_chauffe: true
+      reseau_chaleur_id: null
+      generateur_mixte_id: null
+    signaletique:
+      volume_stockage: 200
+      pn: 10
+      cop: 3
+      label: null
+      mode_combustion: null
+      presence_ventouse: null
+      pveilleuse: null
+      qp0: null
+      rpn: null
+  - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
+    description: Chauffe eau
+    type: chauffe_eau
+    energie: electricite
+    annee_installation: 2000
+    position:
+      position_chauffe_eau: chauffe_eau_vertical
+      generateur_collectif: false
+      generateur_multi_batiment: false
+      position_volume_chauffe: true
+      reseau_chaleur_id: null
+      generateur_mixte_id: null
+    signaletique:
+      volume_stockage: 200
+      pn: 10
+      label: ne_performance_a
+  - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
+    description: Chauffe eau
+    type: chauffe_eau
+    energie: gaz_naturel
+    annee_installation: 2000
+    position:
+      position_chauffe_eau: chauffe_eau_vertical
+      generateur_collectif: false
+      generateur_multi_batiment: false
+      position_volume_chauffe: true
+      reseau_chaleur_id: null
+      generateur_mixte_id: null
+    signaletique:
+      volume_stockage: 0
+      pn: 10

@@ -1,9 +1,0 @@
-adresse: examples/adresse.yaml
-batiment: examples/batiment.yaml
-logements: examples/logement.yaml
-enveloppe: examples/enveloppe.yaml
-chauffage: examples/chauffage.yaml
-ecs: examples/ecs.yaml
-ventilation: examples/ventilation.yaml
-refroidissement: examples/refroidissement.yaml
-production: examples/production.yaml

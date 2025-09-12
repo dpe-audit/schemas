@@ -1,0 +1,38 @@
+$id: https://schemas.dpe-audit.fr/chauffage/installation
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Installation de chauffage
+type: object
+unevaluatedProperties: false
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  surface:
+    title: Surface couverte par l'installation de chauffage en m²
+    type: number
+    exclusiveMinimum: 0
+  comptage_individuel:
+    title: Comptage individuel
+    type: boolean
+  solaire_thermique:
+    title: Solaire thermique
+    type: ["object", "null"]
+    oneOf:
+      - const: null
+      - $ref: /chauffage/installation/solaire_thermique
+  regulation_centrale:
+    $ref: /chauffage/installation/regulation
+  regulation_terminale:
+    $ref: /chauffage/installation/regulation
+required:
+  - id
+  - description
+  - surface
+  - comptage_individuel
+  - solaire_thermique
+  - regulation_centrale
+  - regulation_terminale

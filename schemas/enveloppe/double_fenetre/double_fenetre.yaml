@@ -1,0 +1,133 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/double_fenetre
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Double fenêtre
+type: object
+unevaluatedProperties: false
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+  description:
+    title: Description
+    type: string
+  type:
+    title: Type
+    type: string
+    enum:
+      - brique_verre_pleine
+      - brique_verre_creuse
+      - polycarbonate
+      - fenetre_battante
+      - fenetre_coulissante
+      - porte_fenetre_coulissante
+      - porte_fenetre_battante
+  ug:
+    title: Coefficient de transmission thermique du vitrage connu et justifié en W/m²K
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+  uw:
+    title: Coefficient de transmission thermique de la baie connu et justifié en W/m²K
+    type: ["number", "null"]
+    exclusiveMinimum: 0
+    default: null
+  sw:
+    title: Proportion d'énergie solaire transmise par la baie en %
+    type: ["number", "null"]
+    minimum: 0
+    maximum: 100
+    default: null
+  position:
+    $ref: /enveloppe/double_fenetre/position
+  vitrage:
+    $ref: /enveloppe/double_fenetre/vitrage
+  survitrage:
+    title: Survitrage
+    type: ["object", "null"]
+    default: null
+    oneOf:
+      - $ref: /enveloppe/double_fenetre/survitrage
+      - const: null
+  menuiserie:
+    title: Menuiserie
+    type: [object, "null"]
+    default: null
+    oneOf:
+      - $ref: /enveloppe/double_fenetre/menuiserie
+      - const: null
+required:
+  - id
+  - description
+  - type
+  - position
+  - vitrage
+oneOf:
+  - title: Paroi vitrée
+    type: object
+    properties:
+      type:
+        enum: [brique_verre_pleine, brique_verre_creuse, polycarbonate]
+      vitrage:
+        type: object
+        properties:
+          type:
+            enum: [brique_verre, polycarbonate]
+      menuiserie:
+        const: null
+    required:
+      - type
+      - vitrage
+  - title: Fenêtre
+    type: object
+    properties:
+      type:
+        enum: [fenetre_battante, fenetre_coulissante]
+      position:
+        type: object
+        properties:
+          type_pose:
+            type: string
+        required:
+          - type_pose
+      vitrage:
+        type: object
+        properties:
+          type:
+            not:
+              enum: [brique_verre, polycarbonate]
+      menuiserie:
+        type: object
+    required:
+      - type
+      - position
+      - vitrage
+      - menuiserie
+  - title: Porte fenêtre
+    type: object
+    properties:
+      type:
+        enum: [porte_fenetre_coulissante, porte_fenetre_battante]
+      position:
+        type: object
+        properties:
+          type_pose:
+            type: string
+          presence_soubassement:
+            type: boolean
+        required:
+          - type_pose
+          - presence_soubassement
+      vitrage:
+        type: object
+        properties:
+          type:
+            not:
+              enum: [brique_verre, polycarbonate]
+      menuiserie:
+        type: object
+    required:
+      - type
+      - position
+      - vitrage
+      - menuiserie

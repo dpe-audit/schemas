@@ -70,21 +70,13 @@ properties:
     maximum: 100
     default: null
   position:
-    $ref: /enveloppe/baie/position
-  vitrage:
-    $ref: /enveloppe/baie/vitrage
-  survitrage:
-    title: Survitrage
-    type: ["object", "null"]
-    oneOf:
-      - $ref: /enveloppe/baie/survitrage
-      - const: null
+    $ref: "#/$defs/position"
   menuiserie:
-    title: Menuiserie
-    type: ["object", "null"]
-    oneOf:
-      - $ref: /enveloppe/baie/menuiserie
-      - const: null
+    $ref: "#/$defs/menuiserie"
+  vitrage:
+    $ref: "#/$defs/vitrage"
+  survitrage:
+    $ref: "#/$defs/survitrage"
   masques:
     title: Liste des masques
     type: array
@@ -93,26 +85,7 @@ properties:
       type: string
       format: uuid
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      u:
-        title: Coefficient de transmission thermique en W/(m².K)
-        type: number
-      b:
-        title: Coefficient de réduction des déperditions thermiques
-        type: number
-      sdep:
-        title: Surface déperditive en m²
-        type: number
-      dp:
-        title: Déperditions thermiques en W/K
-        type: number
-      performance:
-        title: Performance
-        type: string
-        enum: [tres_bonne, bonne, moyenne, insuffisante]
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -191,3 +164,213 @@ oneOf:
       - position
       - vitrage
       - menuiserie
+$defs:
+  position:
+    title: Position
+    type: object
+    properties:
+      paroi_id:
+        title: Identifiant de la paroi associée à la baie
+        type: ["string", "null"]
+        format: uuid
+        default: null
+      local_non_chauffe_id:
+        title: Identifiant du local non chauffé associé à la baie
+        type: ["string", "null"]
+        format: uuid
+        default: null
+      double_fenetre_id:
+        title: Identifiant de la double fenêtre associée
+        type: ["string", "null"]
+        format: uuid
+        default: null
+      surface:
+        title: Surface déperditive exprimée en m²
+        type: number
+        minimum: 0
+      mitoyennete:
+        $ref: /enveloppe/paroi/mitoyennete
+      type_pose:
+        title: Type de pose
+        type: ["string", "null"]
+        enum: [nu_exterieur, nu_interieur, tunnel, null]
+        default: null
+      presence_soubassement:
+        title: Présence d'un soubassement
+        type: [boolean, "null"]
+        default: null
+      inclinaison:
+        title: Inclinaison de la baie par rapport à l'horizontale en degré
+        type: number
+        minimum: 0
+        maximum: 90
+      orientation:
+        title: Orientation de la baie en degré par rapport au nord
+        type: [number, "null"]
+        minimum: 0
+        exclusiveMaximum: 360
+    required:
+      - paroi_id
+      - surface
+      - mitoyennete
+      - inclinaison
+      - orientation
+    allOf:
+      - oneOf:
+          - title: Baie donnant sur un local non chauffé
+            type: object
+            properties:
+              mitoyennete:
+                const: local_non_chauffe
+              local_non_chauffe_id:
+                type: string
+            required:
+              - local_non_chauffe_id
+              - mitoyennete
+          - title: Autres cas
+            type: object
+            properties:
+              mitoyennete:
+                not:
+                  const: local_non_chauffe
+              local_non_chauffe_id:
+                const: null
+            required:
+              - mitoyennete
+      - oneOf:
+          - title: Baie horizontale
+            type: object
+            properties:
+              inclinaison:
+                const: 0
+              orientation:
+                const: null
+            required:
+              - inclinaison
+              - orientation
+          - title: Autres cas
+            type: object
+            properties:
+              inclinaison:
+                minimumExlusive: 0
+              orientation:
+                type: number
+            required:
+              - inclinaison
+              - orientation
+  menuiserie:
+    title: Menuiserie
+    type: object
+    properties:
+      materiau:
+        title: Matériau
+        type: ["string", "null"]
+        enum: [pvc, bois, bois_metal, metal, null]
+        default: null
+      largeur_dormant:
+        title: Largeur dormant en mm
+        type: ["number", "null"]
+        exclusiveMinimum: 0
+        default: null
+      presence_joint:
+        title: Présence de joint d'étanchéité
+        type: ["boolean", "null"]
+        default: null
+      presence_retour_isolation:
+        title: Présence d'un retour d'isolation
+        type: ["boolean", "null"]
+        default: null
+      presence_rupteur_pont_thermique:
+        title: Présence d'un rupteur de pont thermique
+        type: ["boolean", "null"]
+        default: null
+    required:
+      - materiau
+      - largeur_dormant
+      - presence_joint
+      - presence_retour_isolation
+      - presence_rupteur_pont_thermique
+  vitrage:
+    title: Vitrage
+    type: object
+    properties:
+      type:
+        title: Type
+        type: string
+        enum:
+          - brique_verre
+          - polycarbonate
+          - simple_vitrage
+          - double_vitrage
+          - double_vitrage_fe
+          - triple_vitrage
+          - triple_vitrage_fe
+      nature_lame:
+        title: Nature de la lame d'air
+        type: ["string", "null"]
+        enum: [air, argon, krypton, null]
+        default: null
+      epaisseur_lame:
+        title: Epaisseur de la lame d'air en mm
+        type: ["number", "null"]
+        exclusiveMinimum: 0
+        default: null
+    required:
+      - type
+    oneOf:
+      - title: Paroi vitrée
+        properties:
+          type:
+            enum: [brique_verre, polycarbonate]
+          nature_lame:
+            const: null
+          epaisseur_lame:
+            const: null
+        required:
+          - type
+      - title: Vitrage simple
+        properties:
+          type:
+            const: simple_vitrage
+          nature_lame:
+            const: null
+          epaisseur_lame:
+            const: null
+        required:
+          - type
+      - title: Vitrage complexe
+        properties:
+          type:
+            not:
+              enum: [brique_verre, polycarbonate, simple_vitrage]
+        required:
+          - type
+  survitrage:
+    title: Survitrage
+    type: object
+    properties:
+      type:
+        title: Type de survitrage
+        type: ["string", "null"]
+        enum: [survitrage_simple, survitrage_fe, null]
+        default: null
+      epaisseur_lame:
+        title: Epaisseur de la lame d'air en mm
+        type: ["number", "null"]
+        minimum: 0
+        default: null
+    required:
+      - type
+      - epaisseur_lame
+  data:
+    title: Données calculées
+    type: object
+    properties:
+      ug:
+        title: Coefficient de transmission thermique du vitrage en W/m²K
+        type: ["number", "null"]
+      uw:
+        title: Coefficient de transmission thermique de la baie en W/m²K
+        type: ["number", "null"]
+    allOf:
+      - $ref: /enveloppe/paroi/data

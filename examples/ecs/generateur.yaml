@@ -22,6 +22,18 @@ examples:
       pveilleuse: null
       qp0: null
       rpn: null
+    data:
+      rdim: 1
+      cef_ecs: 1500
+      cep_ecs: 1800
+      eges_ecs: 500
+      pn: 20
+      pdim: 20
+      pecs: 20
+      cop: 3.5
+      rpn: null
+      qp0: null
+      pveilleuse: null
   - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
     description: Chauffe eau
     type: chauffe_eau
@@ -38,6 +50,18 @@ examples:
       volume_stockage: 200
       pn: 10
       label: ne_performance_a
+    data:
+      rdim: 1
+      cef_ecs: 1500
+      cep_ecs: 1800
+      eges_ecs: 500
+      pn: 20
+      pdim: 20
+      pecs: 20
+      cop: null
+      rpn: null
+      qp0: null
+      pveilleuse: null
   - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
     description: Chauffe eau
     type: chauffe_eau
@@ -53,3 +77,16 @@ examples:
     signaletique:
       volume_stockage: 0
       pn: 10
+    data:
+      rdim: 1
+      cef_ecs: 1500
+      cep_ecs: 1800
+      eges_ecs: 500
+      pn: 20
+      pdim: 20
+      pecs: 20
+      cop: null
+      rpn: null
+      qp0: null
+      pveilleuse: null
+

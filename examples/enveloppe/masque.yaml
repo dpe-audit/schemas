@@ -6,9 +6,13 @@ examples:
     configuration: fond_balcon
     orientation: nord
     profondeur: 2.5
+    data:
+      fe1: 0.8
   - id: 84689d75-6494-425a-8ed6-5e5a26ad9716
     description: Un masque lointain homogène
     type: lointain
     configuration: homogene
     hauteur: 45
     orientation: nord
+    data:
+      fe2: 0.7

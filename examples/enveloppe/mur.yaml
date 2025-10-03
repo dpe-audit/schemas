@@ -23,3 +23,9 @@ examples:
       annee_installation: 2010
       epaisseur: 100
       resistance_thermique: 4.0
+    data:
+      sdep: 100
+      b: 1
+      u: 2.5
+      dp: 250
+      performance: insuffisante

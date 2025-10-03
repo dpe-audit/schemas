@@ -7,3 +7,6 @@ examples:
     modules: 6
     surface: 10
     installation_collective: false
+    data:
+      kpv: 1
+      ppv: 500

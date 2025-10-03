@@ -6,3 +6,8 @@ examples:
     type: pac_air_air
     energie: electricite
     seer: null
+    data:
+      rdim: 1
+      cef_fr: 1000
+      cep_fr: 1900
+      eges_fr: 500

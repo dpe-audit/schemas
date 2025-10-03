@@ -19,15 +19,13 @@ properties:
     title: Comptage individuel
     type: boolean
   solaire_thermique:
-    title: Solaire thermique
-    type: ["object", "null"]
-    oneOf:
-      - const: null
-      - $ref: /chauffage/installation/solaire_thermique
+    $ref: "#/$defs/solaire_thermique"
   regulation_centrale:
-    $ref: /chauffage/installation/regulation
+    $ref: "#/$defs/regulation"
   regulation_terminale:
-    $ref: /chauffage/installation/regulation
+    $ref: "#/$defs/regulation"
+  data:
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -36,3 +34,139 @@ required:
   - solaire_thermique
   - regulation_centrale
   - regulation_terminale
+$defs:
+  solaire_thermique:
+    title: Solaire thermique
+    type: ["object", "null"]
+    default: null
+    properties:
+      usage:
+        title: Usages couverts par le solaire thermique
+        type: string
+        enum:
+          - chauffage
+          - chauffage_ecs
+        default: chauffage
+      annee_installation:
+        title: Année d'installation
+        type: ["integer", "null"]
+        default: null
+      fch:
+        title: Facteur de couverture solaire connu et justifié en %
+        type: number
+        minimum: 0
+        maximum: 100
+    required:
+      - usage
+      - annee_installation
+      - fch
+  regulation:
+    title: Régulation
+    type: object
+    properties:
+      presence_regulation:
+        title: Présence d'une régulation
+        type: boolean
+      minimum_temperature:
+        title: Régulation avec minimum de température
+        type: [boolean, "null"]
+        default: null
+      detection_presence:
+        title: Détection de présence
+        type: [boolean, "null"]
+        default: null
+    required:
+      - presence_regulation
+    oneOf:
+      - title: Régulation
+        type: object
+        properties:
+          presence_regulation:
+            const: true
+          minimum_temperature:
+            type: boolean
+          detection_presence:
+            type: boolean
+        required:
+          - presence_regulation
+          - minimum_temperature
+          - detection_presence
+      - title: Pas de régulation
+        type: object
+        properties:
+          presence_regulation:
+            const: false
+          minimum_temperature:
+            const: null
+          detection_presence:
+            const: null
+        required:
+          - presence_regulation
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      rdim:
+        title: Ratio de dimensionnement
+        type: number
+      fch:
+        title: Facteur de couverture solaire
+        type: number
+      int:
+        title: Facteur d'intermittence
+        type: number
+      i0:
+        title: Coefficient d'intermittence
+        type: number
+      cef_ch:
+        title: Consommation finale de chauffage en kWh/an
+        type: number
+      cep_ch:
+        title: Consommation primaire de chauffage en kWh/an
+        type: number
+      eges_ch:
+        title: Emissions de gaz à effet de serre de chauffage en kgCO2/an
+        type: number
+      cef_aux:
+        title: Consommation finale des auxiliaires en kWh/an
+        type: number
+      cep_aux:
+        title: Consommation primaire des auxiliaires en kWh/an
+        type: number
+      eges_aux:
+        title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
+        type: number
+      rendements:
+        $ref: "#/$defs/rendements"
+      pertes:
+        $ref: "#/$defs/pertes"
+  rendements:
+    title: Rendements
+    type: object
+    properties:
+      ich:
+        title: Inverse du rendement du système
+        type: number
+      rd:
+        title: Rendement de distribution
+        type: number
+      re:
+        title: Rendement d'émission
+        type: number
+      rg:
+        title: Rendement de génération
+        type: number
+      rr:
+        title: Rendement de régulation
+        type: number
+  pertes:
+    title: Pertes
+    type: object
+    properties:
+      pertes_generation:
+        title: Pertes de génération en kWh/an
+        type: number
+      pertes_generation_recuperables:
+        title: Pertes de génération récupérables en kWh/an
+        type: number

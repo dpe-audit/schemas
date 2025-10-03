@@ -8,3 +8,6 @@ examples:
       type: plancher_bas_mur
       mur_id: b0b1933f-8097-4b36-8532-aa1fab8726d2
       plancher_id: 78ce5abe-e271-43f0-84de-d685ae4da9ef
+    data:
+      k: 0.1
+      pt: 0.1

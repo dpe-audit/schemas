@@ -3,3 +3,8 @@ examples:
   - id: 5124d497-6458-45a9-a9b0-8c84d14139f6
     description: Une installation de refroidissement
     surface: 100
+    data:
+      rdim: 1
+      cef_fr: 1000
+      cep_fr: 1900
+      eges_fr: 500

@@ -16,3 +16,9 @@ examples:
       orientation: null
     isolation:
       etat: null
+    data:
+      sdep: 100
+      b: 1
+      u: 2.5
+      dp: 250
+      performance: insuffisante

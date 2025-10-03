@@ -14,6 +14,12 @@ examples:
       local_non_chauffe_id: 30972a71-398f-4eb9-a902-0a6665d94a4f
     isolation:
       etat: null
+    data:
+      sdep: 100
+      b: 1
+      u: 2.5
+      dp: 250
+      performance: insuffisante
   - id: ecd4cd8f-7f2b-4427-9d94-b1ed5da33711
     description: Un plancher bas
     type_structure: dalle_beton
@@ -29,3 +35,9 @@ examples:
       perimetre_ue: 40
     isolation:
       etat: null
+    data:
+      sdep: 100
+      b: 1
+      u: 2.5
+      dp: 250
+      performance: insuffisante

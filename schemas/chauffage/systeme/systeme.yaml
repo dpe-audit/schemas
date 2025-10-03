@@ -24,12 +24,7 @@ properties:
     type: string
     enum: [chauffage_central, chauffage_divise]
   reseau:
-    title: Réseau de distribution
-    type: [object, "null"]
-    default: null
-    oneOf:
-      - const: null
-      - $ref: /chauffage/systeme/reseau
+    $ref: "#/$defs/reseau"
   emetteurs:
     title: Liste des émetteurs associés au système de chauffage
     type: array
@@ -38,6 +33,8 @@ properties:
       title: Identifiant unique de l'émetteur de chauffage au format UUID
       type: string
       format: uuid
+  data:
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -72,3 +69,99 @@ oneOf:
         maxContains: 0
     required:
       - type
+$defs:
+  reseau:
+    title: Réseau de distribution
+    type: [object, "null"]
+    default: null
+    properties:
+      type_distribution:
+        title: Type de distribution
+        type: string
+        enum:
+          - hydraulique
+          - aeraulique
+          - fluide_frigorigene
+      presence_circulateur_externe:
+        title: Présence d'un circulateur externe
+        type: boolean
+        default: false
+      niveaux_desservis:
+        title: Nombre de niveaux desservis par le réseau
+        type: integer
+        minimum: 1
+      isolation:
+        title: Isolation du réseau
+        type: ["string", "null"]
+        enum: [isole, non_isole, null]
+        default: null
+    required:
+      - type_distribution
+      - presence_circulateur_externe
+      - niveaux_desservis
+      - isolation
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      rdim:
+        title: Ratio de dimensionnement
+        type: number
+      int:
+        title: Facteur d'intermittence
+        type: number
+      i0:
+        title: Coefficient d'intermittence
+        type: number
+      cef_ch:
+        title: Consommation finale de chauffage en kWh/an
+        type: number
+      cep_ch:
+        title: Consommation primaire de chauffage en kWh/an
+        type: number
+      eges_ch:
+        title: Emissions de gaz à effet de serre de chauffage en kgCO2/an
+        type: number
+      cef_aux:
+        title: Consommation finale des auxiliaires en kWh/an
+        type: number
+      cep_aux:
+        title: Consommation primaire des auxiliaires en kWh/an
+        type: number
+      eges_aux:
+        title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
+        type: number
+      rendements:
+        $ref: "#/$defs/rendements"
+      pertes:
+        $ref: "#/$defs/pertes"
+  rendements:
+    title: Rendements
+    type: object
+    properties:
+      ich:
+        title: Inverse du rendement du système
+        type: number
+      rd:
+        title: Rendement de distribution
+        type: number
+      re:
+        title: Rendement d'émission
+        type: number
+      rg:
+        title: Rendement de génération
+        type: number
+      rr:
+        title: Rendement de régulation
+        type: number
+  pertes:
+    title: Pertes
+    type: object
+    properties:
+      pertes_generation:
+        title: Pertes de génération en kWh/an
+        type: number
+      pertes_generation_recuperables:
+        title: Pertes de génération récupérables en kWh/an
+        type: number

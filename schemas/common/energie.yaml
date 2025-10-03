@@ -3,19 +3,17 @@ $id: https://schemas.dpe-audit.fr/common/energie
 title: Energie
 type: string
 oneOf:
-  - const: electricite
-    title: Électricité
-  - const: gaz_naturel
-    title: Gaz naturel
-  - const: gpl
-    title: GPL
-  - const: fioul
-    title: Fioul
-  - const: bois
-    title: Bois
-  - const: charbon
-    title: Charbon
-  - const: reseau_chaleur
-    title: Réseau de chaleur
-  - const: reseau_froid
-    title: Réseau de froid
+  - title: Electricité
+    const: electricite
+  - title: Gaz naturel
+    const: gaz_naturel
+  - title: GPL
+    const: gpl
+  - title: Fioul
+    const: fioul
+  - title: Bois
+    const: bois
+  - title: Charbon
+    const: charbon
+  - title: Réseau urbain
+    const: reseau_urbain

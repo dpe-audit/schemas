@@ -5,7 +5,23 @@ examples:
     surface: 100
     type: ventilation_mecanique
     generateur_id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
+    data:
+      rdim: 0.5
+      qvarep_conv: 1.5
+      qvasouf_conv: 0
+      smea_conv: 2
+      cef_aux: 1500
+      cep_aux: 1800
+      eges_aux: 200
   - id: e5258a6a-ef09-4895-bb13-46e1d1651153
     description: Installation de ventilation naturelle
     surface: 100
     type: ventilation_naturelle_ouverture_fenetres
+    data:
+      rdim: 0.5
+      qvarep_conv: 1.2
+      qvasouf_conv: 1.2
+      smea_conv: 0
+      cef_aux: 0
+      cep_aux: 0
+      eges_aux: 0

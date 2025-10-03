@@ -27,8 +27,49 @@ properties:
     minContains: 1
     items:
       $ref: /chauffage/systeme
+  data:
+    $ref: "#/$defs/data"
 required:
   - generateurs
   - emetteurs
   - installations
   - systemes
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      bch:
+        title: Besoin de chauffage en kWh/an
+        type: number
+      cef_ch:
+        title: Consommation finale de chauffage en kWh/an
+        type: number
+      cep_ch:
+        title: Consommation primaire de chauffage en kWh/an
+        type: number
+      eges_ch:
+        title: Emissions de gaz à effet de serre de chauffage en kgCO2/an
+        type: number
+      cef_aux:
+        title: Consommation finale des auxiliaires de chauffage en kWh/an
+        type: number
+      cep_aux:
+        title: Consommation primaire des auxiliaires de chauffage en kWh/an
+        type: number
+      eges_aux:
+        title: Emissions de gaz à effet de serre des auxiliaires de chauffage en kgCO2/an
+        type: number
+      pertes:
+        $ref: "#/$defs/pertes"
+  pertes:
+    title: Pertes
+    type: object
+    properties:
+      pertes_generation:
+        title: Pertes de génération en kWh/an
+        type: number
+      pertes_generation_recuperables:
+        title: Pertes de génération récupérables en kWh/an
+        type: number

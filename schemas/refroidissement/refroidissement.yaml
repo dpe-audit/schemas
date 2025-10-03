@@ -22,6 +22,13 @@ properties:
     items:
       $ref: /refroidissement/systeme
   data:
+    $ref: "#/$defs/data"
+required:
+  - generateurs
+  - installations
+  - systemes
+$defs:
+  data:
     title: Données calculées
     type: object
     readOnly: true
@@ -29,16 +36,12 @@ properties:
       bfr:
         title: Besoin annuel de refroidissement en kWh
         type: number
-      cef:
+      cef_fr:
         title: Consommation finale en kWh/an
         type: number
-      cep:
+      cep_fr:
         title: Consommation primaire en kWh/an
         type: number
-      eges:
+      eges_fr:
         title: Emissions de gaz à effet de serre en kgCO2/an
         type: number
-required:
-  - generateurs
-  - installations
-  - systemes

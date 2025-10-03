@@ -11,9 +11,14 @@ properties:
     title: Description
     type: string
   orientation:
-    $ref: /common/orientation
+    title: Orientation
+    minimum: 0
+    exclusiveMaximum: 360
   inclinaison:
-    $ref: /common/inclinaison
+    title: Inclinaison
+    type: number
+    minimum: 0
+    maximum: 90
   modules:
     title: Nombre de modules
     type: integer
@@ -27,16 +32,7 @@ properties:
     title: Installation photovoltaïque collective
     type: boolean
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      kpv:
-        title: Coefficient de pondération prenant en compte l'altération par rapport à l'orientation optimale
-        type: number
-      ppv:
-        title: Production photovoltaïque en kWh
-        type: number
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -45,3 +41,15 @@ required:
   - modules
   - surface
   - installation_collective
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      kpv:
+        title: Coefficient de pondération prenant en compte l'altération par rapport à l'orientation optimale
+        type: number
+      ppv:
+        title: Production photovoltaïque en kWh/an
+        type: number

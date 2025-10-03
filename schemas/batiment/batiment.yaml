@@ -33,6 +33,8 @@ properties:
   materiaux_anciens:
     title: Bâtiment majoritairement composé de matériaux anciens
     type: boolean
+  data:
+    $ref: "#/$defs/data"
 required:
   - rnb_id
   - type
@@ -42,3 +44,23 @@ required:
   - surface_habitable
   - hauteur_sous_plafond
   - materiaux_anciens
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      effet_joule:
+        title: Bâtiment chauffé par effet joule
+        type: boolean
+      parois_anciennes_lourdes:
+        title: Bâtiment constitué de parois anciennes lourdes
+        type: boolean
+      surface_reference:
+        title: Surface thermique de référence en m²
+        type: number
+        minimumExclusive: 0
+      volume_reference:
+        title: Volume thermique de référence en m³
+        type: number
+        minimumExclusive: 0

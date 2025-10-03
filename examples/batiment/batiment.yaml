@@ -8,3 +8,8 @@ examples:
     surface_habitable: 100
     hauteur_sous_plafond: 2.5
     materiaux_anciens: true
+    data:
+      effet_joule: true
+      parois_anciennes_lourdes: true
+      surface_reference: 100
+      volume_reference: 250

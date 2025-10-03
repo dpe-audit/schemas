@@ -10,10 +10,6 @@ properties:
   description:
     title: Description
     type: string
-  type_pose:
-    title: Type de pose
-    type: string
-    enum: [nu_exterieur, nu_interieur, tunnel]
   isolation:
     title: État d'isolation de la porte
     type: ["string", "null"]
@@ -29,41 +25,21 @@ properties:
     type: ["integer", "null"]
     default: null
   u:
-    title: Coefficient de transmission thermique de la porte connu et justifié en W/m²K
+    title: Coefficient de transmission thermique connu et justifié en W/m²K
     type: ["number", "null"]
     exclusiveMinimum: 0
     default: null
   position:
-    $ref: /enveloppe/porte/position
+    $ref: "#/$defs/position"
   menuiserie:
-    $ref: /enveloppe/porte/menuiserie
+    $ref: "#/$defs/menuiserie"
   vitrage:
-    $ref: /enveloppe/porte/vitrage
+    $ref: "#/$defs/vitrage"
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      u:
-        title: Coefficient de transmission thermique en W/(m².K)
-        type: number
-      b:
-        title: Coefficient de réduction des déperditions thermiques
-        type: number
-      sdep:
-        title: Surface déperditive en m²
-        type: number
-      dp:
-        title: Déperditions thermiques en W/K
-        type: number
-      performance:
-        title: Performance
-        type: string
-        enum: [tres_bonne, bonne, moyenne, insuffisante]
+    $ref: "#/$defs/data"
 required:
   - id
   - description
-  - type_pose
   - isolation
   - materiau
   - annee_installation
@@ -71,3 +47,126 @@ required:
   - position
   - vitrage
   - menuiserie
+$defs:
+  position:
+    title: Position de la porte
+    type: object
+    properties:
+      paroi_id:
+        title: Identifiant de la paroi associée à la porte
+        type: ["string", "null"]
+        format: uuid
+        default: null
+      local_non_chauffe_id:
+        title: Identifiant du local non chauffé associé à la porte
+        type: ["string", "null"]
+        format: uuid
+        default: null
+      surface:
+        title: Surface déperditive exprimée en m²
+        type: number
+        exclusiveMinimum: 0
+      mitoyennete:
+        $ref: /enveloppe/paroi/mitoyennete
+      orientation:
+        title: Orientation de la porte en degré par rapport au nord
+        type: ["number", "null"]
+        minimum: 0
+        exclusiveMaximum: 360
+        default: null
+      presence_sas:
+        title: Présence d'un sas devant la porte
+        type: boolean
+      type_pose:
+        $ref: /enveloppe/paroi/type_pose
+    required:
+      - surface
+      - mitoyennete
+      - orientation
+      - presence_sas
+      - type_pose
+    oneOf:
+      - title: Porte donnant sur un local non chauffé
+        type: object
+        properties:
+          mitoyennete:
+            const: local_non_chauffe
+          local_non_chauffe_id:
+            type: string
+        required:
+          - local_non_chauffe_id
+          - mitoyennete
+      - title: Autres cas
+        type: object
+        properties:
+          mitoyennete:
+            not:
+              const: local_non_chauffe
+          local_non_chauffe_id:
+            const: null
+        required:
+          - mitoyennete
+  menuiserie:
+    title: Menuiserie
+    type: object
+    properties:
+      largeur_dormant:
+        title: Largeur dormant en mm
+        type: [number, "null"]
+        minimum: 0
+        default: null
+      presence_joint:
+        title: Présence de joint d'étanchéité
+        type: [boolean, "null"]
+        default: null
+      presence_retour_isolation:
+        title: Présence d'un retour d'isolation
+        type: [boolean, "null"]
+        default: null
+    required:
+      - largeur_dormant
+      - presence_joint
+      - presence_retour_isolation
+  vitrage:
+    title: Vitrage
+    type: object
+    properties:
+      surface:
+        title: Surface de vitrage en m²
+        description: Une porte avec un taux de vitrage supérieur à 60% est à considérer comme une porte-fenêtre avec soubassement
+        type: number
+        minimum: 0
+      type:
+        title: Type de vitrage
+        type: ["string", "null"]
+        enum: [simple_vitrage, double_vitrage, triple_vitrage, null]
+        default: null
+    required:
+      - surface
+    oneOf:
+      - title: Porte sans vitrage
+        type: object
+        properties:
+          surface:
+            const: 0
+          type:
+            const: null
+        required:
+          - surface
+      - title: Porte avec vitrage
+        type: object
+        properties:
+          surface:
+            type: number
+            minimumExclusive: 0
+          type:
+            type: string
+        required:
+          - surface
+          - type
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    allOf:
+      - $ref: /enveloppe/paroi/data

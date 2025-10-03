@@ -1,9 +1,5 @@
 # Changelog
 
-## 0.2 (dev)
+## [1.0.0-alpha](https://github.com/dpe-audit/schemas)
 
-- Version de développement
-
-## 0.1 (dev)
-
-- Version de développement
+Version de développement

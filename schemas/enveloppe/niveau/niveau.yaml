@@ -27,6 +27,16 @@ properties:
     type: string
     enum: [lourde, legere]
   data:
+    $ref: "#/$defs/data"
+required:
+  - id
+  - description
+  - surface
+  - inertie_paroi_verticale
+  - inertie_plancher_bas
+  - inertie_plancher_haut
+$defs:
+  data:
     title: Données calculées
     type: object
     readOnly: true
@@ -35,10 +45,3 @@ properties:
         title: Inertie
         type: string
         enum: [lourde, legere]
-required:
-  - id
-  - description
-  - surface
-  - inertie_paroi_verticale
-  - inertie_plancher_bas
-  - inertie_plancher_haut

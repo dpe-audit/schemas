@@ -3,3 +3,20 @@ examples:
   - generateurs: https://schemas.dpe-audit.fr/ecs/generateur
     installations: https://schemas.dpe-audit.fr/ecs/installation
     systemes: https://schemas.dpe-audit.fr/ecs/systeme
+    data:
+      nadeq: 2.5
+      nmax: 1.0
+      becs: 2500
+      cef_ecs: 1500
+      cep_ecs: 1800
+      eges_ecs: 500
+      cef_aux: 1500
+      cep_aux: 1800
+      eges_aux: 500
+      pertes:
+        pertes_generation: 100
+        pertes_generation_recuperables: 150
+        pertes_stockage: 300
+        pertes_stockage_recuperables: 150
+        pertes_distribution: 300
+        pertes_distribution_recuperables: 150

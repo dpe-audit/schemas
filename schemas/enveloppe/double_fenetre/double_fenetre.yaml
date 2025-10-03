@@ -39,23 +39,15 @@ properties:
     maximum: 100
     default: null
   position:
-    $ref: /enveloppe/double_fenetre/position
-  vitrage:
-    $ref: /enveloppe/double_fenetre/vitrage
-  survitrage:
-    title: Survitrage
-    type: ["object", "null"]
-    default: null
-    oneOf:
-      - $ref: /enveloppe/double_fenetre/survitrage
-      - const: null
+    $ref: "#/$defs/position"
   menuiserie:
-    title: Menuiserie
-    type: [object, "null"]
-    default: null
-    oneOf:
-      - $ref: /enveloppe/double_fenetre/menuiserie
-      - const: null
+    $ref: "#/$defs/menuiserie"
+  vitrage:
+    $ref: "#/$defs/vitrage"
+  survitrage:
+    $ref: "#/$defs/survitrage"
+  data:
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -131,3 +123,143 @@ oneOf:
       - position
       - vitrage
       - menuiserie
+$defs:
+  position:
+    title: Position
+    type: object
+    properties:
+      type_pose:
+        title: Type de pose
+        type: ["string", "null"]
+        enum: [nu_exterieur, nu_interieur, tunnel, null]
+        default: null
+      inclinaison:
+        title: Inclinaison
+        type: number
+        minimum: 0
+        maximum: 90
+      presence_soubassement:
+        title: Présence d'un soubassement
+        type: [boolean, "null"]
+        default: null
+    required:
+      - inclinaison
+  menuiserie:
+    title: Menuiserie
+    type: [object, "null"]
+    default: null
+    properties:
+      materiau:
+        title: Matériau
+        type: ["string", "null"]
+        enum: [pvc, bois, bois_metal, metal, null]
+      largeur_dormant:
+        title: Largeur dormant en mm
+        type: ["number", "null"]
+        exclusiveMinimum: 0
+        default: null
+      presence_joint:
+        title: Présence de joint d'étanchéité
+        type: ["boolean", "null"]
+        default: null
+      presence_retour_isolation:
+        title: Présence d'un retour d'isolation
+        type: ["boolean", "null"]
+        default: null
+      presence_rupteur_pont_thermique:
+        title: Présence d'un rupteur de pont thermique
+        type: ["boolean", "null"]
+        default: null
+    required:
+      - materiau
+      - largeur_dormant
+      - presence_joint
+      - presence_retour_isolation
+      - presence_rupteur_pont_thermique
+  vitrage:
+    title: Vitrage
+    type: object
+    properties:
+      type:
+        title: Type
+        type: string
+        enum:
+          - brique_verre
+          - polycarbonate
+          - simple_vitrage
+          - double_vitrage
+          - double_vitrage_fe
+          - triple_vitrage
+          - triple_vitrage_fe
+      nature_lame:
+        title: Nature de la lame d'air
+        type: ["string", "null"]
+        enum: [air, argon, krypton, null]
+        default: null
+      epaisseur_lame:
+        title: Epaisseur de la lame d'air en mm
+        type: ["number", "null"]
+        exclusiveMinimum: 0
+        default: null
+    required:
+      - type
+    oneOf:
+      - title: Paroi vitrée
+        properties:
+          type:
+            enum: [brique_verre, polycarbonate]
+          nature_lame:
+            const: null
+          epaisseur_lame:
+            const: null
+        required:
+          - type
+      - title: Vitrage simple
+        properties:
+          type:
+            const: simple_vitrage
+          nature_lame:
+            const: null
+          epaisseur_lame:
+            const: null
+        required:
+          - type
+      - title: Vitrage complexe
+        properties:
+          type:
+            not:
+              enum: [brique_verre, polycarbonate, simple_vitrage]
+        required:
+          - type
+  survitrage:
+    title: Survitrage
+    type: [object, "null"]
+    default: null
+    properties:
+      type:
+        title: Type de survitrage
+        type: ["string", "null"]
+        enum: [survitrage_simple, survitrage_fe, null]
+        default: null
+      epaisseur_lame:
+        title: Epaisseur de la lame d'air en mm
+        type: ["number", "null"]
+        minimum: 0
+        default: null
+    required:
+      - type
+      - epaisseur_lame
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      ug:
+        title: Coefficient de transmission thermique du vitrage en W/m²K
+        type: ["number", "null"]
+      uw:
+        title: Coefficient de transmission thermique de la baie en W/m²K
+        type: ["number", "null"]
+      sw:
+        title: Proportion d'énergie solaire transmise par la baie en %
+        type: ["number", "null"]

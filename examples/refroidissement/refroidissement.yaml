@@ -3,3 +3,7 @@ examples:
   - generateurs: https://schemas.dpe-audit.fr/refroidissement/generateur
     installations: https://schemas.dpe-audit.fr/refroidissement/installation
     systemes: https://schemas.dpe-audit.fr/refroidissement/systeme
+    data:
+      cef_fr: 1000
+      cep_fr: 1900
+      eges_fr: 500

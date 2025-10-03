@@ -8,19 +8,16 @@
 	<a href="https://github.com/dpe-audit/api">
 		API
 	</a>&nbsp;&nbsp;&nbsp;
-	<a href="https://github.com/dpe-audit/api">
+	<a href="https://github.com/dpe-audit/demo">
 		Démo
 	</a>&nbsp;&nbsp;&nbsp;
-	<a href="https://github.com/dpe-audit/documentation">
+	<a href="https://github.com/dpe-audit/doc">
 		Documentation
 	</a>
 </p>
 <p align="center">
 	<a href="https://github.com/dpe-audit/schemas">
 		Schémas
-	</a>&nbsp;&nbsp;&nbsp;
-	<a href="https://github.com/dpe-audit/opendata">
-		Données ouvertes
 	</a>&nbsp;&nbsp;&nbsp;
 	<a href="https://github.com/dpe-audit/methode-3cl">
 		Méthode 3CL
@@ -32,7 +29,7 @@
 
 # DPE-Audit - Schémas de données publiques
 
-Standard de données publiques pour la description thermique des bâtiments (données d'entrée).
+Standard de données publiques pour la description thermique des bâtiments.
 
 > [!IMPORTANT]
 > Ce projet est actuellement en cours de développement.
@@ -60,9 +57,22 @@ npm run build // Déréférence le schéma de données aux formats JSON et YAML
 
 ## Documentation
 
-### Généralités
+### Introduction
 
-Le schéma de données publiques proposer une description standardisée des bâtiments du point de vue du diagnostiqueur / auditeur pour l'établissement des Diagnostics de Performance Energétique et Audits réglementaires.
+Le schéma de données publiques propose une nouvelle modélisation thermique des bâtiments pour l'établissement des Diagnostics de Performance Energétique et Audits réglementaires. Le schéma poursuit deux objectifs :
+
+- Décrire thermiquement un bâtiment ou un logement ;
+- Collecter les données nécessaires à l'application de la méthode de calcul conventionnel 3CL-DPE.
+
+### Principales évolutions
+
+- Découpage des schémas par entité métier (générateurs, installations, parois...)
+- Intégration des règles de validation métier directement dans les schémas
+- Remplacement des énumérations tabulaires par des énumérations métiers
+
+### Technologies
+
+- JSON Schema
 
 ### Structure
 
@@ -94,7 +104,6 @@ Ressource
 ├── Ventilation
 │   ├── Générateurs
 │   ├── Installations
-│   ├── Systèmes
 ├── Refroidissement
 │   ├── Générateurs
 │   ├── Installations
@@ -102,10 +111,6 @@ Ressource
 ├── Production
 │   ├── Panneaux photovoltaïques
 ```
-
-### Technologies
-
-- JSON Schema
 
 ### Conventions de nommage
 

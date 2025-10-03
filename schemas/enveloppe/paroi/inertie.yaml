@@ -1,0 +1,6 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/paroi/inertie
+$schema: https://json-schema.org/draft/2020-12/schema
+title: État d'inertie
+type: ["string", "null"]
+enum: [lourde, legere, null]
+default: null

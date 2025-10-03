@@ -39,30 +39,7 @@ properties:
   production:
     $ref: /production
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      cef:
-        title: Consommation d'énergie finale
-        type: number
-        minimum: 0
-      cep:
-        title: Consommation d'énergie primaire
-        type: number
-        minimum: 0
-      eges:
-        title: Émissions de gaz à effet de serre
-        type: number
-        minimum: 0
-      etiquette_energie:
-        title: Etiquette énergie
-        type: string
-        enum: [A, B, C, D, E, F, G]
-      etiquette_climat:
-        title: Etiquette climat
-        type: string
-        enum: [A, B, C, D, E, F, G]
+    $ref: "#/$defs/data"
 required:
   - date_visite
   - date_etablissement
@@ -74,3 +51,62 @@ required:
   - ventilation
   - refroidissement
   - production
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      bilan:
+        title: Bilan
+        type: object
+        properties:
+          cef:
+            title: Consommation d'énergie finale en kWh/m²/an
+            type: number
+            minimum: 0
+          cep:
+            title: Consommation d'énergie primaire en kWh/m²/an
+            type: number
+            minimum: 0
+          eges:
+            title: Émissions de gaz à effet de serre en kgCO2/m²/an
+            type: number
+            minimum: 0
+          etiquette_energie:
+            title: Etiquette énergie
+            type: string
+            enum: [A, B, C, D, E, F, G]
+          etiquette_climat:
+            title: Etiquette climat
+            type: string
+            enum: [A, B, C, D, E, F, G]
+      consommations:
+        title: Consommations d'énergie
+        type: array
+        items:
+          type: object
+          properties:
+            energie:
+              $ref: /common/energie
+            usage:
+              $ref: /common/usage
+            cef:
+              title: Consommation d'énergie finale en kWh/an
+              type: number
+            cep:
+              title: Consommation d'énergie primaire en kWh/an
+              type: number
+      emissions:
+        title: Emissions de gaz à effet de serre
+        type: array
+        items:
+          type: object
+          properties:
+            energie:
+              $ref: /common/energie
+            usage:
+              $ref: /common/usage
+            eges:
+              title: Émissions de gaz à effet de serre en kgCO2/an
+              type: number

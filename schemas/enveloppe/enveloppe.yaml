@@ -77,22 +77,7 @@ properties:
     items:
       $ref: /enveloppe/masque
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      inertie:
-        title: Inertie
-        type: string
-        enum: [tres_lourde, lourde, moyenne, legere]
-      permeabilite:
-        $ref: /enveloppe/permeabilite
-      deperditions:
-        $ref: /enveloppe/deperditions
-      confort_ete:
-        $ref: /enveloppe/confort_ete
-      apports:
-        $ref: /enveloppe/apports
+    $ref: "#/$defs/data"
 required:
   - exposition
   - q4pa_conv
@@ -107,3 +92,102 @@ required:
   - ponts_thermiques
   - doubles_fenetres
   - masques
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      inertie:
+        title: Inertie
+        type: string
+        enum: [tres_lourde, lourde, moyenne, legere]
+      permeabilite:
+        $ref: "#/$defs/permeabilite"
+      deperditions:
+        $ref: "#/$defs/deperditions"
+      confort_ete:
+        $ref: "#/$defs/confort_ete"
+      apports:
+        $ref: "#/$defs/apports"
+  deperditions:
+    title: Déperditions thermiques
+    type: object
+    properties:
+      gv:
+        title: Déperditions thermiques en W/K
+        type: number
+      dp:
+        title: Déperditions thermiques par les parois en W/K
+        type: number
+      pt:
+        title: Déperditions thermiques par les ponts thermiques en W/K
+        type: number
+      dr:
+        title: Déperditions thermiques par renouvellement d'air en W/K
+        type: number
+      ubat:
+        title: Coefficient de transmission thermique de l'enveloppe en W/(m².K)
+        type: number
+      performance:
+        title: Performance
+        type: string
+        enum: [tres_bonne, bonne, moyenne, insuffisante]
+  apports:
+    title: Apports gratuits
+    type: object
+    properties:
+      f:
+        title: Fraction des besoins de chauffage couverts par les apports gratuits
+        type: number
+      apport:
+        title: Apport
+        type: number
+      apport_interne:
+        title: Apport interne
+        type: number
+      apport_solaire:
+        title: Apport solaire
+        type: number
+  permeabilite:
+    title: Permeabilité
+    type: object
+    properties:
+      hvent:
+        title: Déperdition thermique par renouvellement d'air due au système de ventilation en W/K
+        type: number
+        minimum: 0
+      hperm:
+        title: Déperdition thermique par renouvellement d'air due au vent en W/K
+        type: number
+        minimum: 0
+      q4pa_conv:
+        title: Perméabilité à l'air de l'enveloppe sous 4Pa en m3/(h.m²)
+        type: number
+        minimum: 0
+      presence_joints_menuiserie:
+        title: Présence majoritaire de joints au niveau des menuiseries
+        type: boolean
+  confort_ete:
+    title: Confort d'été
+    type: object
+    properties:
+      performance:
+        title: Performance
+        type: string
+        enum: [bon, moyen, insuffisant]
+      inertie_lourde:
+        title: Inertie lourde
+        type: boolean
+      isolatoin_plancher_haut:
+        title: Isolation des planchers hauts
+        type: [boolean, "null"]
+      presence_protection_solaire:
+        title: Présence de protections solaires
+        type: [boolean, "null"]
+      logement_traversant:
+        title: Logement traversant
+        type: [boolean, "null"]
+      presence_brasseur_air:
+        title: Présence de brasseurs d'air
+        type: [boolean, "null"]

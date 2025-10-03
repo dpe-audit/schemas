@@ -2,7 +2,6 @@ schema: https://schemas.dpe-audit.fr/enveloppe/porte
 examples:
   - id: 6bc71c8d-11fa-4f36-b40b-b75ddbedf5d5
     description: Porte d'entrée
-    type_pose: nu_interieur
     isolation: isole
     materiau: pvc
     annee_installation: 1980
@@ -14,6 +13,7 @@ examples:
       mitoyennete: local_non_chauffe
       orientation: 90
       presence_sas: false
+      type_pose: nu_interieur
     vitrage:
       surface: 1
       type: simple_vitrage
@@ -21,3 +21,9 @@ examples:
       largeur_dormant: 60
       presence_joint: true
       presence_retour_isolation: true
+    data:
+      sdep: 3.2
+      b: 1
+      u: 2.5
+      dp: 8
+      performance: insuffisante

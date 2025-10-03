@@ -39,6 +39,15 @@ properties:
     items:
       $ref: /enveloppe/local_non_chauffe/baie
   data:
+    $ref: "#/$defs/data"
+required:
+  - id
+  - description
+  - type
+  - parois
+  - baies
+$defs:
+  data:
     title: Données calculées
     type: object
     readOnly: true
@@ -64,9 +73,3 @@ properties:
       sse:
         title: Surface sud équivalente
         type: [number, "null"]
-required:
-  - id
-  - description
-  - type
-  - parois
-  - baies

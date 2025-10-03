@@ -18,8 +18,28 @@ properties:
     title: Identifiant du générateur associé
     type: string
     format: uuid
+  data:
+    $ref: "#/$defs/data"
 required:
   - id
   - description
   - installation_id
   - generateur_id
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      rdim:
+        title: Ratio de dimensionnement
+        type: number
+      cef_fr:
+        title: Consommation finale en kWh/an
+        type: number
+      cep_fr:
+        title: Consommation primaire en kWh/an
+        type: number
+      eges_fr:
+        title: Emissions de gaz à effet de serre en kgCO2/an
+        type: number

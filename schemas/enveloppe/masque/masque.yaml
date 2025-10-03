@@ -13,9 +13,7 @@ properties:
   type:
     title: Type de masque
     type: string
-    enum:
-      - proche
-      - lointain
+    enum: [proche, lointain]
   configuration:
     title: Configuration du masque
     type: string
@@ -48,6 +46,8 @@ properties:
     type: [string, "null"]
     enum: [lateral, lateral_sud, central, central_sud, null]
     default: null
+  data:
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -155,3 +155,18 @@ oneOf:
       - type
       - configuration
       - profondeur
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      fe1:
+        title: Facteur d'ensoleillement du masque proche
+        type: [number, "null"]
+      fe2:
+        title: Facteur d'ensoleillement du masque lointain homogène
+        type: [number, "null"]
+      omb:
+        title: Facteur d'ensoleillement du masque lointain non homogène
+        type: [number, "null"]

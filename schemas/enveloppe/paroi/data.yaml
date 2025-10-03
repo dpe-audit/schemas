@@ -1,0 +1,26 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/paroi/data
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Deperdition
+type: object
+readOnly: true
+properties:
+  u:
+    title: Coefficient de transmission thermique en W/(m².K)
+    type: number
+    minimum: 0
+  b:
+    title: Coefficient de réduction des déperditions thermiques
+    type: number
+    minimum: 0
+  sdep:
+    title: Surface déperditive en m²
+    type: number
+    minimum: 0
+  dp:
+    title: Déperditions thermiques en W/K
+    type: number
+    minimum: 0
+  performance:
+    title: Performance
+    type: string
+    enum: [tres_bonne, bonne, moyenne, insuffisante]

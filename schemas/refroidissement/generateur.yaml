@@ -26,11 +26,7 @@ properties:
   energie:
     title: Énergie utilisée par le générateur
     type: string
-    enum:
-      - electricite
-      - gaz_naturel
-      - gpl
-      - reseau_froid
+    enum: [electricite, gaz_naturel, gpl, reseau_froid]
   annee_installation:
     title: Année d'installation connue et justifiée
     type: ["integer", "null"]
@@ -45,19 +41,7 @@ properties:
     type: ["string", "null"]
     default: null
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      cef:
-        title: Consommation finale en kWh/an
-        type: number
-      cep:
-        title: Consommation primaire en kWh/an
-        type: number
-      eges:
-        title: Emissions de gaz à effet de serre en kgCO2/an
-        type: number
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -107,3 +91,21 @@ oneOf:
     required:
       - type
       - energie
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      rdim:
+        title: Ratio de dimensionnement
+        type: number
+      cef_fr:
+        title: Consommation finale en kWh/an
+        type: number
+      cep_fr:
+        title: Consommation primaire en kWh/an
+        type: number
+      eges_fr:
+        title: Emissions de gaz à effet de serre en kgCO2/an
+        type: number

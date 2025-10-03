@@ -27,11 +27,7 @@ properties:
   type_vmc:
     title: Type de Ventilation Mécanique Contrôlée
     type: ["string", "null"]
-    enum:
-      - autoreglable
-      - hygroreglable_type_a
-      - hygroreglable_type_b
-      - null
+    enum: [autoreglable, hygroreglable_type_a, hygroreglable_type_b, null]
     default: null
   generateur_collectif:
     title: Générateur collectif de ventilation
@@ -45,21 +41,7 @@ properties:
     type: ["integer", "null"]
     default: null
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      rdim:
-        title: Ratio de dimensionnement du générateur
-        type: number
-      ratio_utilisation:
-        title: Ratio d'utilisation du mode mécanique du générateur
-        type: number
-      pvent_moy:
-        title: Puissance moyenne des auxiliaires en W
-        type: number
-      performance:
-        $ref: /common/performance
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -93,3 +75,27 @@ oneOf:
         const: null
     required:
       - type
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      rdim:
+        title: Ratio de dimensionnement du générateur
+        type: number
+      ratio_utilisation:
+        title: Ratio d'utilisation du mode mécanique du générateur
+        type: number
+      pvent_moy:
+        title: Puissance moyenne des auxiliaires en W
+        type: number
+      cef_aux:
+        title: Consommation d'énergie finale en kWh/an
+        type: number
+      cep_aux:
+        title: Consommation d'énergie primaire en kWh/an
+        type: number
+      eges_aux:
+        title: Emissions de gaz à effet de serre en kgCO2/an
+        type: number

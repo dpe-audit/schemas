@@ -1,3 +1,5 @@
 schema: https://schemas.dpe-audit.fr/production
 examples:
   - panneaux_photovoltaiques: https://schemas.dpe-audit.fr/production/panneau_photovoltaique
+    data:
+      ppv: 500

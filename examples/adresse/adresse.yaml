@@ -5,3 +5,5 @@ examples:
     code_postal: "75000"
     code_insee: "75000"
     commune: Paris
+    data:
+      zone_climatique: H1a

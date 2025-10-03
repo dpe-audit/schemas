@@ -16,14 +16,109 @@ properties:
     type: number
     exclusiveMinimum: 0
   solaire_thermique:
-    title: Solaire thermique
-    type: ["object", "null"]
-    default: null
-    oneOf:
-      - $ref: /ecs/installation/solaire_thermique
-      - const: null
+    $ref: "#/$defs/solaire_thermique"
+  data:
+    $ref: "#/$defs/data"
 required:
   - id
   - description
   - surface
   - solaire_thermique
+$defs:
+  solaire_thermique:
+    title: Solaire thermique
+    type: [object, "null"]
+    default: null
+    properties:
+      usage:
+        title: Usages couverts par le solaire thermique
+        type: string
+        enum: [ecs, chauffage_ecs]
+      annee_installation:
+        title: Année d'installation
+        type: ["integer", "null"]
+        default: null
+      fecs:
+        title: Facteur de couverture solaire connue et justifié
+        type: ["number", "null"]
+        minimum: 0
+        maximum: 1
+        default: null
+    required:
+      - usage
+      - annee_installation
+      - fecs
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      rdim:
+        title: Ratio de dimensionnement
+        type: number
+      fecs:
+        title: Facteur de couverture solaire
+        type: number
+      cef_ecs:
+        title: Consommation finale d'eau chaude sanitaire en kWh/an
+        type: number
+      cep_ecs:
+        title: Consommation primaire d'eau chaude sanitaire en kWh/an
+        type: number
+      eges_ecs:
+        title: Emissions de gaz à effet de serre d'eau chaude sanitaire en kgCO2/an
+        type: number
+      cef_aux:
+        title: Consommation finale des auxiliaires en kWh/an
+        type: number
+      cep_aux:
+        title: Consommation primaire des auxiliaires en kWh/an
+        type: number
+      eges_aux:
+        title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
+        type: number
+      rendements:
+        $ref: "#/$defs/rendements"
+      pertes:
+        $ref: "#/$defs/pertes"
+  rendements:
+    title: Rendements
+    type: object
+    properties:
+      iecs:
+        title: Inverse du rendement de l'installation
+        type: number
+      rd:
+        title: Rendement de distribution
+        type: number
+      rs:
+        title: Rendement de stockage
+        type: number
+      rg:
+        title: Rendement de génération
+        type: number
+      rgs:
+        title: Rendement de génération et de stockage
+        type: number
+  pertes:
+    title: Pertes
+    type: object
+    properties:
+      pertes_generation:
+        title: Pertes de génération en kWh/an
+        type: number
+      pertes_generation_recuperables:
+        title: Pertes de génération récupérables en kWh/an
+        type: number
+      pertes_stockage:
+        title: Pertes de stockage en kWh/an
+        type: number
+      pertes_stockage_recuperables:
+        title: Pertes de stockage récupérables en kWh/an
+        type: number
+      pertes_distribution:
+        title: Pertes de distribution en kWh/an
+        type: number
+      pertes_distribution_recuperables:
+        title: Pertes de distribution récupérables en kWh/an
+        type: number

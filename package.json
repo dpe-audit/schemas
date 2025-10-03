@@ -1,13 +1,17 @@
 {
   "name": "dpe-audit-schema",
+  "description": "Schéma de données publiques DPE-Audit",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "build": "node scripts/build.js",
     "validate": "node scripts/validate.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["json-schema", "opendata", "dpe", "audit"],
+  "author": {
+    "name": "Adrien Rosi Dit Rozzi",
+    "email": "adrienrosi@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {
     "@hyperjump/json-schema": "^1.11.0",

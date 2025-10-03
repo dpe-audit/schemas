@@ -28,10 +28,7 @@ properties:
       - null
     default: null
   inertie:
-    title: État d'inertie
-    type: ["string", "null"]
-    enum: [lourde, legere, null]
-    default: null
+    $ref: /enveloppe/paroi/inertie
   annee_construction:
     title: Année de construction
     type: ["integer", "null"]
@@ -51,30 +48,11 @@ properties:
     exclusiveMinimum: 0
     default: null
   position:
-    $ref: /enveloppe/plancher_bas/position
+    $ref: "#/$defs/position"
   isolation:
-    $ref: /enveloppe/plancher_bas/isolation
+    $ref: "#/$defs/isolation"
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      u:
-        title: Coefficient de transmission thermique en W/(m².K)
-        type: number
-      b:
-        title: Coefficient de réduction des déperditions thermiques
-        type: number
-      sdep:
-        title: Surface déperditive en m²
-        type: number
-      dp:
-        title: Déperditions thermiques en W/K
-        type: number
-      performance:
-        title: Performance
-        type: string
-        enum: [tres_bonne, bonne, moyenne, insuffisante]
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -86,3 +64,73 @@ required:
   - u
   - position
   - isolation
+$defs:
+  position:
+    title: Position
+    type: object
+    properties:
+      surface:
+        title: Surface déperditive exprimée en m²
+        type: number
+        exclusiveMinimum: 0
+      mitoyennete:
+        $ref: /enveloppe/paroi/mitoyennete
+      local_non_chauffe_id:
+        title: Identifiant du local non chauffé associé
+        type: [string, "null"]
+        format: uuid
+        default: null
+    required:
+      - surface
+      - mitoyennete
+    oneOf:
+      - title: Plancher bas donnant sur un local non chauffé
+        type: object
+        properties:
+          mitoyennete:
+            const: local_non_chauffe
+          local_non_chauffe_id:
+            type: string
+        required:
+          - local_non_chauffe_id
+          - mitoyennete
+      - title: Plancher bas donnant sur un vides sanitaire, un sous-sol non chauffé ou un terre-plein
+        type: object
+        properties:
+          mitoyennete:
+            enum:
+              - enterre
+              - vide_sanitaire
+              - terre_plein
+              - sous_sol_non_chauffe
+          surface_ue:
+            title: Surface retenue pour le calcul de ue en m²
+            type: number
+            exclusiveMinimum: 0
+          perimetre_ue:
+            title: Périmètre retenue pour le calcul de ue en m
+            type: number
+            exclusiveMinimum: 0
+          local_non_chauffe_id:
+            const: null
+        required:
+          - mitoyennete
+          - surface_ue
+          - perimetre_ue
+      - title: Autres cas
+        type: object
+        properties:
+          mitoyennete:
+            enum:
+              - exterieur
+              - local_non_residentiel
+              - local_residentiel
+              - local_non_accessible
+          local_non_chauffe_id:
+            const: null
+        required:
+          - mitoyennete
+  isolation:
+    $ref: /enveloppe/paroi/isolation
+  data:
+    $ref: /enveloppe/paroi/data

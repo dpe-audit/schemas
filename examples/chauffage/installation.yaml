@@ -16,3 +16,21 @@ examples:
       presence_regulation: true
       minimum_temperature: false
       detection_presence: false
+    data:
+      rdim: 1
+      fch: 0.5
+      cef_ch: 1500
+      cep_ch: 1800
+      eges_ch: 500
+      cef_aux: 1500
+      cep_aux: 1800
+      eges_aux: 500
+      rendements:
+        ich: 2
+        rd: 0.8
+        re: 0.8
+        rg: 0.8
+        rr: 1
+      pertes:
+        pertes_generation: 100
+        pertes_generation_recuperables: 150

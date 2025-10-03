@@ -13,13 +13,11 @@ properties:
   configuration:
     title: Configuration
     type: string
-    enum:
-      - plancher
-      - rampants
-      - terrasse
+    enum: [plancher, rampants, terrasse]
   type_structure:
     title: Type de plancher haut
     type: ["string", "null"]
+    default: null
     enum:
       - plafond_avec_ou_sans_remplissage
       - plafond_entre_solives_metalliques
@@ -36,12 +34,8 @@ properties:
       - plafond_patre
       - bac_acier
       - null
-    default: null
   inertie:
-    title: État d'inertie
-    type: ["string", "null"]
-    enum: [lourde, legere, null]
-    default: null
+    $ref: /enveloppe/paroi/inertie
   annee_construction:
     title: Année de construction
     type: ["integer", "null"]
@@ -61,30 +55,11 @@ properties:
     exclusiveMinimum: 0
     default: null
   position:
-    $ref: /enveloppe/plancher_haut/position
+    $ref: "#/$defs/position"
   isolation:
-    $ref: /enveloppe/plancher_haut/isolation
+    $ref: "#/$defs/isolation"
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      u:
-        title: Coefficient de transmission thermique en W/(m².K)
-        type: number
-      b:
-        title: Coefficient de réduction des déperditions thermiques
-        type: number
-      sdep:
-        title: Surface déperditive en m²
-        type: number
-      dp:
-        title: Déperditions thermiques en W/K
-        type: number
-      performance:
-        title: Performance
-        type: string
-        enum: [tres_bonne, bonne, moyenne, insuffisante]
+    $ref: "#/$defs/data"
 required:
   - id
   - description
@@ -97,3 +72,58 @@ required:
   - u
   - position
   - isolation
+$defs:
+  position:
+    title: Position
+    type: object
+    properties:
+      surface:
+        title: Surface déperditive exprimée en m²
+        type: number
+        exclusiveMinimum: 0
+      mitoyennete:
+        $ref: /enveloppe/paroi/mitoyennete
+      orientation:
+        title: Orientation en degré par rapport au nord
+        type: ["number", "null"]
+        minimum: 0
+        exclusiveMaximum: 360
+        default: null
+      local_non_chauffe_id:
+        title: Identifiant du local non chauffé associé
+        type: [string, "null"]
+        format: uuid
+        default: null
+    required:
+      - surface
+      - mitoyennete
+      - orientation
+    oneOf:
+      - title: Plancher donnant sur un local non chauffé
+        type: object
+        properties:
+          mitoyennete:
+            const: local_non_chauffe
+          local_non_chauffe_id:
+            type: string
+        required:
+          - local_non_chauffe_id
+          - mitoyennete
+      - title: Autres cas
+        type: object
+        properties:
+          mitoyennete:
+            not:
+              const: local_non_chauffe
+          local_non_chauffe_id:
+            const: null
+        required:
+          - mitoyennete
+  isolation:
+    $ref: /enveloppe/paroi/isolation
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    allOf:
+      - $ref: /enveloppe/paroi/data

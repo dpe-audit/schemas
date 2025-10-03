@@ -16,21 +16,22 @@ properties:
     items:
       $ref: /ventilation/installation
   data:
+    $ref: "#/$defs/data"
+required:
+  - generateurs
+  - installations
+$defs:
+  data:
     title: Données calculées
     type: object
     readOnly: true
     properties:
-      hvent:
-        title: Déperdition thermique par renouvellement d'air due au système de ventilation en W/K
+      cef_aux:
+        title: Consommation d'énergie finale en kWh/an
         type: number
-      hperm:
-        title: Déperdition thermique par renouvellement d'air due au vent en W/K
+      cep_aux:
+        title: Consommation d'énergie primaire en kWh/an
         type: number
-      q4pa_conv:
-        title: Perméabilité à l'air de l'enveloppe sous 4Pa en m3/(h.m²)
+      eges_aux:
+        title: Emissions de gaz à effet de serre en kgCO2/an
         type: number
-      performance:
-        $ref: /common/performance
-required:
-  - generateurs
-  - installations

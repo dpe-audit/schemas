@@ -1,0 +1,14 @@
+$id: https://schemas.dpe-audit.fr/enveloppe/paroi/mitoyennete
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Mitoyenneté
+type: string
+enum:
+  - exterieur
+  - enterre
+  - vide_sanitaire
+  - terre_plein
+  - sous_sol_non_chauffe
+  - local_non_chauffe
+  - local_non_residentiel
+  - local_residentiel
+  - local_non_accessible

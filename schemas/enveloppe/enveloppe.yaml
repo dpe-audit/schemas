@@ -120,6 +120,21 @@ $defs:
       dp:
         title: Déperditions thermiques par les parois en W/K
         type: number
+      dp_murs:
+        title: Déperditions thermiques par les murs en W/K
+        type: number
+      dp_planchers_bas:
+        title: Déperditions thermiques par les planchers bas en W/K
+        type: number
+      dp_planchers_hauts:
+        title: Déperditions thermiques par les planchers hauts en W/K
+        type: number
+      dp_baies:
+        title: Déperditions thermiques par les baies en W/K
+        type: number
+      dp_portes:
+        title: Déperditions thermiques par les portes en W/K
+        type: number
       pt:
         title: Déperditions thermiques par les ponts thermiques en W/K
         type: number

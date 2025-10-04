@@ -11,3 +11,26 @@ examples:
     ventilation: https://schemas.dpe-audit.fr/ventilation#0
     refroidissement: https://schemas.dpe-audit.fr/refroidissement#0
     production: https://schemas.dpe-audit.fr/production#0
+    data:
+      bilan:
+        cef: 20000
+        cep: 30000
+        eges: 5000
+        etiquette_energie: C
+        etiquette_climat: D
+      consommations:
+        - energie: electricite
+          usage: chauffage
+          cef: 15000
+          cep: 20000
+        - energie: electricite
+          usage: ecs
+          cef: 5000
+          cep: 10000
+      emissions:
+        - energie: electricite
+          usage: chauffage
+          eges: 3000
+        - energie: electricite
+          usage: ecs
+          eges: 2000

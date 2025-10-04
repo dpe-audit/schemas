@@ -44,4 +44,4 @@ $defs:
       inertie:
         title: Inertie
         type: string
-        enum: [lourde, legere]
+        enum: [tres_lourde, lourde, moyenne, legere]

@@ -97,6 +97,9 @@ $defs:
     type: object
     readOnly: true
     properties:
+      eer:
+        title: Coefficient d'efficacité énergétique
+        type: number
       rdim:
         title: Ratio de dimensionnement
         type: number

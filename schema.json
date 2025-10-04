@@ -21,10 +21,10 @@
       "format": "date"
     },
     "adresse": {
-      "$ref": "/adresse"
+      "$ref": "#/$defs/adresse"
     },
     "batiment": {
-      "$ref": "/batiment"
+      "$ref": "#/$defs/batiment"
     },
     "logements": {
       "title": "Liste des logements visités",
@@ -69,11 +69,150 @@
     "production"
   ],
   "$defs": {
+    "adresse": {
+      "title": "Adresse",
+      "type": "object",
+      "properties": {
+        "ban_id": {
+          "title": "Identifiant depuis la Base Adresse Nationale (BAN)",
+          "description": "Clé d'interopérabilité telle que définie dans la spécification du format d'échange BAL",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "nom": {
+          "title": "Numéro éventuel et nom de voie ou lieu dit",
+          "type": "string"
+        },
+        "code_postal": {
+          "title": "Code postal de la commune",
+          "type": "string"
+        },
+        "code_insee": {
+          "title": "Code INSEE de la commune",
+          "type": "string"
+        },
+        "commune": {
+          "title": "Nom officiel de la commune",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ban_id",
+        "nom",
+        "code_postal",
+        "code_insee",
+        "commune"
+      ]
+    },
+    "batiment": {
+      "title": "Bâtiment",
+      "type": "object",
+      "properties": {
+        "rnb_id": {
+          "title": "Identifiant du bâtiment depuis le RNB",
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "type": {
+          "title": "Type de bâtiment",
+          "description": "Donnée calculée à partir du nombre de logements",
+          "type": "string",
+          "enum": [
+            "maison",
+            "immeuble"
+          ]
+        },
+        "annee_construction": {
+          "title": "Année de construction",
+          "type": "integer"
+        },
+        "altitude": {
+          "title": "Altitude du bâtiment en mètres",
+          "type": "number"
+        },
+        "logements": {
+          "title": "Nombre de logements",
+          "type": "integer",
+          "exclusiveMinimum": 0
+        },
+        "surface_habitable": {
+          "title": "Surface habitable en m²",
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "hauteur_sous_plafond": {
+          "title": "Hauteur moyenne sous plafond en m",
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "materiaux_anciens": {
+          "title": "Bâtiment majoritairement composé de matériaux anciens",
+          "type": "boolean"
+        },
+        "data": {
+          "$ref": "#/$defs/data"
+        }
+      },
+      "required": [
+        "rnb_id",
+        "type",
+        "annee_construction",
+        "altitude",
+        "logements",
+        "surface_habitable",
+        "hauteur_sous_plafond",
+        "materiaux_anciens"
+      ]
+    },
     "data": {
       "title": "Données calculées",
       "type": "object",
       "readOnly": true,
       "properties": {
+        "zone_thermique": {
+          "title": "Zone thermique",
+          "type": "object",
+          "properties": {
+            "zone_climatique": {
+              "title": "Zone climatique",
+              "type": "string",
+              "enum": [
+                "H1a",
+                "H1b",
+                "H1c",
+                "H2a",
+                "H2b",
+                "H2c",
+                "H2d",
+                "H3"
+              ]
+            },
+            "effet_joule": {
+              "title": "Bâtiment chauffé par effet joule",
+              "type": "boolean"
+            },
+            "parois_anciennes_lourdes": {
+              "title": "Bâtiment constitué de parois anciennes lourdes",
+              "type": "boolean"
+            },
+            "surface_reference": {
+              "title": "Surface thermique de référence en m²",
+              "type": "number",
+              "minimumExclusive": 0
+            },
+            "volume_reference": {
+              "title": "Volume thermique de référence en m³",
+              "type": "number",
+              "minimumExclusive": 0
+            }
+          }
+        },
         "bilan": {
           "title": "Bilan",
           "type": "object",
@@ -160,162 +299,6 @@
                 "title": "Émissions de gaz à effet de serre en kgCO2/an",
                 "type": "number"
               }
-            }
-          }
-        }
-      }
-    },
-    "https://schemas.dpe-audit.fr/adresse": {
-      "$id": "https://schemas.dpe-audit.fr/adresse",
-      "title": "Adresse",
-      "type": "object",
-      "properties": {
-        "ban_id": {
-          "title": "Identifiant depuis la Base Adresse Nationale (BAN)",
-          "description": "Clé d'interopérabilité telle que définie dans la spécification du format d'échange BAL",
-          "type": [
-            "string",
-            "null"
-          ],
-          "default": null
-        },
-        "nom": {
-          "title": "Numéro éventuel et nom de voie ou lieu dit",
-          "type": "string"
-        },
-        "code_postal": {
-          "title": "Code postal de la commune",
-          "type": "string"
-        },
-        "code_insee": {
-          "title": "Code INSEE de la commune",
-          "type": "string"
-        },
-        "commune": {
-          "title": "Nom officiel de la commune",
-          "type": "string"
-        },
-        "data": {
-          "$ref": "#/$defs/data"
-        }
-      },
-      "required": [
-        "ban_id",
-        "nom",
-        "code_postal",
-        "code_insee",
-        "commune"
-      ],
-      "$defs": {
-        "data": {
-          "title": "Données calculées",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "zone_climatique": {
-              "title": "Zone climatique",
-              "type": "string",
-              "enum": [
-                "H1a",
-                "H1b",
-                "H1c",
-                "H2a",
-                "H2b",
-                "H2c",
-                "H2d",
-                "H3"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "https://schemas.dpe-audit.fr/batiment": {
-      "$id": "https://schemas.dpe-audit.fr/batiment",
-      "title": "Bâtiment",
-      "type": "object",
-      "properties": {
-        "rnb_id": {
-          "title": "Identifiant du bâtiment depuis le RNB",
-          "type": [
-            "string",
-            "null"
-          ],
-          "default": null
-        },
-        "type": {
-          "title": "Type de bâtiment",
-          "description": "Donnée calculée à partir du nombre de logements",
-          "type": "string",
-          "enum": [
-            "maison",
-            "immeuble"
-          ]
-        },
-        "annee_construction": {
-          "title": "Année de construction",
-          "type": "integer"
-        },
-        "altitude": {
-          "title": "Altitude du bâtiment en mètres",
-          "type": "number"
-        },
-        "logements": {
-          "title": "Nombre de logements",
-          "type": "integer",
-          "exclusiveMinimum": 0
-        },
-        "surface_habitable": {
-          "title": "Surface habitable en m²",
-          "type": "number",
-          "exclusiveMinimum": 0
-        },
-        "hauteur_sous_plafond": {
-          "title": "Hauteur moyenne sous plafond en m",
-          "type": "number",
-          "exclusiveMinimum": 0
-        },
-        "materiaux_anciens": {
-          "title": "Bâtiment majoritairement composé de matériaux anciens",
-          "type": "boolean"
-        },
-        "data": {
-          "$ref": "#/$defs/data"
-        }
-      },
-      "required": [
-        "rnb_id",
-        "type",
-        "annee_construction",
-        "altitude",
-        "logements",
-        "surface_habitable",
-        "hauteur_sous_plafond",
-        "materiaux_anciens"
-      ],
-      "$defs": {
-        "data": {
-          "title": "Données calculées",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "effet_joule": {
-              "title": "Bâtiment chauffé par effet joule",
-              "type": "boolean"
-            },
-            "parois_anciennes_lourdes": {
-              "title": "Bâtiment constitué de parois anciennes lourdes",
-              "type": "boolean"
-            },
-            "surface_reference": {
-              "title": "Surface thermique de référence en m²",
-              "type": "number",
-              "minimumExclusive": 0
-            },
-            "volume_reference": {
-              "title": "Volume thermique de référence en m³",
-              "type": "number",
-              "minimumExclusive": 0
             }
           }
         }
@@ -543,6 +526,26 @@
               "title": "Déperditions thermiques par les parois en W/K",
               "type": "number"
             },
+            "dp_murs": {
+              "title": "Déperditions thermiques par les murs en W/K",
+              "type": "number"
+            },
+            "dp_planchers_bas": {
+              "title": "Déperditions thermiques par les planchers bas en W/K",
+              "type": "number"
+            },
+            "dp_planchers_hauts": {
+              "title": "Déperditions thermiques par les planchers hauts en W/K",
+              "type": "number"
+            },
+            "dp_baies": {
+              "title": "Déperditions thermiques par les baies en W/K",
+              "type": "number"
+            },
+            "dp_portes": {
+              "title": "Déperditions thermiques par les portes en W/K",
+              "type": "number"
+            },
             "pt": {
               "title": "Déperditions thermiques par les ponts thermiques en W/K",
               "type": "number"
@@ -575,16 +578,28 @@
               "title": "Fraction des besoins de chauffage couverts par les apports gratuits",
               "type": "number"
             },
-            "apport": {
-              "title": "Apport",
+            "apport_ch": {
+              "title": "Apport pour le chauffage",
               "type": "number"
             },
-            "apport_interne": {
-              "title": "Apport interne",
+            "apport_interne_ch": {
+              "title": "Apport interne pour le chauffage",
               "type": "number"
             },
-            "apport_solaire": {
-              "title": "Apport solaire",
+            "apport_solaire_ch": {
+              "title": "Apport solaire pour le chauffage",
+              "type": "number"
+            },
+            "apport_fr": {
+              "title": "Apport pour le refroidissement",
+              "type": "number"
+            },
+            "apport_interne_fr": {
+              "title": "Apport interne pour le refroidissement",
+              "type": "number"
+            },
+            "apport_solaire_fr": {
+              "title": "Apport solaire pour le refroidissement",
               "type": "number"
             }
           }
@@ -728,7 +743,9 @@
               "title": "Inertie",
               "type": "string",
               "enum": [
+                "tres_lourde",
                 "lourde",
+                "moyenne",
                 "legere"
               ]
             }
@@ -1325,7 +1342,20 @@
           "$ref": "/enveloppe/paroi/isolation"
         },
         "data": {
-          "$ref": "/enveloppe/paroi/data"
+          "title": "Données calculées",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "u0": {
+              "title": "Coefficient de transmission thermique du mur non isolé en W/(m².K)",
+              "type": "number"
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "/enveloppe/paroi/data"
+            }
+          ]
         }
       }
     },
@@ -1702,7 +1732,20 @@
           "$ref": "/enveloppe/paroi/isolation"
         },
         "data": {
-          "$ref": "/enveloppe/paroi/data"
+          "title": "Données calculées",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "u0": {
+              "title": "Coefficient de transmission thermique du plancher bas non isolé en W/(m².K)",
+              "type": "number"
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "/enveloppe/paroi/data"
+            }
+          ]
         }
       }
     },
@@ -1895,6 +1938,12 @@
           "title": "Données calculées",
           "type": "object",
           "readOnly": true,
+          "properties": {
+            "u0": {
+              "title": "Coefficient de transmission thermique du plancher haut non isolé en W/(m².K)",
+              "type": "number"
+            }
+          },
           "allOf": [
             {
               "$ref": "/enveloppe/paroi/data"
@@ -2531,6 +2580,34 @@
             },
             "uw": {
               "title": "Coefficient de transmission thermique de la baie en W/m²K",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "deltar": {
+              "title": "Résistance thermique additionnelle due aux fermetures exprimée en m².K/W",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "fe": {
+              "title": "Facteur d'ensoleillement de la baie",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "sw": {
+              "title": "Proportion d'énergie solaire transmise par la baie",
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "sse": {
+              "title": "Surface sud équivalente de la baie en m²",
               "type": [
                 "number",
                 "null"
@@ -3490,7 +3567,7 @@
               ]
             },
             "sw": {
-              "title": "Proportion d'énergie solaire transmise par la baie en %",
+              "title": "Proportion d'énergie solaire transmise par la baie",
               "type": [
                 "number",
                 "null"
@@ -5654,35 +5731,7 @@
           }
         },
         "data": {
-          "title": "Données calculées",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "nadeq": {
-              "title": "Nombre d'adultes équivalents",
-              "type": "number"
-            },
-            "nmax": {
-              "title": "Coefficient d'occupation maximal",
-              "type": "number"
-            },
-            "besoin": {
-              "title": "Besoin en kWh/an",
-              "type": "number"
-            },
-            "cef": {
-              "title": "Consommation finale en kWh/an",
-              "type": "number"
-            },
-            "cep": {
-              "title": "Consommation primaire en kWh/an",
-              "type": "number"
-            },
-            "eges": {
-              "title": "Emissions de gaz à effet de serre en kgCO2/an",
-              "type": "number"
-            }
-          }
+          "$ref": "#/$defs/data"
         }
       },
       "required": [
@@ -6469,6 +6518,13 @@
             "pdim": {
               "title": "Puissance de dimensionnement en kW",
               "type": "number"
+            },
+            "paux": {
+              "title": "Puissance des auxiliaires en kW",
+              "type": [
+                "number",
+                "null"
+              ]
             },
             "pecs": {
               "title": "Puissance de dimensionnement du besoin d'eau chaude sanitaire en kW",
@@ -7477,6 +7533,10 @@
           "type": "object",
           "readOnly": true,
           "properties": {
+            "eer": {
+              "title": "Coefficient d'efficacité énergétique",
+              "type": "number"
+            },
             "rdim": {
               "title": "Ratio de dimensionnement",
               "type": "number"

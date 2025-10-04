@@ -29,6 +29,7 @@ properties:
       - double_vitrage_fe
       - triple_vitrage
       - triple_vitrage_fe
+      - null
     default: null
   presence_rupteur_pont_thermique:
     title: Présence d'un rupteur de pont thermique

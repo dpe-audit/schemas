@@ -1,5 +1,0 @@
-$id: https://schemas.dpe-audit.fr/enveloppe/paroi/type_pose
-$schema: https://json-schema.org/draft/2020-12/schema
-title: Type de pose
-type: string
-enum: [nu_exterieur, nu_interieur, tunnel]

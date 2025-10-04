@@ -26,7 +26,7 @@ properties:
       - plafond_bois_sous_solives_metalliques
       - bardeaux_et_remplissage
       - plafond_bois_sur_solives_bois
-      - plafond_bois_sous_solives_bo
+      - plafond_bois_sous_solives_bois
       - dalle_beton
       - plafond_lourd
       - combles_amenages_sous_rampant

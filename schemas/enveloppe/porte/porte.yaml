@@ -78,7 +78,10 @@ $defs:
         title: Présence d'un sas devant la porte
         type: boolean
       type_pose:
-        $ref: /enveloppe/paroi/type_pose
+        title: Type de pose
+        type: ["string", "null"]
+        enum: [nu_exterieur, nu_interieur, tunnel, null]
+        default: null
     required:
       - surface
       - mitoyennete

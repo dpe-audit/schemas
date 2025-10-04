@@ -2,22 +2,9 @@ schema: https://schemas.dpe-audit.fr/ressource
 examples:
   - date_visite: "2026-01-01"
     date_etablissement: "2026-01-01"
-    adresse:
-      ban_id: ban_id
-      nom: 1 rue de la Paix
-      code_postal: "75000"
-      code_insee: "75000"
-      commune: Paris
-    batiment:
-      rnb_id: band_id
-      type: maison
-      annee_construction: 2000
-      altitude: 0
-      logements: 1
-      surface_habitable: 100
-      hauteur_sous_plafond: 2.5
-      materiaux_anciens: true
-    logements: https://schemas.dpe-audit.fr/logement
+    adresse: https://schemas.dpe-audit.fr/adresse#0
+    batiment: https://schemas.dpe-audit.fr/batiment#0
+    logements: https://schemas.dpe-audit.fr/logement#0
     enveloppe: https://schemas.dpe-audit.fr/enveloppe#0
     chauffage: https://schemas.dpe-audit.fr/chauffage#0
     ecs: https://schemas.dpe-audit.fr/ecs#0
@@ -25,12 +12,11 @@ examples:
     refroidissement: https://schemas.dpe-audit.fr/refroidissement#0
     production: https://schemas.dpe-audit.fr/production#0
     data:
-      zone_thermique:
-        zone_climatique: H1a
-        effet_joule: true
-        parois_anciennes_lourdes: true
-        surface_reference: 100
-        volume_reference: 250
+      zone_climatique: H1a
+      effet_joule: true
+      parois_anciennes_lourdes: true
+      surface_reference: 100
+      volume_reference: 250
       bilan:
         cef: 20000
         cep: 30000

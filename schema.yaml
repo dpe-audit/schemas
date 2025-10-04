@@ -17,9 +17,9 @@ properties:
     type: string
     format: date
   adresse:
-    $ref: '#/$defs/adresse'
+    $ref: /adresse
   batiment:
-    $ref: '#/$defs/batiment'
+    $ref: /batiment
   logements:
     title: Liste des logements visités
     type: array
@@ -52,121 +52,37 @@ required:
   - refroidissement
   - production
 $defs:
-  adresse:
-    title: Adresse
-    type: object
-    properties:
-      ban_id:
-        title: Identifiant depuis la Base Adresse Nationale (BAN)
-        description: >-
-          Clé d'interopérabilité telle que définie dans la spécification du
-          format d'échange BAL
-        type:
-          - string
-          - 'null'
-        default: null
-      nom:
-        title: Numéro éventuel et nom de voie ou lieu dit
-        type: string
-      code_postal:
-        title: Code postal de la commune
-        type: string
-      code_insee:
-        title: Code INSEE de la commune
-        type: string
-      commune:
-        title: Nom officiel de la commune
-        type: string
-    required:
-      - ban_id
-      - nom
-      - code_postal
-      - code_insee
-      - commune
-  batiment:
-    title: Bâtiment
-    type: object
-    properties:
-      rnb_id:
-        title: Identifiant du bâtiment depuis le RNB
-        type:
-          - string
-          - 'null'
-        default: null
-      type:
-        title: Type de bâtiment
-        description: Donnée calculée à partir du nombre de logements
-        type: string
-        enum:
-          - maison
-          - immeuble
-      annee_construction:
-        title: Année de construction
-        type: integer
-      altitude:
-        title: Altitude du bâtiment en mètres
-        type: number
-      logements:
-        title: Nombre de logements
-        type: integer
-        exclusiveMinimum: 0
-      surface_habitable:
-        title: Surface habitable en m²
-        type: number
-        exclusiveMinimum: 0
-      hauteur_sous_plafond:
-        title: Hauteur moyenne sous plafond en m
-        type: number
-        exclusiveMinimum: 0
-      materiaux_anciens:
-        title: Bâtiment majoritairement composé de matériaux anciens
-        type: boolean
-      data:
-        $ref: '#/$defs/data'
-    required:
-      - rnb_id
-      - type
-      - annee_construction
-      - altitude
-      - logements
-      - surface_habitable
-      - hauteur_sous_plafond
-      - materiaux_anciens
   data:
     title: Données calculées
     type: object
     readOnly: true
     properties:
-      zone_thermique:
-        title: Zone thermique
-        type: object
-        properties:
-          zone_climatique:
-            title: Zone climatique
-            type: string
-            enum:
-              - H1a
-              - H1b
-              - H1c
-              - H2a
-              - H2b
-              - H2c
-              - H2d
-              - H3
-          effet_joule:
-            title: Bâtiment chauffé par effet joule
-            type: boolean
-          parois_anciennes_lourdes:
-            title: Bâtiment constitué de parois anciennes lourdes
-            type: boolean
-          surface_reference:
-            title: Surface thermique de référence en m²
-            type: number
-            minimumExclusive: 0
-          volume_reference:
-            title: Volume thermique de référence en m³
-            type: number
-            minimumExclusive: 0
+      zone_climatique:
+        title: Zone climatique
+        type: string
+        enum:
+          - H1a
+          - H1b
+          - H1c
+          - H2a
+          - H2b
+          - H2c
+          - H2d
+          - H3
+      effet_joule:
+        title: Bâtiment chauffé par effet joule
+        type: boolean
+      parois_anciennes_lourdes:
+        title: Bâtiment constitué de parois anciennes lourdes
+        type: boolean
+      surface_reference:
+        title: Surface thermique de référence en m²
+        type: number
+        minimumExclusive: 0
+      volume_reference:
+        title: Volume thermique de référence en m³
+        type: number
+        minimumExclusive: 0
       bilan:
         title: Bilan
         type: object
@@ -234,6 +150,86 @@ $defs:
             eges:
               title: Émissions de gaz à effet de serre en kgCO2/an
               type: number
+  https://schemas.dpe-audit.fr/adresse:
+    $id: https://schemas.dpe-audit.fr/adresse
+    title: Adresse
+    type: object
+    properties:
+      ban_id:
+        title: Identifiant depuis la Base Adresse Nationale (BAN)
+        description: >-
+          Clé d'interopérabilité telle que définie dans la spécification du
+          format d'échange BAL
+        type:
+          - string
+          - 'null'
+        default: null
+      nom:
+        title: Numéro éventuel et nom de voie ou lieu dit
+        type: string
+      code_postal:
+        title: Code postal de la commune
+        type: string
+      code_insee:
+        title: Code INSEE de la commune
+        type: string
+      commune:
+        title: Nom officiel de la commune
+        type: string
+    required:
+      - ban_id
+      - nom
+      - code_postal
+      - code_insee
+      - commune
+  https://schemas.dpe-audit.fr/batiment:
+    $id: https://schemas.dpe-audit.fr/batiment
+    title: Bâtiment
+    type: object
+    properties:
+      rnb_id:
+        title: Identifiant du bâtiment depuis le RNB
+        type:
+          - string
+          - 'null'
+        default: null
+      type:
+        title: Type de bâtiment
+        description: Donnée calculée à partir du nombre de logements
+        type: string
+        enum:
+          - maison
+          - immeuble
+      annee_construction:
+        title: Année de construction
+        type: integer
+      altitude:
+        title: Altitude du bâtiment en mètres
+        type: number
+      logements:
+        title: Nombre de logements
+        type: integer
+        exclusiveMinimum: 0
+      surface_habitable:
+        title: Surface habitable en m²
+        type: number
+        exclusiveMinimum: 0
+      hauteur_sous_plafond:
+        title: Hauteur moyenne sous plafond en m
+        type: number
+        exclusiveMinimum: 0
+      materiaux_anciens:
+        title: Bâtiment majoritairement composé de matériaux anciens
+        type: boolean
+    required:
+      - rnb_id
+      - type
+      - annee_construction
+      - altitude
+      - logements
+      - surface_habitable
+      - hauteur_sous_plafond
+      - materiaux_anciens
   https://schemas.dpe-audit.fr/logement:
     $id: https://schemas.dpe-audit.fr/logement
     title: Logement visité

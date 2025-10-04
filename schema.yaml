@@ -62,15 +62,15 @@ $defs:
         type: object
         properties:
           cef:
-            title: Consommation d'énergie finale
+            title: Consommation d'énergie finale en kWh/m²/an
             type: number
             minimum: 0
           cep:
-            title: Consommation d'énergie primaire
+            title: Consommation d'énergie primaire en kWh/m²/an
             type: number
             minimum: 0
           eges:
-            title: Émissions de gaz à effet de serre
+            title: Émissions de gaz à effet de serre en kgCO2/m²/an
             type: number
             minimum: 0
           etiquette_energie:
@@ -130,7 +130,7 @@ $defs:
     type: object
     properties:
       ban_id:
-        title: Identifiant
+        title: Identifiant depuis la Base Adresse Nationale (BAN)
         description: >-
           Clé d'interopérabilité telle que définie dans la spécification du
           format d'échange BAL
@@ -741,6 +741,7 @@ $defs:
           - double_vitrage_fe
           - triple_vitrage
           - triple_vitrage_fe
+          - null
         default: null
       presence_rupteur_pont_thermique:
         title: Présence d'un rupteur de pont thermique
@@ -1331,7 +1332,7 @@ $defs:
           - plafond_bois_sous_solives_metalliques
           - bardeaux_et_remplissage
           - plafond_bois_sur_solives_bois
-          - plafond_bois_sous_solives_bo
+          - plafond_bois_sous_solives_bois
           - dalle_beton
           - plafond_lourd
           - combles_amenages_sous_rampant
@@ -2008,7 +2009,16 @@ $defs:
             title: Présence d'un sas devant la porte
             type: boolean
           type_pose:
-            $ref: /enveloppe/paroi/type_pose
+            title: Type de pose
+            type:
+              - string
+              - 'null'
+            enum:
+              - nu_exterieur
+              - nu_interieur
+              - tunnel
+              - null
+            default: null
         required:
           - surface
           - mitoyennete
@@ -2114,14 +2124,6 @@ $defs:
         readOnly: true
         allOf:
           - $ref: /enveloppe/paroi/data
-  https://schemas.dpe-audit.fr/enveloppe/paroi/type_pose:
-    $id: https://schemas.dpe-audit.fr/enveloppe/paroi/type_pose
-    title: Type de pose
-    type: string
-    enum:
-      - nu_exterieur
-      - nu_interieur
-      - tunnel
   https://schemas.dpe-audit.fr/enveloppe/pont_thermique:
     $id: https://schemas.dpe-audit.fr/enveloppe/pont_thermique
     title: Pont thermique
@@ -3968,6 +3970,8 @@ $defs:
           title: Identifiant unique de l'émetteur de chauffage au format UUID
           type: string
           format: uuid
+      data:
+        $ref: '#/$defs/data'
     required:
       - id
       - description

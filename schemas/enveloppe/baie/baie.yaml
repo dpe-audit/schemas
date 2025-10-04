@@ -372,5 +372,17 @@ $defs:
       uw:
         title: Coefficient de transmission thermique de la baie en W/m²K
         type: ["number", "null"]
+      deltar:
+        title: Résistance thermique additionnelle due aux fermetures exprimée en m².K/W
+        type: ["number", "null"]
+      fe:
+        title: Facteur d'ensoleillement de la baie
+        type: ["number", "null"]
+      sw:
+        title: Proportion d'énergie solaire transmise par la baie
+        type: ["number", "null"]
+      sse:
+        title: Surface sud équivalente de la baie en m²
+        type: ["number", "null"]
     allOf:
       - $ref: /enveloppe/paroi/data

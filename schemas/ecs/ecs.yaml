@@ -22,28 +22,7 @@ properties:
     items:
       $ref: /ecs/systeme
   data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      nadeq:
-        title: Nombre d'adultes équivalents
-        type: number
-      nmax:
-        title: Coefficient d'occupation maximal
-        type: number
-      besoin:
-        title: Besoin en kWh/an
-        type: number
-      cef:
-        title: Consommation finale en kWh/an
-        type: number
-      cep:
-        title: Consommation primaire en kWh/an
-        type: number
-      eges:
-        title: Emissions de gaz à effet de serre en kgCO2/an
-        type: number
+    $ref: "#/$defs/data"
 required:
   - generateurs
   - installations

@@ -448,6 +448,9 @@ $defs:
       pdim:
         title: Puissance de dimensionnement en kW
         type: number
+      paux:
+        title: Puissance des auxiliaires en kW
+        type: [number, "null"]
       pecs:
         title: Puissance de dimensionnement du besoin d'eau chaude sanitaire en kW
         type: number

@@ -261,5 +261,5 @@ $defs:
         title: Coefficient de transmission thermique de la baie en W/m²K
         type: ["number", "null"]
       sw:
-        title: Proportion d'énergie solaire transmise par la baie en %
+        title: Proportion d'énergie solaire transmise par la baie
         type: ["number", "null"]

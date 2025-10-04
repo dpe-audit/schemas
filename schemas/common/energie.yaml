@@ -2,18 +2,12 @@ $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.dpe-audit.fr/common/energie
 title: Energie
 type: string
-oneOf:
-  - title: Electricité
-    const: electricite
-  - title: Gaz naturel
-    const: gaz_naturel
-  - title: GPL
-    const: gpl
-  - title: Fioul
-    const: fioul
-  - title: Bois
-    const: bois
-  - title: Charbon
-    const: charbon
-  - title: Réseau urbain
-    const: reseau_urbain
+enum:
+  - electricite
+  - electricite_renouvelable
+  - gaz_naturel
+  - gpl
+  - fioul
+  - bois
+  - charbon
+  - reseau_urbain

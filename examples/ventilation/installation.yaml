@@ -22,6 +22,10 @@ examples:
       qvarep_conv: 1.2
       qvasouf_conv: 1.2
       smea_conv: 0
-      cef_aux: 0
-      cep_aux: 0
-      eges_aux: 0
+      consommations:
+        - usage: auxiliaire
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200
+

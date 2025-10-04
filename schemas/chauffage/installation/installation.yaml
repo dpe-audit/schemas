@@ -119,24 +119,8 @@ $defs:
       i0:
         title: Coefficient d'intermittence
         type: number
-      cef_ch:
-        title: Consommation finale de chauffage en kWh/an
-        type: number
-      cep_ch:
-        title: Consommation primaire de chauffage en kWh/an
-        type: number
-      eges_ch:
-        title: Emissions de gaz à effet de serre de chauffage en kgCO2/an
-        type: number
-      cef_aux:
-        title: Consommation finale des auxiliaires en kWh/an
-        type: number
-      cep_aux:
-        title: Consommation primaire des auxiliaires en kWh/an
-        type: number
-      eges_aux:
-        title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
-        type: number
+      consommations:
+        $ref: /common/consommations
       rendements:
         $ref: "#/$defs/rendements"
       pertes:

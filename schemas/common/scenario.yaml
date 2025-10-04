@@ -2,8 +2,6 @@ $schema: https://json-schema.org/draft/2020-12/schema
 $id: https://schemas.dpe-audit.fr/common/scenario
 title: Scénario d'usage
 type: string
-oneOf:
-  - const: conventionnel
-    title: Scénario conventionnel
-  - const: depensier
-    title: Scénario dépensier
+enum:
+  - scenario_conventionnel
+  - scenario_depensier

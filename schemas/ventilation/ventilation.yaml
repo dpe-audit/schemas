@@ -26,12 +26,5 @@ $defs:
     type: object
     readOnly: true
     properties:
-      cef_aux:
-        title: Consommation d'énergie finale en kWh/an
-        type: number
-      cep_aux:
-        title: Consommation d'énergie primaire en kWh/an
-        type: number
-      eges_aux:
-        title: Emissions de gaz à effet de serre en kgCO2/an
-        type: number
+      consommations:
+        $ref: /common/consommations

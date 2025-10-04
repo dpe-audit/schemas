@@ -84,72 +84,47 @@ $defs:
         type: number
         minimumExclusive: 0
       bilan:
-        title: Bilan
-        type: object
-        properties:
-          cef:
-            title: Consommation d'énergie finale en kWh/m²/an
-            type: number
-            minimum: 0
-          cep:
-            title: Consommation d'énergie primaire en kWh/m²/an
-            type: number
-            minimum: 0
-          eges:
-            title: Émissions de gaz à effet de serre en kgCO2/m²/an
-            type: number
-            minimum: 0
-          etiquette_energie:
-            title: Etiquette énergie
-            type: string
-            enum:
-              - A
-              - B
-              - C
-              - D
-              - E
-              - F
-              - G
-          etiquette_climat:
-            title: Etiquette climat
-            type: string
-            enum:
-              - A
-              - B
-              - C
-              - D
-              - E
-              - F
-              - G
+        $ref: '#/$defs/bilan'
       consommations:
-        title: Consommations d'énergie
-        type: array
-        items:
-          type: object
-          properties:
-            energie:
-              $ref: /common/energie
-            usage:
-              $ref: /common/usage
-            cef:
-              title: Consommation d'énergie finale en kWh/an
-              type: number
-            cep:
-              title: Consommation d'énergie primaire en kWh/an
-              type: number
-      emissions:
-        title: Emissions de gaz à effet de serre
-        type: array
-        items:
-          type: object
-          properties:
-            energie:
-              $ref: /common/energie
-            usage:
-              $ref: /common/usage
-            eges:
-              title: Émissions de gaz à effet de serre en kgCO2/an
-              type: number
+        $ref: /common/consommations
+  bilan:
+    title: Bilan
+    type: object
+    properties:
+      cef:
+        title: Consommation d'énergie finale en kWh/m²/an
+        type: number
+        minimum: 0
+      cep:
+        title: Consommation d'énergie primaire en kWh/m²/an
+        type: number
+        minimum: 0
+      eges:
+        title: Émissions de gaz à effet de serre en kgCO2/m²/an
+        type: number
+        minimum: 0
+      etiquette_energie:
+        title: Etiquette énergie
+        type: string
+        enum:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+      etiquette_climat:
+        title: Etiquette climat
+        type: string
+        enum:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
   https://schemas.dpe-audit.fr/adresse:
     $id: https://schemas.dpe-audit.fr/adresse
     title: Adresse
@@ -2907,26 +2882,8 @@ $defs:
           bch:
             title: Besoin de chauffage en kWh/an
             type: number
-          cef_ch:
-            title: Consommation finale de chauffage en kWh/an
-            type: number
-          cep_ch:
-            title: Consommation primaire de chauffage en kWh/an
-            type: number
-          eges_ch:
-            title: Emissions de gaz à effet de serre de chauffage en kgCO2/an
-            type: number
-          cef_aux:
-            title: Consommation finale des auxiliaires de chauffage en kWh/an
-            type: number
-          cep_aux:
-            title: Consommation primaire des auxiliaires de chauffage en kWh/an
-            type: number
-          eges_aux:
-            title: >-
-              Emissions de gaz à effet de serre des auxiliaires de chauffage en
-              kgCO2/an
-            type: number
+          consommations:
+            $ref: /common/consommations
           pertes:
             $ref: '#/$defs/pertes'
       pertes:
@@ -3938,24 +3895,8 @@ $defs:
           i0:
             title: Coefficient d'intermittence
             type: number
-          cef_ch:
-            title: Consommation finale de chauffage en kWh/an
-            type: number
-          cep_ch:
-            title: Consommation primaire de chauffage en kWh/an
-            type: number
-          eges_ch:
-            title: Emissions de gaz à effet de serre de chauffage en kgCO2/an
-            type: number
-          cef_aux:
-            title: Consommation finale des auxiliaires en kWh/an
-            type: number
-          cep_aux:
-            title: Consommation primaire des auxiliaires en kWh/an
-            type: number
-          eges_aux:
-            title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
-            type: number
+          consommations:
+            $ref: /common/consommations
           rendements:
             $ref: '#/$defs/rendements'
           pertes:
@@ -3989,6 +3930,55 @@ $defs:
           pertes_generation_recuperables:
             title: Pertes de génération récupérables en kWh/an
             type: number
+  https://schemas.dpe-audit.fr/common/consommations:
+    $id: https://schemas.dpe-audit.fr/common/consommations
+    title: Consommations d'énergie
+    type: array
+    items:
+      type: object
+      properties:
+        energie:
+          $ref: /common/energie
+        usage:
+          $ref: /common/usage
+        cef:
+          title: Consommation d'énergie finale en kWh/an
+          type: number
+        cep:
+          title: Consommation d'énergie primaire en kWh/an
+          type: number
+        eges:
+          title: Emissions de gaz à effet de serre en kgCO2/an
+          type: number
+      required:
+        - energie
+        - usage
+        - cef
+        - cep
+        - eges
+  https://schemas.dpe-audit.fr/common/energie:
+    $id: https://schemas.dpe-audit.fr/common/energie
+    title: Energie
+    type: string
+    enum:
+      - electricite
+      - electricite_renouvelable
+      - gaz_naturel
+      - gpl
+      - fioul
+      - bois
+      - charbon
+      - reseau_urbain
+  https://schemas.dpe-audit.fr/common/usage:
+    $id: https://schemas.dpe-audit.fr/common/usage
+    title: Usage
+    type: string
+    enum:
+      - chauffage
+      - ecs
+      - refroidissement
+      - eclairage
+      - auxiliaire
   https://schemas.dpe-audit.fr/chauffage/systeme:
     $id: https://schemas.dpe-audit.fr/chauffage/systeme
     title: Système de chauffage
@@ -4209,38 +4199,20 @@ $defs:
           becs:
             title: Besoin d'eau chaude sanitaire en kWh/an
             type: number
-          cef_ecs:
-            title: Consommation finale d'eau chaude sanitaire en kWh/an
-            type: number
-          cep_ecs:
-            title: Consommation primaire d'eau chaude sanitaire en kWh/an
-            type: number
-          eges_ecs:
-            title: >-
-              Emissions de gaz à effet de serre d'eau chaude sanitaire en
-              kgCO2/an
-            type: number
-          cef_aux:
-            title: >-
-              Consommation finale des auxiliaires d'eau chaude sanitaire en
-              kWh/an
-            type: number
-          cep_aux:
-            title: >-
-              Consommation primaire des auxiliaires d'eau chaude sanitaire en
-              kWh/an
-            type: number
-          eges_aux:
-            title: >-
-              Emissions de gaz à effet de serre des auxiliaires d'eau chaude
-              sanitaire en kgCO2/an
-            type: number
+          consommations:
+            $ref: /common/consommations
           pertes:
             $ref: '#/$defs/pertes'
       pertes:
         title: Pertes
         type: object
         properties:
+          pertes:
+            title: Pertes en kWh/an
+            type: number
+          pertes_recuperables:
+            title: Pertes récupérables en kWh/an
+            type: number
           pertes_generation:
             title: Pertes de génération en kWh/an
             type: number
@@ -4783,6 +4755,22 @@ $defs:
             type:
               - number
               - 'null'
+      pertes:
+        title: Pertes
+        type: object
+        properties:
+          pertes_generation:
+            title: Pertes de génération en kWh/an
+            type: number
+          pertes_generation_recuperables:
+            title: Pertes de génération récupérables en kWh/an
+            type: number
+          pertes_stockage_integre:
+            title: Pertes de stockage intégré en kWh/an
+            type: number
+          pertes_stockage_integre_recuperables:
+            title: Pertes de stockage intégré récupérables en kWh/an
+            type: number
   https://schemas.dpe-audit.fr/ecs/installation:
     $id: https://schemas.dpe-audit.fr/ecs/installation
     title: Installation d'eau chaude sanitaire
@@ -4852,26 +4840,8 @@ $defs:
           fecs:
             title: Facteur de couverture solaire
             type: number
-          cef_ecs:
-            title: Consommation finale d'eau chaude sanitaire en kWh/an
-            type: number
-          cep_ecs:
-            title: Consommation primaire d'eau chaude sanitaire en kWh/an
-            type: number
-          eges_ecs:
-            title: >-
-              Emissions de gaz à effet de serre d'eau chaude sanitaire en
-              kgCO2/an
-            type: number
-          cef_aux:
-            title: Consommation finale des auxiliaires en kWh/an
-            type: number
-          cep_aux:
-            title: Consommation primaire des auxiliaires en kWh/an
-            type: number
-          eges_aux:
-            title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
-            type: number
+          consommations:
+            $ref: /common/consommations
           rendements:
             $ref: '#/$defs/rendements'
           pertes:
@@ -5092,11 +5062,17 @@ $defs:
           pertes_generation_recuperables:
             title: Pertes de génération récupérables en kWh/an
             type: number
-          pertes_stockage:
-            title: Pertes de stockage en kWh/an
+          pertes_stockage_integre:
+            title: Pertes de stockage intégré en kWh/an
             type: number
-          pertes_stockage_recuperables:
-            title: Pertes de stockage récupérables en kWh/an
+          pertes_stockage_integre_recuperables:
+            title: Pertes de stockage intégré récupérables en kWh/an
+            type: number
+          pertes_stockage_independant:
+            title: Pertes de stockage indépendant en kWh/an
+            type: number
+          pertes_stockage_independant_recuperables:
+            title: Pertes de stockage indépendant récupérables en kWh/an
             type: number
           pertes_distribution:
             title: Pertes de distribution en kWh/an
@@ -5132,15 +5108,8 @@ $defs:
         type: object
         readOnly: true
         properties:
-          cef_aux:
-            title: Consommation d'énergie finale en kWh/an
-            type: number
-          cep_aux:
-            title: Consommation d'énergie primaire en kWh/an
-            type: number
-          eges_aux:
-            title: Emissions de gaz à effet de serre en kgCO2/an
-            type: number
+          consommations:
+            $ref: /common/consommations
   https://schemas.dpe-audit.fr/ventilation/generateur:
     $id: https://schemas.dpe-audit.fr/ventilation/generateur
     title: Générateur de ventilation
@@ -5336,15 +5305,8 @@ $defs:
               Somme des modules d'entrée d'air sous 20 Pa par unité de surface
               habitable en m3/(h.m²)
             type: number
-          cef_aux:
-            title: Consommation d'énergie finale en kWh/an
-            type: number
-          cep_aux:
-            title: Consommation d'énergie primaire en kWh/an
-            type: number
-          eges_aux:
-            title: Emissions de gaz à effet de serre en kgCO2/an
-            type: number
+          consommations:
+            $ref: /common/consommations
   https://schemas.dpe-audit.fr/refroidissement:
     $id: https://schemas.dpe-audit.fr/refroidissement
     title: Refroidissement
@@ -5383,15 +5345,8 @@ $defs:
           bfr:
             title: Besoin annuel de refroidissement en kWh
             type: number
-          cef_fr:
-            title: Consommation finale en kWh/an
-            type: number
-          cep_fr:
-            title: Consommation primaire en kWh/an
-            type: number
-          eges_fr:
-            title: Emissions de gaz à effet de serre en kgCO2/an
-            type: number
+          consommations:
+            $ref: /common/consommations
   https://schemas.dpe-audit.fr/refroidissement/generateur:
     $id: https://schemas.dpe-audit.fr/refroidissement/generateur
     title: Générateur de refroidissement
@@ -5547,15 +5502,8 @@ $defs:
           rdim:
             title: Ratio de dimensionnement
             type: number
-          cef_fr:
-            title: Consommation finale en kWh/an
-            type: number
-          cep_fr:
-            title: Consommation primaire en kWh/an
-            type: number
-          eges_fr:
-            title: Emissions de gaz à effet de serre en kgCO2/an
-            type: number
+          consommations:
+            $ref: /common/consommations
   https://schemas.dpe-audit.fr/refroidissement/systeme:
     $id: https://schemas.dpe-audit.fr/refroidissement/systeme
     title: Système de refroidissement
@@ -5684,37 +5632,3 @@ $defs:
           ppv:
             title: Production photovoltaïque en kWh/an
             type: number
-  https://schemas.dpe-audit.fr/common/energie:
-    $id: https://schemas.dpe-audit.fr/common/energie
-    title: Energie
-    type: string
-    oneOf:
-      - title: Electricité
-        const: electricite
-      - title: Gaz naturel
-        const: gaz_naturel
-      - title: GPL
-        const: gpl
-      - title: Fioul
-        const: fioul
-      - title: Bois
-        const: bois
-      - title: Charbon
-        const: charbon
-      - title: Réseau urbain
-        const: reseau_urbain
-  https://schemas.dpe-audit.fr/common/usage:
-    $id: https://schemas.dpe-audit.fr/common/usage
-    title: Usage
-    type: string
-    oneOf:
-      - const: chauffage
-        title: Chauffage
-      - const: ecs
-        title: Eau chaude sanitaire
-      - const: refroidissement
-        title: Refroidissement
-      - const: eclairage
-        title: Eclairage
-      - const: auxiliaire
-        title: Auxiliaire

@@ -10,12 +10,17 @@ examples:
     data:
       rdim: 1
       fecs: 0.5
-      cef_ecs: 1500
-      cep_ecs: 1800
-      eges_ecs: 500
-      cef_aux: 1500
-      cep_aux: 1800
-      eges_aux: 500
+      consommations:
+        - usage: ecs
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 500
+        - usage: auxiliaire
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 500
       rendements:
         iecs: 2
         rd: 0.8

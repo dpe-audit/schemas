@@ -3,6 +3,9 @@ examples:
   - generateurs: https://schemas.dpe-audit.fr/ventilation/generateur
     installations: https://schemas.dpe-audit.fr/ventilation/installation
     data:
-      cef_aux: 1500
-      cep_aux: 1800
-      eges_aux: 200
+      consommations:
+        - usage: auxiliaire
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200

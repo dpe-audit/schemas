@@ -4,7 +4,7 @@ examples:
     date_etablissement: "2026-01-01"
     adresse: https://schemas.dpe-audit.fr/adresse#0
     batiment: https://schemas.dpe-audit.fr/batiment#0
-    logements: https://schemas.dpe-audit.fr/logement#0
+    logements: https://schemas.dpe-audit.fr/logement
     enveloppe: https://schemas.dpe-audit.fr/enveloppe#0
     chauffage: https://schemas.dpe-audit.fr/chauffage#0
     ecs: https://schemas.dpe-audit.fr/ecs#0
@@ -28,14 +28,9 @@ examples:
           usage: chauffage
           cef: 15000
           cep: 20000
+          eges: 3000
         - energie: electricite
           usage: ecs
           cef: 5000
           cep: 10000
-      emissions:
-        - energie: electricite
-          usage: chauffage
-          eges: 3000
-        - energie: electricite
-          usage: ecs
           eges: 2000

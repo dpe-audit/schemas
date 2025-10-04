@@ -5,6 +5,10 @@ examples:
     surface: 100
     data:
       rdim: 1
-      cef_fr: 1000
-      cep_fr: 1900
-      eges_fr: 500
+      consommations:
+        - usage: refroidissement
+          energie: electricite
+          cef: 1000
+          cep: 1900
+          eges: 500
+

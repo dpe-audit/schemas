@@ -133,4 +133,12 @@ $defs:
   isolation:
     $ref: /enveloppe/paroi/isolation
   data:
-    $ref: /enveloppe/paroi/data
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      u0:
+        title: Coefficient de transmission thermique du plancher bas non isolé en W/(m².K)
+        type: number
+    allOf:
+      - $ref: /enveloppe/paroi/data

@@ -140,14 +140,23 @@ $defs:
       f:
         title: Fraction des besoins de chauffage couverts par les apports gratuits
         type: number
-      apport:
-        title: Apport
+      apport_ch:
+        title: Apport pour le chauffage
         type: number
-      apport_interne:
-        title: Apport interne
+      apport_interne_ch:
+        title: Apport interne pour le chauffage
         type: number
-      apport_solaire:
-        title: Apport solaire
+      apport_solaire_ch:
+        title: Apport solaire pour le chauffage
+        type: number
+      apport_fr:
+        title: Apport pour le refroidissement
+        type: number
+      apport_interne_fr:
+        title: Apport interne pour le refroidissement
+        type: number
+      apport_solaire_fr:
+        title: Apport solaire pour le refroidissement
         type: number
   permeabilite:
     title: Permeabilité

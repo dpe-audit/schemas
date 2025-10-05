@@ -109,6 +109,9 @@
         "bilan": {
           "$ref": "#/$defs/bilan"
         },
+        "pertes": {
+          "$ref": "/common/pertes"
+        },
         "consommations": {
           "$ref": "/common/consommations"
         }
@@ -3886,25 +3889,11 @@
               "title": "Besoin de chauffage en kWh/an",
               "type": "number"
             },
+            "pertes": {
+              "$ref": "/common/pertes"
+            },
             "consommations": {
               "$ref": "/common/consommations"
-            },
-            "pertes": {
-              "$ref": "#/$defs/pertes"
-            }
-          }
-        },
-        "pertes": {
-          "title": "Pertes",
-          "type": "object",
-          "properties": {
-            "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
-              "type": "number"
-            },
-            "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
-              "type": "number"
             }
           }
         }
@@ -5323,21 +5312,6 @@
               "title": "Coefficient d'intermittence",
               "type": "number"
             },
-            "consommations": {
-              "$ref": "/common/consommations"
-            },
-            "rendements": {
-              "$ref": "#/$defs/rendements"
-            },
-            "pertes": {
-              "$ref": "#/$defs/pertes"
-            }
-          }
-        },
-        "rendements": {
-          "title": "Rendements",
-          "type": "object",
-          "properties": {
             "ich": {
               "title": "Inverse du rendement du système",
               "type": "number"
@@ -5357,23 +5331,47 @@
             "rr": {
               "title": "Rendement de régulation",
               "type": "number"
-            }
-          }
-        },
-        "pertes": {
-          "title": "Pertes",
-          "type": "object",
-          "properties": {
-            "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
-              "type": "number"
             },
-            "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
-              "type": "number"
+            "pertes": {
+              "$ref": "/common/pertes"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
+      }
+    },
+    "https://schemas.dpe-audit.fr/common/pertes": {
+      "$id": "https://schemas.dpe-audit.fr/common/pertes",
+      "title": "Pertes des sytèmes",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type de perte",
+            "type": "string",
+            "enum": [
+              "distribution",
+              "generation",
+              "stockage"
+            ]
+          },
+          "pertes": {
+            "title": "Pertes en kWh/an",
+            "type": "number"
+          },
+          "pertes_recuperables": {
+            "title": "Pertes récupérables en kWh/an",
+            "type": "number"
+          }
+        },
+        "required": [
+          "type",
+          "pertes",
+          "pertes_recuperables"
+        ]
       }
     },
     "https://schemas.dpe-audit.fr/common/consommations": {
@@ -5604,6 +5602,26 @@
               "title": "Coefficient d'intermittence",
               "type": "number"
             },
+            "ich": {
+              "title": "Inverse du rendement du système",
+              "type": "number"
+            },
+            "rd": {
+              "title": "Rendement de distribution",
+              "type": "number"
+            },
+            "re": {
+              "title": "Rendement d'émission",
+              "type": "number"
+            },
+            "rg": {
+              "title": "Rendement de génération",
+              "type": "number"
+            },
+            "rr": {
+              "title": "Rendement de régulation",
+              "type": "number"
+            },
             "cef_ch": {
               "title": "Consommation finale de chauffage en kWh/an",
               "type": "number"
@@ -5628,37 +5646,8 @@
               "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
               "type": "number"
             },
-            "rendements": {
-              "$ref": "#/$defs/rendements"
-            },
             "pertes": {
               "$ref": "#/$defs/pertes"
-            }
-          }
-        },
-        "rendements": {
-          "title": "Rendements",
-          "type": "object",
-          "properties": {
-            "ich": {
-              "title": "Inverse du rendement du système",
-              "type": "number"
-            },
-            "rd": {
-              "title": "Rendement de distribution",
-              "type": "number"
-            },
-            "re": {
-              "title": "Rendement d'émission",
-              "type": "number"
-            },
-            "rg": {
-              "title": "Rendement de génération",
-              "type": "number"
-            },
-            "rr": {
-              "title": "Rendement de régulation",
-              "type": "number"
             }
           }
         },
@@ -5734,49 +5723,11 @@
               "title": "Besoin d'eau chaude sanitaire en kWh/an",
               "type": "number"
             },
+            "pertes": {
+              "$ref": "/common/pertes"
+            },
             "consommations": {
               "$ref": "/common/consommations"
-            },
-            "pertes": {
-              "$ref": "#/$defs/pertes"
-            }
-          }
-        },
-        "pertes": {
-          "title": "Pertes",
-          "type": "object",
-          "properties": {
-            "pertes": {
-              "title": "Pertes en kWh/an",
-              "type": "number"
-            },
-            "pertes_recuperables": {
-              "title": "Pertes récupérables en kWh/an",
-              "type": "number"
-            },
-            "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
-              "type": "number"
-            },
-            "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
-              "type": "number"
-            },
-            "pertes_stockage": {
-              "title": "Pertes de stockage en kWh/an",
-              "type": "number"
-            },
-            "pertes_stockage_recuperables": {
-              "title": "Pertes de stockage récupérables en kWh/an",
-              "type": "number"
-            },
-            "pertes_distribution": {
-              "title": "Pertes de distribution en kWh/an",
-              "type": "number"
-            },
-            "pertes_distribution_recuperables": {
-              "title": "Pertes de distribution récupérables en kWh/an",
-              "type": "number"
             }
           }
         }
@@ -6636,21 +6587,6 @@
               "title": "Facteur de couverture solaire",
               "type": "number"
             },
-            "consommations": {
-              "$ref": "/common/consommations"
-            },
-            "rendements": {
-              "$ref": "#/$defs/rendements"
-            },
-            "pertes": {
-              "$ref": "#/$defs/pertes"
-            }
-          }
-        },
-        "rendements": {
-          "title": "Rendements",
-          "type": "object",
-          "properties": {
             "iecs": {
               "title": "Inverse du rendement de l'installation",
               "type": "number"
@@ -6670,36 +6606,12 @@
             "rgs": {
               "title": "Rendement de génération et de stockage",
               "type": "number"
-            }
-          }
-        },
-        "pertes": {
-          "title": "Pertes",
-          "type": "object",
-          "properties": {
-            "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
-              "type": "number"
             },
-            "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
-              "type": "number"
+            "pertes": {
+              "$ref": "/common/pertes"
             },
-            "pertes_stockage": {
-              "title": "Pertes de stockage en kWh/an",
-              "type": "number"
-            },
-            "pertes_stockage_recuperables": {
-              "title": "Pertes de stockage récupérables en kWh/an",
-              "type": "number"
-            },
-            "pertes_distribution": {
-              "title": "Pertes de distribution en kWh/an",
-              "type": "number"
-            },
-            "pertes_distribution_recuperables": {
-              "title": "Pertes de distribution récupérables en kWh/an",
-              "type": "number"
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -6870,6 +6782,26 @@
               "title": "Ratio de dimensionnement",
               "type": "number"
             },
+            "iecs": {
+              "title": "Inverse du rendement du système",
+              "type": "number"
+            },
+            "rd": {
+              "title": "Rendement de distribution",
+              "type": "number"
+            },
+            "rs": {
+              "title": "Rendement de stockage",
+              "type": "number"
+            },
+            "rg": {
+              "title": "Rendement de génération",
+              "type": "number"
+            },
+            "rgs": {
+              "title": "Rendement de génération et de stockage",
+              "type": "number"
+            },
             "cef_ecs": {
               "title": "Consommation finale d'eau chaude sanitaire en kWh/an",
               "type": "number"
@@ -6894,37 +6826,8 @@
               "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
               "type": "number"
             },
-            "rendements": {
-              "$ref": "#/$defs/rendements"
-            },
             "pertes": {
               "$ref": "#/$defs/pertes"
-            }
-          }
-        },
-        "rendements": {
-          "title": "Rendements",
-          "type": "object",
-          "properties": {
-            "iecs": {
-              "title": "Inverse du rendement du système",
-              "type": "number"
-            },
-            "rd": {
-              "title": "Rendement de distribution",
-              "type": "number"
-            },
-            "rs": {
-              "title": "Rendement de stockage",
-              "type": "number"
-            },
-            "rg": {
-              "title": "Rendement de génération",
-              "type": "number"
-            },
-            "rgs": {
-              "title": "Rendement de génération et de stockage",
-              "type": "number"
             }
           }
         },
@@ -7602,6 +7505,18 @@
             },
             "eges_fr": {
               "title": "Emissions de gaz à effet de serre en kgCO2/an",
+              "type": "number"
+            },
+            "cef_aux": {
+              "title": "Consommation d'énergie finale des auxiliaires en kWh/an",
+              "type": "number"
+            },
+            "cep_aux": {
+              "title": "Consommation d'énergie primaire des auxiliaires en kWh/an",
+              "type": "number"
+            },
+            "eges_aux": {
+              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
               "type": "number"
             }
           }

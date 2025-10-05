@@ -4,6 +4,7 @@ examples:
     installations: https://schemas.dpe-audit.fr/refroidissement/installation
     systemes: https://schemas.dpe-audit.fr/refroidissement/systeme
     data:
+      bfr: 5000
       consommations:
         - usage: refroidissement
           energie: electricite

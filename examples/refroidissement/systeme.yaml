@@ -9,3 +9,6 @@ examples:
       cef_fr: 1000
       cep_fr: 1900
       eges_fr: 500
+      cef_aux: 0
+      cep_aux: 0
+      eges_aux: 0

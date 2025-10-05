@@ -280,6 +280,12 @@ $defs:
       pveilleuse:
         title: Puissance de la veilleuse en W
         type: [number, "null"]
+      tfonc30:
+        title: Température de fonctionnement à 30% de la puissance nominale en °C
+        type: [number, "null"]
+      tfonc100:
+        title: Température de fonctionnement à 100% de la puissance nominale en °C
+        type: [number, "null"]
 oneOf:
   - title: Chaudière à combustion
     properties:

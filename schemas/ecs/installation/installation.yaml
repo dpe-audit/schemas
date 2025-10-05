@@ -59,16 +59,6 @@ $defs:
       fecs:
         title: Facteur de couverture solaire
         type: number
-      rendements:
-        $ref: "#/$defs/rendements"
-      pertes:
-        $ref: /common/pertes
-      consommations:
-        $ref: /common/consommations
-  rendements:
-    title: Rendements
-    type: object
-    properties:
       iecs:
         title: Inverse du rendement de l'installation
         type: number
@@ -84,3 +74,7 @@ $defs:
       rgs:
         title: Rendement de génération et de stockage
         type: number
+      pertes:
+        $ref: /common/pertes
+      consommations:
+        $ref: /common/consommations

@@ -10,6 +10,11 @@ examples:
     data:
       rdim: 1
       fecs: 0.5
+      iecs: 2
+      rd: 0.8
+      rs: 0.8
+      rg: 0.8
+      rgs: 1
       pertes:
         - type: generation
           pertes: 5000
@@ -31,9 +36,3 @@ examples:
           cef: 1500
           cep: 1800
           eges: 500
-      rendements:
-        iecs: 2
-        rd: 0.8
-        rs: 0.8
-        rg: 0.8
-        rgs: 1

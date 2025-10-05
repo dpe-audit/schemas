@@ -14,18 +14,17 @@ examples:
       position_volume_chauffe: true
     data:
       rdim: 1
+      iecs: 2
+      rd: 0.8
+      rs: 0.8
+      rg: 0.8
+      rgs: 1
       cef_ecs: 1500
       cep_ecs: 1800
       eges_ecs: 500
       cef_aux: 1500
       cep_aux: 1800
       eges_aux: 500
-      rendements:
-        iecs: 2
-        rd: 0.8
-        rs: 0.8
-        rg: 0.8
-        rgs: 1
       pertes:
         pertes_generation: 100
         pertes_generation_recuperables: 150

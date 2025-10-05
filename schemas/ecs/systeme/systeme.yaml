@@ -103,6 +103,21 @@ $defs:
       rdim:
         title: Ratio de dimensionnement
         type: number
+      iecs:
+        title: Inverse du rendement du système
+        type: number
+      rd:
+        title: Rendement de distribution
+        type: number
+      rs:
+        title: Rendement de stockage
+        type: number
+      rg:
+        title: Rendement de génération
+        type: number
+      rgs:
+        title: Rendement de génération et de stockage
+        type: number
       cef_ecs:
         title: Consommation finale d'eau chaude sanitaire en kWh/an
         type: number
@@ -121,29 +136,8 @@ $defs:
       eges_aux:
         title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
         type: number
-      rendements:
-        $ref: "#/$defs/rendements"
       pertes:
         $ref: "#/$defs/pertes"
-  rendements:
-    title: Rendements
-    type: object
-    properties:
-      iecs:
-        title: Inverse du rendement du système
-        type: number
-      rd:
-        title: Rendement de distribution
-        type: number
-      rs:
-        title: Rendement de stockage
-        type: number
-      rg:
-        title: Rendement de génération
-        type: number
-      rgs:
-        title: Rendement de génération et de stockage
-        type: number
   pertes:
     title: Pertes
     type: object

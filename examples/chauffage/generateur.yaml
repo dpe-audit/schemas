@@ -40,6 +40,8 @@ examples:
       rpint: null
       qp0: null
       pveilleuse: null
+      tfonc30: null
+      tfonc100: null
   - id: 6a785019-8ce1-4768-b9c3-400b7bd2f1f3
     description: Réseau de chaleur
     type: reseau_chaleur
@@ -76,6 +78,8 @@ examples:
       rpint: null
       qp0: null
       pveilleuse: null
+      tfonc30: null
+      tfonc100: null
   - id: 6a785019-8ce1-4768-b9c3-400b7bd2f1f3
     description: Générateur collectif inconnu
     type: null
@@ -112,3 +116,5 @@ examples:
       rpint: null
       qp0: null
       pveilleuse: null
+      tfonc30: null
+      tfonc100: null

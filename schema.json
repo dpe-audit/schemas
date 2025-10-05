@@ -4364,6 +4364,23 @@
                 "number",
                 "null"
               ]
+            },
+            "pertes": {
+              "$ref": "#/$defs/pertes"
+            }
+          }
+        },
+        "pertes": {
+          "title": "Pertes",
+          "type": "object",
+          "properties": {
+            "pertes_generation": {
+              "title": "Pertes de génération en kWh/an",
+              "type": "number"
+            },
+            "pertes_generation_recuperables": {
+              "title": "Pertes de génération récupérables en kWh/an",
+              "type": "number"
             }
           }
         }

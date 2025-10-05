@@ -119,12 +119,12 @@ $defs:
       i0:
         title: Coefficient d'intermittence
         type: number
-      consommations:
-        $ref: /common/consommations
       rendements:
         $ref: "#/$defs/rendements"
       pertes:
-        $ref: "#/$defs/pertes"
+        $ref: /common/pertes
+      consommations:
+        $ref: /common/consommations
   rendements:
     title: Rendements
     type: object
@@ -143,14 +143,4 @@ $defs:
         type: number
       rr:
         title: Rendement de régulation
-        type: number
-  pertes:
-    title: Pertes
-    type: object
-    properties:
-      pertes_generation:
-        title: Pertes de génération en kWh/an
-        type: number
-      pertes_generation_recuperables:
-        title: Pertes de génération récupérables en kWh/an
         type: number

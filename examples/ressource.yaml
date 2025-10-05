@@ -23,6 +23,16 @@ examples:
         eges: 5000
         etiquette_energie: C
         etiquette_climat: D
+      pertes:
+        - type: generation
+          pertes: 5000
+          pertes_recuperables: 2000
+        - type: distribution
+          pertes: 5000
+          pertes_recuperables: 2000
+        - type: stockage
+          pertes: 5000
+          pertes_recuperables: 2000
       consommations:
         - energie: electricite
           usage: chauffage

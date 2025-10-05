@@ -42,35 +42,7 @@ $defs:
       becs:
         title: Besoin d'eau chaude sanitaire en kWh/an
         type: number
+      pertes:
+        $ref: /common/pertes
       consommations:
         $ref: /common/consommations
-      pertes:
-        $ref: "#/$defs/pertes"
-  pertes:
-    title: Pertes
-    type: object
-    properties:
-      pertes:
-        title: Pertes en kWh/an
-        type: number
-      pertes_recuperables:
-        title: Pertes récupérables en kWh/an
-        type: number
-      pertes_generation:
-        title: Pertes de génération en kWh/an
-        type: number
-      pertes_generation_recuperables:
-        title: Pertes de génération récupérables en kWh/an
-        type: number
-      pertes_stockage:
-        title: Pertes de stockage en kWh/an
-        type: number
-      pertes_stockage_recuperables:
-        title: Pertes de stockage récupérables en kWh/an
-        type: number
-      pertes_distribution:
-        title: Pertes de distribution en kWh/an
-        type: number
-      pertes_distribution_recuperables:
-        title: Pertes de distribution récupérables en kWh/an
-        type: number

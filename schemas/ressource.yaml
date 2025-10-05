@@ -77,6 +77,8 @@ $defs:
         minimumExclusive: 0
       bilan:
         $ref: "#/$defs/bilan"
+      pertes:
+        $ref: /common/pertes
       consommations:
         $ref: /common/consommations
   bilan:

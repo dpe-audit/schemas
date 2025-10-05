@@ -59,12 +59,12 @@ $defs:
       fecs:
         title: Facteur de couverture solaire
         type: number
-      consommations:
-        $ref: /common/consommations
       rendements:
         $ref: "#/$defs/rendements"
       pertes:
-        $ref: "#/$defs/pertes"
+        $ref: /common/pertes
+      consommations:
+        $ref: /common/consommations
   rendements:
     title: Rendements
     type: object
@@ -83,26 +83,4 @@ $defs:
         type: number
       rgs:
         title: Rendement de génération et de stockage
-        type: number
-  pertes:
-    title: Pertes
-    type: object
-    properties:
-      pertes_generation:
-        title: Pertes de génération en kWh/an
-        type: number
-      pertes_generation_recuperables:
-        title: Pertes de génération récupérables en kWh/an
-        type: number
-      pertes_stockage:
-        title: Pertes de stockage en kWh/an
-        type: number
-      pertes_stockage_recuperables:
-        title: Pertes de stockage récupérables en kWh/an
-        type: number
-      pertes_distribution:
-        title: Pertes de distribution en kWh/an
-        type: number
-      pertes_distribution_recuperables:
-        title: Pertes de distribution récupérables en kWh/an
         type: number

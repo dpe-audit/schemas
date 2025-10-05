@@ -19,6 +19,10 @@ examples:
     data:
       rdim: 1
       fch: 0.5
+      pertes:
+        - type: generation
+          pertes: 5000
+          pertes_recuperables: 2000
       consommations:
         - usage: chauffage
           energie: gaz_naturel
@@ -36,6 +40,3 @@ examples:
         re: 0.8
         rg: 0.8
         rr: 1
-      pertes:
-        pertes_generation: 100
-        pertes_generation_recuperables: 150

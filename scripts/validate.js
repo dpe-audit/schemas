@@ -53,10 +53,14 @@ for (const schema of schemas) {
   console.log(`Validating schema: ${schema.$id}`)
 
   for (const data of dataset) {
-    const { valid, errors } = await validate(schema.$id, data, BASIC)
+    try {
+      const { valid, errors } = await validate(schema.$id, data, BASIC)
 
-    if (false === valid) {
-      console.error(errors.length ? errors : 'Unknown error')
+      if (!valid) {
+        console.warn(errors.length ? errors : 'Unknown error')
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 }

@@ -114,6 +114,21 @@ $defs:
       i0:
         title: Coefficient d'intermittence
         type: number
+      ich:
+        title: Inverse du rendement du système
+        type: number
+      rd:
+        title: Rendement de distribution
+        type: number
+      re:
+        title: Rendement d'émission
+        type: number
+      rg:
+        title: Rendement de génération
+        type: number
+      rr:
+        title: Rendement de régulation
+        type: number
       cef_ch:
         title: Consommation finale de chauffage en kWh/an
         type: number
@@ -132,29 +147,8 @@ $defs:
       eges_aux:
         title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
         type: number
-      rendements:
-        $ref: "#/$defs/rendements"
       pertes:
         $ref: "#/$defs/pertes"
-  rendements:
-    title: Rendements
-    type: object
-    properties:
-      ich:
-        title: Inverse du rendement du système
-        type: number
-      rd:
-        title: Rendement de distribution
-        type: number
-      re:
-        title: Rendement d'émission
-        type: number
-      rg:
-        title: Rendement de génération
-        type: number
-      rr:
-        title: Rendement de régulation
-        type: number
   pertes:
     title: Pertes
     type: object

@@ -119,16 +119,6 @@ $defs:
       i0:
         title: Coefficient d'intermittence
         type: number
-      rendements:
-        $ref: "#/$defs/rendements"
-      pertes:
-        $ref: /common/pertes
-      consommations:
-        $ref: /common/consommations
-  rendements:
-    title: Rendements
-    type: object
-    properties:
       ich:
         title: Inverse du rendement du système
         type: number
@@ -144,3 +134,7 @@ $defs:
       rr:
         title: Rendement de régulation
         type: number
+      pertes:
+        $ref: /common/pertes
+      consommations:
+        $ref: /common/consommations

@@ -19,6 +19,11 @@ examples:
     data:
       rdim: 1
       fch: 0.5
+      ich: 2
+      rd: 0.8
+      re: 0.8
+      rg: 0.8
+      rr: 1
       pertes:
         - type: generation
           pertes: 5000
@@ -34,9 +39,3 @@ examples:
           cef: 1500
           cep: 1800
           eges: 500
-      rendements:
-        ich: 2
-        rd: 0.8
-        re: 0.8
-        rg: 0.8
-        rr: 1

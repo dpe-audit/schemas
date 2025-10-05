@@ -34,6 +34,11 @@ examples:
       rpn: null
       qp0: null
       pveilleuse: null
+      pertes:
+        pertes_generation: 1000
+        pertes_generation_recuperables: 800
+        pertes_stockage_integre: 1000
+        pertes_stockage_integre_recuperables: 800
   - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
     description: Chauffe eau
     type: chauffe_eau
@@ -62,6 +67,11 @@ examples:
       rpn: null
       qp0: null
       pveilleuse: null
+      pertes:
+        pertes_generation: 1000
+        pertes_generation_recuperables: 800
+        pertes_stockage_integre: 1000
+        pertes_stockage_integre_recuperables: 800
   - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
     description: Chauffe eau
     type: chauffe_eau
@@ -89,4 +99,9 @@ examples:
       rpn: null
       qp0: null
       pveilleuse: null
+      pertes:
+        pertes_generation: 1000
+        pertes_generation_recuperables: 800
+        pertes_stockage_integre: 1000
+        pertes_stockage_integre_recuperables: 800
 

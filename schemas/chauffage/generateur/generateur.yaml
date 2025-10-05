@@ -286,6 +286,18 @@ $defs:
       tfonc100:
         title: Température de fonctionnement à 100% de la puissance nominale en °C
         type: [number, "null"]
+      pertes:
+        $ref: "#/$defs/pertes"
+  pertes:
+    title: Pertes
+    type: object
+    properties:
+      pertes_generation:
+        title: Pertes de génération en kWh/an
+        type: number
+      pertes_generation_recuperables:
+        title: Pertes de génération récupérables en kWh/an
+        type: number
 oneOf:
   - title: Chaudière à combustion
     properties:

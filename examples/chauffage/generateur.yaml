@@ -42,6 +42,9 @@ examples:
       pveilleuse: null
       tfonc30: null
       tfonc100: null
+      pertes:
+        pertes_generation: 1000
+        pertes_generation_recuperables: 800
   - id: 6a785019-8ce1-4768-b9c3-400b7bd2f1f3
     description: Réseau de chaleur
     type: reseau_chaleur
@@ -80,6 +83,9 @@ examples:
       pveilleuse: null
       tfonc30: null
       tfonc100: null
+      pertes:
+        pertes_generation: 1000
+        pertes_generation_recuperables: 800
   - id: 6a785019-8ce1-4768-b9c3-400b7bd2f1f3
     description: Générateur collectif inconnu
     type: null
@@ -118,3 +124,6 @@ examples:
       pveilleuse: null
       tfonc30: null
       tfonc100: null
+      pertes:
+        pertes_generation: 1000
+        pertes_generation_recuperables: 800

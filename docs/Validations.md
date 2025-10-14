@@ -1,6 +1,6 @@
 # Règles de validation
 
-Règles de validation non couvertes par les schémas de données. Ces règles doivent être implémentées dans l'application.
+Règles de validation non couvertes par les schémas de données. Ces règles doivent être implémentées par le client.
 
 ### Localisation
 

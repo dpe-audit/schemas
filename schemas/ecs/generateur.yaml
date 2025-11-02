@@ -466,6 +466,8 @@ $defs:
       pveilleuse:
         title: Puissance de la veilleuse en W
         type: [number, "null"]
+      pertes:
+        $ref: "#/$defs/pertes"
   pertes:
     title: Pertes
     type: object

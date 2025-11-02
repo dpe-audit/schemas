@@ -203,7 +203,7 @@ $defs:
       inertie_lourde:
         title: Inertie lourde
         type: boolean
-      isolatoin_plancher_haut:
+      isolation_plancher_haut:
         title: Isolation des planchers hauts
         type: [boolean, "null"]
       presence_protection_solaire:

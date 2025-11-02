@@ -21,6 +21,16 @@ properties:
     title: Date d'établissement
     type: string
     format: date
+  batiment:
+    allOf:
+      - $ref: /batiment
+      - readOnly: true
+  logements:
+    title: Liste des logements visités
+    type: array
+    readOnly: true
+    items:
+      $ref: /logement
   scenarios:
     title: Scénarios de travaux
     type: array
@@ -32,6 +42,132 @@ required:
   - date_etablissement
   - scenarios
 $defs:
+  https://schemas.dpe-audit.fr/batiment:
+    $id: https://schemas.dpe-audit.fr/batiment
+    title: Bâtiment
+    type: object
+    properties:
+      rnb_id:
+        title: Identifiant du bâtiment depuis le RNB
+        type:
+          - string
+          - 'null'
+        default: null
+      type:
+        title: Type de bâtiment
+        description: Donnée calculée à partir du nombre de logements
+        type: string
+        enum:
+          - maison
+          - immeuble
+      annee_construction:
+        title: Année de construction
+        type: integer
+      altitude:
+        title: Altitude du bâtiment en mètres
+        type: number
+      logements:
+        title: Nombre de logements
+        type: integer
+        exclusiveMinimum: 0
+      surface_habitable:
+        title: Surface habitable en m²
+        type: number
+        exclusiveMinimum: 0
+      hauteur_sous_plafond:
+        title: Hauteur moyenne sous plafond en m
+        type: number
+        exclusiveMinimum: 0
+      materiaux_anciens:
+        title: Bâtiment majoritairement composé de matériaux anciens
+        type: boolean
+      adresse:
+        $ref: /adresse
+    required:
+      - rnb_id
+      - type
+      - annee_construction
+      - altitude
+      - logements
+      - surface_habitable
+      - hauteur_sous_plafond
+      - materiaux_anciens
+      - adresse
+  https://schemas.dpe-audit.fr/adresse:
+    $id: https://schemas.dpe-audit.fr/adresse
+    title: Adresse
+    type: object
+    properties:
+      ban_id:
+        title: Identifiant depuis la Base Adresse Nationale (BAN)
+        description: >-
+          Clé d'interopérabilité telle que définie dans la spécification du
+          format d'échange BAL
+        type:
+          - string
+          - 'null'
+        default: null
+      nom:
+        title: Numéro éventuel et nom de voie ou lieu dit
+        type: string
+      code_postal:
+        title: Code postal de la commune
+        type: string
+      code_insee:
+        title: Code INSEE de la commune
+        type: string
+      commune:
+        title: Nom officiel de la commune
+        type: string
+    required:
+      - ban_id
+      - nom
+      - code_postal
+      - code_insee
+      - commune
+  https://schemas.dpe-audit.fr/logement:
+    $id: https://schemas.dpe-audit.fr/logement
+    title: Logement visité
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      surface_habitable:
+        title: Surface habitable en m²
+        type: number
+      hauteur_sous_plafond:
+        title: Hauteur sous plafond moyenne en m
+        type: number
+      position:
+        title: Position du logement
+        type: string
+        enum:
+          - rdc
+          - etage_intermediaire
+          - dernier_etage
+      typologie:
+        title: Typologie du logement
+        type: string
+        enum:
+          - T1
+          - T2
+          - T3
+          - T4
+          - T5
+          - T6
+          - T7
+    required:
+      - id
+      - description
+      - surface_habitable
+      - hauteur_sous_plafond
+      - position
+      - typologie
   https://schemas.dpe-audit.fr/scenario:
     $id: https://schemas.dpe-audit.fr/scenario
     title: Scénario de travaux

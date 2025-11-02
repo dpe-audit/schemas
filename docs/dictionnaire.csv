@@ -3,7 +3,6 @@ Diagnostic;/diagnostic;Diagnostic initial;object;;
 Diagnostic;diagnostic/id;Identifiant;string;;true
 Diagnostic;/diagnostic/date_visite;Date de visite du logement;string;;
 Diagnostic;/diagnostic/date_etablissement;Date d'établissement;string;;
-Diagnostic;/diagnostic/adresse;Adresse;object;/adresse;
 Diagnostic;/diagnostic/batiment;Bâtiment;object;/batiment;
 Diagnostic;/diagnostic/logements;Liste des logements visités;array;/logement;
 Diagnostic;/diagnostic/enveloppe;Enveloppe;object;/enveloppe;
@@ -79,6 +78,7 @@ Bâtiment;/batiment/logements;Nombre de logements;integer;;
 Bâtiment;/batiment/surface_habitable;Surface habitable en m²;number;;
 Bâtiment;/batiment/hauteur_sous_plafond;Hauteur moyenne sous plafond en m;number;;
 Bâtiment;/batiment/materiaux_anciens;Bâtiment majoritairement composé de matériaux anciens;boolean;;
+Bâtiment;/batiment/adresse;Adresse du bâtiment;object;/adresse;
 Logement;/logement;Logement;object;;
 Logement;/logement/id;Identifiant;string;;
 Logement;/logement/description;Description;string;;

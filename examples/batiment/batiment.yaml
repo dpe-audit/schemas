@@ -8,3 +8,9 @@ examples:
     surface_habitable: 100
     hauteur_sous_plafond: 2.5
     materiaux_anciens: true
+    adresse:
+      ban_id: ban_id
+      nom: 1 rue de la Paix
+      code_postal: "75000"
+      code_insee: "75000"
+      commune: Paris

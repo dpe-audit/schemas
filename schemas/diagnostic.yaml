@@ -16,8 +16,6 @@ properties:
     title: Date d'établissement
     type: string
     format: date
-  adresse:
-    $ref: /adresse
   batiment:
     $ref: /batiment
   logements:
@@ -43,7 +41,6 @@ properties:
 required:
   - date_visite
   - date_etablissement
-  - adresse
   - batiment
   - logements
   - enveloppe

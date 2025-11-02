@@ -21,6 +21,16 @@ properties:
     title: Date d'établissement
     type: string
     format: date
+  batiment:
+    allOf:
+      - $ref: /batiment
+      - readOnly: true
+  logements:
+    title: Liste des logements visités
+    type: array
+    readOnly: true
+    items:
+      $ref: /logement
   scenarios:
     title: Scénarios de travaux
     type: array

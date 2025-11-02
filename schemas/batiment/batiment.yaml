@@ -33,6 +33,8 @@ properties:
   materiaux_anciens:
     title: Bâtiment majoritairement composé de matériaux anciens
     type: boolean
+  adresse:
+    $ref: /adresse
 required:
   - rnb_id
   - type
@@ -42,3 +44,4 @@ required:
   - surface_habitable
   - hauteur_sous_plafond
   - materiaux_anciens
+  - adresse

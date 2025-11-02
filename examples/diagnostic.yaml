@@ -2,7 +2,6 @@ schema: https://schemas.dpe-audit.fr/diagnostic
 examples:
   - date_visite: "2026-01-01"
     date_etablissement: "2026-01-01"
-    adresse: https://schemas.dpe-audit.fr/adresse#0
     batiment: https://schemas.dpe-audit.fr/batiment#0
     logements: https://schemas.dpe-audit.fr/logement
     enveloppe: https://schemas.dpe-audit.fr/enveloppe#0

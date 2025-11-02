@@ -16,8 +16,6 @@ properties:
     title: Date d'établissement
     type: string
     format: date
-  adresse:
-    $ref: /adresse
   batiment:
     $ref: /batiment
   logements:
@@ -43,7 +41,6 @@ properties:
 required:
   - date_visite
   - date_etablissement
-  - adresse
   - batiment
   - logements
   - enveloppe
@@ -90,38 +87,6 @@ $defs:
         $ref: /common/pertes
       consommations:
         $ref: /common/consommations
-  https://schemas.dpe-audit.fr/adresse:
-    $id: https://schemas.dpe-audit.fr/adresse
-    title: Adresse
-    type: object
-    properties:
-      ban_id:
-        title: Identifiant depuis la Base Adresse Nationale (BAN)
-        description: >-
-          Clé d'interopérabilité telle que définie dans la spécification du
-          format d'échange BAL
-        type:
-          - string
-          - 'null'
-        default: null
-      nom:
-        title: Numéro éventuel et nom de voie ou lieu dit
-        type: string
-      code_postal:
-        title: Code postal de la commune
-        type: string
-      code_insee:
-        title: Code INSEE de la commune
-        type: string
-      commune:
-        title: Nom officiel de la commune
-        type: string
-    required:
-      - ban_id
-      - nom
-      - code_postal
-      - code_insee
-      - commune
   https://schemas.dpe-audit.fr/batiment:
     $id: https://schemas.dpe-audit.fr/batiment
     title: Bâtiment
@@ -161,6 +126,8 @@ $defs:
       materiaux_anciens:
         title: Bâtiment majoritairement composé de matériaux anciens
         type: boolean
+      adresse:
+        $ref: /adresse
     required:
       - rnb_id
       - type
@@ -170,6 +137,39 @@ $defs:
       - surface_habitable
       - hauteur_sous_plafond
       - materiaux_anciens
+      - adresse
+  https://schemas.dpe-audit.fr/adresse:
+    $id: https://schemas.dpe-audit.fr/adresse
+    title: Adresse
+    type: object
+    properties:
+      ban_id:
+        title: Identifiant depuis la Base Adresse Nationale (BAN)
+        description: >-
+          Clé d'interopérabilité telle que définie dans la spécification du
+          format d'échange BAL
+        type:
+          - string
+          - 'null'
+        default: null
+      nom:
+        title: Numéro éventuel et nom de voie ou lieu dit
+        type: string
+      code_postal:
+        title: Code postal de la commune
+        type: string
+      code_insee:
+        title: Code INSEE de la commune
+        type: string
+      commune:
+        title: Nom officiel de la commune
+        type: string
+    required:
+      - ban_id
+      - nom
+      - code_postal
+      - code_insee
+      - commune
   https://schemas.dpe-audit.fr/logement:
     $id: https://schemas.dpe-audit.fr/logement
     title: Logement visité

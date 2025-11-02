@@ -1,0 +1,33 @@
+$id: https://schemas.dpe-audit.fr/audit
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Audit
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+    readOnly: true
+  diagnostic_id:
+    title: Identifiant du diagnostic associé
+    type: string
+    format: uuid
+    readOnly: true
+  date_visite:
+    title: Date de visite du logement
+    type: string
+    format: date
+  date_etablissement:
+    title: Date d'établissement
+    type: string
+    format: date
+  scenarios:
+    title: Scénarios de travaux
+    type: array
+    minItems: 1
+    items:
+      $ref: /scenario
+required:
+  - date_visite
+  - date_etablissement
+  - scenarios

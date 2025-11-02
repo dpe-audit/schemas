@@ -1,6 +1,6 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://schemas.dpe-audit.fr/ressource
-title: Ressource
+$id: https://schemas.dpe-audit.fr/diagnostic
+title: Diagnostic
 type: object
 properties:
   id:
@@ -46,6 +46,7 @@ required:
   - adresse
   - batiment
   - logements
+  - enveloppe
   - chauffage
   - ecs
   - ventilation

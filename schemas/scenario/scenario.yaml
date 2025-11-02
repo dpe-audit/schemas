@@ -1,0 +1,31 @@
+$id: https://schemas.dpe-audit.fr/scenario
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Scénario de travaux
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+    readOnly: true
+  categorie:
+    title: Catégorie
+    type: string
+    enum: [renovation_globale, renovation_par_etapes]
+  nom:
+    title: Nom
+    type: string
+  description:
+    title: Description
+    type: string
+  etapes:
+    title: Étapes de travaux
+    type: array
+    minItems: 1
+    items:
+      $ref: /scenario/etape
+required:
+  - categorie
+  - nom
+  - description
+  - etapes

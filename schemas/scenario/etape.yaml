@@ -1,6 +1,6 @@
-$id: https://schemas.dpe-audit.fr/ressource
+$id: https://schemas.dpe-audit.fr/scenario/etape
 $schema: https://json-schema.org/draft/2020-12/schema
-title: Ressource
+title: Etape de travaux
 type: object
 properties:
   id:
@@ -8,24 +8,12 @@ properties:
     type: string
     format: uuid
     readOnly: true
-  date_visite:
-    title: Date de visite du logement
+  nom:
+    title: Nom
     type: string
-    format: date
-  date_etablissement:
-    title: Date d'établissement
+  description:
+    title: Description
     type: string
-    format: date
-  adresse:
-    $ref: /adresse
-  batiment:
-    $ref: /batiment
-  logements:
-    title: Liste des logements visités
-    type: array
-    default: []
-    items:
-      $ref: /logement
   enveloppe:
     $ref: /enveloppe
   chauffage:
@@ -41,11 +29,9 @@ properties:
   data:
     $ref: "#/$defs/data"
 required:
-  - date_visite
-  - date_etablissement
-  - adresse
-  - batiment
-  - logements
+  - nom
+  - description
+  - enveloppe
   - chauffage
   - ecs
   - ventilation

@@ -1,0 +1,108 @@
+$id: https://schemas.dpe-audit.fr/diagnostic
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Diagnostic
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+    readOnly: true
+  date_visite:
+    title: Date de visite du logement
+    type: string
+    format: date
+  date_etablissement:
+    title: Date d'établissement
+    type: string
+    format: date
+  adresse:
+    $ref: /adresse
+  batiment:
+    $ref: /batiment
+  logements:
+    title: Liste des logements visités
+    type: array
+    default: []
+    items:
+      $ref: /logement
+  enveloppe:
+    $ref: /enveloppe
+  chauffage:
+    $ref: /chauffage
+  ecs:
+    $ref: /ecs
+  ventilation:
+    $ref: /ventilation
+  refroidissement:
+    $ref: /refroidissement
+  production:
+    $ref: /production
+  data:
+    $ref: "#/$defs/data"
+required:
+  - date_visite
+  - date_etablissement
+  - adresse
+  - batiment
+  - logements
+  - enveloppe
+  - chauffage
+  - ecs
+  - ventilation
+  - refroidissement
+  - production
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      zone_climatique:
+        title: Zone climatique
+        type: string
+        enum: [H1a, H1b, H1c, H2a, H2b, H2c, H2d, H3]
+      effet_joule:
+        title: Bâtiment chauffé par effet joule
+        type: boolean
+      parois_anciennes_lourdes:
+        title: Bâtiment constitué de parois anciennes lourdes
+        type: boolean
+      surface_reference:
+        title: Surface thermique de référence en m²
+        type: number
+        minimumExclusive: 0
+      volume_reference:
+        title: Volume thermique de référence en m³
+        type: number
+        minimumExclusive: 0
+      bilan:
+        $ref: "#/$defs/bilan"
+      pertes:
+        $ref: /common/pertes
+      consommations:
+        $ref: /common/consommations
+  bilan:
+    title: Bilan
+    type: object
+    properties:
+      cef:
+        title: Consommation d'énergie finale en kWh/m²/an
+        type: number
+        minimum: 0
+      cep:
+        title: Consommation d'énergie primaire en kWh/m²/an
+        type: number
+        minimum: 0
+      eges:
+        title: Émissions de gaz à effet de serre en kgCO2/m²/an
+        type: number
+        minimum: 0
+      etiquette_energie:
+        title: Etiquette énergie
+        type: string
+        enum: [A, B, C, D, E, F, G]
+      etiquette_climat:
+        title: Etiquette climat
+        type: string
+        enum: [A, B, C, D, E, F, G]

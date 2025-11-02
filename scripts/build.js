@@ -4,17 +4,22 @@ import { registerSchema } from '@hyperjump/json-schema/draft-2020-12'
 import { bundle } from '@hyperjump/json-schema/bundle'
 import yaml from 'js-yaml'
 
-const schemas = globSync('schemas/**/*.yaml')
+const config = yaml.load(
+  readFileSync('schemas.config.yaml', { encoding: 'utf-8' })
+)
 
-for (const schema of schemas) {
-  console.log(schema)
-  const schemaObject = yaml.load(readFileSync(schema, { encoding: 'utf-8' }))
-  registerSchema(schemaObject, schemaObject.$id)
-}
+globSync(`${config.source}/**/*.yaml`)
+  .map(schema => yaml.load(readFileSync(schema, { encoding: 'utf-8' })))
+  .forEach(schema => registerSchema(schema, schema.$id))
 
-const bundledSchema = await bundle('https://schemas.dpe-audit.fr/ressource')
-const JSONOutput = JSON.stringify(bundledSchema, null, 2)
-const YAMLOutput = yaml.dump(bundledSchema)
-
-writeFileSync(`./schema.json`, JSONOutput, { encoding: 'utf-8' })
-writeFileSync(`./schema.yaml`, YAMLOutput, { encoding: 'utf-8' })
+config.bundle.forEach(async schema => {
+  const bundledSchema = await bundle(schema.$id)
+  if (schema.formats.includes('json')) {
+    const JSONOutput = JSON.stringify(bundledSchema, null, 2)
+    writeFileSync(`${schema.target}.json`, JSONOutput, { encoding: 'utf-8' })
+  }
+  if (schema.formats.includes('yaml')) {
+    const YAMLOutput = yaml.dump(bundledSchema)
+    writeFileSync(`${schema.target}.yaml`, YAMLOutput, { encoding: 'utf-8' })
+  }
+})

@@ -1,0 +1,6 @@
+schema: https://schemas.dpe-audit.fr/audit
+examples:
+  - date_visite: "2026-01-01"
+    date_etablissement: "2026-01-01"
+    scenarios:
+      - https://schemas.dpe-audit.fr/scenario#0

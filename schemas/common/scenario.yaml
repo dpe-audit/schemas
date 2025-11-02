@@ -3,5 +3,5 @@ $id: https://schemas.dpe-audit.fr/common/scenario
 title: Scénario d'usage
 type: string
 enum:
-  - scenario_conventionnel
-  - scenario_depensier
+  - conventionnel
+  - depensier

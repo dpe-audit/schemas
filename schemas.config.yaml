@@ -1,0 +1,10 @@
+uri: https://schemas.dpe-audit.fr/
+source: schemas
+examples: examples
+bundle:
+  - $id: https://schemas.dpe-audit.fr/diagnostic
+    formats: [json, yaml]
+    target: dist/diagnostic
+  - $id: https://schemas.dpe-audit.fr/audit
+    formats: [json, yaml]
+    target: dist/audit

@@ -1,0 +1,43 @@
+schema: https://schemas.dpe-audit.fr/scenario/etape
+examples:
+  - nom: Etape principale
+    description: Rénovation globale du bâtiment
+    enveloppe: https://schemas.dpe-audit.fr/enveloppe#0
+    chauffage: https://schemas.dpe-audit.fr/chauffage#0
+    ecs: https://schemas.dpe-audit.fr/ecs#0
+    ventilation: https://schemas.dpe-audit.fr/ventilation#0
+    refroidissement: https://schemas.dpe-audit.fr/refroidissement#0
+    production: https://schemas.dpe-audit.fr/production#0
+    data:
+      zone_climatique: H1a
+      effet_joule: true
+      parois_anciennes_lourdes: true
+      surface_reference: 100
+      volume_reference: 250
+      bilan:
+        cef: 20000
+        cep: 30000
+        eges: 5000
+        etiquette_energie: C
+        etiquette_climat: D
+      pertes:
+        - type: generation
+          pertes: 5000
+          pertes_recuperables: 2000
+        - type: distribution
+          pertes: 5000
+          pertes_recuperables: 2000
+        - type: stockage
+          pertes: 5000
+          pertes_recuperables: 2000
+      consommations:
+        - energie: electricite
+          usage: chauffage
+          cef: 15000
+          cep: 20000
+          eges: 3000
+        - energie: electricite
+          usage: ecs
+          cef: 5000
+          cep: 10000
+          eges: 2000

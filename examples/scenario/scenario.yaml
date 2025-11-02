@@ -1,6 +1,6 @@
 schema: https://schemas.dpe-audit.fr/scenario
 examples:
-  - categorie: renovation_par_etapes
+  - type: renovation_par_etapes
     nom: Rénovation par étapes
     description: Rénovation en plusieurs étapes sur 5 ans
     etapes:

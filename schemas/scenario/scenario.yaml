@@ -8,8 +8,8 @@ properties:
     type: string
     format: uuid
     readOnly: true
-  categorie:
-    title: Catégorie
+  type:
+    title: Type de scénario
     type: string
     enum: [renovation_globale, renovation_par_etapes]
   nom:
@@ -25,7 +25,7 @@ properties:
     items:
       $ref: /scenario/etape
 required:
-  - categorie
+  - type
   - nom
   - description
   - etapes

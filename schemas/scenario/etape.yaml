@@ -62,32 +62,8 @@ $defs:
         type: number
         minimumExclusive: 0
       bilan:
-        $ref: "#/$defs/bilan"
+        $ref: /common/bilan
       pertes:
         $ref: /common/pertes
       consommations:
         $ref: /common/consommations
-  bilan:
-    title: Bilan
-    type: object
-    properties:
-      cef:
-        title: Consommation d'énergie finale en kWh/m²/an
-        type: number
-        minimum: 0
-      cep:
-        title: Consommation d'énergie primaire en kWh/m²/an
-        type: number
-        minimum: 0
-      eges:
-        title: Émissions de gaz à effet de serre en kgCO2/m²/an
-        type: number
-        minimum: 0
-      etiquette_energie:
-        title: Etiquette énergie
-        type: string
-        enum: [A, B, C, D, E, F, G]
-      etiquette_climat:
-        title: Etiquette climat
-        type: string
-        enum: [A, B, C, D, E, F, G]

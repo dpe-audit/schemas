@@ -145,17 +145,11 @@ $defs:
       pertes_generation_recuperables:
         title: Pertes de génération récupérables en kWh/an
         type: number
-      pertes_stockage_integre:
-        title: Pertes de stockage intégré en kWh/an
+      pertes_stockage:
+        title: Pertes de stockage en kWh/an
         type: number
-      pertes_stockage_integre_recuperables:
-        title: Pertes de stockage intégré récupérables en kWh/an
-        type: number
-      pertes_stockage_independant:
-        title: Pertes de stockage indépendant en kWh/an
-        type: number
-      pertes_stockage_independant_recuperables:
-        title: Pertes de stockage indépendant récupérables en kWh/an
+      pertes_stockage_recuperables:
+        title: Pertes de stockage récupérables en kWh/an
         type: number
       pertes_distribution:
         title: Pertes de distribution en kWh/an

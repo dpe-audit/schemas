@@ -10,9 +10,6 @@ examples:
       qvarep_conv: 1.5
       qvasouf_conv: 0
       smea_conv: 2
-      cef_aux: 1500
-      cep_aux: 1800
-      eges_aux: 200
   - id: e5258a6a-ef09-4895-bb13-46e1d1651153
     description: Installation de ventilation naturelle
     surface: 100
@@ -22,10 +19,3 @@ examples:
       qvarep_conv: 1.2
       qvasouf_conv: 1.2
       smea_conv: 0
-      consommations:
-        - usage: auxiliaire
-          energie: electricite
-          cef: 1500
-          cep: 1800
-          eges: 200
-

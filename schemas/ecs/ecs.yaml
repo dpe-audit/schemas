@@ -42,7 +42,21 @@ $defs:
       becs:
         title: Besoin d'eau chaude sanitaire en kWh/an
         type: number
-      pertes:
-        $ref: /common/pertes
-      consommations:
-        $ref: /common/consommations
+      cef_ecs:
+        title: Consommation finale d'eau chaude sanitaire en kWh/an
+        type: number
+      cep_ecs:
+        title: Consommation primaire d'eau chaude sanitaire en kWh/an
+        type: number
+      eges_ecs:
+        title: Emissions de gaz à effet de serre d'eau chaude sanitaire en kgCO2/an
+        type: number
+      cef_aux:
+        title: Consommation finale des auxiliaires en kWh/an
+        type: number
+      cep_aux:
+        title: Consommation primaire des auxiliaires en kWh/an
+        type: number
+      eges_aux:
+        title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
+        type: number

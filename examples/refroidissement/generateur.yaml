@@ -7,7 +7,4 @@ examples:
     energie: electricite
     seer: null
     data:
-      rdim: 1
-      cef_fr: 1000
-      cep_fr: 1900
-      eges_fr: 500
+      eer: 6.2

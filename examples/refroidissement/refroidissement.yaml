@@ -5,9 +5,3 @@ examples:
     systemes: https://schemas.dpe-audit.fr/refroidissement/systeme
     data:
       bfr: 5000
-      consommations:
-        - usage: refroidissement
-          energie: electricite
-          cef: 1000
-          cep: 1900
-          eges: 500

@@ -247,15 +247,6 @@ $defs:
       rdim:
         title: Ratio de dimenstionnement
         type: number
-      cef_ch:
-        title: Consommation finale de chauffage en kWh/an
-        type: number
-      cep_ch:
-        title: Consommation primaire de chauffage  en kWh/an
-        type: number
-      eges_ch:
-        title: Emissions de gaz à effet de serre de chauffage  en kgCO2/an
-        type: number
       pn:
         title: Puissance nominale en kW
         type: number
@@ -286,18 +277,6 @@ $defs:
       tfonc100:
         title: Température de fonctionnement à 100% de la puissance nominale en °C
         type: [number, "null"]
-      pertes:
-        $ref: "#/$defs/pertes"
-  pertes:
-    title: Pertes
-    type: object
-    properties:
-      pertes_generation:
-        title: Pertes de génération en kWh/an
-        type: number
-      pertes_generation_recuperables:
-        title: Pertes de génération récupérables en kWh/an
-        type: number
 oneOf:
   - title: Chaudière à combustion
     properties:

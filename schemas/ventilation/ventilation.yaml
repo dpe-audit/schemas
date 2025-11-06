@@ -15,16 +15,6 @@ properties:
     minContains: 1
     items:
       $ref: /ventilation/installation
-  data:
-    $ref: "#/$defs/data"
 required:
   - generateurs
   - installations
-$defs:
-  data:
-    title: Données calculées
-    type: object
-    readOnly: true
-    properties:
-      consommations:
-        $ref: /common/consommations

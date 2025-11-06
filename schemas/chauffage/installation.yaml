@@ -134,7 +134,3 @@ $defs:
       rr:
         title: Rendement de régulation
         type: number
-      pertes:
-        $ref: /common/pertes
-      consommations:
-        $ref: /common/consommations

@@ -2,10 +2,3 @@ schema: https://schemas.dpe-audit.fr/ventilation
 examples:
   - generateurs: https://schemas.dpe-audit.fr/ventilation/generateur
     installations: https://schemas.dpe-audit.fr/ventilation/installation
-    data:
-      consommations:
-        - usage: auxiliaire
-          energie: electricite
-          cef: 1500
-          cep: 1800
-          eges: 200

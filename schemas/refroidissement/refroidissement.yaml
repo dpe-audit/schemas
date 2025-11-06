@@ -36,5 +36,3 @@ $defs:
       bfr:
         title: Besoin annuel de refroidissement en kWh
         type: number
-      consommations:
-        $ref: /common/consommations

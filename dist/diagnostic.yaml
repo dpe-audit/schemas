@@ -36,6 +36,8 @@ properties:
     $ref: /refroidissement
   production:
     $ref: /production
+  eclairage:
+    $ref: /eclairage
   data:
     $ref: '#/$defs/data'
 required:
@@ -5438,6 +5440,21 @@ $defs:
           ppv:
             title: Production photovoltaïque en kWh/an
             type: number
+  https://schemas.dpe-audit.fr/eclairage:
+    $id: https://schemas.dpe-audit.fr/eclairage
+    title: Eclairage
+    type: object
+    readOnly: true
+    properties:
+      cef_ecl:
+        title: Consommation finale d'éclairage en kWh/an
+        type: number
+      cep_ecl:
+        title: Consommation d'énergie primaire d'éclairage en kWh/an
+        type: number
+      eges_ecl:
+        title: Emissions de gaz à effet de serre liées à l'éclairage en kgCO2/an
+        type: number
   https://schemas.dpe-audit.fr/common/bilan:
     $id: https://schemas.dpe-audit.fr/common/bilan
     title: Bilan

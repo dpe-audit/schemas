@@ -6,18 +6,9 @@ examples:
     systemes: https://schemas.dpe-audit.fr/chauffage/systeme
     data:
       bch: 25000
-      pertes:
-        - type: generation
-          pertes: 5000
-          pertes_recuperables: 2000
-      consommations:
-        - usage: chauffage
-          energie: gaz_naturel
-          cef: 15000
-          cep: 18000
-          eges: 5000
-        - usage: auxiliaire
-          energie: electricite
-          cef: 1500
-          cep: 1800
-          eges: 500
+      cef_ch: 1500
+      cep_ch: 1800
+      eges_ch: 500
+      cef_aux: 1500
+      cep_aux: 1800
+      eges_aux: 500

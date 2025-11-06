@@ -28,6 +28,3 @@ examples:
       cef_aux: 1500
       cep_aux: 1800
       eges_aux: 500
-      pertes:
-        pertes_generation: 100
-        pertes_generation_recuperables: 150

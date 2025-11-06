@@ -15,6 +15,23 @@ properties:
     minContains: 1
     items:
       $ref: /ventilation/installation
+  data:
+    $ref: "#/$defs/data"
 required:
   - generateurs
   - installations
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      cef_aux:
+        title: Consommation d'énergie finale des auxiliaires de ventilation en kWh/an
+        type: number
+      cep_aux:
+        title: Consommation d'énergie primaire des auxiliaires de ventilation en kWh/an
+        type: number
+      eges_aux:
+        title: Emissions de gaz à effet de serre des auxiliaires de ventilation en kgCO2/an
+        type: number

@@ -7,24 +7,15 @@ examples:
       nadeq: 2.5
       nmax: 1.0
       becs: 2500
-      pertes:
-        - type: generation
-          pertes: 5000
-          pertes_recuperables: 2000
-        - type: distribution
-          pertes: 5000
-          pertes_recuperables: 2000
-        - type: stockage
-          pertes: 5000
-          pertes_recuperables: 2000
-      consommations:
-        - usage: ecs
-          energie: electricite
-          cef: 1500
-          cep: 1800
-          eges: 500
-        - usage: auxiliaire
-          energie: electricite
-          cef: 1500
-          cep: 1800
-          eges: 500
+      cef_ecs: 1500
+      cep_ecs: 1800
+      eges_ecs: 500
+      cef_aux: 1500
+      cep_aux: 1800
+      eges_aux: 500
+      pertes_generation: 100
+      pertes_generation_recuperables: 150
+      pertes_stockage: 300
+      pertes_stockage_recuperables: 150
+      pertes_distribution: 300
+      pertes_distribution_recuperables: 150

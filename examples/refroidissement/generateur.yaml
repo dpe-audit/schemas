@@ -7,4 +7,5 @@ examples:
     energie: electricite
     seer: null
     data:
+      rdim: 1
       eer: 6.2

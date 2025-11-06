@@ -351,12 +351,6 @@
             },
             "bilan": {
               "$ref": "/common/bilan"
-            },
-            "pertes": {
-              "$ref": "/common/pertes"
-            },
-            "consommations": {
-              "$ref": "/common/consommations"
             }
           }
         }
@@ -3932,6 +3926,38 @@
             "bch": {
               "title": "Besoin de chauffage en kWh/an",
               "type": "number"
+            },
+            "cef_ch": {
+              "title": "Consommation finale de chauffage en kWh/an",
+              "type": "number"
+            },
+            "cep_ch": {
+              "title": "Consommation primaire de chauffage en kWh/an",
+              "type": "number"
+            },
+            "eges_ch": {
+              "title": "Emissions de gaz à effet de serre de chauffage en kgCO2/an",
+              "type": "number"
+            },
+            "cef_aux": {
+              "title": "Consommation finale des auxiliaires en kWh/an",
+              "type": "number"
+            },
+            "cep_aux": {
+              "title": "Consommation primaire des auxiliaires en kWh/an",
+              "type": "number"
+            },
+            "eges_aux": {
+              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
+              "type": "number"
+            },
+            "pertes_generation": {
+              "title": "Pertes de génération en kWh/an",
+              "type": "number"
+            },
+            "pertes_generation_recuperables": {
+              "title": "Pertes de génération récupérables en kWh/an",
+              "type": "number"
             }
           }
         }
@@ -4340,6 +4366,14 @@
                 "number",
                 "null"
               ]
+            },
+            "pertes_generation": {
+              "title": "Pertes de génération en kWh/an",
+              "type": "number"
+            },
+            "pertes_generation_recuperables": {
+              "title": "Pertes de génération récupérables en kWh/an",
+              "type": "number"
             }
           }
         }
@@ -5508,14 +5542,6 @@
             "eges_aux": {
               "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
               "type": "number"
-            },
-            "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
-              "type": "number"
-            },
-            "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
-              "type": "number"
             }
           }
         }
@@ -5599,6 +5625,30 @@
             },
             "eges_aux": {
               "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
+              "type": "number"
+            },
+            "pertes_generation": {
+              "title": "Pertes de génération en kWh/an",
+              "type": "number"
+            },
+            "pertes_generation_recuperables": {
+              "title": "Pertes de génération récupérables en kWh/an",
+              "type": "number"
+            },
+            "pertes_stockage": {
+              "title": "Pertes de stockage en kWh/an",
+              "type": "number"
+            },
+            "pertes_stockage_recuperables": {
+              "title": "Pertes de stockage récupérables en kWh/an",
+              "type": "number"
+            },
+            "pertes_distribution": {
+              "title": "Pertes de distribution en kWh/an",
+              "type": "number"
+            },
+            "pertes_distribution_recuperables": {
+              "title": "Pertes de distribution récupérables en kWh/an",
               "type": "number"
             }
           }
@@ -6325,6 +6375,22 @@
                 "number",
                 "null"
               ]
+            },
+            "pertes_generation": {
+              "title": "Pertes de génération en kWh/an",
+              "type": "number"
+            },
+            "pertes_generation_recuperables": {
+              "title": "Pertes de génération récupérables en kWh/an",
+              "type": "number"
+            },
+            "pertes_stockage": {
+              "title": "Pertes de stockage intégré en kWh/an",
+              "type": "number"
+            },
+            "pertes_stockage_recuperables": {
+              "title": "Pertes de stockage intégré récupérables en kWh/an",
+              "type": "number"
             }
           }
         }
@@ -6658,20 +6724,12 @@
               "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
               "type": "number"
             },
-            "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
-              "type": "number"
-            },
-            "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
-              "type": "number"
-            },
             "pertes_stockage": {
-              "title": "Pertes de stockage en kWh/an",
+              "title": "Pertes de stockage indépendant en kWh/an",
               "type": "number"
             },
             "pertes_stockage_recuperables": {
-              "title": "Pertes de stockage récupérables en kWh/an",
+              "title": "Pertes de stockage indépendant récupérables en kWh/an",
               "type": "number"
             },
             "pertes_distribution": {
@@ -6706,12 +6764,36 @@
           "items": {
             "$ref": "/ventilation/installation"
           }
+        },
+        "data": {
+          "$ref": "#/$defs/data"
         }
       },
       "required": [
         "generateurs",
         "installations"
-      ]
+      ],
+      "$defs": {
+        "data": {
+          "title": "Données calculées",
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "cef_aux": {
+              "title": "Consommation d'énergie finale des auxiliaires de ventilation en kWh/an",
+              "type": "number"
+            },
+            "cep_aux": {
+              "title": "Consommation d'énergie primaire des auxiliaires de ventilation en kWh/an",
+              "type": "number"
+            },
+            "eges_aux": {
+              "title": "Emissions de gaz à effet de serre des auxiliaires de ventilation en kgCO2/an",
+              "type": "number"
+            }
+          }
+        }
+      }
     },
     "https://schemas.dpe-audit.fr/ventilation/generateur": {
       "$id": "https://schemas.dpe-audit.fr/ventilation/generateur",
@@ -7023,6 +7105,30 @@
           "properties": {
             "bfr": {
               "title": "Besoin annuel de refroidissement en kWh",
+              "type": "number"
+            },
+            "cef_fr": {
+              "title": "Consommation finale en kWh/an",
+              "type": "number"
+            },
+            "cep_fr": {
+              "title": "Consommation primaire en kWh/an",
+              "type": "number"
+            },
+            "eges_fr": {
+              "title": "Emissions de gaz à effet de serre en kgCO2/an",
+              "type": "number"
+            },
+            "cef_aux": {
+              "title": "Consommation d'énergie finale des auxiliaires en kWh/an",
+              "type": "number"
+            },
+            "cep_aux": {
+              "title": "Consommation d'énergie primaire des auxiliaires en kWh/an",
+              "type": "number"
+            },
+            "eges_aux": {
+              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
               "type": "number"
             }
           }
@@ -7457,100 +7563,6 @@
           ]
         }
       }
-    },
-    "https://schemas.dpe-audit.fr/common/pertes": {
-      "$id": "https://schemas.dpe-audit.fr/common/pertes",
-      "title": "Pertes des sytèmes",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "title": "Type de perte",
-            "type": "string",
-            "enum": [
-              "distribution",
-              "generation",
-              "stockage"
-            ]
-          },
-          "pertes": {
-            "title": "Pertes en kWh/an",
-            "type": "number"
-          },
-          "pertes_recuperables": {
-            "title": "Pertes récupérables en kWh/an",
-            "type": "number"
-          }
-        },
-        "required": [
-          "type",
-          "pertes",
-          "pertes_recuperables"
-        ]
-      }
-    },
-    "https://schemas.dpe-audit.fr/common/consommations": {
-      "$id": "https://schemas.dpe-audit.fr/common/consommations",
-      "title": "Consommations d'énergie",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "energie": {
-            "$ref": "/common/energie"
-          },
-          "usage": {
-            "$ref": "/common/usage"
-          },
-          "cef": {
-            "title": "Consommation d'énergie finale en kWh/an",
-            "type": "number"
-          },
-          "cep": {
-            "title": "Consommation d'énergie primaire en kWh/an",
-            "type": "number"
-          },
-          "eges": {
-            "title": "Emissions de gaz à effet de serre en kgCO2/an",
-            "type": "number"
-          }
-        },
-        "required": [
-          "energie",
-          "usage",
-          "cef",
-          "cep",
-          "eges"
-        ]
-      }
-    },
-    "https://schemas.dpe-audit.fr/common/energie": {
-      "$id": "https://schemas.dpe-audit.fr/common/energie",
-      "title": "Energie",
-      "type": "string",
-      "enum": [
-        "electricite",
-        "electricite_renouvelable",
-        "gaz_naturel",
-        "gpl",
-        "fioul",
-        "bois",
-        "charbon",
-        "reseau_urbain"
-      ]
-    },
-    "https://schemas.dpe-audit.fr/common/usage": {
-      "$id": "https://schemas.dpe-audit.fr/common/usage",
-      "title": "Usage",
-      "type": "string",
-      "enum": [
-        "chauffage",
-        "ecs",
-        "refroidissement",
-        "eclairage",
-        "auxiliaire"
-      ]
     }
   }
 }

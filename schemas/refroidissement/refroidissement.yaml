@@ -36,3 +36,21 @@ $defs:
       bfr:
         title: Besoin annuel de refroidissement en kWh
         type: number
+      cef_fr:
+        title: Consommation finale en kWh/an
+        type: number
+      cep_fr:
+        title: Consommation primaire en kWh/an
+        type: number
+      eges_fr:
+        title: Emissions de gaz à effet de serre en kgCO2/an
+        type: number
+      cef_aux:
+        title: Consommation d'énergie finale des auxiliaires en kWh/an
+        type: number
+      cep_aux:
+        title: Consommation d'énergie primaire des auxiliaires en kWh/an
+        type: number
+      eges_aux:
+        title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
+        type: number

@@ -24,9 +24,6 @@ examples:
       rpn: null
     data:
       rdim: 1
-      cef_ecs: 1500
-      cep_ecs: 1800
-      eges_ecs: 500
       pn: 20
       pdim: 20
       pecs: 20
@@ -56,9 +53,6 @@ examples:
       label: ne_performance_a
     data:
       rdim: 1
-      cef_ecs: 1500
-      cep_ecs: 1800
-      eges_ecs: 500
       pn: 20
       pdim: 20
       pecs: 20
@@ -87,9 +81,6 @@ examples:
       pn: 10
     data:
       rdim: 1
-      cef_ecs: 1500
-      cep_ecs: 1800
-      eges_ecs: 500
       pn: 20
       pdim: 20
       pecs: 20

@@ -6549,11 +6549,11 @@
               "title": "Pertes de génération récupérables en kWh/an",
               "type": "number"
             },
-            "pertes_stockage_integre": {
+            "pertes_stockage": {
               "title": "Pertes de stockage intégré en kWh/an",
               "type": "number"
             },
-            "pertes_stockage_integre_recuperables": {
+            "pertes_stockage_recuperables": {
               "title": "Pertes de stockage intégré récupérables en kWh/an",
               "type": "number"
             }

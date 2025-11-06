@@ -448,9 +448,6 @@ $defs:
       pdim:
         title: Puissance de dimensionnement en kW
         type: number
-      paux:
-        title: Puissance des auxiliaires en kW
-        type: [number, "null"]
       pecs:
         title: Puissance de dimensionnement du besoin d'eau chaude sanitaire en kW
         type: number
@@ -466,12 +463,6 @@ $defs:
       pveilleuse:
         title: Puissance de la veilleuse en W
         type: [number, "null"]
-      pertes:
-        $ref: "#/$defs/pertes"
-  pertes:
-    title: Pertes
-    type: object
-    properties:
       pertes_generation:
         title: Pertes de génération en kWh/an
         type: number
@@ -484,3 +475,4 @@ $defs:
       pertes_stockage_integre_recuperables:
         title: Pertes de stockage intégré récupérables en kWh/an
         type: number
+  

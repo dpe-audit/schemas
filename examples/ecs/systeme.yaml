@@ -25,10 +25,9 @@ examples:
       cef_aux: 1500
       cep_aux: 1800
       eges_aux: 500
-      pertes:
-        pertes_generation: 100
-        pertes_generation_recuperables: 150
-        pertes_stockage: 300
-        pertes_stockage_recuperables: 150
-        pertes_distribution: 300
-        pertes_distribution_recuperables: 150
+      pertes_generation: 100
+      pertes_generation_recuperables: 150
+      pertes_stockage: 300
+      pertes_stockage_recuperables: 150
+      pertes_distribution: 300
+      pertes_distribution_recuperables: 150

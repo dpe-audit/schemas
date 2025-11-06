@@ -103,6 +103,9 @@ $defs:
       rdim:
         title: Ratio de dimensionnement
         type: number
+      paux:
+        title: Puissance des auxiliaires en kW
+        type: [number, "null"]
       iecs:
         title: Inverse du rendement du système
         type: number
@@ -136,12 +139,6 @@ $defs:
       eges_aux:
         title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
         type: number
-      pertes:
-        $ref: "#/$defs/pertes"
-  pertes:
-    title: Pertes
-    type: object
-    properties:
       pertes_generation:
         title: Pertes de génération en kWh/an
         type: number

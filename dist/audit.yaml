@@ -4743,11 +4743,6 @@ $defs:
           pdim:
             title: Puissance de dimensionnement en kW
             type: number
-          paux:
-            title: Puissance des auxiliaires en kW
-            type:
-              - number
-              - 'null'
           pecs:
             title: >-
               Puissance de dimensionnement du besoin d'eau chaude sanitaire en
@@ -4773,12 +4768,6 @@ $defs:
             type:
               - number
               - 'null'
-          pertes:
-            $ref: '#/$defs/pertes'
-      pertes:
-        title: Pertes
-        type: object
-        properties:
           pertes_generation:
             title: Pertes de génération en kWh/an
             type: number
@@ -5001,6 +4990,11 @@ $defs:
           rdim:
             title: Ratio de dimensionnement
             type: number
+          paux:
+            title: Puissance des auxiliaires en kW
+            type:
+              - number
+              - 'null'
           iecs:
             title: Inverse du rendement du système
             type: number
@@ -5036,12 +5030,6 @@ $defs:
           eges_aux:
             title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
             type: number
-          pertes:
-            $ref: '#/$defs/pertes'
-      pertes:
-        title: Pertes
-        type: object
-        properties:
           pertes_generation:
             title: Pertes de génération en kWh/an
             type: number

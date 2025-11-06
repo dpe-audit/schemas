@@ -28,6 +28,12 @@ Règles de validation non couvertes par les schémas de données. Ces règles do
 
 - Validation de l'existence du réseau de froid déclaré depuis [l'arrêté du 15 septembre 2006](https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000788395/)
 
+### Chauffage
+
+##### /chauffage/systeme/cascade
+
+- En présence d'une cascade, tous les systèmes associés à un même générateur doivent partager la même valeur.
+
 ### Années de construction / rénovation / installation
 
 ##### /batiment/annee_construction

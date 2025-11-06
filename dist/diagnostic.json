@@ -3842,12 +3842,6 @@
             "bch": {
               "title": "Besoin de chauffage en kWh/an",
               "type": "number"
-            },
-            "pertes": {
-              "$ref": "/common/pertes"
-            },
-            "consommations": {
-              "$ref": "/common/consommations"
             }
           }
         }
@@ -3994,24 +3988,6 @@
               "title": "Position du générateur à l'intérieur du volume chauffé",
               "type": "boolean"
             },
-            "cascade": {
-              "title": "Identifiant de la cascade",
-              "type": [
-                "integer",
-                "null"
-              ],
-              "minimum": 0,
-              "default": null
-            },
-            "priorite_cascade": {
-              "title": "Ordre de priorité du générateur en cascade",
-              "type": [
-                "integer",
-                "null"
-              ],
-              "minimum": 0,
-              "default": null
-            },
             "generateur_mixte_id": {
               "title": "Identifiant du générateur mixte",
               "type": [
@@ -4074,38 +4050,6 @@
                     "generateur_collectif",
                     "position_volume_chauffe"
                   ]
-                }
-              ]
-            },
-            {
-              "oneOf": [
-                {
-                  "title": "Générateur en cascade",
-                  "type": "object",
-                  "properties": {
-                    "cascade": {
-                      "type": "integer"
-                    },
-                    "priorite_cascade": {
-                      "type": "integer"
-                    }
-                  },
-                  "required": [
-                    "cascade",
-                    "priorite_cascade"
-                  ]
-                },
-                {
-                  "title": "Autres",
-                  "type": "object",
-                  "properties": {
-                    "cascade": {
-                      "const": null
-                    },
-                    "priorite_cascade": {
-                      "const": null
-                    }
-                  }
                 }
               ]
             }
@@ -4246,18 +4190,6 @@
               "title": "Ratio de dimenstionnement",
               "type": "number"
             },
-            "cef_ch": {
-              "title": "Consommation finale de chauffage en kWh/an",
-              "type": "number"
-            },
-            "cep_ch": {
-              "title": "Consommation primaire de chauffage  en kWh/an",
-              "type": "number"
-            },
-            "eges_ch": {
-              "title": "Emissions de gaz à effet de serre de chauffage  en kgCO2/an",
-              "type": "number"
-            },
             "pn": {
               "title": "Puissance nominale en kW",
               "type": "number"
@@ -4318,23 +4250,6 @@
                 "number",
                 "null"
               ]
-            },
-            "pertes": {
-              "$ref": "#/$defs/pertes"
-            }
-          }
-        },
-        "pertes": {
-          "title": "Pertes",
-          "type": "object",
-          "properties": {
-            "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
-              "type": "number"
-            },
-            "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
-              "type": "number"
             }
           }
         }
@@ -4496,12 +4411,6 @@
                 "position_volume_chauffe": {
                   "const": true
                 },
-                "cascade": {
-                  "const": null
-                },
-                "priorite_cascade": {
-                  "const": null
-                },
                 "generateur_mixte_id": {
                   "const": null
                 },
@@ -4588,12 +4497,6 @@
               "type": "object",
               "properties": {
                 "position_chaudiere": {
-                  "const": null
-                },
-                "cascade": {
-                  "const": null
-                },
-                "priorite_cascade": {
                   "const": null
                 },
                 "reseau_chaleur_id": {
@@ -4731,12 +4634,6 @@
                 "position_volume_chauffe": {
                   "const": true
                 },
-                "cascade": {
-                  "const": null
-                },
-                "priorite_cascade": {
-                  "const": null
-                },
                 "generateur_mixte_id": {
                   "const": null
                 },
@@ -4828,12 +4725,6 @@
                 "position_volume_chauffe": {
                   "const": true
                 },
-                "cascade": {
-                  "const": null
-                },
-                "priorite_cascade": {
-                  "const": null
-                },
                 "generateur_mixte_id": {
                   "const": null
                 },
@@ -4922,12 +4813,6 @@
                 "position_volume_chauffe": {
                   "const": false
                 },
-                "cascade": {
-                  "const": null
-                },
-                "priorite_cascade": {
-                  "const": null
-                },
                 "generateur_mixte_id": {
                   "const": null
                 }
@@ -5003,12 +4888,6 @@
                 },
                 "position_volume_chauffe": {
                   "const": false
-                },
-                "cascade": {
-                  "const": null
-                },
-                "priorite_cascade": {
-                  "const": null
                 },
                 "generateur_mixte_id": {
                   "const": null
@@ -5316,110 +5195,10 @@
             "rr": {
               "title": "Rendement de régulation",
               "type": "number"
-            },
-            "pertes": {
-              "$ref": "/common/pertes"
-            },
-            "consommations": {
-              "$ref": "/common/consommations"
             }
           }
         }
       }
-    },
-    "https://schemas.dpe-audit.fr/common/pertes": {
-      "$id": "https://schemas.dpe-audit.fr/common/pertes",
-      "title": "Pertes des sytèmes",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "title": "Type de perte",
-            "type": "string",
-            "enum": [
-              "distribution",
-              "generation",
-              "stockage"
-            ]
-          },
-          "pertes": {
-            "title": "Pertes en kWh/an",
-            "type": "number"
-          },
-          "pertes_recuperables": {
-            "title": "Pertes récupérables en kWh/an",
-            "type": "number"
-          }
-        },
-        "required": [
-          "type",
-          "pertes",
-          "pertes_recuperables"
-        ]
-      }
-    },
-    "https://schemas.dpe-audit.fr/common/consommations": {
-      "$id": "https://schemas.dpe-audit.fr/common/consommations",
-      "title": "Consommations d'énergie",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "energie": {
-            "$ref": "/common/energie"
-          },
-          "usage": {
-            "$ref": "/common/usage"
-          },
-          "cef": {
-            "title": "Consommation d'énergie finale en kWh/an",
-            "type": "number"
-          },
-          "cep": {
-            "title": "Consommation d'énergie primaire en kWh/an",
-            "type": "number"
-          },
-          "eges": {
-            "title": "Emissions de gaz à effet de serre en kgCO2/an",
-            "type": "number"
-          }
-        },
-        "required": [
-          "energie",
-          "usage",
-          "cef",
-          "cep",
-          "eges"
-        ]
-      }
-    },
-    "https://schemas.dpe-audit.fr/common/energie": {
-      "$id": "https://schemas.dpe-audit.fr/common/energie",
-      "title": "Energie",
-      "type": "string",
-      "enum": [
-        "electricite",
-        "electricite_renouvelable",
-        "gaz_naturel",
-        "gpl",
-        "fioul",
-        "bois",
-        "charbon",
-        "reseau_urbain"
-      ]
-    },
-    "https://schemas.dpe-audit.fr/common/usage": {
-      "$id": "https://schemas.dpe-audit.fr/common/usage",
-      "title": "Usage",
-      "type": "string",
-      "enum": [
-        "chauffage",
-        "ecs",
-        "refroidissement",
-        "eclairage",
-        "auxiliaire"
-      ]
     },
     "https://schemas.dpe-audit.fr/chauffage/systeme": {
       "$id": "https://schemas.dpe-audit.fr/chauffage/systeme",
@@ -5453,6 +5232,15 @@
             "chauffage_central",
             "chauffage_divise"
           ]
+        },
+        "cascade": {
+          "title": "Système en cascade",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Ordre de priorité (1 pour le premier système, 2 pour le deuxième, etc.). En l'absence de priorité, saisir 0.",
+          "default": null
         },
         "reseau": {
           "$ref": "#/$defs/reseau"
@@ -5631,15 +5419,6 @@
               "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
               "type": "number"
             },
-            "pertes": {
-              "$ref": "#/$defs/pertes"
-            }
-          }
-        },
-        "pertes": {
-          "title": "Pertes",
-          "type": "object",
-          "properties": {
             "pertes_generation": {
               "title": "Pertes de génération en kWh/an",
               "type": "number"
@@ -5708,11 +5487,29 @@
               "title": "Besoin d'eau chaude sanitaire en kWh/an",
               "type": "number"
             },
-            "pertes": {
-              "$ref": "/common/pertes"
+            "cef_ecs": {
+              "title": "Consommation finale d'eau chaude sanitaire en kWh/an",
+              "type": "number"
             },
-            "consommations": {
-              "$ref": "/common/consommations"
+            "cep_ecs": {
+              "title": "Consommation primaire d'eau chaude sanitaire en kWh/an",
+              "type": "number"
+            },
+            "eges_ecs": {
+              "title": "Emissions de gaz à effet de serre d'eau chaude sanitaire en kgCO2/an",
+              "type": "number"
+            },
+            "cef_aux": {
+              "title": "Consommation finale des auxiliaires en kWh/an",
+              "type": "number"
+            },
+            "cep_aux": {
+              "title": "Consommation primaire des auxiliaires en kWh/an",
+              "type": "number"
+            },
+            "eges_aux": {
+              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
+              "type": "number"
             }
           }
         }
@@ -6396,19 +6193,7 @@
           "readOnly": true,
           "properties": {
             "rdim": {
-              "title": "Ratio de dimensionnement",
-              "type": "number"
-            },
-            "cef_ecs": {
-              "title": "Consommation finale d'eau chaude sanitaire en kWh/an",
-              "type": "number"
-            },
-            "cep_ecs": {
-              "title": "Consommation primaire d'eau chaude sanitaire en kWh/an",
-              "type": "number"
-            },
-            "eges_ecs": {
-              "title": "Emissions de gaz à effet de serre d'eau chaude sanitaire en kgCO2/an",
+              "title": "Ratio de dimenstionnement",
               "type": "number"
             },
             "pn": {
@@ -6450,22 +6235,6 @@
                 "number",
                 "null"
               ]
-            },
-            "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
-              "type": "number"
-            },
-            "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
-              "type": "number"
-            },
-            "pertes_stockage": {
-              "title": "Pertes de stockage intégré en kWh/an",
-              "type": "number"
-            },
-            "pertes_stockage_recuperables": {
-              "title": "Pertes de stockage intégré récupérables en kWh/an",
-              "type": "number"
             }
           }
         }
@@ -6578,12 +6347,6 @@
             "rgs": {
               "title": "Rendement de génération et de stockage",
               "type": "number"
-            },
-            "pertes": {
-              "$ref": "/common/pertes"
-            },
-            "consommations": {
-              "$ref": "/common/consommations"
             }
           }
         }
@@ -6853,27 +6616,12 @@
           "items": {
             "$ref": "/ventilation/installation"
           }
-        },
-        "data": {
-          "$ref": "#/$defs/data"
         }
       },
       "required": [
         "generateurs",
         "installations"
-      ],
-      "$defs": {
-        "data": {
-          "title": "Données calculées",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "consommations": {
-              "$ref": "/common/consommations"
-            }
-          }
-        }
-      }
+      ]
     },
     "https://schemas.dpe-audit.fr/ventilation/generateur": {
       "$id": "https://schemas.dpe-audit.fr/ventilation/generateur",
@@ -7134,9 +6882,6 @@
             "smea_conv": {
               "title": "Somme des modules d'entrée d'air sous 20 Pa par unité de surface habitable en m3/(h.m²)",
               "type": "number"
-            },
-            "consommations": {
-              "$ref": "/common/consommations"
             }
           }
         }
@@ -7189,9 +6934,6 @@
             "bfr": {
               "title": "Besoin annuel de refroidissement en kWh",
               "type": "number"
-            },
-            "consommations": {
-              "$ref": "/common/consommations"
             }
           }
         }
@@ -7344,24 +7086,12 @@
           "type": "object",
           "readOnly": true,
           "properties": {
+            "rdim": {
+              "title": "Ratio de dimenstionnement",
+              "type": "number"
+            },
             "eer": {
               "title": "Coefficient d'efficacité énergétique",
-              "type": "number"
-            },
-            "rdim": {
-              "title": "Ratio de dimensionnement",
-              "type": "number"
-            },
-            "cef_fr": {
-              "title": "Consommation finale en kWh/an",
-              "type": "number"
-            },
-            "cep_fr": {
-              "title": "Consommation primaire en kWh/an",
-              "type": "number"
-            },
-            "eges_fr": {
-              "title": "Emissions de gaz à effet de serre en kgCO2/an",
               "type": "number"
             }
           }
@@ -7405,9 +7135,6 @@
             "rdim": {
               "title": "Ratio de dimensionnement",
               "type": "number"
-            },
-            "consommations": {
-              "$ref": "/common/consommations"
             }
           }
         }
@@ -7640,6 +7367,100 @@
           ]
         }
       }
+    },
+    "https://schemas.dpe-audit.fr/common/pertes": {
+      "$id": "https://schemas.dpe-audit.fr/common/pertes",
+      "title": "Pertes des sytèmes",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "title": "Type de perte",
+            "type": "string",
+            "enum": [
+              "distribution",
+              "generation",
+              "stockage"
+            ]
+          },
+          "pertes": {
+            "title": "Pertes en kWh/an",
+            "type": "number"
+          },
+          "pertes_recuperables": {
+            "title": "Pertes récupérables en kWh/an",
+            "type": "number"
+          }
+        },
+        "required": [
+          "type",
+          "pertes",
+          "pertes_recuperables"
+        ]
+      }
+    },
+    "https://schemas.dpe-audit.fr/common/consommations": {
+      "$id": "https://schemas.dpe-audit.fr/common/consommations",
+      "title": "Consommations d'énergie",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "energie": {
+            "$ref": "/common/energie"
+          },
+          "usage": {
+            "$ref": "/common/usage"
+          },
+          "cef": {
+            "title": "Consommation d'énergie finale en kWh/an",
+            "type": "number"
+          },
+          "cep": {
+            "title": "Consommation d'énergie primaire en kWh/an",
+            "type": "number"
+          },
+          "eges": {
+            "title": "Emissions de gaz à effet de serre en kgCO2/an",
+            "type": "number"
+          }
+        },
+        "required": [
+          "energie",
+          "usage",
+          "cef",
+          "cep",
+          "eges"
+        ]
+      }
+    },
+    "https://schemas.dpe-audit.fr/common/energie": {
+      "$id": "https://schemas.dpe-audit.fr/common/energie",
+      "title": "Energie",
+      "type": "string",
+      "enum": [
+        "electricite",
+        "electricite_renouvelable",
+        "gaz_naturel",
+        "gpl",
+        "fioul",
+        "bois",
+        "charbon",
+        "reseau_urbain"
+      ]
+    },
+    "https://schemas.dpe-audit.fr/common/usage": {
+      "$id": "https://schemas.dpe-audit.fr/common/usage",
+      "title": "Usage",
+      "type": "string",
+      "enum": [
+        "chauffage",
+        "ecs",
+        "refroidissement",
+        "eclairage",
+        "auxiliaire"
+      ]
     }
   }
 }

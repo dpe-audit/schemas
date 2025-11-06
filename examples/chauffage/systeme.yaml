@@ -5,6 +5,7 @@ examples:
     installation_id: 9d615f30-c6f8-406f-8a1f-899617c472db
     generateur_id: 6a785019-8ce1-4768-b9c3-400b7bd2f1f3
     type: chauffage_central
+    cascade: 1
     reseau:
       type_distribution: hydraulique
       presence_circulateur_externe: false

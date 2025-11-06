@@ -12,8 +12,6 @@ examples:
       position_volume_chauffe: false
       generateur_collectif: true
       generateur_multi_batiment: false
-      cascade: 1
-      priorite_cascade: 2
       reseau_chaleur_id: null
     signaletique:
       mode_combustion: condensation

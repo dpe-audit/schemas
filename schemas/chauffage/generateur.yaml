@@ -102,16 +102,6 @@ $defs:
       position_volume_chauffe:
         title: Position du générateur à l'intérieur du volume chauffé
         type: boolean
-      cascade:
-        title: Identifiant de la cascade
-        type: [integer, "null"]
-        minimum: 0
-        default: null
-      priorite_cascade:
-        title: Ordre de priorité du générateur en cascade
-        type: [integer, "null"]
-        minimum: 0
-        default: null
       generateur_mixte_id:
         title: Identifiant du générateur mixte
         type: ["string", "null"]
@@ -150,24 +140,6 @@ $defs:
             required:
               - generateur_collectif
               - position_volume_chauffe
-      - oneOf:
-          - title: Générateur en cascade
-            type: object
-            properties:
-              cascade:
-                type: integer
-              priorite_cascade:
-                type: integer
-            required:
-              - cascade
-              - priorite_cascade
-          - title: Autres
-            type: object
-            properties:
-              cascade:
-                const: null
-              priorite_cascade:
-                const: null
   signaletique:
     title: Fiche signalétique
     type: object
@@ -376,10 +348,6 @@ oneOf:
             const: false
           position_volume_chauffe:
             const: true
-          cascade:
-            const: null
-          priorite_cascade:
-            const: null
           generateur_mixte_id:
             const: null
           reseau_chaleur_id:
@@ -435,10 +403,6 @@ oneOf:
         type: object
         properties:
           position_chaudiere:
-            const: null
-          cascade:
-            const: null
-          priorite_cascade:
             const: null
           reseau_chaleur_id:
             const: null
@@ -519,10 +483,6 @@ oneOf:
             const: false
           position_volume_chauffe:
             const: true
-          cascade:
-            const: null
-          priorite_cascade:
-            const: null
           generateur_mixte_id:
             const: null
           reseau_chaleur_id:
@@ -578,10 +538,6 @@ oneOf:
             const: false
           position_volume_chauffe:
             const: true
-          cascade:
-            const: null
-          priorite_cascade:
-            const: null
           generateur_mixte_id:
             const: null
           reseau_chaleur_id:
@@ -637,10 +593,6 @@ oneOf:
             const: true
           position_volume_chauffe:
             const: false
-          cascade:
-            const: null
-          priorite_cascade:
-            const: null
           generateur_mixte_id:
             const: null
       signaletique:
@@ -691,10 +643,6 @@ oneOf:
             const: true
           position_volume_chauffe:
             const: false
-          cascade:
-            const: null
-          priorite_cascade:
-            const: null
           generateur_mixte_id:
             const: null
           reseau_chaleur_id:

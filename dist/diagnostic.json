@@ -5305,18 +5305,56 @@
       ],
       "oneOf": [
         {
-          "title": "Chauffage central",
+          "title": "Chauffage central avec distribution hydraulique",
           "type": "object",
           "properties": {
             "type": {
               "const": "chauffage_central"
             },
             "reseau": {
-              "type": "object"
+              "type": "object",
+              "properties": {
+                "type_distribution": {
+                  "const": "hydraulique"
+                }
+              },
+              "required": [
+                "type_distribution"
+              ]
             },
             "emetteurs": {
               "type": "array",
               "minContains": 1
+            }
+          },
+          "required": [
+            "type",
+            "reseau",
+            "emetteurs"
+          ]
+        },
+        {
+          "title": "Chauffage central avec distribution aéraulique",
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "chauffage_central"
+            },
+            "reseau": {
+              "type": "object",
+              "properties": {
+                "type_distribution": {
+                  "const": "aeraulique"
+                }
+              },
+              "required": [
+                "type_distribution"
+              ]
+            },
+            "emetteurs": {
+              "type": "array",
+              "minContains": 0,
+              "maxContains": 0
             }
           },
           "required": [
@@ -5360,8 +5398,7 @@
               "type": "string",
               "enum": [
                 "hydraulique",
-                "aeraulique",
-                "fluide_frigorigene"
+                "aeraulique"
               ]
             },
             "presence_circulateur_externe": {

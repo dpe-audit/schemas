@@ -257,7 +257,6 @@
 /chauffage/systeme/reseau/isolation;non_isole;Non isolé
 /chauffage/systeme/reseau/type_distribution;hydraulique;Distribution hydraulique
 /chauffage/systeme/reseau/type_distribution;aeraulique;Distribution aeraulique
-/chauffage/systeme/reseau/type_distribution;fluide_frigorigene;Distribution par fluide frigorigène
 /ecs/generateur/position/position_chauffe_eau;chauffe_eau_vertical;Chauffe eau vertical
 /ecs/generateur/position/position_chauffe_eau;chauffe_eau_horizontal;Chauffe eau horizontal
 /ecs/generateur/signaletique/label;ne_performance_a;NE Performance - A

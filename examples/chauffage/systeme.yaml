@@ -8,6 +8,7 @@ examples:
     cascade: 1
     reseau:
       type_distribution: hydraulique
+      presence_fluide_frigorigene: true
       presence_circulateur_externe: false
       niveaux_desservis: 2
       isolation: non_isole

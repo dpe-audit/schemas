@@ -5491,6 +5491,11 @@
                 "aeraulique"
               ]
             },
+            "presence_fluide_frigorigene": {
+              "title": "Distribution avec fluide frigorigène",
+              "type": "boolean",
+              "default": false
+            },
             "presence_circulateur_externe": {
               "title": "Présence d'un circulateur externe",
               "type": "boolean",
@@ -5517,6 +5522,7 @@
           },
           "required": [
             "type_distribution",
+            "presence_fluide_frigorigene",
             "presence_circulateur_externe",
             "niveaux_desservis",
             "isolation"

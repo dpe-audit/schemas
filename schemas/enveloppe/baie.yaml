@@ -110,14 +110,27 @@ oneOf:
     type: object
     properties:
       type:
-        enum: [brique_verre_pleine, brique_verre_creuse, polycarbonate]
+        enum: [brique_verre_pleine, brique_verre_creuse]
       vitrage:
         type: object
         properties:
           type:
-            enum: [brique_verre, polycarbonate]
+            const: brique_verre
       menuiserie:
         const: null
+    required:
+      - type
+      - vitrage
+  - title: Paroi en polycarbonate
+    type: object
+    properties:
+      type:
+        const: polycarbonate
+      vitrage:
+        type: object
+        properties:
+          type:
+            const: polycarbonate
     required:
       - type
       - vitrage

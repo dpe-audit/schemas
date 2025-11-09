@@ -3854,7 +3854,9 @@ $defs:
             default: null
           fch:
             title: Facteur de couverture solaire connu et justifié en %
-            type: number
+            type:
+              - number
+              - 'null'
             minimum: 0
             maximum: 100
         required:

@@ -146,11 +146,11 @@ oneOf:
       - position
       - vitrage
       - menuiserie
-  - title: Porte fenêtre
+  - title: Porte fenêtre battante
     type: object
     properties:
       type:
-        enum: [porte_fenetre_coulissante, porte_fenetre_battante]
+        const: porte_fenetre_battante
       position:
         type: object
         properties:
@@ -161,6 +161,31 @@ oneOf:
         required:
           - type_pose
           - presence_soubassement
+      vitrage:
+        type: object
+        properties:
+          type:
+            not:
+              enum: [brique_verre, polycarbonate]
+      menuiserie:
+        type: object
+    required:
+      - type
+      - position
+      - vitrage
+      - menuiserie
+  - title: Porte fenêtre coulissante
+    type: object
+    properties:
+      type:
+        const: porte_fenetre_coulissante
+      position:
+        type: object
+        properties:
+          type_pose:
+            type: string
+        required:
+          - type_pose
       vitrage:
         type: object
         properties:

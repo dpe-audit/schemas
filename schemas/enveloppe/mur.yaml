@@ -33,6 +33,7 @@ properties:
       - ossature_bois_sans_remplissage
       - ossature_bois_avec_remplissage_tout_venant
       - ossature_bois_avec_remplissage_isolant
+      - beton_cellulaire
       - null
     default: null
   epaisseur_structure:

@@ -1971,7 +1971,20 @@
           "$ref": "#/$defs/vitrage"
         },
         "survitrage": {
-          "$ref": "#/$defs/survitrage"
+          "title": "Survitrage",
+          "type": [
+            "object",
+            "null"
+          ],
+          "default": null,
+          "oneOf": [
+            {
+              "$ref": "#/$defs/survitrage"
+            },
+            {
+              "const": null
+            }
+          ]
         },
         "masques": {
           "title": "Liste des masques",
@@ -5180,10 +5193,16 @@
                   "const": false
                 },
                 "minimum_temperature": {
-                  "const": null
+                  "enum": [
+                    false,
+                    null
+                  ]
                 },
                 "detection_presence": {
-                  "const": null
+                  "enum": [
+                    false,
+                    null
+                  ]
                 }
               },
               "required": [

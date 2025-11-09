@@ -1067,6 +1067,7 @@
             "ossature_bois_sans_remplissage",
             "ossature_bois_avec_remplissage_tout_venant",
             "ossature_bois_avec_remplissage_isolant",
+            "beton_cellulaire",
             null
           ],
           "default": null
@@ -4053,46 +4054,40 @@
             "generateur_multi_batiment",
             "position_volume_chauffe"
           ],
-          "allOf": [
+          "oneOf": [
             {
-              "oneOf": [
-                {
-                  "title": "Générateur individuel",
-                  "type": "object",
-                  "properties": {
-                    "generateur_collectif": {
-                      "const": false
-                    },
-                    "generateur_multi_batiment": {
-                      "const": false
-                    },
-                    "generateur_mixte_id": {
-                      "const": null
-                    },
-                    "reseau_chaleur_id": {
-                      "const": null
-                    }
-                  },
-                  "required": [
-                    "generateur_collectif"
-                  ]
+              "title": "Générateur individuel",
+              "type": "object",
+              "properties": {
+                "generateur_collectif": {
+                  "const": false
                 },
-                {
-                  "title": "Générateur collectif",
-                  "type": "object",
-                  "properties": {
-                    "generateur_collectif": {
-                      "const": true
-                    },
-                    "position_volume_chauffe": {
-                      "const": false
-                    }
-                  },
-                  "required": [
-                    "generateur_collectif",
-                    "position_volume_chauffe"
-                  ]
+                "generateur_multi_batiment": {
+                  "const": false
+                },
+                "reseau_chaleur_id": {
+                  "const": null
                 }
+              },
+              "required": [
+                "generateur_collectif",
+                "generateur_multi_batiment"
+              ]
+            },
+            {
+              "title": "Générateur collectif",
+              "type": "object",
+              "properties": {
+                "generateur_collectif": {
+                  "const": true
+                },
+                "position_volume_chauffe": {
+                  "const": false
+                }
+              },
+              "required": [
+                "generateur_collectif",
+                "position_volume_chauffe"
               ]
             }
           ]
@@ -6202,6 +6197,43 @@
             "generateur_collectif",
             "generateur_multi_batiment",
             "position_volume_chauffe"
+          ],
+          "oneOf": [
+            {
+              "title": "Générateur individuel",
+              "type": "object",
+              "properties": {
+                "generateur_collectif": {
+                  "const": false
+                },
+                "generateur_multi_batiment": {
+                  "const": false
+                },
+                "reseau_chaleur_id": {
+                  "const": null
+                }
+              },
+              "required": [
+                "generateur_collectif",
+                "generateur_multi_batiment"
+              ]
+            },
+            {
+              "title": "Générateur collectif",
+              "type": "object",
+              "properties": {
+                "generateur_collectif": {
+                  "const": true
+                },
+                "position_volume_chauffe": {
+                  "const": false
+                }
+              },
+              "required": [
+                "generateur_collectif",
+                "position_volume_chauffe"
+              ]
+            }
           ]
         },
         "signaletique": {
@@ -6598,7 +6630,7 @@
           },
           "oneOf": [
             {
-              "title": "Absance de stockage",
+              "title": "Avec stockage",
               "properties": {
                 "volume": {
                   "minimumExclusive": 0

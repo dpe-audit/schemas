@@ -367,6 +367,29 @@ $defs:
       - generateur_collectif
       - generateur_multi_batiment
       - position_volume_chauffe
+    oneOf:
+      - title: Générateur individuel
+        type: object
+        properties:
+          generateur_collectif:
+            const: false
+          generateur_multi_batiment:
+            const: false
+          reseau_chaleur_id:
+            const: null
+        required:
+          - generateur_collectif
+          - generateur_multi_batiment
+      - title: Générateur collectif
+        type: object
+        properties:
+          generateur_collectif:
+            const: true
+          position_volume_chauffe:
+            const: false
+        required:
+          - generateur_collectif
+          - position_volume_chauffe
   signaletique:
     title: Fiche signalétique
     type: object

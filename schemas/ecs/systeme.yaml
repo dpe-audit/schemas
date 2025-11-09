@@ -72,7 +72,7 @@ $defs:
         type: [boolean, "null"]
         default: null
     oneOf:
-      - title: Absance de stockage
+      - title: Avec stockage
         properties:
           volume:
             minimumExclusive: 0

@@ -97,9 +97,9 @@ $defs:
           presence_regulation:
             const: false
           minimum_temperature:
-            const: null
+            enum: [false, null]
           detection_presence:
-            const: null
+            enum: [false, null]
         required:
           - presence_regulation
   data:

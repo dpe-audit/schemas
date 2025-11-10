@@ -406,21 +406,21 @@ $defs:
     properties:
       ug:
         title: Coefficient de transmission thermique du vitrage en W/m²K
-        type: ["number", "null"]
+        type: number
       uw:
         title: Coefficient de transmission thermique de la baie en W/m²K
-        type: ["number", "null"]
+        type: number
       deltar:
         title: Résistance thermique additionnelle due aux fermetures exprimée en m².K/W
-        type: ["number", "null"]
+        type: number
       fe:
         title: Facteur d'ensoleillement de la baie
-        type: ["number", "null"]
+        type: number
       sw:
         title: Proportion d'énergie solaire transmise par la baie
-        type: ["number", "null"]
+        type: number
       sse:
         title: Surface sud équivalente de la baie en m²
-        type: ["number", "null"]
+        type: number
     allOf:
       - $ref: /enveloppe/paroi/data

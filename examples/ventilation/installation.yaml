@@ -26,10 +26,3 @@ examples:
       qvarep_conv: 1.2
       qvasouf_conv: 1.2
       smea_conv: 0
-      consommations:
-        - scenario: conventionnel
-          usage: auxiliaire
-          energie: electricite
-          cef: 1500
-          cep: 1800
-          eges: 200

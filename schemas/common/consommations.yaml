@@ -1,0 +1,29 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.dpe-audit.fr/common/consommations
+title: Consommations d'énergie
+type: array
+items:
+  type: object
+  properties:
+    scenario:
+      $ref: /common/scenario
+    energie:
+      $ref: /common/energie
+    usage:
+      $ref: /common/usage
+    cef:
+      title: Consommation d'énergie finale en kWh/an
+      type: number
+    cep:
+      title: Consommation d'énergie primaire en kWh/an
+      type: number
+    eges:
+      title: Emissions de gaz à effet de serre en kgCO2/an
+      type: number
+  required:
+    - scenario
+    - energie
+    - usage
+    - cef
+    - cep
+    - eges

@@ -5,9 +5,16 @@ examples:
     systemes: https://schemas.dpe-audit.fr/refroidissement/systeme
     data:
       bfr: 5000
-      cef_fr: 1000
-      cep_fr: 1900
-      eges_fr: 500
-      cef_aux: 0
-      cep_aux: 0
-      eges_aux: 0
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: refroidissement
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200

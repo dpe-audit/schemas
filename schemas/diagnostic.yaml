@@ -36,8 +36,6 @@ properties:
     $ref: /refroidissement
   production:
     $ref: /production
-  eclairage:
-    $ref: /eclairage
   data:
     $ref: "#/$defs/data"
 required:
@@ -77,3 +75,5 @@ $defs:
         minimumExclusive: 0
       bilan:
         $ref: /common/bilan
+      consommations:
+        $ref: /common/consommations

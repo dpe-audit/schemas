@@ -6,9 +6,16 @@ examples:
     systemes: https://schemas.dpe-audit.fr/chauffage/systeme
     data:
       bch: 25000
-      cef_ch: 1500
-      cep_ch: 1800
-      eges_ch: 500
-      cef_aux: 1500
-      cep_aux: 1800
-      eges_aux: 500
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: chauffage
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200

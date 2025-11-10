@@ -11,6 +11,10 @@ examples:
       rdim: 1
       ratio_utilisation: 1
       pvent_moy: 15
-      cef_aux: 1500
-      cep_aux: 1800
-      eges_aux: 200
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200

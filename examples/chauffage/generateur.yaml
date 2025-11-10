@@ -39,6 +39,19 @@ examples:
       tfonc100: null
       pertes_generation: 1000
       pertes_generation_recuperables: 800
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: chauffage
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200
   - id: 6a785019-8ce1-4768-b9c3-400b7bd2f1f3
     description: Réseau de chaleur
     type: reseau_chaleur
@@ -76,6 +89,19 @@ examples:
       tfonc100: null
       pertes_generation: 1000
       pertes_generation_recuperables: 800
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: chauffage
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200
   - id: 6a785019-8ce1-4768-b9c3-400b7bd2f1f3
     description: Générateur collectif inconnu
     type: null
@@ -113,3 +139,16 @@ examples:
       tfonc100: null
       pertes_generation: 1000
       pertes_generation_recuperables: 800
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: chauffage
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200

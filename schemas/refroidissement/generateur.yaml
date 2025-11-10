@@ -103,3 +103,5 @@ $defs:
       eer:
         title: Coefficient d'efficacité énergétique
         type: number
+      consommations:
+        $ref: /common/consommations

@@ -74,3 +74,5 @@ $defs:
       rgs:
         title: Rendement de génération et de stockage
         type: number
+      consommations:
+        $ref: /common/consommations

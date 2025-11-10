@@ -9,3 +9,16 @@ examples:
     data:
       rdim: 1
       eer: 6.2
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: refroidissement
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200

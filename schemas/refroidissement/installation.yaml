@@ -29,3 +29,5 @@ $defs:
       rdim:
         title: Ratio de dimensionnement
         type: number
+      consommations:
+        $ref: /common/consommations

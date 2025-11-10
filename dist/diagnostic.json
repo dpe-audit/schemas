@@ -4313,6 +4313,9 @@
             "pertes_generation_recuperables": {
               "title": "Pertes de génération récupérables en kWh/an",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -5008,6 +5011,81 @@
         }
       ]
     },
+    "https://schemas.dpe-audit.fr/common/consommations": {
+      "$id": "https://schemas.dpe-audit.fr/common/consommations",
+      "title": "Consommations d'énergie",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scenario": {
+            "$ref": "/common/scenario"
+          },
+          "energie": {
+            "$ref": "/common/energie"
+          },
+          "usage": {
+            "$ref": "/common/usage"
+          },
+          "cef": {
+            "title": "Consommation d'énergie finale en kWh/an",
+            "type": "number"
+          },
+          "cep": {
+            "title": "Consommation d'énergie primaire en kWh/an",
+            "type": "number"
+          },
+          "eges": {
+            "title": "Emissions de gaz à effet de serre en kgCO2/an",
+            "type": "number"
+          }
+        },
+        "required": [
+          "scenario",
+          "energie",
+          "usage",
+          "cef",
+          "cep",
+          "eges"
+        ]
+      }
+    },
+    "https://schemas.dpe-audit.fr/common/scenario": {
+      "$id": "https://schemas.dpe-audit.fr/common/scenario",
+      "title": "Scénario d'usage",
+      "type": "string",
+      "enum": [
+        "conventionnel",
+        "depensier"
+      ]
+    },
+    "https://schemas.dpe-audit.fr/common/energie": {
+      "$id": "https://schemas.dpe-audit.fr/common/energie",
+      "title": "Energie",
+      "type": "string",
+      "enum": [
+        "electricite",
+        "electricite_renouvelable",
+        "gaz_naturel",
+        "gpl",
+        "fioul",
+        "bois",
+        "charbon",
+        "reseau_urbain"
+      ]
+    },
+    "https://schemas.dpe-audit.fr/common/usage": {
+      "$id": "https://schemas.dpe-audit.fr/common/usage",
+      "title": "Usage",
+      "type": "string",
+      "enum": [
+        "chauffage",
+        "ecs",
+        "refroidissement",
+        "eclairage",
+        "auxiliaire"
+      ]
+    },
     "https://schemas.dpe-audit.fr/chauffage/emetteur": {
       "$id": "https://schemas.dpe-audit.fr/chauffage/emetteur",
       "title": "Émetteur de chaleur",
@@ -5267,6 +5345,9 @@
             "rr": {
               "title": "Rendement de régulation",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -5516,81 +5597,6 @@
           }
         }
       }
-    },
-    "https://schemas.dpe-audit.fr/common/consommations": {
-      "$id": "https://schemas.dpe-audit.fr/common/consommations",
-      "title": "Consommations d'énergie",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "scenario": {
-            "$ref": "/common/scenario"
-          },
-          "energie": {
-            "$ref": "/common/energie"
-          },
-          "usage": {
-            "$ref": "/common/usage"
-          },
-          "cef": {
-            "title": "Consommation d'énergie finale en kWh/an",
-            "type": "number"
-          },
-          "cep": {
-            "title": "Consommation d'énergie primaire en kWh/an",
-            "type": "number"
-          },
-          "eges": {
-            "title": "Emissions de gaz à effet de serre en kgCO2/an",
-            "type": "number"
-          }
-        },
-        "required": [
-          "scenario",
-          "energie",
-          "usage",
-          "cef",
-          "cep",
-          "eges"
-        ]
-      }
-    },
-    "https://schemas.dpe-audit.fr/common/scenario": {
-      "$id": "https://schemas.dpe-audit.fr/common/scenario",
-      "title": "Scénario d'usage",
-      "type": "string",
-      "enum": [
-        "conventionnel",
-        "depensier"
-      ]
-    },
-    "https://schemas.dpe-audit.fr/common/energie": {
-      "$id": "https://schemas.dpe-audit.fr/common/energie",
-      "title": "Energie",
-      "type": "string",
-      "enum": [
-        "electricite",
-        "electricite_renouvelable",
-        "gaz_naturel",
-        "gpl",
-        "fioul",
-        "bois",
-        "charbon",
-        "reseau_urbain"
-      ]
-    },
-    "https://schemas.dpe-audit.fr/common/usage": {
-      "$id": "https://schemas.dpe-audit.fr/common/usage",
-      "title": "Usage",
-      "type": "string",
-      "enum": [
-        "chauffage",
-        "ecs",
-        "refroidissement",
-        "eclairage",
-        "auxiliaire"
-      ]
     },
     "https://schemas.dpe-audit.fr/ecs": {
       "$id": "https://schemas.dpe-audit.fr/ecs",
@@ -6452,6 +6458,9 @@
             "pertes_stockage_recuperables": {
               "title": "Pertes de stockage intégré récupérables en kWh/an",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -6564,6 +6573,9 @@
             "rgs": {
               "title": "Rendement de génération et de stockage",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -7073,6 +7085,9 @@
             "smea_conv": {
               "title": "Somme des modules d'entrée d'air sous 20 Pa par unité de surface habitable en m3/(h.m²)",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -7287,6 +7302,9 @@
             "eer": {
               "title": "Coefficient d'efficacité énergétique",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -7329,6 +7347,9 @@
             "rdim": {
               "title": "Ratio de dimensionnement",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }

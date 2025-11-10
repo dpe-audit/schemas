@@ -253,6 +253,8 @@ $defs:
       pertes_generation_recuperables:
         title: Pertes de génération récupérables en kWh/an
         type: number
+      consommations:
+        $ref: /common/consommations
 oneOf:
   - title: Chaudière à combustion
     properties:

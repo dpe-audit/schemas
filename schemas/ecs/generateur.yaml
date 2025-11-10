@@ -489,3 +489,5 @@ $defs:
       pertes_stockage_recuperables:
         title: Pertes de stockage intégré récupérables en kWh/an
         type: number
+      consommations:
+        $ref: /common/consommations

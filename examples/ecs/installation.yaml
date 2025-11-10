@@ -15,3 +15,16 @@ examples:
       rs: 0.8
       rg: 0.8
       rgs: 1
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: ecs
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200

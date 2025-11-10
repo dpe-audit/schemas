@@ -24,18 +24,16 @@ examples:
       re: 0.8
       rg: 0.8
       rr: 1
-      pertes:
-        - type: generation
-          pertes: 5000
-          pertes_recuperables: 2000
       consommations:
-        - usage: chauffage
-          energie: gaz_naturel
-          cef: 15000
-          cep: 18000
-          eges: 5000
-        - usage: auxiliaire
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: chauffage
           energie: electricite
           cef: 1500
           cep: 1800
-          eges: 500
+          eges: 200

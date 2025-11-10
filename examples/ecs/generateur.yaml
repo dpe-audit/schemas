@@ -35,6 +35,19 @@ examples:
       pertes_generation_recuperables: 800
       pertes_stockage: 1000
       pertes_stockage_recuperables: 800
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: ecs
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200
   - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
     description: Chauffe eau
     type: chauffe_eau
@@ -64,6 +77,19 @@ examples:
       pertes_generation_recuperables: 800
       pertes_stockage: 1000
       pertes_stockage_recuperables: 800
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: ecs
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200
   - id: fbc4f0ac-7d7c-4464-adb3-5617b81896c2
     description: Chauffe eau
     type: chauffe_eau
@@ -92,4 +118,17 @@ examples:
       pertes_generation_recuperables: 800
       pertes_stockage: 1000
       pertes_stockage_recuperables: 800
+      consommations:
+        - scenario: conventionnel
+          usage: auxiliaire
+          energie: electricite
+          cef: 0
+          cep: 0
+          eges: 0
+        - scenario: conventionnel
+          usage: ecs
+          energie: electricite
+          cef: 1500
+          cep: 1800
+          eges: 200
 

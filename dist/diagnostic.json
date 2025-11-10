@@ -49,9 +49,6 @@
     "production": {
       "$ref": "/production"
     },
-    "eclairage": {
-      "$ref": "/eclairage"
-    },
     "data": {
       "$ref": "#/$defs/data"
     }
@@ -108,6 +105,9 @@
         },
         "bilan": {
           "$ref": "/common/bilan"
+        },
+        "consommations": {
+          "$ref": "/common/consommations"
         }
       }
     },
@@ -2547,45 +2547,27 @@
           "properties": {
             "ug": {
               "title": "Coefficient de transmission thermique du vitrage en W/m²K",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             },
             "uw": {
               "title": "Coefficient de transmission thermique de la baie en W/m²K",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             },
             "deltar": {
               "title": "Résistance thermique additionnelle due aux fermetures exprimée en m².K/W",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             },
             "fe": {
               "title": "Facteur d'ensoleillement de la baie",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             },
             "sw": {
               "title": "Proportion d'énergie solaire transmise par la baie",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             },
             "sse": {
               "title": "Surface sud équivalente de la baie en m²",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             }
           },
           "allOf": [
@@ -3545,24 +3527,15 @@
           "properties": {
             "ug": {
               "title": "Coefficient de transmission thermique du vitrage en W/m²K",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             },
             "uw": {
               "title": "Coefficient de transmission thermique de la baie en W/m²K",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             },
             "sw": {
               "title": "Proportion d'énergie solaire transmise par la baie",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             }
           }
         }
@@ -3920,30 +3893,6 @@
               "title": "Besoin de chauffage en kWh/an",
               "type": "number"
             },
-            "cef_ch": {
-              "title": "Consommation finale de chauffage en kWh/an",
-              "type": "number"
-            },
-            "cep_ch": {
-              "title": "Consommation primaire de chauffage en kWh/an",
-              "type": "number"
-            },
-            "eges_ch": {
-              "title": "Emissions de gaz à effet de serre de chauffage en kgCO2/an",
-              "type": "number"
-            },
-            "cef_aux": {
-              "title": "Consommation finale des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "cep_aux": {
-              "title": "Consommation primaire des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "eges_aux": {
-              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
-              "type": "number"
-            },
             "pertes_generation": {
               "title": "Pertes de génération en kWh/an",
               "type": "number"
@@ -3951,6 +3900,9 @@
             "pertes_generation_recuperables": {
               "title": "Pertes de génération récupérables en kWh/an",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -5558,33 +5510,87 @@
               "title": "Rendement de régulation",
               "type": "number"
             },
-            "cef_ch": {
-              "title": "Consommation finale de chauffage en kWh/an",
-              "type": "number"
-            },
-            "cep_ch": {
-              "title": "Consommation primaire de chauffage en kWh/an",
-              "type": "number"
-            },
-            "eges_ch": {
-              "title": "Emissions de gaz à effet de serre de chauffage en kgCO2/an",
-              "type": "number"
-            },
-            "cef_aux": {
-              "title": "Consommation finale des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "cep_aux": {
-              "title": "Consommation primaire des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "eges_aux": {
-              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
-              "type": "number"
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
       }
+    },
+    "https://schemas.dpe-audit.fr/common/consommations": {
+      "$id": "https://schemas.dpe-audit.fr/common/consommations",
+      "title": "Consommations d'énergie",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scenario": {
+            "$ref": "/common/scenario"
+          },
+          "energie": {
+            "$ref": "/common/energie"
+          },
+          "usage": {
+            "$ref": "/common/usage"
+          },
+          "cef": {
+            "title": "Consommation d'énergie finale en kWh/an",
+            "type": "number"
+          },
+          "cep": {
+            "title": "Consommation d'énergie primaire en kWh/an",
+            "type": "number"
+          },
+          "eges": {
+            "title": "Emissions de gaz à effet de serre en kgCO2/an",
+            "type": "number"
+          }
+        },
+        "required": [
+          "scenario",
+          "energie",
+          "usage",
+          "cef",
+          "cep",
+          "eges"
+        ]
+      }
+    },
+    "https://schemas.dpe-audit.fr/common/scenario": {
+      "$id": "https://schemas.dpe-audit.fr/common/scenario",
+      "title": "Scénario d'usage",
+      "type": "string",
+      "enum": [
+        "conventionnel",
+        "depensier"
+      ]
+    },
+    "https://schemas.dpe-audit.fr/common/energie": {
+      "$id": "https://schemas.dpe-audit.fr/common/energie",
+      "title": "Energie",
+      "type": "string",
+      "enum": [
+        "electricite",
+        "electricite_renouvelable",
+        "gaz_naturel",
+        "gpl",
+        "fioul",
+        "bois",
+        "charbon",
+        "reseau_urbain"
+      ]
+    },
+    "https://schemas.dpe-audit.fr/common/usage": {
+      "$id": "https://schemas.dpe-audit.fr/common/usage",
+      "title": "Usage",
+      "type": "string",
+      "enum": [
+        "chauffage",
+        "ecs",
+        "refroidissement",
+        "eclairage",
+        "auxiliaire"
+      ]
     },
     "https://schemas.dpe-audit.fr/ecs": {
       "$id": "https://schemas.dpe-audit.fr/ecs",
@@ -5642,30 +5648,6 @@
               "title": "Besoin d'eau chaude sanitaire en kWh/an",
               "type": "number"
             },
-            "cef_ecs": {
-              "title": "Consommation finale d'eau chaude sanitaire en kWh/an",
-              "type": "number"
-            },
-            "cep_ecs": {
-              "title": "Consommation primaire d'eau chaude sanitaire en kWh/an",
-              "type": "number"
-            },
-            "eges_ecs": {
-              "title": "Emissions de gaz à effet de serre d'eau chaude sanitaire en kgCO2/an",
-              "type": "number"
-            },
-            "cef_aux": {
-              "title": "Consommation finale des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "cep_aux": {
-              "title": "Consommation primaire des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "eges_aux": {
-              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
-              "type": "number"
-            },
             "pertes_generation": {
               "title": "Pertes de génération en kWh/an",
               "type": "number"
@@ -5689,6 +5671,9 @@
             "pertes_distribution_recuperables": {
               "title": "Pertes de distribution récupérables en kWh/an",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -6751,10 +6736,7 @@
             },
             "paux": {
               "title": "Puissance des auxiliaires en kW",
-              "type": [
-                "number",
-                "null"
-              ]
+              "type": "number"
             },
             "iecs": {
               "title": "Inverse du rendement du système",
@@ -6776,30 +6758,6 @@
               "title": "Rendement de génération et de stockage",
               "type": "number"
             },
-            "cef_ecs": {
-              "title": "Consommation finale d'eau chaude sanitaire en kWh/an",
-              "type": "number"
-            },
-            "cep_ecs": {
-              "title": "Consommation primaire d'eau chaude sanitaire en kWh/an",
-              "type": "number"
-            },
-            "eges_ecs": {
-              "title": "Emissions de gaz à effet de serre d'eau chaude sanitaire en kgCO2/an",
-              "type": "number"
-            },
-            "cef_aux": {
-              "title": "Consommation finale des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "cep_aux": {
-              "title": "Consommation primaire des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "eges_aux": {
-              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
-              "type": "number"
-            },
             "pertes_stockage": {
               "title": "Pertes de stockage indépendant en kWh/an",
               "type": "number"
@@ -6815,6 +6773,9 @@
             "pertes_distribution_recuperables": {
               "title": "Pertes de distribution récupérables en kWh/an",
               "type": "number"
+            },
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -6855,17 +6816,8 @@
           "type": "object",
           "readOnly": true,
           "properties": {
-            "cef_aux": {
-              "title": "Consommation d'énergie finale des auxiliaires de ventilation en kWh/an",
-              "type": "number"
-            },
-            "cep_aux": {
-              "title": "Consommation d'énergie primaire des auxiliaires de ventilation en kWh/an",
-              "type": "number"
-            },
-            "eges_aux": {
-              "title": "Emissions de gaz à effet de serre des auxiliaires de ventilation en kgCO2/an",
-              "type": "number"
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -7005,17 +6957,8 @@
               "title": "Puissance moyenne des auxiliaires en W",
               "type": "number"
             },
-            "cef_aux": {
-              "title": "Consommation d'énergie finale en kWh/an",
-              "type": "number"
-            },
-            "cep_aux": {
-              "title": "Consommation d'énergie primaire en kWh/an",
-              "type": "number"
-            },
-            "eges_aux": {
-              "title": "Emissions de gaz à effet de serre en kgCO2/an",
-              "type": "number"
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -7183,29 +7126,8 @@
               "title": "Besoin annuel de refroidissement en kWh",
               "type": "number"
             },
-            "cef_fr": {
-              "title": "Consommation finale en kWh/an",
-              "type": "number"
-            },
-            "cep_fr": {
-              "title": "Consommation primaire en kWh/an",
-              "type": "number"
-            },
-            "eges_fr": {
-              "title": "Emissions de gaz à effet de serre en kgCO2/an",
-              "type": "number"
-            },
-            "cef_aux": {
-              "title": "Consommation d'énergie finale des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "cep_aux": {
-              "title": "Consommation d'énergie primaire des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "eges_aux": {
-              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
-              "type": "number"
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -7456,29 +7378,8 @@
               "title": "Ratio de dimensionnement",
               "type": "number"
             },
-            "cef_fr": {
-              "title": "Consommation finale en kWh/an",
-              "type": "number"
-            },
-            "cep_fr": {
-              "title": "Consommation primaire en kWh/an",
-              "type": "number"
-            },
-            "eges_fr": {
-              "title": "Emissions de gaz à effet de serre en kgCO2/an",
-              "type": "number"
-            },
-            "cef_aux": {
-              "title": "Consommation d'énergie finale des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "cep_aux": {
-              "title": "Consommation d'énergie primaire des auxiliaires en kWh/an",
-              "type": "number"
-            },
-            "eges_aux": {
-              "title": "Emissions de gaz à effet de serre des auxiliaires en kgCO2/an",
-              "type": "number"
+            "consommations": {
+              "$ref": "/common/consommations"
             }
           }
         }
@@ -7589,26 +7490,6 @@
               "type": "number"
             }
           }
-        }
-      }
-    },
-    "https://schemas.dpe-audit.fr/eclairage": {
-      "$id": "https://schemas.dpe-audit.fr/eclairage",
-      "title": "Eclairage",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "cef_ecl": {
-          "title": "Consommation finale d'éclairage en kWh/an",
-          "type": "number"
-        },
-        "cep_ecl": {
-          "title": "Consommation d'énergie primaire d'éclairage en kWh/an",
-          "type": "number"
-        },
-        "eges_ecl": {
-          "title": "Emissions de gaz à effet de serre liées à l'éclairage en kgCO2/an",
-          "type": "number"
         }
       }
     },

@@ -1574,26 +1574,12 @@ $defs:
         default: null
       position:
         $ref: '#/$defs/position'
+      menuiserie:
+        $ref: '#/$defs/menuiserie'
       vitrage:
         $ref: '#/$defs/vitrage'
-      menuiserie:
-        title: Menuiserie
-        type:
-          - object
-          - 'null'
-        default: null
-        oneOf:
-          - $ref: '#/$defs/menuiserie'
-          - const: null
       survitrage:
-        title: Survitrage
-        type:
-          - object
-          - 'null'
-        default: null
-        oneOf:
-          - $ref: '#/$defs/survitrage'
-          - const: null
+        $ref: '#/$defs/survitrage'
       masques:
         title: Liste des masques
         type: array
@@ -1841,7 +1827,9 @@ $defs:
                   - orientation
       menuiserie:
         title: Menuiserie
-        type: object
+        type:
+          - object
+          - 'null'
         properties:
           materiau:
             title: Matériau
@@ -1956,7 +1944,9 @@ $defs:
               - type
       survitrage:
         title: Survitrage
-        type: object
+        type:
+          - object
+          - 'null'
         properties:
           type:
             title: Type de survitrage

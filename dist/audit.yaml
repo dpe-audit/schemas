@@ -4382,6 +4382,10 @@ $defs:
           signaletique:
             type: object
             properties:
+              mode_combustion:
+                enum:
+                  - standard
+                  - condensation
               cop:
                 const: null
               label:

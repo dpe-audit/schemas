@@ -5770,10 +5770,7 @@
           "type": "object",
           "properties": {
             "type": {
-              "enum": [
-                "chaudiere",
-                "poele_bouilleur"
-              ]
+              "const": "chaudiere"
             },
             "energie": {
               "not": {
@@ -5782,6 +5779,50 @@
                   "reseau_chaleur"
                 ]
               }
+            },
+            "position": {
+              "type": "object",
+              "properties": {
+                "position_chauffe_eau": {
+                  "const": null
+                },
+                "reseau_chaleur_id": {
+                  "const": null
+                }
+              }
+            },
+            "signaletique": {
+              "type": "object",
+              "properties": {
+                "cop": {
+                  "const": null
+                },
+                "label": {
+                  "const": null
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "energie",
+            "position",
+            "signaletique"
+          ]
+        },
+        {
+          "title": "Poêle à bois bouilleur",
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "poele_bouilleur"
+            },
+            "energie": {
+              "enum": [
+                "bois_buche",
+                "bois_plaquette",
+                "bois_granule"
+              ]
             },
             "position": {
               "type": "object",

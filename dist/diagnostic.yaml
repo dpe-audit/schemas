@@ -3208,9 +3208,7 @@ $defs:
       - title: Chaudière à combustion
         properties:
           type:
-            enum:
-              - chaudiere
-              - poele_bouilleur
+            const: chaudiere
           energie:
             not:
               enum:
@@ -3219,6 +3217,34 @@ $defs:
           bienergie:
             not:
               const: reseau_chaleur
+          position:
+            type: object
+            properties:
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                const: null
+              scop:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Poêle bouilleur
+        properties:
+          type:
+            const: poele_bouilleur
+          energie:
+            enum:
+              - bois_buche
+              - bois_plaquette
+              - bois_granule
+          bienergie:
+            const: null
           position:
             type: object
             properties:

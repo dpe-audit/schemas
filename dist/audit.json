@@ -3984,11 +3984,11 @@
               "type": "number"
             },
             "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
+              "title": "Pertes de génération en Wh/an",
               "type": "number"
             },
             "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
+              "title": "Pertes de génération récupérables en Wh/an",
               "type": "number"
             },
             "consommations": {
@@ -4397,11 +4397,11 @@
               ]
             },
             "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
+              "title": "Pertes de génération en Wh/an",
               "type": "number"
             },
             "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
+              "title": "Pertes de génération récupérables en Wh/an",
               "type": "number"
             },
             "consommations": {
@@ -5744,6 +5744,10 @@
               "title": "Ratio de dimensionnement",
               "type": "number"
             },
+            "paux": {
+              "title": "Puissance des auxiliaires en W",
+              "type": "number"
+            },
             "int": {
               "title": "Facteur d'intermittence",
               "type": "number"
@@ -5836,27 +5840,27 @@
               "type": "number"
             },
             "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
+              "title": "Pertes de génération en Wh/an",
               "type": "number"
             },
             "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
+              "title": "Pertes de génération récupérables en Wh/an",
               "type": "number"
             },
             "pertes_stockage": {
-              "title": "Pertes de stockage en kWh/an",
+              "title": "Pertes de stockage en Wh/an",
               "type": "number"
             },
             "pertes_stockage_recuperables": {
-              "title": "Pertes de stockage récupérables en kWh/an",
+              "title": "Pertes de stockage récupérables en Wh/an",
               "type": "number"
             },
             "pertes_distribution": {
-              "title": "Pertes de distribution en kWh/an",
+              "title": "Pertes de distribution en Wh/an",
               "type": "number"
             },
             "pertes_distribution_recuperables": {
-              "title": "Pertes de distribution récupérables en kWh/an",
+              "title": "Pertes de distribution récupérables en Wh/an",
               "type": "number"
             },
             "consommations": {
@@ -6672,19 +6676,19 @@
               ]
             },
             "pertes_generation": {
-              "title": "Pertes de génération en kWh/an",
+              "title": "Pertes de génération en Wh/an",
               "type": "number"
             },
             "pertes_generation_recuperables": {
-              "title": "Pertes de génération récupérables en kWh/an",
+              "title": "Pertes de génération récupérables en Wh/an",
               "type": "number"
             },
             "pertes_stockage": {
-              "title": "Pertes de stockage intégré en kWh/an",
+              "title": "Pertes de stockage intégré en Wh/an",
               "type": "number"
             },
             "pertes_stockage_recuperables": {
-              "title": "Pertes de stockage intégré récupérables en kWh/an",
+              "title": "Pertes de stockage intégré récupérables en Wh/an",
               "type": "number"
             },
             "consommations": {
@@ -6975,7 +6979,7 @@
               "type": "number"
             },
             "paux": {
-              "title": "Puissance des auxiliaires en kW",
+              "title": "Puissance des auxiliaires en W",
               "type": "number"
             },
             "iecs": {
@@ -6999,19 +7003,19 @@
               "type": "number"
             },
             "pertes_stockage": {
-              "title": "Pertes de stockage indépendant en kWh/an",
+              "title": "Pertes de stockage indépendant en Wh/an",
               "type": "number"
             },
             "pertes_stockage_recuperables": {
-              "title": "Pertes de stockage indépendant récupérables en kWh/an",
+              "title": "Pertes de stockage indépendant récupérables en Wh/an",
               "type": "number"
             },
             "pertes_distribution": {
-              "title": "Pertes de distribution en kWh/an",
+              "title": "Pertes de distribution en Wh/an",
               "type": "number"
             },
             "pertes_distribution_recuperables": {
-              "title": "Pertes de distribution récupérables en kWh/an",
+              "title": "Pertes de distribution récupérables en Wh/an",
               "type": "number"
             },
             "consommations": {

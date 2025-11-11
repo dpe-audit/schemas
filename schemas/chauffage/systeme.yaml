@@ -142,6 +142,9 @@ $defs:
       rdim:
         title: Ratio de dimensionnement
         type: number
+      paux:
+        title: Puissance des auxiliaires en W
+        type: number
       int:
         title: Facteur d'intermittence
         type: number

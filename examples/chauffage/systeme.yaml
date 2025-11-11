@@ -16,6 +16,7 @@ examples:
       - 1e9098f0-5952-4c95-8608-291689103c29
     data:
       rdim: 1
+      paux: 150
       int: 0.8
       i0: 0.9
       ich: 2

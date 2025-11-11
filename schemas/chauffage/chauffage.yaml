@@ -44,10 +44,10 @@ $defs:
         title: Besoin de chauffage en kWh/an
         type: number
       pertes_generation:
-        title: Pertes de génération en kWh/an
+        title: Pertes de génération en Wh/an
         type: number
       pertes_generation_recuperables:
-        title: Pertes de génération récupérables en kWh/an
+        title: Pertes de génération récupérables en Wh/an
         type: number
       consommations:
         $ref: /common/consommations

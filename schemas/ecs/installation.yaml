@@ -60,19 +60,19 @@ $defs:
         title: Facteur de couverture solaire
         type: number
       iecs:
-        title: Inverse du rendement de l'installation
+        title: Inverse du rendement moyen
         type: number
       rd:
-        title: Rendement de distribution
+        title: Rendement de distribution moyen
         type: number
       rs:
-        title: Rendement de stockage
+        title: Rendement de stockage moyen
         type: number
       rg:
-        title: Rendement de génération
+        title: Rendement de génération moyen
         type: number
       rgs:
-        title: Rendement de génération et de stockage
+        title: Rendement de génération et de stockage moyen
         type: number
       consommations:
         $ref: /common/consommations

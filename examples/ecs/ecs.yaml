@@ -7,6 +7,11 @@ examples:
       nadeq: 2.5
       nmax: 1.0
       becs: 2500
+      iecs: 2
+      rd: 0.8
+      rs: 0.8
+      rg: 0.8
+      rgs: 1
       pertes_generation: 100
       pertes_generation_recuperables: 150
       pertes_stockage: 300

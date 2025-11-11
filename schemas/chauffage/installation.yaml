@@ -120,19 +120,19 @@ $defs:
         title: Coefficient d'intermittence
         type: number
       ich:
-        title: Inverse du rendement du système
+        title: Inverse du rendement moyen
         type: number
       rd:
-        title: Rendement de distribution
+        title: Rendement de distribution moyen
         type: number
       re:
-        title: Rendement d'émission
+        title: Rendement d'émission moyen
         type: number
       rg:
-        title: Rendement de génération
+        title: Rendement de génération moyen
         type: number
       rr:
-        title: Rendement de régulation
+        title: Rendement de régulation moyen
         type: number
       consommations:
         $ref: /common/consommations

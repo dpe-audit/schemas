@@ -2877,6 +2877,21 @@ $defs:
           bch:
             title: Besoin de chauffage en kWh/an
             type: number
+          ich:
+            title: Inverse du rendement moyen
+            type: number
+          rd:
+            title: Rendement de distribution moyen
+            type: number
+          re:
+            title: Rendement d'émission moyen
+            type: number
+          rg:
+            title: Rendement de génération moyen
+            type: number
+          rr:
+            title: Rendement de régulation moyen
+            type: number
           pertes_generation:
             title: Pertes de génération en Wh/an
             type: number
@@ -3962,19 +3977,19 @@ $defs:
             title: Coefficient d'intermittence
             type: number
           ich:
-            title: Inverse du rendement du système
+            title: Inverse du rendement moyen
             type: number
           rd:
-            title: Rendement de distribution
+            title: Rendement de distribution moyen
             type: number
           re:
-            title: Rendement d'émission
+            title: Rendement d'émission moyen
             type: number
           rg:
-            title: Rendement de génération
+            title: Rendement de génération moyen
             type: number
           rr:
-            title: Rendement de régulation
+            title: Rendement de régulation moyen
             type: number
           consommations:
             $ref: /common/consommations
@@ -4204,6 +4219,21 @@ $defs:
             type: number
           becs:
             title: Besoin d'eau chaude sanitaire en kWh/an
+            type: number
+          iecs:
+            title: Inverse du rendement moyen
+            type: number
+          rd:
+            title: Rendement de distribution moyen
+            type: number
+          rs:
+            title: Rendement de stockage moyen
+            type: number
+          rg:
+            title: Rendement de génération moyen
+            type: number
+          rgs:
+            title: Rendement de génération et de stockage moyen
             type: number
           pertes_generation:
             title: Pertes de génération en Wh/an
@@ -4871,19 +4901,19 @@ $defs:
             title: Facteur de couverture solaire
             type: number
           iecs:
-            title: Inverse du rendement de l'installation
+            title: Inverse du rendement moyen
             type: number
           rd:
-            title: Rendement de distribution
+            title: Rendement de distribution moyen
             type: number
           rs:
-            title: Rendement de stockage
+            title: Rendement de stockage moyen
             type: number
           rg:
-            title: Rendement de génération
+            title: Rendement de génération moyen
             type: number
           rgs:
-            title: Rendement de génération et de stockage
+            title: Rendement de génération et de stockage moyen
             type: number
           consommations:
             $ref: /common/consommations

@@ -42,6 +42,21 @@ $defs:
       becs:
         title: Besoin d'eau chaude sanitaire en kWh/an
         type: number
+      iecs:
+        title: Inverse du rendement moyen
+        type: number
+      rd:
+        title: Rendement de distribution moyen
+        type: number
+      rs:
+        title: Rendement de stockage moyen
+        type: number
+      rg:
+        title: Rendement de génération moyen
+        type: number
+      rgs:
+        title: Rendement de génération et de stockage moyen
+        type: number
       pertes_generation:
         title: Pertes de génération en Wh/an
         type: number

@@ -6,6 +6,11 @@ examples:
     systemes: https://schemas.dpe-audit.fr/chauffage/systeme
     data:
       bch: 25000
+      ich: 2
+      rd: 0.8
+      re: 0.8
+      rg: 0.8
+      rr: 1
       consommations:
         - scenario: conventionnel
           usage: auxiliaire

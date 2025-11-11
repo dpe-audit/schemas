@@ -4417,8 +4417,7 @@
             "type": {
               "enum": [
                 "chaudiere",
-                "poele_bouilleur",
-                "generateur_air_chaud"
+                "poele_bouilleur"
               ]
             },
             "energie": {
@@ -4838,6 +4837,58 @@
                   "const": null
                 },
                 "tfonc100": {
+                  "const": null
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "energie",
+            "position",
+            "signaletique"
+          ]
+        },
+        {
+          "title": "Générateur air chaud à combustion",
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "generateur_air_chaud"
+            },
+            "energie": {
+              "not": {
+                "enum": [
+                  "electricite",
+                  "reseau_chaleur"
+                ]
+              }
+            },
+            "bienergie": {
+              "const": null
+            },
+            "position": {
+              "type": "object",
+              "properties": {
+                "reseau_chaleur_id": {
+                  "const": null
+                }
+              }
+            },
+            "signaletique": {
+              "type": "object",
+              "properties": {
+                "mode_combustion": {
+                  "enum": [
+                    "standard",
+                    "condensation",
+                    null
+                  ]
+                },
+                "label": {
+                  "const": null
+                },
+                "scop": {
                   "const": null
                 }
               }

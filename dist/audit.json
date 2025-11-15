@@ -4367,6 +4367,10 @@
               "title": "Puissance de dimensionnement de chauffage en kW",
               "type": "number"
             },
+            "rg": {
+              "title": "Rendement de génération moyen",
+              "type": "number"
+            },
             "scop": {
               "title": "Coefficient de performance énergétique saisonnier",
               "type": [
@@ -6685,6 +6689,10 @@
             },
             "pecs": {
               "title": "Puissance de dimensionnement du besoin d'eau chaude sanitaire en kW",
+              "type": "number"
+            },
+            "rg": {
+              "title": "Rendement de génération moyen",
               "type": "number"
             },
             "cop": {

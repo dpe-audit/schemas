@@ -493,6 +493,9 @@ $defs:
       pecs:
         title: Puissance de dimensionnement du besoin d'eau chaude sanitaire en kW
         type: number
+      rg:
+        title: Rendement de génération moyen
+        type: number
       cop:
         title: Coefficient de performance énergétique
         type: [number, "null"]

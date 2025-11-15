@@ -226,6 +226,9 @@ $defs:
       pch:
         title: Puissance de dimensionnement de chauffage en kW
         type: number
+      rg:
+        title: Rendement de génération moyen
+        type: number
       scop:
         title: Coefficient de performance énergétique saisonnier
         type: [number, "null"]

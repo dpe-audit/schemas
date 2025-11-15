@@ -27,6 +27,7 @@ examples:
       pn: 20
       pdim: 20
       pecs: 20
+      rg: 0.8
       cop: 3.5
       rpn: null
       qp0: null
@@ -69,6 +70,7 @@ examples:
       pn: 20
       pdim: 20
       pecs: 20
+      rg: 0.8
       cop: null
       rpn: null
       qp0: null
@@ -110,6 +112,7 @@ examples:
       pn: 20
       pdim: 20
       pecs: 20
+      rg: 0.8
       cop: null
       rpn: null
       qp0: null

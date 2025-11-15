@@ -30,6 +30,7 @@ examples:
       pn: 20
       pdim: 20
       pch: 20
+      rg: 0.8
       scop: 4.5
       rpn: null
       rpint: null
@@ -80,6 +81,7 @@ examples:
       pn: 20
       pdim: 20
       pch: 20
+      rg: 0.8
       scop: null
       rpn: null
       rpint: null
@@ -130,6 +132,7 @@ examples:
       pn: 20
       pdim: 20
       pch: 20
+      rg: 0.8
       scop: null
       rpn: null
       rpint: null
